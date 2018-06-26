@@ -8,24 +8,16 @@
 <title>게시판 등록</title>
 </head>
 <body>
-<%-- <form:form modelAttribute="board" action="write.jds" method="post" enctype="multipart/form-data" name="f">
- <table border ="1" cellpadding="0" cellspacing="0">
-  <caption>Spring 게시판</caption>
-  <tr><td align="center">글쓴이</td><td><form:input path="name"/>
-      <font color="red"><form:errors path="name"/></font></td></tr>
-  <tr><td align="center">비밀번호</td><td><form:password path="pass"/>
-      <font color="red"><form:errors path="pass"/></font></td></tr>
-  <tr><td align="center">제목</td><td><form:input path="subject"/>
-      <font color="red"><form:errors path="subject"/></font></td></tr>
-  <tr><td align="center">내용</td>
-      <td><form:textarea rows="15" cols="80" path="content"/>
-      <font color="red"><form:errors path="content"/></font></td></tr>
-  <tr><td align="center">첨부파일</td>
-      <td><input type="file" name="file1"></td></tr>
-  <tr><td align="center" colspan="2">
-      <a href="javascript:document.f.submit()">[게시물등록]</a><a href="list.shop">[게시물목록]</a></td></tr>
- </table>
-</form:form> --%>
-
+  <form action="">
+    <table border="1" cellpadding="0" cellspacing="0">
+      <tr><td rowspan="4"><div><img src="../file/test.jpg" width="200" height="250"></div></td><td>상품명 : <input type="text"></td></tr>
+      <tr><td>상품가격 : <input type="text"></td></tr>
+      <tr><td>인원 : <input type="text"></td></tr>
+      <tr><td>연령대 : <input type="text"></td></tr>
+      <tr><td colspan="2"><textarea rows="15" cols="80"></textarea></td></tr>
+      <tr><td colspan="2"><input type="text"></td></tr>
+      <tr><td colspan="2"></td></tr>
+    </table>
+  </form>
 </body>
 </html>
