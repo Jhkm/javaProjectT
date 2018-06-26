@@ -26,5 +26,6 @@
       <a href="javascript:document.f.submit()">[게시물등록]</a><a href="list.shop">[게시물목록]</a></td></tr>
  </table>
 </form:form> --%>
+
 </body>
 </html>
