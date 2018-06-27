@@ -19,6 +19,29 @@ public class ItemController {
 	@Autowired
 	private ShopService service;
 	
+	@RequestMapping("item/create")
+	public ModelAndView create() {
+		ModelAndView mav = new ModelAndView("item/add");
+		mav.addObject(new Item());
+		return mav;
+	}
+	@RequestMapping("item/register")
+	public ModelAndView register(@Valid Item item, BindingResult bindingResult, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("item/itemadd");
+		if(bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
+		service.itemCreate(item, request);
+		mav.setViewName("redirect:/item/list.shop");
+		return mav;
+	}
+	@RequestMapping("item/*")
+	public ModelAndView detail(String no) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(new Item());
+		return mav;
+	}
 //	@RequestMapping("item/list") //요청벙보에 따라 호출되는 메서드 설정.
 //	public ModelAndView list() {
 //		//itemList : item 테이블의 모든 정보를 Item 객체의 List로 저장.

@@ -4,6 +4,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Item {
 	//아이템 num
@@ -28,6 +29,13 @@ public class Item {
 	private String i_img;
 	//보드게임 장르
 	private Integer it_no;
+	private MultipartFile i_Img_File;
+	public MultipartFile getI_Img_File() {
+		return i_Img_File;
+	}
+	public void setI_Img_File(MultipartFile i_Img_File) {
+		this.i_Img_File = i_Img_File;
+	}
 	public Integer getI_no() {
 		return i_no;
 	}
