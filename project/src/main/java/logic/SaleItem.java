@@ -3,38 +3,38 @@ package logic;
 import java.util.Date;
 
 public class SaleItem {
-	private Integer saleId;
-	private Integer saleItemId;
-	private Integer itemId;
+	private Integer si_id;
+	private Integer s_id;
+	private Integer i_no;
 	private Integer quantity;
 	private Date updateTime;
 	private Item item;
 	public SaleItem() {}
 	public SaleItem(Integer saleId, int saleItemId, ItemSet itemSet, Date currentTime) {
-		this.saleId = saleId;
-		this.saleItemId = saleItemId;
+		this.s_id = saleId;
+		this.si_id = saleItemId;
 		this.item = itemSet.getItem();
-		this.itemId = item.getId();
+		this.i_no = item.getI_no();
 		this.updateTime = currentTime;
 		this.quantity = itemSet.getQuantity();
 	}
-	public Integer getSaleId() {
-		return saleId;
+	public Integer getSi_id() {
+		return si_id;
 	}
-	public void setSaleId(Integer saleId) {
-		this.saleId = saleId;
+	public void setSi_id(Integer si_id) {
+		this.si_id = si_id;
 	}
-	public Integer getSaleItemId() {
-		return saleItemId;
+	public Integer getS_id() {
+		return s_id;
 	}
-	public void setSaleItemId(Integer saleItemId) {
-		this.saleItemId = saleItemId;
+	public void setS_id(Integer s_id) {
+		this.s_id = s_id;
 	}
-	public Integer getItemId() {
-		return itemId;
+	public Integer getI_no() {
+		return i_no;
 	}
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
+	public void setI_no(Integer i_no) {
+		this.i_no = i_no;
 	}
 	public Integer getQuantity() {
 		return quantity;

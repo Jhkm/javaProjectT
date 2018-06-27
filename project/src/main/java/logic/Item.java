@@ -1,17 +1,26 @@
 package logic;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Item {
 	//아이템 num
 	private Integer i_no;
 	//아이템명
+	@NotEmpty(message="상품명을 등록하세요")
 	private String i_name;
 	//아이템 가격
+	@NotNull(message="가격을 등록하세요")
+	@Min(value=1, message="가격은 1원 이상 가능 합니다.")
 	private Integer i_price;
 	//보드게임 적정(가능)인원수
 	private String i_people;
 	//보드게임 연령대
 	private Integer i_age;
 	//보드게임 설명
+	@NotEmpty(message="상품설명을 등록하세요")
 	private String i_explain;
 	//보드게임 판매갯수
 	private String i_amount;

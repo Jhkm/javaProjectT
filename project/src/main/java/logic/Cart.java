@@ -15,7 +15,7 @@ public class Cart {
 	//itemSet : 추가될 상품
 	public void push(ItemSet itemSet) {
 		for(ItemSet is : itemList) {
-			if(is.getItem().getId() == itemSet.getItem().getId()) {
+			if(is.getItem().getI_no() == itemSet.getItem().getI_no()) {
 				is.setQuantity(is.getQuantity() + itemSet.getQuantity());
 				return;
 			}
@@ -29,7 +29,7 @@ public class Cart {
 	public int getTotalAmount() {
 		int tot = 0;
 		for(ItemSet i : itemList) {
-			tot += i.getItem().getPrice() * i.getQuantity();
+			tot += i.getItem().getI_price() * i.getQuantity();
 		}
 //		tot=0;
 //		Iterator<ItemSet> it = itemList.iterator();
