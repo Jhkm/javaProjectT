@@ -56,7 +56,6 @@ public class ItemController {
 		Item item = service.detail(no);
 		System.out.println(item);
 		mav.addObject("item",item);
-		mav.addObject(new Item());
 		return mav;
 	}
 //	@RequestMapping("item/list") //요청벙보에 따라 호출되는 메서드 설정.
