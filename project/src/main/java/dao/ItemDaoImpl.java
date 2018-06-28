@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,5 +30,21 @@ public class ItemDaoImpl implements ItemDao{
 		int i = sqlSession.getMapper(ItemMapper.class).maxid();
 		item.setI_no(++i);
 		sqlSession.getMapper(ItemMapper.class).insert(item);
+	}
+	@Override
+	public List<Map<Integer, String>> gameType() {
+		List<Map<Integer, String>> list = sqlSession.getMapper(ItemMapper.class).getType();
+		return list;
+	}
+	@Override
+	public List<Item> list() {
+		return sqlSession.selectList(NS+"list");
+	}
+	@Override
+	public Item detail(Integer no) {
+		Map<String,Integer> param = new HashMap<String,Integer>();
+		param.put("no", no);
+		Item item = sqlSession.selectOne(NS+"list",param);
+		return item;
 	}
 }

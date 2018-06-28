@@ -30,6 +30,15 @@ public class Item {
 	//보드게임 장르
 	private Integer it_no;
 	private MultipartFile i_Img_File;
+	private String tp_name;
+	
+	
+	public String getTp_name() {
+		return tp_name;
+	}
+	public void setTp_name(String tp_name) {
+		this.tp_name = tp_name;
+	}
 	public MultipartFile getI_Img_File() {
 		return i_Img_File;
 	}
@@ -94,6 +103,8 @@ public class Item {
 	public String toString() {
 		return "Item [i_no=" + i_no + ", i_name=" + i_name + ", i_price=" + i_price + ", i_people=" + i_people
 				+ ", i_age=" + i_age + ", i_explain=" + i_explain + ", i_amount=" + i_amount + ", i_img=" + i_img
-				+ ", it_no=" + it_no + "]";
+				+ ", it_no=" + it_no + ", i_Img_File=" + i_Img_File + ", tp_name=" + tp_name + "]";
 	}
+	
+	
 }

@@ -37,5 +37,17 @@ public class ShopServiceImpl implements ShopService{
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public List<Map<Integer, String>> gameType() {
+		return itemDao.gameType();
+	}
+	@Override
+	public List<Item> getItemList() {
+		return itemDao.list();
+	}
+	@Override
+	public Item detail(Integer no) {
+		return itemDao.detail(no);
+	}
 	
 }

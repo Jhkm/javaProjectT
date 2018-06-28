@@ -37,8 +37,7 @@
 </head>
 <body>
 	<div align="center">
-		<form:form modelAttribute="item" action="register.sdj"
-			enctype="multipart/form-data">
+		<form:form modelAttribute="item" action="register.sdj" enctype="multipart/form-data">
 			<table border="1" cellpadding="0" cellspacing="0">
 				<tr>
 					<td rowspan="5"><div>
@@ -46,21 +45,11 @@
 						</div></td>
 					<td>게임 장르:</td>
 					<!-- 추후에 장르 DB 조회하여 forEach문으로 다시 작성할 예정 -->
-					<td><select>
+					<td><select name="it_no">
 					 	<option>선택하세요</option>
-					 	<option value="1">장르 1</option>
-					 	<option value="2">장르 2</option>
-					 	<option value="3">장르 3</option>
-					 	<option value="4">장르 4</option>
-					 	<option value="5">장르 5</option>
-					 	<option value="6">장르 6</option>
-					 	<option value="7">장르 7</option>
-					 	<option value="8">장르 8</option>
-					 	<option value="9">장르 9</option>
-					 	<option value="10">장르 10</option>
-					 	<option value="11">장르 11</option>
-					 	<option value="12">장르 12</option>
-					 	<option value="13">장르 13</option>
+					 	<c:forEach var="m" items="${gametype }">
+					 	  <option value="${m.get('tp_no') }">${m.get('tp_name') }</option>
+					 	</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
@@ -79,7 +68,7 @@
 				</tr>
 				<tr>
 					<td>연령대 :</td>
-					<td><input type="text" size="15" name="i_age">이상</td>
+					<td><input type="text" size="15" name="i_age">세 이상</td>
 				</tr>
 				<tr>
 					<td colspan="3"><form:textarea path="i_explain"
@@ -89,7 +78,7 @@
 				</tr>
 				<tr>
 					<td colspan="3"><input type="file" id="img_upload"
-						name="i_img"></td>
+						name="i_Img_File"></td>
 				</tr>
 				<tr>
 					<td colspan="3" align="center"><input type="submit" value="등록"></td>
