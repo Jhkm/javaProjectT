@@ -18,4 +18,6 @@ public interface ShopService {
 
 	void update(Item item,HttpServletRequest request);
 	
+	
+	
 }
