@@ -15,5 +15,7 @@ public interface ShopService {
 	List<Item> getItemList();
 
 	Item detail(Integer no);
+
+	void update(Item item,HttpServletRequest request);
 	
 }

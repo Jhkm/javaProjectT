@@ -31,8 +31,14 @@ public class Item {
 	private Integer it_no;
 	private MultipartFile i_Img_File;
 	private String tp_name;
+	private String i_people2;
 	
-	
+	public String getI_people2() {
+		return i_people2;
+	}
+	public void setI_people2(String i_people2) {
+		this.i_people2 = i_people2;
+	}
 	public String getTp_name() {
 		return tp_name;
 	}

@@ -47,4 +47,8 @@ public class ItemDaoImpl implements ItemDao{
 		Item item = sqlSession.selectOne(NS+"list",param);
 		return item;
 	}
+	@Override
+	public void update(Item item) {
+		sqlSession.getMapper(ItemMapper.class).update(item);
+	}
 }

@@ -20,5 +20,8 @@ public interface ItemMapper {
 
 	@Select("select tp_no, tp_name from gametype")
 	List<Map<Integer, String>> getType();
+
+	@Update("update item set i_name=#{i_name},i_price=#{i_price},i_people=#{i_people},i_age=#{i_age},i_explain=#{i_explain},i_img=#{i_img},it_no=#{it_no} where i_no=#{i_no}")
+	void update(Item item);
 	
 }

@@ -16,4 +16,6 @@ public interface ItemDao {
 	List<Item> list();
 
 	Item detail(Integer no);
+
+	void update(Item item);
 }

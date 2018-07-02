@@ -49,5 +49,13 @@ public class ShopServiceImpl implements ShopService{
 	public Item detail(Integer no) {
 		return itemDao.detail(no);
 	}
+	@Override
+	public void update(Item item, HttpServletRequest request) {
+		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
+			uploadFileCreate(item.getI_Img_File(),request);//파일 생성
+			item.setI_img(item.getI_Img_File().getOriginalFilename()); //파일의 이름 등록
+		}
+		itemDao.update(item);
+	}
 	
 }

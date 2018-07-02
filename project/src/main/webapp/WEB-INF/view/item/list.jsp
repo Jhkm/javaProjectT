@@ -46,7 +46,7 @@
           </a>
         </div>
         <div>
-          <a href="detail.sdj?id=${item.i_no }">${item.i_name }</a>
+          <a href="detail.sdj?no=${item.i_no }">${item.i_name }</a>
         </div>
         <br>
         <div>

@@ -33,7 +33,7 @@ public class ItemController {
 	public ModelAndView register(@Valid Item item, BindingResult bindingResult, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("item/itemadd");
 		System.out.println(item);
-		item.setI_people(item.getI_people()+"~"+request.getParameter("i_people2"));
+		item.setI_people(item.getI_people()+"~"+item.getI_people2());
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
@@ -51,76 +51,31 @@ public class ItemController {
 	}
 	@RequestMapping("item/detail")
 	public ModelAndView detail(Integer no) {
-		System.out.println(no);
 		ModelAndView mav = new ModelAndView();
 		Item item = service.detail(no);
-		System.out.println(item);
+		String[] people = item.getI_people().split("~");
+		item.setI_people(people[0]);
+		item.setI_people2(people[1]);
+		List<Map<Integer, String>> maplist = service.gameType();
+		mav.addObject("gametype", maplist);
 		mav.addObject("item",item);
 		return mav;
 	}
-//	@RequestMapping("item/list") //요청벙보에 따라 호출되는 메서드 설정.
-//	public ModelAndView list() {
-//		//itemList : item 테이블의 모든 정보를 Item 객체의 List로 저장.
-//		List<Item> itemList = service.getItemList();
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("itemList",itemList);
-//		return mav;
-//	}
-//	@RequestMapping("item/create")
-//	public ModelAndView create() {
-//		ModelAndView mav = new ModelAndView("item/add");
-//		mav.addObject(new Item());
-//		return mav;
-//	}
-//	@RequestMapping("item/register")
-//	public ModelAndView register(@Valid Item item, BindingResult bindingResult, HttpServletRequest request) {
-//		ModelAndView mav = new ModelAndView("item/add");
-//		if(bindingResult.hasErrors()) {
-//			mav.getModel().putAll(bindingResult.getModel());
-//			return mav;
-//		}
-//		service.itemCreate(item, request);
-//		mav.setViewName("redirect:/item/list.shop");
-//		return mav;
-//	}
-//	/*
-//	 * 상품상세보기 : id파라미터가 전송됨.
-//	 *      1. id 파라미터를 이용하여 db 조회하기
-//	 *      2. 조회된 db 내용을 view로 전송하기
-//	 */
-//	@RequestMapping("item/update")
-//	public ModelAndView update(@Valid Item item, BindingResult bindingResult, HttpServletRequest request) {
-//		ModelAndView mav = new ModelAndView("item/edit");
-//		if(bindingResult.hasErrors()) {
-//			mav.getModel().putAll(bindingResult.getModel());
-//			return mav;
-//		}
-//		service.itemUdate(item, request);
-//		mav.setViewName("redirect:/item/detail.shop?id="+item.getId());
-//		return mav;
-//	}
-//	/*
-//	 * 삭제하기
-//	 * id에 해당하는 상품정보를 제거하기 제거성공시 list.shop으로 이동, 제거 실패시 confirm.shop으로 이동.
-//	 */
-//	@RequestMapping("item/delete")
-//	public String delete(String id) {
-//		int result = service.itemDelete(id);
-//		if(result > 0) {
-//			return "redirect:list.shop";
-//		} else {
-//			return "redirect:confirm.shop?id=" + id;
-//		}
-//	}
-//	@RequestMapping("item/*")
-//	public ModelAndView detail(String id) {
-//		ModelAndView mav = new ModelAndView();
-//		Item item = service.itemDetail(id);
-//		mav.addObject("item",item);
-//		return mav;
-//	}
-//	@RequestMapping("item/edit")
-//	public ModelAndView edit(String id) {
-//		return detail(id);
-//	}
+	@RequestMapping("item/edit")
+	public ModelAndView edit(Integer no) {
+		return detail(no);
+	}
+	@RequestMapping("item/update")
+	public ModelAndView update(Item item, BindingResult bindingResult, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("item/edit");
+		System.out.println(item);
+		item.setI_people(item.getI_people()+"~"+item.getI_people2());
+		if(bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
+		service.update(item,request);
+		mav.setViewName("redirect:/item/list.sdj");
+		return mav;
+	}
 }
