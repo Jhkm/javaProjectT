@@ -42,6 +42,7 @@ public class UserController {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
+		System.out.println("test1");
 		try {
 			// user : 화면에서 입력된 정보 저장하고 있는 객체 , userCreate 로 db에 전달
 			service.userCreate(user);
