@@ -8,6 +8,23 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface ShopService {
 
+
+	int boardcount(String searchType, String searchContent, String category);
+
+	List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, String category);
+
+	Board getBoard(Integer num);
+
+	void insert(Board board, HttpServletRequest request);
+
+	void updatereadcnt(Integer num);
+
+	void boardReply(Board board);
+
+	void boardUpdate(Board board, HttpServletRequest request);
+
+	void boardDelete(int num);
+	
 	void itemCreate(Item item, HttpServletRequest request);
 
 	List<Map<Integer, String>> gameType();

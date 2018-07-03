@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import dao.BoardDao;
 import dao.ItemDao;
 import dao.UserDao;
 
@@ -22,6 +23,83 @@ public class ShopServiceImpl implements ShopService{
 	private ItemDao itemDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	BoardDao boardDao;
+
+	@Override
+	public int boardcount(String searchType, String searchContent, String category) {
+		return boardDao.count(searchType, searchContent, category);
+	}
+
+	@Override
+	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, String category) {
+		return boardDao.list(searchType, searchContent, pageNum, limit, category);
+	}
+
+	@Override
+	public Board getBoard(Integer b_no) {
+		return boardDao.getBoard(b_no);
+	}
+
+	@Override
+	public void insert(Board board, HttpServletRequest request) {
+		if(board.getB_file() != null && !board.getB_file().isEmpty()) {
+			uploadBoardFileCreate(board.getB_file(), request);
+			board.setB_fileurl(board.getB_file().getOriginalFilename());
+		}
+		int b_no = boardDao.maxNum();
+		board.setB_no(++b_no);
+		board.setB_ref(b_no);
+		board.setB_reflevel(0);
+		board.setB_refstep(0);
+		board.setB_people(0);
+		board.setB_category(Integer.parseInt(request.getParameter("b_category")));
+		boardDao.insert(board);
+	}
+	private void uploadBoardFileCreate(MultipartFile file1, HttpServletRequest request) {
+		String uploadPath = request.getServletContext().getRealPath("/") + "/file/";
+		String orgFile = file1.getOriginalFilename();
+		try {
+			file1.transferTo(new File(uploadPath + orgFile));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updatereadcnt(Integer b_no) {
+		boardDao.b_readcnt(b_no);
+	}
+	
+	@Override
+	public void boardReply(Board board) {
+		boardDao.refstepadd(board);
+		int b_no = boardDao.maxNum(); //
+		board.setB_no(++b_no); //
+//		board.getRef :
+//		board.setReflevel() : 
+//		board.setRefstep() : 
+		board.setB_reflevel(board.getB_reflevel()+1);
+		board.setB_refstep(board.getB_refstep()+1);
+		boardDao.insert(board);
+	}
+
+	@Override
+	public void boardUpdate(Board board, HttpServletRequest request) {
+		if(board.getB_file() != null && !board.getB_file().isEmpty()) {
+			uploadBoardFileCreate(board.getB_file(), request);
+			board.setB_fileurl(board.getB_file().getOriginalFilename());
+		}
+		boardDao.update(board);
+	}
+
+
+	@Override
+	public void boardDelete(int b_no) {
+		boardDao.delete(b_no);
+	}
+
+
 	@Override
 	public void itemCreate(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {

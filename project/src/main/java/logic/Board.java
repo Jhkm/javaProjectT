@@ -7,26 +7,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Board {
 	private int b_no;
-	//게시물 종류
 	private int b_category;
+	@NotEmpty(message="제목을 입력하세요")
 	private String b_subject;
+	@NotEmpty(message="내용을 입력하세요")
 	private String b_content;
-	private MultipartFile b_file;
-	private String m_id;
+	private int b_readcnt;
+	private String b_fileurl;
 	private Date b_regtime;
 	private int b_ref;
 	private int b_reflevel;
 	private int b_refstep;
-	//모임장소
+	private MultipartFile b_file;
+	private String m_id;
+//	@NotEmpty(message="날짜를 선택하세요")
 	private String b_state;
-	//모임시간
+//	@NotEmpty(message="장소를 선택하세요")
 	private Date b_date;
-	//모임 인원제한
+//	@NotEmpty(message="참가 인원를 선택하세요")
 	private int b_people;
-	//모임 참가 id
 	private String g_id;
-	
-	// getter,setter
 	public int getB_no() {
 		return b_no;
 	}
@@ -36,8 +36,8 @@ public class Board {
 	public int getB_category() {
 		return b_category;
 	}
-	public void setB_category(int b_category) {
-		this.b_category = b_category;
+	public void setB_category(int i) {
+		this.b_category = i;
 	}
 	public String getB_subject() {
 		return b_subject;
@@ -51,17 +51,17 @@ public class Board {
 	public void setB_content(String b_content) {
 		this.b_content = b_content;
 	}
-	public MultipartFile getB_file() {
-		return b_file;
+	public int getB_readcnt() {
+		return b_readcnt;
 	}
-	public void setB_file(MultipartFile b_file) {
-		this.b_file = b_file;
+	public void setB_readcnt(int b_readcnt) {
+		this.b_readcnt = b_readcnt;
 	}
-	public String getM_id() {
-		return m_id;
+	public String getB_fileurl() {
+		return b_fileurl;
 	}
-	public void setM_id(String m_id) {
-		this.m_id = m_id;
+	public void setB_fileurl(String b_fileurl) {
+		this.b_fileurl = b_fileurl;
 	}
 	public Date getB_regtime() {
 		return b_regtime;
@@ -87,6 +87,18 @@ public class Board {
 	public void setB_refstep(int b_refstep) {
 		this.b_refstep = b_refstep;
 	}
+	public MultipartFile getB_file() {
+		return b_file;
+	}
+	public void setB_file(MultipartFile b_file) {
+		this.b_file = b_file;
+	}
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 	public String getB_state() {
 		return b_state;
 	}
@@ -111,4 +123,15 @@ public class Board {
 	public void setG_id(String g_id) {
 		this.g_id = g_id;
 	}
+	
+	@Override
+	public String toString() {
+		return "Board [b_no=" + b_no + ", b_category=" + b_category + ", b_subject=" + b_subject + ", b_content="
+				+ b_content + ", b_readcnt=" + b_readcnt + ", b_fileurl=" + b_fileurl + ", b_regtime=" + b_regtime
+				+ ", b_ref=" + b_ref + ", b_reflevel=" + b_reflevel + ", b_refstep=" + b_refstep + ", b_file=" + b_file
+				+ ", m_id=" + m_id + ", b_state=" + b_state + ", b_date=" + b_date + ", b_people=" + b_people
+				+ ", g_id=" + g_id + "]";
+	}
+	
+	
 }
