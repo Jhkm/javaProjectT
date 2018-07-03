@@ -26,7 +26,7 @@ public class CartController {
 	@RequestMapping("cart/cartAdd")
 	public ModelAndView add(Integer no, Integer quantity,Boolean checkAS, HttpSession session) {
 		//selectedItem : id에 해당하는 상품정보를 db에서 읽어서 저장.
-		String loginId = (String)session.getAttribute("loginId");
+		String loginId = (String)session.getAttribute("loginUser");
 		service.addItemToCart(no,quantity,loginId);
 		Cart cart = service.selectCart(loginId);
 		ModelAndView mav = null;
@@ -42,7 +42,7 @@ public class CartController {
 	@RequestMapping("cart/cartDelete")
 	public ModelAndView delete(Integer index, HttpSession session) {
 		//index : 상품목록 순서정보
-		String loginId = (String)session.getAttribute("loginId");
+		String loginId = (String)session.getAttribute("loginUser");
 		Cart cart = service.selectCart(loginId);
 		ModelAndView mav = new ModelAndView("cart/cart");
 		ItemSet delete = null;
@@ -59,7 +59,7 @@ public class CartController {
 	}
 	@RequestMapping("cart/cartView")
 	public ModelAndView view(HttpSession session) {
-		String loginId = (String)session.getAttribute("loginId");
+		String loginId = (String)session.getAttribute("loginUser");
 		Cart cart = service.selectCart(loginId);
 		ModelAndView mav = new ModelAndView("cart/cart");
 		if(cart == null || cart.isEmpty()) {
@@ -81,7 +81,7 @@ public class CartController {
 	public void countUpdate2(HttpServletRequest request, HttpSession session) {
 		Integer no = Integer.parseInt(request.getParameter("itemNo"));
 		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-		String loginId = (String)session.getAttribute("loginId");
+		String loginId = (String)session.getAttribute("loginUser");
 		service.cartUpdate(no,quantity,loginId);
 	}
 	//AOP 추가하기
@@ -90,18 +90,19 @@ public class CartController {
 	@RequestMapping("cart/checkout")
 	public ModelAndView checkout(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String loginId = (String)session.getAttribute("loginId");
+		String loginId = (String)session.getAttribute("loginUser");
 		Cart cart = service.selectCart(loginId);
 		mav.addObject("cart",cart);
-		mav.addObject("loginUser",(User)service.getUser(loginId));
+		mav.addObject("loginUser1",(User)service.getUser(loginId));
 		return mav; // view 이름
 	}
 	
 	@RequestMapping("cart/end")
-	public ModelAndView checkend(HttpSession session) {
-		Cart cart = service.selectCart((String)session.getAttribute("loginId"));
-//		Cart cart = (Cart)session.getAttribute("CART");
-		User loginUser = (User)session.getAttribute("loginUser");
+	public ModelAndView checkend(HttpSession session, HttpServletRequest request) {
+		Cart cart = service.selectCart((String)session.getAttribute("loginUser"));
+		String loginId = (String)session.getAttribute("loginUser");
+		User loginUser = service.getUser(loginId);
+		
 		if(cart == null || cart.isEmpty()) {
 			throw new CartEmptyException("장바구니에 계산할 상품이 없습니다.","../item/list.shop");
 		}
@@ -110,12 +111,13 @@ public class CartController {
 		 *  sale 객체에 정보를 저장하여 리턴
 		 *  db에 주문정보와 주문 상품 정보 저장.
 		 */
-//		Sale sale = service.checkEnd(loginUser,cart);
+		Sale sale = service.checkEnd(loginUser,cart,request);
 		List<ItemSet> itemList = cart.getItemList();
 		int tot = cart.getTotalAmount(); //총 금액 산출
-		cart.clearAll(session);// 장바구니 비우기
+		service.clearCart();// 장바구니 비우기
 		ModelAndView mav = new ModelAndView();
-//		mav.addObject("sale",sale);
+		mav.addObject("loginUser1",(User)service.getUser(loginId));
+		mav.addObject("sale",sale);
 		mav.addObject("totalAmount",tot);
 		return mav;
 	}

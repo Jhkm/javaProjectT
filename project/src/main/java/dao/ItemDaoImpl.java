@@ -90,4 +90,8 @@ public class ItemDaoImpl implements ItemDao{
 		cartSubtraction(no,loginId);
 		addItemToCart(no,quantity,loginId);
 	}
+	@Override
+	public void clearCart() {
+		sqlSession.getMapper(ItemMapper.class).clearCart();
+	}
 }

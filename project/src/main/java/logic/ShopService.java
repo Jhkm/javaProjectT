@@ -29,6 +29,10 @@ public interface ShopService {
 	void cartSubtraction(Integer i_no, String loginId);
 
 	void cartUpdate(Integer no, Integer quantity, String loginId);
+
+	Sale checkEnd(User loginUser, Cart cart, HttpServletRequest request);
+
+	void clearCart();
 	
 	
 	
