@@ -7,8 +7,8 @@
 <title>로그인 성공</title>
 </head>
 <body>
-<h2>환영합니다. ${loginUser.m_id }님</h2>
-<a href="mypage.shop?id=${loginUser.m_id }">mypage</a>
+<h2>환영합니다. ${loginUser}님</h2>
+<a href="mypage.shop?id=${loginUser}">mypage</a>
 <a href="../item/list.shop">상품목록보기</a>
 <a href="logout.shop">로그아웃</a>
 </body>
