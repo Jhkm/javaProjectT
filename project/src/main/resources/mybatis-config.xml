@@ -11,10 +11,9 @@
   </typeAliases>
   <mappers>
     <mapper resource="dao/mapper/Item.xml"/>
-    <mapper resource="dao/mapper/User.xml"/>
-<!--
-    <mapper resource="dao/mapper/Sale.xml"/>
-    <mapper resource="dao/mapper/SaleItem.xml"/>
-    <mapper resource="dao/mapper/Board.xml"/> -->
+    <!-- <mapper resource="dao/mapper/User.xml"/> -->
+    <!-- <mapper resource="dao/mapper/Sale.xml"/> -->
+    <!-- <mapper resource="dao/mapper/SaleItem.xml"/> -->
+    <!-- <mapper resource="dao/mapper/Board.xml"/> -->
   </mappers>
 </configuration>

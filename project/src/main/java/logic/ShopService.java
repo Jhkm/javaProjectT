@@ -22,5 +22,14 @@ public interface ShopService {
 
 	User getUser(String m_id);
 	
+	void addItemToCart(Integer no, Integer quantity,String id);
+
+	Cart selectCart(String loginId);
+
+	void cartSubtraction(Integer i_no, String loginId);
+
+	void cartUpdate(Integer no, Integer quantity, String loginId);
+	
+	
 	
 }

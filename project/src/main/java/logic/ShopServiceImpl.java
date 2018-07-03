@@ -59,7 +59,7 @@ public class ShopServiceImpl implements ShopService{
 			item.setI_img(item.getI_Img_File().getOriginalFilename()); //파일의 이름 등록
 		}
 		itemDao.update(item);
-	}
+	}	
 	@Override
 	public void userCreate(User user) {
 		userDao.insert(user);
@@ -67,6 +67,24 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public User getUser(String id) {
 		return userDao.select(id);
+	}
+
+	@Override
+	public void addItemToCart(Integer no, Integer quantity, String id) {
+		itemDao.addItemToCart(no,quantity, id);
+	}
+	@Override
+	public Cart selectCart(String loginId) {
+		
+		return itemDao.selectCart(loginId);
+	}
+	@Override
+	public void cartSubtraction(Integer i_no, String loginId) {
+		itemDao.cartSubtraction(i_no,loginId);
+	}
+	@Override
+	public void cartUpdate(Integer no, Integer quantity, String loginId) {
+		itemDao.cartUpdate(no,quantity,loginId);
 	}
 	
 	
