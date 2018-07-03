@@ -2,6 +2,7 @@
    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,6 +14,7 @@
    href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<decorator:head/>
 </head>
 <body>
 <div>
@@ -22,7 +24,7 @@
             href="javascript:void(0)" onclick="myFunction()"
             title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
          <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-          <a href="#"   class="w3-bar-item w3-button w3-padding-large w3-hide-small">보드게임몰</a>
+          <a href="/project/item/list.sdj"   class="w3-bar-item w3-button w3-padding-large w3-hide-small">보드게임몰</a>
          <div class="w3-dropdown-hover w3-hide-small">
             <button class="w3-padding-large w3-button" title="More">
                커뮤니티 <i class="fa fa-caret-down"></i>

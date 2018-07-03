@@ -36,6 +36,7 @@
 </script>
 </head>
 <body>
+<br><br><br>
 	<div align="center">
 		<form:form modelAttribute="item" action="register.sdj" enctype="multipart/form-data">
 			<table border="1" cellpadding="0" cellspacing="0">

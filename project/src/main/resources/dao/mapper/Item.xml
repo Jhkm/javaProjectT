@@ -7,7 +7,7 @@
     <if test="no != null">
        where i_no=#{no}
     </if>
-    order by i_no
+    order by i_no desc
   </select>
   <select id="cart" resultType="map" parameterType="map">
     select i_no, quantity from cart
