@@ -83,7 +83,7 @@
 		<div class="w3-padding-64 w3-padding-large">
 			<h1>회원가입</h1>
 			<form:form modelAttribute="user" class="w3-container w3-card w3-padding-32 w3-white"
-				action="login.sdj" method="post">
+				action="userEntry.sdj" method="post">
 				<spring:hasBindErrors name="user">
 					<font color="red"> 
 						<c:forEach items="${errors.globalErrors}" var="error">
