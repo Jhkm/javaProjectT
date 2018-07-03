@@ -1,99 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+   pageEncoding="EUC-KR"%>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<title><decorator:title/></title>
-<decorator:head/>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>보드행</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
-.w3-sidebar {
-  z-index: 3;
-  width: 250px;
-  top: 43px;
-  bottom: 0;
-  height: inherit;
-}
-</style>
+<link rel="stylesheet"
+   href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <body>
-
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-theme-l1">구디아카데미</a>
-    <c:if test="${empty sessionScope.loginUser }">
-    <a href="${path }/user/login.shop" class="w3-bar-item w3-button w3-hide-small w3-hover-white">로그인</a>
-    </c:if>
-    <c:if test="${!empty sessionScope.loginUser }">
-    <a href="${path }/user/logout.shop" class="w3-bar-item w3-button w3-hide-small w3-hover-white">${sessionScope.loginUser }님! 로그아웃</a>
-    </c:if>
-  </div>
+<div>
+   <div class="w3-top w3-center">
+      <div class="w3-bar w3-white w3-card">
+         <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+            href="javascript:void(0)" onclick="myFunction()"
+            title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+         <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+          <a href="#"   class="w3-bar-item w3-button w3-padding-large w3-hide-small">보드게임몰</a>
+         <div class="w3-dropdown-hover w3-hide-small">
+            <button class="w3-padding-large w3-button" title="More">
+               커뮤니티 <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="w3-dropdown-content w3-bar-block w3-card-4">
+               <a href="#" class="w3-bar-item w3-button">플레이후기</a>
+               <a href="#"   class="w3-bar-item w3-button">팁 게시판</a>
+               <a href="#"   class="w3-bar-item w3-button">자유게시판</a> 
+               <a href="#"   class="w3-bar-item w3-button">요청게시판</a> 
+               <a href="#"   class="w3-bar-item w3-button">번개게시판</a> 
+               <a href="#"   class="w3-bar-item w3-button">게임플레이 동영상</a>
+            </div>
+         </div>
+         <c:if test="${!empty sessionScope.loginUser}">
+               	<c:if test="${sessionScope.loginUser eq 'admin' }">
+               		<a href="/project/admin/admin.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">관리자페이지</a>
+              	</c:if>
+               	<c:if test="${sessionScope.loginUser ne 'admin' }">
+               		<a href="/project/user/mypage.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
+               	</c:if>
+               </c:if>
+         <c:if test="${empty sessionScope.loginUser}">
+         <a href="/project/user/login.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">로그인</a>
+       	</c:if>
+       	<c:if test="${!empty sessionScope.loginUser}">
+         <a href="/project/user/logout.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">로그아웃</a>
+       	</c:if>
+         <a href="javascript:void(0)"
+            class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i
+            class="fa fa-search"></i></a>
+      </div>
+   </div>
+   
+<div align="center" >
+	<decorator:body/>
 </div>
-
-<!-- Sidebar -->
-<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
-    <i class="fa fa-remove"></i>
-  </a>
-  <h4 class="w3-bar-item"><b>Menu</b></h4>
-  <a class="w3-bar-item w3-button w3-hover-black" href="${path }/user/mypage.shop?id=${sessionScope.loginUser}">회원관리</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="${path }/item/list.shop">상품관리</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="${path }/board/list.shop">게시판</a>
-  <c:if test="${sessionScope.loginUser=='admin' }">
-  <a class="w3-bar-item w3-button w3-hover-black" href="${path }/admin/admin.shop">관리자</a>
-  </c:if>
-</nav>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main" style="margin-left:250px">
-
-  <div class="w3-row w3-padding-64">
-    <decorator:body/>
-  </div>
-  <footer id="myFooter">
-    <div class="w3-container w3-theme-l2 w3-padding-32">
-      <h4>구디아카데미 Since 2016</h4>
-    </div>
-  </footer>
-
-<!-- END MAIN -->
-</div>
-
-<script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-</script>
-
 </body>
 </html>

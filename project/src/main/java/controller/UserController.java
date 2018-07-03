@@ -87,4 +87,11 @@ public class UserController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping("user/logout")
+	public ModelAndView logout(HttpSession session) {
+		ModelAndView mav = new ModelAndView("user/login");
+		session.invalidate();
+		return mav;
+	}
 }
