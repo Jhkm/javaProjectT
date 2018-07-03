@@ -23,5 +23,14 @@ public interface ItemMapper {
 
 	@Update("update item set i_name=#{i_name},i_price=#{i_price},i_people=#{i_people},i_age=#{i_age},i_explain=#{i_explain},i_img=#{i_img},it_no=#{it_no} where i_no=#{i_no}")
 	void update(Item item);
+
+	@Insert("insert into cart (i_no, quantity, m_id) values (#{no},#{quantity},#{id})")
+	void addItemToCart(Map<String, Integer> map);
+
+	@Select("select i_no, quantity from cart where m_id = #{loginId}")
+	List<Map> selectCart(String loginId);
+
+	@Delete("delete from cart where m_id = #{id} and i_no = #{no}")
+	void cartSubT(Map map);
 	
 }

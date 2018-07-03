@@ -57,6 +57,23 @@ public class ShopServiceImpl implements ShopService{
 		}
 		itemDao.update(item);
 	}
+	@Override
+	public void addItemToCart(Integer no, Integer quantity, String id) {
+		itemDao.addItemToCart(no,quantity, id);
+	}
+	@Override
+	public Cart selectCart(String loginId) {
+		
+		return itemDao.selectCart(loginId);
+	}
+	@Override
+	public void cartSubtraction(Integer i_no, String loginId) {
+		itemDao.cartSubtraction(i_no,loginId);
+	}
+	@Override
+	public void cartUpdate(Integer no, Integer quantity, String loginId) {
+		itemDao.cartUpdate(no,quantity,loginId);
+	}
 	
 	
 }

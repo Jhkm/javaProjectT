@@ -17,6 +17,14 @@ public interface ShopService {
 	Item detail(Integer no);
 
 	void update(Item item,HttpServletRequest request);
+
+	void addItemToCart(Integer no, Integer quantity,String id);
+
+	Cart selectCart(String loginId);
+
+	void cartSubtraction(Integer i_no, String loginId);
+
+	void cartUpdate(Integer no, Integer quantity, String loginId);
 	
 	
 	

@@ -78,4 +78,9 @@ public class ItemController {
 		mav.setViewName("redirect:/item/list.sdj");
 		return mav;
 	}
+	@RequestMapping("item/cart")
+	public ModelAndView cart() {
+		
+		return null;
+	}
 }
