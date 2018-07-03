@@ -88,13 +88,19 @@ public class CartController {
 	//1. 로그인이 안된경우 : 로그인이 필요합니다. login.shop으로 /user/login.shop
 	//2. 카트가 비어 있는 경우 : 장바구니가 비었습니다. /item/list.shop
 	@RequestMapping("cart/checkout")
-	public String checkout(HttpSession session) {
-		return null; // view 이름
+	public ModelAndView checkout(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String loginId = (String)session.getAttribute("loginId");
+		Cart cart = service.selectCart(loginId);
+		mav.addObject("cart",cart);
+		mav.addObject("loginUser",(User)service.getUser(loginId));
+		return mav; // view 이름
 	}
 	
 	@RequestMapping("cart/end")
 	public ModelAndView checkend(HttpSession session) {
-		Cart cart = (Cart)session.getAttribute("CART");
+		Cart cart = service.selectCart((String)session.getAttribute("loginId"));
+//		Cart cart = (Cart)session.getAttribute("CART");
 		User loginUser = (User)session.getAttribute("loginUser");
 		if(cart == null || cart.isEmpty()) {
 			throw new CartEmptyException("장바구니에 계산할 상품이 없습니다.","../item/list.shop");
@@ -104,12 +110,12 @@ public class CartController {
 		 *  sale 객체에 정보를 저장하여 리턴
 		 *  db에 주문정보와 주문 상품 정보 저장.
 		 */
-		Sale sale = service.checkEnd(loginUser,cart);
+//		Sale sale = service.checkEnd(loginUser,cart);
 		List<ItemSet> itemList = cart.getItemList();
 		int tot = cart.getTotalAmount(); //총 금액 산출
 		cart.clearAll(session);// 장바구니 비우기
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("sale",sale);
+//		mav.addObject("sale",sale);
 		mav.addObject("totalAmount",tot);
 		return mav;
 	}
