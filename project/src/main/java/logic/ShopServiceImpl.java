@@ -14,11 +14,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.ItemDao;
+import dao.UserDao;
 
 @Service
 public class ShopServiceImpl implements ShopService{
 	@Autowired
 	private ItemDao itemDao;
+	@Autowired
+	private UserDao userDao;
 	@Override
 	public void itemCreate(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
@@ -56,6 +59,14 @@ public class ShopServiceImpl implements ShopService{
 			item.setI_img(item.getI_Img_File().getOriginalFilename()); //파일의 이름 등록
 		}
 		itemDao.update(item);
+	}
+	@Override
+	public void userCreate(User user) {
+		userDao.insert(user);
+	}
+	@Override
+	public User getUser(String id) {
+		return userDao.select(id);
 	}
 	
 	

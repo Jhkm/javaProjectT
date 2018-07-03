@@ -17,7 +17,10 @@ public interface ShopService {
 	Item detail(Integer no);
 
 	void update(Item item,HttpServletRequest request);
-	
+
+	void userCreate(User user);
+
+	User getUser(String m_id);
 	
 	
 }

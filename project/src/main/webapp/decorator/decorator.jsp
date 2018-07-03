@@ -33,7 +33,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     <a href="${path }/user/login.shop" class="w3-bar-item w3-button w3-hide-small w3-hover-white">로그인</a>
     </c:if>
     <c:if test="${!empty sessionScope.loginUser }">
-    <a href="${path }/user/logout.shop" class="w3-bar-item w3-button w3-hide-small w3-hover-white">${sessionScope.loginUser.userId }님! 로그아웃</a>
+    <a href="${path }/user/logout.shop" class="w3-bar-item w3-button w3-hide-small w3-hover-white">${sessionScope.loginUser }님! 로그아웃</a>
     </c:if>
   </div>
 </div>
@@ -44,10 +44,10 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Menu</b></h4>
-  <a class="w3-bar-item w3-button w3-hover-black" href="${path }/user/mypage.shop?id=${sessionScope.loginUser.userId}">회원관리</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="${path }/user/mypage.shop?id=${sessionScope.loginUser}">회원관리</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="${path }/item/list.shop">상품관리</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="${path }/board/list.shop">게시판</a>
-  <c:if test="${sessionScope.loginUser.userId=='admin' }">
+  <c:if test="${sessionScope.loginUser=='admin' }">
   <a class="w3-bar-item w3-button w3-hover-black" href="${path }/admin/admin.shop">관리자</a>
   </c:if>
 </nav>
