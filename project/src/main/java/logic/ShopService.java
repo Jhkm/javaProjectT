@@ -63,4 +63,6 @@ public interface ShopService {
 
 	List<User> userList(String[] idchks);
 
+	int deleteItem(int i_no);
+
 }

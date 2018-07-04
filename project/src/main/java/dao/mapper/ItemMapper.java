@@ -35,5 +35,8 @@ public interface ItemMapper {
 
 	@Delete("delete from cart where 1 = 1")
 	void clearCart();
+
+	@Delete("delete from item where i_no = #{value}")
+	int delete(int i_no);
 	
 }

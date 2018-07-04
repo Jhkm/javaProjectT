@@ -79,7 +79,7 @@
   </c:if>
   </c:forEach>
   <br>
-    <input type="hidden" name="gametype" value="${gametype }">
+    <input type="hidden" name="gametype" value="${gametype}">
     <select name="kind">
       <option value="i_name">제목</option>
       <option value="i_explain">내용</option>

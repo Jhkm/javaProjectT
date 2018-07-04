@@ -29,4 +29,6 @@ public interface ItemDao {
 	void cartUpdate(Integer no, Integer quantity, String loginId);
 
 	void clearCart();
+
+	int delete(int i_no);
 }

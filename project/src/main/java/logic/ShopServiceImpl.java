@@ -80,10 +80,7 @@ public class ShopServiceImpl implements ShopService{
 	public void boardReply(Board board) {
 		boardDao.refstepadd(board);
 		int b_no = boardDao.maxNum(); //
-		board.setB_no(++b_no); //
-//		board.getRef :
-//		board.setReflevel() : 
-//		board.setRefstep() : 
+		board.setB_no(++b_no);
 		board.setB_reflevel(board.getB_reflevel()+1);
 		board.setB_refstep(board.getB_refstep()+1);
 		boardDao.insert(board);
@@ -111,8 +108,8 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void itemCreate(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
-			uploadFileCreate(item.getI_Img_File(),request);//파일 생성
-			item.setI_img(item.getI_Img_File().getOriginalFilename()); //파일의 이름 등록
+			uploadFileCreate(item.getI_Img_File(),request);
+			item.setI_img(item.getI_Img_File().getOriginalFilename());
 		}
 		itemDao.create(item);
 	}
@@ -120,7 +117,6 @@ public class ShopServiceImpl implements ShopService{
 		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/";
 		String orgFile = picture.getOriginalFilename();
 		try {
-			//new File(uploadPath + orgFile) : 파일 객체 설정
 			picture.transferTo(new File(uploadPath + orgFile));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,8 +137,8 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void update(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
-			uploadFileCreate(item.getI_Img_File(),request);//파일 생성
-			item.setI_img(item.getI_Img_File().getOriginalFilename()); //파일의 이름 등록
+			uploadFileCreate(item.getI_Img_File(),request);
+			item.setI_img(item.getI_Img_File().getOriginalFilename());
 		}
 		itemDao.update(item);
 	}	
@@ -191,8 +187,8 @@ public class ShopServiceImpl implements ShopService{
 	public Sale checkEnd(User loginUser, Cart cart, HttpServletRequest request) {
 		Sale sale = new Sale();
 		sale.setS_id(saleDao.getMaxSaleId());
-		sale.setUser(loginUser); //�ֹ���
-		sale.setS_updateTime(new Date());// �ֹ��ð�.
+		sale.setUser(loginUser);
+		sale.setS_updateTime(new Date());
 		if(request.getParameter("newAddress").equals("") || request.getParameter("newAddress") == null) {
 			sale.setAddress(request.getParameter("oldAddress"));
 		} else {
@@ -204,11 +200,11 @@ public class ShopServiceImpl implements ShopService{
 			int saleItemId = i+1;
 			SaleItem saleItem = new SaleItem(sale.getS_id(),saleItemId,itemSet,sale.getS_updateTime());
 			sale.getSaleItemList().add(saleItem);
-		}//db�� sale ���̺� �߰��ϱ�
+		}
 		saleDao.insert(sale);
 		List<SaleItem> saleItemList = sale.getSaleItemList();
 		for(SaleItem saleItem : saleItemList) {
-			saleItemDao.insert(saleItem); //�ֹ���ǰ ������ saleitem���̺� ����.
+			saleItemDao.insert(saleItem);
 		}
 		
 		return sale;
@@ -232,6 +228,11 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public List<User> userList(String[] idchks) {
 		return userDao.list(idchks);
+	}
+
+	@Override
+	public int deleteItem(int i_no) {
+		return itemDao.delete(i_no);
 	}
 	
 	

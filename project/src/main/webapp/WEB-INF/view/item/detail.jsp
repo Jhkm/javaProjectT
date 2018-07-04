@@ -42,6 +42,11 @@ $(document).ready(function() {
 		}
 		total.value = ${item.i_price} * parseInt(count.value);
 	}
+	function checkConfirm() {
+		if(confirm("정말 삭제 하시겠습니까??")) {
+			location.href='delete.sdj?no=${item.i_no}';
+		}
+	}
 </script>
 <style type="text/css">
   table {
@@ -99,7 +104,7 @@ $(document).ready(function() {
     </form>
     <br>
     <input type="submit" value="정보수정" id="editgo">
-    <input type="submit" value="삭제">
+    <input type="button" value="삭제" onclick="javascript:checkConfirm();">
   </span>
 </div>
 </body>

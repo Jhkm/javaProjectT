@@ -25,11 +25,7 @@
          <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
             href="javascript:void(0)" onclick="myFunction()"
             title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-<<<<<<< HEAD
          <a href="/project/index.jsp" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-          <a href="/project/item/list.sdj"   class="w3-bar-item w3-button w3-padding-large w3-hide-small">º¸µå°ÔÀÓ¸ô</a>
-=======
-         <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
          <div class="w3-dropdown-hover w3-hide-small">
             <button class="w3-padding-large w3-button" title="More" onclick="location.href='/project/item/list.sdj'">
                º¸µå°ÔÀÓ¸ô<i class="fa fa-caret-down"></i>
@@ -44,7 +40,6 @@
                <a href="/project/item/list.sdj?gametype=8"   class="w3-bar-item w3-button">½ºÆ÷Ã÷</a>
             </div>
          </div>
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
          <div class="w3-dropdown-hover w3-hide-small">
             <button class="w3-padding-large w3-button" title="More">
                Ä¿¹Â´ÏÆ¼ <i class="fa fa-caret-down"></i>
@@ -77,13 +72,10 @@
             class="fa fa-search"></i></a>
       </div>
    </div>
-<<<<<<< HEAD
 </div>
-=======
    
 </div>
 <br><br><br>
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 <div align="center" >
 	<decorator:body/>
 </div>
