@@ -41,6 +41,7 @@ public class ItemDaoImpl implements ItemDao{
 	@Override
 	public List<Item> list(HttpServletRequest request) {
 		Map map = new HashMap();
+		map.put("sort", request.getParameter("sort"));
 		map.put("find", request.getParameter("find"));
 		map.put("kind", request.getParameter("kind"));
 		map.put("gametype", request.getParameter("gametype"));
