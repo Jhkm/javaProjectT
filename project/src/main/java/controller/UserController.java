@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.LoginException;
+import exception.ShopException;
+import logic.Item;
+import logic.Sale;
+import logic.SaleItem;
 import logic.ShopService;
 import logic.User;
 
@@ -73,7 +78,7 @@ public class UserController {
 		}
 		User dbUser = service.getUser(user.getM_id());
 		if (dbUser == null) {
-			bindingResult.reject("error.login.id");
+			bindingResult.reject("error.login.m_id");
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
@@ -82,7 +87,7 @@ public class UserController {
 			mav.setViewName("user/loginSuccess");
 			session.setAttribute("loginUser", dbUser.getM_id());
 		} else {
-			bindingResult.reject("error.login.password");
+			bindingResult.reject("error.login.m_passwd");
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
@@ -93,6 +98,127 @@ public class UserController {
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView mav = new ModelAndView("user/login");
 		session.invalidate();
+		return mav;
+	}
+	
+	@RequestMapping("user/mypage")
+	public ModelAndView mypage(String id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String loginUserId = (String)session.getAttribute("loginUser");
+		User user = service.getUser(id);
+/*		List<Sale> salelist = service.saleList(id);
+		for(Sale sale : salelist) {
+			List<SaleItem> saleItemList = service.saleitemList(sale.getS_id());
+			int amount = 0;
+			for(SaleItem sitem : saleItemList) {
+				Item item = service.ItemDetail(sitem.getSi_id()+"");
+				sitem.setItem(item);
+				amount += sitem.getQuantity() * item.getI_price();
+			}
+			sale.setSaleItemList(saleItemList);
+			sale.setAmount(amount);
+		}
+		mav.addObject("salelist", salelist);*/
+		List<Map<Integer, String>> maplist = service.gameType();
+		String likegame = "";
+		for (Map m : maplist) {
+			if (m.get("tp_no") == user.getM_game()) {
+				likegame += m.get("tp_name");
+			}
+		}
+		mav.addObject("likegame",likegame);
+		mav.addObject("gametype", maplist);
+		mav.addObject("user", user);
+		return mav;
+	}
+	
+	@RequestMapping(value = "user/update", method = RequestMethod.POST)
+	public ModelAndView update(@Valid User user, BindingResult bindingResult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if (bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
+		User loginUser = service.getUser((String) session.getAttribute("loginUser"));
+		User dbUser = service.getUser(user.getM_id());
+		if (loginUser.getM_id().equals("admin")) {
+			if (!user.getM_passwd().equals(loginUser.getM_passwd())) {
+				throw new ShopException("비밀번호가 틀립니다.", "update.shop?id=" + user.getM_id());
+			}
+		} else {
+			if (!user.getM_passwd().equals(dbUser.getM_passwd())) {
+				throw new ShopException("비밀번호가 틀립니다.", "update.shop?id=" + user.getM_id());
+			}
+		}
+		try {
+			// uesr : 화면에서 입력된 정보 저장하고 있는 객체
+			service.updateUser(user);
+			if (loginUser.getM_id().equals("admin")) {
+				mav.setViewName("redirect:../admin/admin.sdj");
+			}else {
+				mav.setViewName("redirect:mypage.sdj?id=" + user.getM_id());
+			}
+		} catch (DataIntegrityViolationException e) { // DataIntegrityViolationException : 기본키가 중복된 경우 발생되는 예외
+			bindingResult.reject("error.duplicate.user");
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "user/update", method = RequestMethod.GET)
+	public ModelAndView myupdateForm(String id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		User user = service.getUser(id);
+		List<Map<Integer, String>> maplist = service.gameType();
+		String likegame = "";
+		for (Map m : maplist) {
+			if (m.get("tp_no") == user.getM_game()) {
+				likegame += m.get("tp_name");
+			}
+		}
+		mav.addObject("likegame",likegame);
+		mav.addObject("gametype", maplist);
+		mav.addObject("user", user);
+		return mav;
+	}
+
+	
+	@RequestMapping(value="user/delete", method=RequestMethod.POST)
+	public String delete(@Valid User user, HttpSession session) {
+		//세션으로부터 로그인유저 객체를 받아옴. 
+		User loginUser = service.getUser((String)session.getAttribute("loginUser"));
+		System.out.println(user);
+		//입력된 id의 db 회원정보를 저장하고 있는 user 객체
+		if(user == null) {
+			throw new ShopException("삭제 대상 사용자가 존재하지 않습니다.", "mypage.sdj?id="+user.getM_id());
+		}
+		if(loginUser.getM_id().equals("admin")) { //관리자인 경우
+			if(!loginUser.getM_passwd().equals(user.getM_passwd())) { //비밀번호입력을 관리자 비밀번호로 등록함
+				throw new LoginException("관리자 비밀번호가 틀립니다.", "delete.sdj?id="+user.getM_id());
+			}
+		} else { //일반사용자의 경우
+			if(!user.getM_passwd().equals(user.getM_passwd())) {
+				throw new LoginException("비밀번호가 틀립니다.", "delete.sdj?id="+user.getM_id());
+			}
+		}
+		try {
+			service.deleteUser(user.getM_id());
+			if(loginUser.getM_id().equals("admin")) { //관리자로그인.
+				return "redirect:../admin/admin.sdj";
+			} else { //일반사용자로 로그인시 삭제 성공
+				session.invalidate(); //로그아웃
+				return "redirect:login.sdj";
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new ShopException("삭제시 오류 발생", "../user/mypage.shop?id="+user.getM_id());
+		}
+		
+	}
+	@RequestMapping(value = "user/delete", method = RequestMethod.GET)
+	public ModelAndView deleteForm(String id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		User user = service.getUser(id);
+		mav.addObject("user", user);
 		return mav;
 	}
 }

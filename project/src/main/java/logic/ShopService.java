@@ -29,7 +29,7 @@ public interface ShopService {
 
 	List<Map<Integer, String>> gameType();
 
-	List<Item> getItemList();
+	List<Item> getItemList(HttpServletRequest request);
 
 	Item detail(Integer no);
 
@@ -54,5 +54,13 @@ public interface ShopService {
 	Sale checkEnd(User loginUser, Cart cart, HttpServletRequest request);
 
 	void clearCart();	
-	
+
+	void updateUser(User user);
+
+	void deleteUser(String id);
+
+	List<User> userList();
+
+	List<User> userList(String[] idchks);
+
 }

@@ -32,21 +32,45 @@ public class ItemController {
 	@RequestMapping("item/register")
 	public ModelAndView register(@Valid Item item, BindingResult bindingResult, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("item/itemadd");
-		System.out.println(item);
 		item.setI_people(item.getI_people()+"~"+item.getI_people2());
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
+		int pageNum = 1;
+		if(request.getParameter("pageNum") == null || request.getParameter("pageNum").equals("")) {
+			pageNum = 1;
+		} else {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
 		service.itemCreate(item, request);
-		mav.setViewName("redirect:/item/list.sdj");
+		mav.setViewName("redirect:/item/list.sdj?pageNum=" + pageNum);
 		return mav;
 	}
 	@RequestMapping("item/list")
-	public ModelAndView list() {
-		List<Item> itemList = service.getItemList();
+	public ModelAndView list(HttpServletRequest request) {
+		List<Item> itemList = service.getItemList(request);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("itemList",itemList);
+		int pageNum = 1;
+		if(request.getParameter("pageNum") == null || request.getParameter("pageNum").equals("")) {
+			pageNum = 1;
+		} else {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		int count = itemList.size();
+		int startPage = (pageNum/10)*10 +1;
+		int endPage = startPage+9;
+		if(endPage >= count/25+1) {
+			endPage = count/25 + 1;
+		}
+		// 시작 페이지 마지막 페이지 현재페이지
+		if(request.getParameter("gametype") != null && !request.getParameter("gametype").equals("")) {
+			mav.addObject("gametype", request.getParameter("gametype"));
+		}
+		mav.addObject("startPage",startPage);
+		mav.addObject("endPage",endPage);
+		mav.addObject("pageNum",pageNum);
 		return mav;
 	}
 	@RequestMapping("item/detail")
@@ -68,7 +92,6 @@ public class ItemController {
 	@RequestMapping("item/update")
 	public ModelAndView update(Item item, BindingResult bindingResult, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("item/edit");
-		System.out.println(item);
 		item.setI_people(item.getI_people()+"~"+item.getI_people2());
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());

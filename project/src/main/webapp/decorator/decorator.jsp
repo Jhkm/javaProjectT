@@ -13,6 +13,7 @@
    href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<decorator:head/>
 </head>
 <body>
 <div>
@@ -24,8 +25,26 @@
          <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
             href="javascript:void(0)" onclick="myFunction()"
             title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+<<<<<<< HEAD
          <a href="/project/index.jsp" class="w3-bar-item w3-button w3-padding-large">HOME</a>
           <a href="/project/item/list.sdj"   class="w3-bar-item w3-button w3-padding-large w3-hide-small">보드게임몰</a>
+=======
+         <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+         <div class="w3-dropdown-hover w3-hide-small">
+            <button class="w3-padding-large w3-button" title="More" onclick="location.href='/project/item/list.sdj'">
+               보드게임몰<i class="fa fa-caret-down"></i>
+            </button>
+            <div class="w3-dropdown-content w3-bar-block w3-card-4">
+               <a href="/project/item/list.sdj?gametype=7" class="w3-bar-item w3-button">액션</a>
+               <a href="/project/item/list.sdj?gametype=1"   class="w3-bar-item w3-button">순발력</a>
+               <a href="/project/item/list.sdj?gametype=4"   class="w3-bar-item w3-button">추리</a> 
+               <a href="/project/item/list.sdj?gametype=2"   class="w3-bar-item w3-button">학습</a> 
+               <a href="/project/item/list.sdj?gametype=6"   class="w3-bar-item w3-button">전략</a> 
+               <a href="/project/item/list.sdj?gametype=10"   class="w3-bar-item w3-button">복불복</a>
+               <a href="/project/item/list.sdj?gametype=8"   class="w3-bar-item w3-button">스포츠</a>
+            </div>
+         </div>
+>>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
          <div class="w3-dropdown-hover w3-hide-small">
             <button class="w3-padding-large w3-button" title="More">
                커뮤니티 <i class="fa fa-caret-down"></i>
@@ -44,7 +63,7 @@
                		<a href="/project/admin/admin.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">관리자페이지</a>
               	</c:if>
                	<c:if test="${sessionScope.loginUser ne 'admin' }">
-               		<a href="/project/user/mypage.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
+               		<a href="/project/user/mypage.sdj?id=${sessionScope.loginUser}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
                	</c:if>
                </c:if>
          <c:if test="${empty sessionScope.loginUser}">
@@ -58,7 +77,13 @@
             class="fa fa-search"></i></a>
       </div>
    </div>
+<<<<<<< HEAD
 </div>
+=======
+   
+</div>
+<br><br><br>
+>>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 <div align="center" >
 	<decorator:body/>
 </div>

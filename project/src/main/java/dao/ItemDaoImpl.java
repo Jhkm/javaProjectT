@@ -39,8 +39,12 @@ public class ItemDaoImpl implements ItemDao{
 		return list;
 	}
 	@Override
-	public List<Item> list() {
-		return sqlSession.selectList(NS+"list");
+	public List<Item> list(HttpServletRequest request) {
+		Map map = new HashMap();
+		map.put("find", request.getParameter("find"));
+		map.put("kind", request.getParameter("kind"));
+		map.put("gametype", request.getParameter("gametype"));
+		return sqlSession.selectList(NS+"list",map);
 	}
 	@Override
 	public Item detail(Integer no) {

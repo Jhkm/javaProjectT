@@ -14,7 +14,7 @@ public interface ItemDao {
 
 	List<Map<Integer, String>> gameType();
 
-	List<Item> list();
+	List<Item> list(HttpServletRequest request);
 
 	Item detail(Integer no);
 

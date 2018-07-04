@@ -21,7 +21,11 @@
          <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
             href="javascript:void(0)" onclick="myFunction()"
             title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+<<<<<<< HEAD
          <a href="/project/index.jsp" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+=======
+         <a href="/project" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+>>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
           <a href="/project/item/list.sdj"   class="w3-bar-item w3-button w3-padding-large w3-hide-small">보드게임몰</a>
          <div class="w3-dropdown-hover w3-hide-small">
             <button class="w3-padding-large w3-button" title="More">
@@ -41,7 +45,7 @@
                		<a href="/project/admin/admin.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">관리자페이지</a>
               	</c:if>
                	<c:if test="${sessionScope.loginUser ne 'admin' }">
-               		<a href="/project/user/mypage.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
+               		<a href="/project/user/mypage.sdj?id=${sessionScope.loginUser }" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
                	</c:if>
                </c:if>
          <c:if test="${empty sessionScope.loginUser}">
@@ -55,7 +59,7 @@
             class="fa fa-search"></i></a>
       </div>
    </div>
-   <div class="w3-content"
+<div class="w3-content"
       style="max-width: 800px; margin-top: 100px; margin-left: 25%;">
       <div id="myCarousel" class="carousel slide" data-ride="carousel" > 
    
@@ -74,7 +78,7 @@
    <div class="carousel-inner" >
       <!--슬라이드1-->
       <div class="item active"> 
-         <img src="./img/1.jpg" style="width:100%" alt="First slide">
+         <img src="/project/img/1.jpg" style="width:100%" alt="First slide">
          <div class="container">
             <div class="carousel-caption">
                <!-- <h1>Slide 1</h1>
@@ -86,7 +90,7 @@
 
       <!--슬라이드2-->
       <div class="item"> 
-         <img src="./img/2.jpg" style="width:100%" data-src="" alt="Second slide">
+         <img src="/project/img/2.jpg" style="width:100%" data-src="" alt="Second slide">
          <div class="container">
             <div class="carousel-caption">
                <!-- <h1>Slide 2</h1>
@@ -98,7 +102,7 @@
       
       <!--슬라이드3-->
       <div class="item"> 
-         <img src="./img/3.jpg" style="width:100%" data-src="" alt="Third slide">
+         <img src="/project/img/3.jpg" style="width:100%" data-src="" alt="Third slide">
          <div class="container">
             <div class="carousel-caption">
                <!-- <h1>Slide 3</h1>
@@ -110,7 +114,7 @@
       
       <!--슬라이드4-->
       <div class="item"> 
-         <img src="./img/4.jpg" style="width:100%" data-src="" alt="Fourth slide">
+         <img src="/project/img/4.jpg" style="width:100%" data-src="" alt="Fourth slide">
          <div class="container">
             <div class="carousel-caption">
                <!-- <h1>Slide 4</h1>
@@ -122,7 +126,7 @@
       
       <!--슬라이드5-->
       <div class="item"> 
-         <img src="./img/5.jpg" style="width:100%" data-src="" alt="Fifth slide">
+         <img src="/project/img/5.jpg" style="width:100%" data-src="" alt="Fifth slide">
          <div class="container">
             <div class="carousel-caption">
                <!-- <h1>Slide 5</h1>
@@ -134,7 +138,7 @@
       
       <!--슬라이드6-->
       <div class="item"> 
-         <img src="./img/6.jpg" style="width:100%" data-src="" alt="Sixth slide">
+         <img src="/project/img/6.jpg" style="width:100%" data-src="" alt="Sixth slide">
          <div class="container">
             <div class="carousel-caption">
                <!-- <h1>Slide 6</h1>

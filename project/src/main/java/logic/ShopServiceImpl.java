@@ -131,8 +131,8 @@ public class ShopServiceImpl implements ShopService{
 		return itemDao.gameType();
 	}
 	@Override
-	public List<Item> getItemList() {
-		return itemDao.list();
+	public List<Item> getItemList(HttpServletRequest request) {
+		return itemDao.list(request);
 	}
 	@Override
 	public Item detail(Integer no) {
@@ -216,6 +216,22 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void clearCart() {
 		itemDao.clearCart();
+	}
+	@Override
+	public void updateUser(User user) {
+		userDao.update(user);
+	}
+	@Override
+	public void deleteUser(String id) {
+		userDao.delete(id);
+	}
+	@Override
+	public List<User> userList() {
+		return userDao.list();
+	}
+	@Override
+	public List<User> userList(String[] idchks) {
+		return userDao.list(idchks);
 	}
 	
 	
