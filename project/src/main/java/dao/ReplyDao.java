@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import logic.Reply;
 
 public interface ReplyDao {
@@ -9,4 +11,6 @@ public interface ReplyDao {
 	void insert(Reply reply);
 
 	Reply getReply(Integer r_no);
+
+	List<Reply> getBoardReply(Integer b_no);
 }

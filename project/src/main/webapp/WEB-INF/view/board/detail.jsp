@@ -59,7 +59,9 @@
 		</table>
 	</form:form>
 	<div>
-	
+	<c:forEach var="reply" items="${replylist }">
+		${reply.m_id } - ${reply.r_content } - ${reply.r_date } <br>
+	</c:forEach>
 	</div>
 </body>
 </html>

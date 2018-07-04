@@ -47,7 +47,7 @@ public class BoardDaoImpl implements BoardDao{
 		Map<String,Integer> map = new HashMap<String, Integer>();
 		map.put("startrow", 0);
 		map.put("limit", 1);
-		map.put("num", num);
+		map.put("b_no", num);
 		return sqlSession.selectOne(NS+"list", map);
 	}
 

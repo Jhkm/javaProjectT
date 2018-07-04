@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,5 +33,10 @@ public class ReplyDaoImpl implements ReplyDao {
 		map.put("limit", 1);
 		map.put("num", r_no);
 		return sqlSession.selectOne(NS+"list", map);
+	}
+
+	@Override
+	public List<Reply> getBoardReply(Integer b_no) {
+		return sqlSession.getMapper(ReplyMapper.class).getBoardReply(b_no);
 	}
 }
