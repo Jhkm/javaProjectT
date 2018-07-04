@@ -33,6 +33,10 @@ public interface ShopService {
 	Sale checkEnd(User loginUser, Cart cart, HttpServletRequest request);
 
 	void clearCart();
+
+	void updateUser(User user);
+
+	void deleteUser(String id);
 	
 	
 	

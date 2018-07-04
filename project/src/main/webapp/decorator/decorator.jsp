@@ -56,7 +56,7 @@
                		<a href="/project/admin/admin.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">관리자페이지</a>
               	</c:if>
                	<c:if test="${sessionScope.loginUser ne 'admin' }">
-               		<a href="/project/user/mypage.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
+               		<a href="/project/user/mypage.sdj?id=${sessionScope.loginUser}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">마이페이지</a>
                	</c:if>
                </c:if>
          <c:if test="${empty sessionScope.loginUser}">

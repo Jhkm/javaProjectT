@@ -122,6 +122,14 @@ public class ShopServiceImpl implements ShopService{
 	public void clearCart() {
 		itemDao.clearCart();
 	}
+	@Override
+	public void updateUser(User user) {
+		userDao.update(user);
+	}
+	@Override
+	public void deleteUser(String id) {
+		userDao.delete(id);
+	}
 	
 	
 }
