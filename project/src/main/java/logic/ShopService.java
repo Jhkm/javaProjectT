@@ -12,7 +12,7 @@ public interface ShopService {
 
 	List<Map<Integer, String>> gameType();
 
-	List<Item> getItemList();
+	List<Item> getItemList(HttpServletRequest request);
 
 	Item detail(Integer no);
 

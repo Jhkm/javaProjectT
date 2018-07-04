@@ -66,11 +66,13 @@
   </c:if>
   </c:forEach>
   <br>
-  <select>
-    <option value="subject">제목</option>
-    <option value="content">내용</option>
-    <option value="subcon">제목+내용</option>
-  </select>&nbsp;<input type="text" size="40" name="find">
+  <form action="list.sdj" method="post">
+    <input type="hidden" name="gametype" value="${gametype }">
+    <select name="kind">
+      <option value="i_name">제목</option>
+      <option value="i_explain">내용</option>
+    </select>&nbsp;<input type="text" size="40" name="find">&nbsp;<input type="submit" value="검색">
+  </form>
 </div>
 </body>
 </html>

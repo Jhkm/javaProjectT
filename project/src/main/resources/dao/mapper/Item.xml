@@ -7,6 +7,18 @@
     <if test="no != null">
        where i_no=#{no}
     </if>
+    <if test="gametype != null">
+       where it_no = #{gametype}
+    </if>
+    <if test="find != null and kind != null">
+      <if test="no != null or gametype != null">
+        and 
+      </if>
+      <if test="no == null and gametype == null">
+        where 
+      </if>
+      ${kind} like '%${find}%'
+    </if>
     order by i_no desc
   </select>
   <select id="cart" resultType="map" parameterType="map">

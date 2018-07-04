@@ -49,7 +49,7 @@ public class ItemController {
 	}
 	@RequestMapping("item/list")
 	public ModelAndView list(HttpServletRequest request) {
-		List<Item> itemList = service.getItemList();
+		List<Item> itemList = service.getItemList(request);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("itemList",itemList);
 		int pageNum = 1;
@@ -65,6 +65,9 @@ public class ItemController {
 			endPage = count/25 + 1;
 		}
 		// 시작 페이지 마지막 페이지 현재페이지
+		if(request.getParameter("gametype") != null && !request.getParameter("gametype").equals("")) {
+			mav.addObject("gametype", request.getParameter("gametype"));
+		}
 		mav.addObject("startPage",startPage);
 		mav.addObject("endPage",endPage);
 		mav.addObject("pageNum",pageNum);
