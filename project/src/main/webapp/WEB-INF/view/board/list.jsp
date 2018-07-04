@@ -67,7 +67,7 @@
 				<c:forEach begin="1" end="${board.b_reflevel }">&nbsp;&nbsp;&nbsp;</c:forEach>
 					<c:if test="${board.b_reflevel > 0}">¦¦</c:if>
 					<a href="detail.sdj?b_no=${board.b_no }&pageNum=${pageNum}&b_category=${board.b_category}">${board.b_subject }</a></td>
-					<td align="left">${board.g_id }</td>
+					<td align="left">${board.m_id }</td>
 					<td align="center">${board.b_regtime }</td>
 					<td align="left">${board.b_readcnt }</td>
 				</tr>

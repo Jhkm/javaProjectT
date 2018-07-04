@@ -7,10 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
@@ -47,7 +50,7 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
-	public void insert(Board board, HttpServletRequest request) {
+	public void insert(Board board, HttpServletRequest request, HttpSession session) {
 		if(board.getB_file() != null && !board.getB_file().isEmpty()) {
 			uploadBoardFileCreate(board.getB_file(), request);
 			board.setB_fileurl(board.getB_file().getOriginalFilename());
@@ -58,6 +61,7 @@ public class ShopServiceImpl implements ShopService{
 		board.setB_reflevel(0);
 		board.setB_refstep(0);
 		board.setB_people(0);
+		board.setM_id((String)request.getSession().getAttribute("loginUser"));
 		board.setB_category(Integer.parseInt(request.getParameter("b_category")));
 		boardDao.insert(board);
 	}
@@ -111,8 +115,8 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void itemCreate(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
-			uploadFileCreate(item.getI_Img_File(),request);//파일 생성
-			item.setI_img(item.getI_Img_File().getOriginalFilename()); //파일의 이름 등록
+			uploadFileCreate(item.getI_Img_File(),request);
+			item.setI_img(item.getI_Img_File().getOriginalFilename()); 
 		}
 		itemDao.create(item);
 	}
@@ -120,7 +124,6 @@ public class ShopServiceImpl implements ShopService{
 		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/";
 		String orgFile = picture.getOriginalFilename();
 		try {
-			//new File(uploadPath + orgFile) : 파일 객체 설정
 			picture.transferTo(new File(uploadPath + orgFile));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,8 +144,8 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void update(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
-			uploadFileCreate(item.getI_Img_File(),request);//파일 생성
-			item.setI_img(item.getI_Img_File().getOriginalFilename()); //파일의 이름 등록
+			uploadFileCreate(item.getI_Img_File(),request);
+			item.setI_img(item.getI_Img_File().getOriginalFilename()); 
 		}
 		itemDao.update(item);
 	}	
@@ -174,13 +177,14 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
-	public void Reply(Reply reply, Board board, HttpServletRequest request) {
+	public void Reply(Reply reply, Board board, HttpServletRequest request, HttpSession session) {
 		int r_no = replyDao.maxNum();
 		board.setB_no(Integer.parseInt(request.getParameter("b_no")));
 		reply.setR_no(++r_no);
 		reply.setR_ref(r_no);
 		reply.setR_reflevel(0);
 		reply.setR_refstep(0);
+		board.setM_id((String)request.getSession().getAttribute("loginUser"));
 		replyDao.insert(reply);
 	}
 
@@ -192,8 +196,8 @@ public class ShopServiceImpl implements ShopService{
 	public Sale checkEnd(User loginUser, Cart cart, HttpServletRequest request) {
 		Sale sale = new Sale();
 		sale.setS_id(saleDao.getMaxSaleId());
-		sale.setUser(loginUser); //�ֹ���
-		sale.setS_updateTime(new Date());// �ֹ��ð�.
+		sale.setUser(loginUser); 
+		sale.setS_updateTime(new Date());
 		if(request.getParameter("newAddress").equals("") || request.getParameter("newAddress") == null) {
 			sale.setAddress(request.getParameter("oldAddress"));
 		} else {
@@ -205,11 +209,11 @@ public class ShopServiceImpl implements ShopService{
 			int saleItemId = i+1;
 			SaleItem saleItem = new SaleItem(sale.getS_id(),saleItemId,itemSet,sale.getS_updateTime());
 			sale.getSaleItemList().add(saleItem);
-		}//db�� sale ���̺� �߰��ϱ�
+		}
 		saleDao.insert(sale);
 		List<SaleItem> saleItemList = sale.getSaleItemList();
 		for(SaleItem saleItem : saleItemList) {
-			saleItemDao.insert(saleItem); //�ֹ���ǰ ������ saleitem���̺� ����.
+			saleItemDao.insert(saleItem); 
 		}
 		
 		return sale;

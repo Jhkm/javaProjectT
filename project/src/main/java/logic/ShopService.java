@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public interface ShopService {
 
@@ -14,7 +15,7 @@ public interface ShopService {
 
 	Board getBoard(Integer num);
 
-	void insert(Board board, HttpServletRequest request);
+	void insert(Board board, HttpServletRequest request, HttpSession session);
 
 	void updatereadcnt(Integer num);
 
@@ -46,7 +47,7 @@ public interface ShopService {
 
 	void cartUpdate(Integer no, Integer quantity, String loginId);
 
-	void Reply(Reply reply, Board board, HttpServletRequest request);
+	void Reply(Reply reply, Board board, HttpServletRequest request, HttpSession session);
 
 	Reply getReply(Integer r_no, HttpServletRequest request);
 
