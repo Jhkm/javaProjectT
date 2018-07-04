@@ -44,12 +44,17 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<a href="reply.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[답변]</a>
 				<a href="update.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[수정]</a>
 				<a href="delete.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[삭제]</a>
 				<a href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">[목록]</a>
 			</td>
 		</tr>
+		<tr><td align="center">내용</td><td><textarea rows="4" cols="80" name="reply_content" style="color:black;"></textarea></td></tr>
 	</table>
+	<form:form modelAttribute="reply" action="reply.sdj" method="post" enctype="multipart/form-data" name="f">
+		<table>
+			<tr><td align="center" colspan="2"><a href="javascript:document.f.submit()">[댓글등록]</a></td></tr>
+		</table>
+	</form:form>
 </body>
 </html>

@@ -24,7 +24,7 @@ public interface ShopService {
 	void boardUpdate(Board board, HttpServletRequest request);
 
 	void boardDelete(int num);
-	
+
 	void itemCreate(Item item, HttpServletRequest request);
 
 	List<Map<Integer, String>> gameType();
@@ -46,6 +46,10 @@ public interface ShopService {
 	void cartSubtraction(Integer i_no, String loginId);
 
 	void cartUpdate(Integer no, Integer quantity, String loginId);
+
+	void Reply(Reply reply, HttpServletRequest request);
+
+	Reply getReply(Integer r_no, HttpServletRequest request);
 	
 	
 	

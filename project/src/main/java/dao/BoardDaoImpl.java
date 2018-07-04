@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import dao.mapper.BoardMapper;
 import logic.Board;
+import logic.Reply;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -65,11 +66,6 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public void refstepadd(Board board) {
-		sqlSession.getMapper(BoardMapper.class).refstepadd(board);
-	}
-
-	@Override
 	public void update(Board board) {
 		sqlSession.getMapper(BoardMapper.class).update(board);
 	}
@@ -77,5 +73,21 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public void delete(int num) {
 		sqlSession.getMapper(BoardMapper.class).delete(num);
+	}
+	@Override
+	public void refstepadd(Board board) {
+		sqlSession.getMapper(BoardMapper.class).refstepadd(board);
+	}
+
+	@Override
+	public void insert(Reply reply) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void refstepadd(Reply reply) {
+		// TODO Auto-generated method stub
+		
 	}
 }

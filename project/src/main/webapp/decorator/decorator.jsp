@@ -16,24 +16,27 @@
 </head>
 <body>
 <div>
+<br>
+<br>
+<br>
    <div class="w3-top w3-center">
       <div class="w3-bar w3-white w3-card">
          <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
             href="javascript:void(0)" onclick="myFunction()"
             title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-         <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-          <a href="#"   class="w3-bar-item w3-button w3-padding-large w3-hide-small">보드게임몰</a>
+         <a href="/project/index.jsp" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+          <a href="/project/item/list.sdj"   class="w3-bar-item w3-button w3-padding-large w3-hide-small">보드게임몰</a>
          <div class="w3-dropdown-hover w3-hide-small">
             <button class="w3-padding-large w3-button" title="More">
                커뮤니티 <i class="fa fa-caret-down"></i>
             </button>
             <div class="w3-dropdown-content w3-bar-block w3-card-4">
-               <a href="#" class="w3-bar-item w3-button">플레이후기</a>
-               <a href="#"   class="w3-bar-item w3-button">팁 게시판</a>
-               <a href="#"   class="w3-bar-item w3-button">자유게시판</a> 
-               <a href="#"   class="w3-bar-item w3-button">요청게시판</a> 
-               <a href="#"   class="w3-bar-item w3-button">번개게시판</a> 
-               <a href="#"   class="w3-bar-item w3-button">게임플레이 동영상</a>
+               <a href="/project/board/list.sdj?b_category=1" class="w3-bar-item w3-button">플레이후기</a>
+               <a href="/project/board/list.sdj?b_category=2"   class="w3-bar-item w3-button">팁 게시판</a>
+               <a href="/project/board/list.sdj?b_category=3"   class="w3-bar-item w3-button">자유게시판</a> 
+               <a href="/project/board/list.sdj?b_category=4"   class="w3-bar-item w3-button">요청게시판</a> 
+               <a href="/project/board/list.sdj?b_category=5"   class="w3-bar-item w3-button">번개게시판</a> 
+               <a href="/project/board/list.sdj?b_category=6"   class="w3-bar-item w3-button">게임플레이 동영상</a>
             </div>
          </div>
          <c:if test="${!empty sessionScope.loginUser}">
@@ -55,7 +58,7 @@
             class="fa fa-search"></i></a>
       </div>
    </div>
-   
+</div>
 <div align="center" >
 	<decorator:body/>
 </div>

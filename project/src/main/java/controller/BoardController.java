@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.BoardException;
 import logic.Board;
+import logic.Reply;
 import logic.ShopService;
 
 @Controller
@@ -146,7 +147,25 @@ public class BoardController {
 		}
 		return mav;
 	}
-		
+	
+	@RequestMapping(value="board/r_reply", method=RequestMethod.POST)
+	public ModelAndView reply(@Valid Reply reply, BindingResult bindingResult, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		if (bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			reply = service.getReply(reply.getR_no(), request);
+			mav.addObject("reply", reply);
+			return mav;
+		}
+		try {
+			service.Reply(reply, request);
+			mav.setViewName("redirect:list.sdj");
+		} catch(Exception e) {
+			throw new BoardException("댓글 등록 실패", "reply.sdj");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value="board/*",method=RequestMethod.GET)
 	public ModelAndView detail(Integer b_no,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();

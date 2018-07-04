@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import logic.Board;
+import logic.Reply;
 
 public interface BoardMapper {
 	@Update("update board set b_readcnt=b_readcnt + 1 where b_no=#{b_no}")
@@ -29,4 +30,8 @@ public interface BoardMapper {
 	
 	@Select("select ifnull(max(b_no),0) from board")
 	int maxNum();
+
+	@Insert("update reply set r_refstep = r_refstep + 1 where r_ref = #{r_ref} and r_refstep > #{r_refstep}")
+	void replyrefstepadd(Reply reply);
+
 }

@@ -13,7 +13,7 @@ $(document).ready(function() {
 		var y = parseInt(count.value)
 		count.value = y+1;;
 		total.value = ${item.i_price} * parseInt(count.value);
-		event.preventDefault()
+		event.preventDefault();
 	})
 	$("#down_button").click(function(){
 		var x = parseInt(count.value)

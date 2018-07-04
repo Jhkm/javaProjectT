@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- /src/resources/dao/mapper/User.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.BoardMapper">
+   <select id="count" resultType="Integer" parameterType="map">
+      select count(*) from board
+      <if test="searchType != null and searchContent != null">
+      	where ${searchType} like '%${searchContent}%'
+      </if>
+      where b_category = #{b_category}
+   </select>
+   <select id="list" resultType="Board" parameterType="map">
+   		select b_readcnt, b_no, b_category, b_subject, b_content, b_file b_fileurl, m_id, b_regtime, b_ref, b_reflevel, b_refstep, b_state, b_date, b_people, g_id from board where 1=1
+		<if test="b_no != null">
+		and b_no=#{b_no}
+		</if>
+   		<if test="searchType != null and searchContent != null">
+   		and ${searchType} like '%${searchContent}%'
+   		</if>
+   		<if test="b_category != null">
+   		and b_category = #{b_category}
+   		</if>
+   		order by b_ref desc, b_refstep asc limit #{startrow}, #{limit}
+   </select>
+</mapper>

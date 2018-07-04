@@ -25,7 +25,7 @@ public class ShopServiceImpl implements ShopService{
 	private UserDao userDao;
 	@Autowired
 	BoardDao boardDao;
-
+	
 	@Override
 	public int boardcount(String searchType, String searchContent, String category) {
 		return boardDao.count(searchType, searchContent, category);
@@ -98,13 +98,13 @@ public class ShopServiceImpl implements ShopService{
 	public void boardDelete(int b_no) {
 		boardDao.delete(b_no);
 	}
-
-
+	
+	
 	@Override
 	public void itemCreate(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
-			uploadFileCreate(item.getI_Img_File(),request);//ÆÄÀÏ »ı¼º
-			item.setI_img(item.getI_Img_File().getOriginalFilename()); //ÆÄÀÏÀÇ ÀÌ¸§ µî·Ï
+			uploadFileCreate(item.getI_Img_File(),request);//íŒŒì¼ ìƒì„±
+			item.setI_img(item.getI_Img_File().getOriginalFilename()); //íŒŒì¼ì˜ ì´ë¦„ ë“±ë¡
 		}
 		itemDao.create(item);
 	}
@@ -112,7 +112,7 @@ public class ShopServiceImpl implements ShopService{
 		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/";
 		String orgFile = picture.getOriginalFilename();
 		try {
-			//new File(uploadPath + orgFile) : ÆÄÀÏ °´Ã¼ ¼³Á¤
+			//new File(uploadPath + orgFile) : íŒŒì¼ ê°ì²´ ì„¤ì •
 			picture.transferTo(new File(uploadPath + orgFile));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -133,8 +133,8 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void update(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
-			uploadFileCreate(item.getI_Img_File(),request);//ÆÄÀÏ »ı¼º
-			item.setI_img(item.getI_Img_File().getOriginalFilename()); //ÆÄÀÏÀÇ ÀÌ¸§ µî·Ï
+			uploadFileCreate(item.getI_Img_File(),request);//íŒŒì¼ ìƒì„±
+			item.setI_img(item.getI_Img_File().getOriginalFilename()); //íŒŒì¼ì˜ ì´ë¦„ ë“±ë¡
 		}
 		itemDao.update(item);
 	}	
@@ -164,6 +164,17 @@ public class ShopServiceImpl implements ShopService{
 	public void cartUpdate(Integer no, Integer quantity, String loginId) {
 		itemDao.cartUpdate(no,quantity,loginId);
 	}
-	
+
+	@Override
+	public void Reply(Reply reply, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Reply getReply(Integer r_no, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
