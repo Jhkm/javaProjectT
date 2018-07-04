@@ -70,7 +70,9 @@
                 <tr><td>${saleItem.item.name }</td>
                 <td>${saleItem.item.price }</td>
                 <td>${saleItem.quantity }</td>
-                <td>${saleItem.quantity * saleItem.item.price}</td>
+                <
+                
+                td>${saleItem.quantity * saleItem.item.price}</td>
                 </tr>
               </c:forEach>
             </table></div></td></tr>
