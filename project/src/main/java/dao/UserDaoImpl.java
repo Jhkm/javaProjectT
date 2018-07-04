@@ -22,4 +22,14 @@ public class UserDaoImpl implements UserDao{
 	public User select(String id) {
 		return sqlSession.getMapper(UserMapper.class).select(id);
 	}
+
+	@Override
+	public void update(User user) {
+		sqlSession.getMapper(UserMapper.class).update(user);
+	}
+
+	@Override
+	public void delete(String id) {
+		sqlSession.getMapper(UserMapper.class).delete(id);
+	}
 }

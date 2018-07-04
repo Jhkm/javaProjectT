@@ -74,7 +74,7 @@
    <div class="carousel-inner" >
       <!--슬라이드1-->
       <div class="item active"> 
-         <img src="./img/1.jpg" style="width:100%" alt="First slide">
+         <img src="img/1.jpg" style="width:100%" alt="First slide">
          <div class="container">
             <div class="carousel-caption">
                <!-- <h1>Slide 1</h1>
