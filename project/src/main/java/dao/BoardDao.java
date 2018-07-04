@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import logic.Board;
-import logic.Reply;
 
 public interface BoardDao {
 
@@ -14,13 +13,9 @@ public interface BoardDao {
 
 	Board getBoard(Integer b_no);
 
-	void insert(Reply reply);
-
 	void b_readcnt(Integer b_no);
 
 	int maxNum();
-
-	void refstepadd(Reply reply);
 
 	void update(Board board);
 

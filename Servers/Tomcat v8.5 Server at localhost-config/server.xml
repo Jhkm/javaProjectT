@@ -104,7 +104,7 @@
 
 				<Context docBase="project" path="/project" reloadable="true" source="org.eclipse.jst.j2ee.server:project"/>
 
-			<Context docBase="singleproject" path="/singleproject" reloadable="true" source="org.eclipse.jst.jee.server:singleproject"/></Host>
+			</Host>
 		</Engine>
 	</Service>
 </Server>

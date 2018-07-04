@@ -20,6 +20,7 @@
 		<input type="hidden" name="reflevel" value="${board.b_reflevel }">
 		<input type="hidden" name="refstep" value="${board.b_refstep }">
 		<table border="1" cellpadding="0" cellspacing="0">
+		
 			<tr>
 				<td colspan="2"> SPRING ´äº¯±Û </td>
 			</tr>

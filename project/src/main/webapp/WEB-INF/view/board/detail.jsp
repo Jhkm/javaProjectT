@@ -49,12 +49,17 @@
 				<a href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">[목록]</a>
 			</td>
 		</tr>
-		<tr><td align="center">내용</td><td><textarea rows="4" cols="80" name="reply_content" style="color:black;"></textarea></td></tr>
 	</table>
-	<form:form modelAttribute="reply" action="reply.sdj" method="post" enctype="multipart/form-data" name="f">
+	<form:form modelAttribute="reply" action="r_reply.sdj" name="f">
+		<input type="hidden" name="b_no" value="${board.b_no}">
+		<input type="hidden" name="pageNum" value="${param.pageNum}">
 		<table>
-			<tr><td align="center" colspan="2"><a href="javascript:document.f.submit()">[댓글등록]</a></td></tr>
+		<tr><td align="center">내용</td><td><textarea rows="4" cols="80" name="r_content" style="color:black;"></textarea></td></tr>
+		<tr><td align="center" colspan="2"><a href="javascript:document.f.submit()">[댓글등록]</a></td></tr>
 		</table>
 	</form:form>
+	<div>
+	
+	</div>
 </body>
 </html>

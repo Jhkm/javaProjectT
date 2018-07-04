@@ -27,4 +27,6 @@ public interface ItemDao {
 	void cartSubtraction(Integer i_no, String loginId);
 
 	void cartUpdate(Integer no, Integer quantity, String loginId);
+
+	void clearCart();
 }

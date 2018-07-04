@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
 import dao.ItemDao;
+import dao.ReplyDao;
+import dao.SaleDao;
+import dao.SaleItemDao;
 import dao.UserDao;
 
 @Service
@@ -25,6 +28,8 @@ public class ShopServiceImpl implements ShopService{
 	private UserDao userDao;
 	@Autowired
 	BoardDao boardDao;
+	@Autowired
+	ReplyDao replyDao;
 	
 	@Override
 	public int boardcount(String searchType, String searchContent, String category) {
@@ -100,6 +105,9 @@ public class ShopServiceImpl implements ShopService{
 	}
 	
 	
+	private SaleDao saleDao;
+	@Autowired
+	private SaleItemDao saleItemDao;
 	@Override
 	public void itemCreate(Item item, HttpServletRequest request) {
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
@@ -167,14 +175,48 @@ public class ShopServiceImpl implements ShopService{
 
 	@Override
 	public void Reply(Reply reply, HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		
+		int r_no = replyDao.maxNum();
+		reply.setR_no(++r_no);
+		reply.setR_ref(r_no);
+		reply.setR_reflevel(0);
+		reply.setR_refstep(0);
+		replyDao.insert(reply);
 	}
 
 	@Override
 	public Reply getReply(Integer r_no, HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return replyDao.getReply(r_no);
 	}
+	@Override
+	public Sale checkEnd(User loginUser, Cart cart, HttpServletRequest request) {
+		Sale sale = new Sale();
+		sale.setS_id(saleDao.getMaxSaleId());
+		sale.setUser(loginUser); //�ֹ���
+		sale.setS_updateTime(new Date());// �ֹ��ð�.
+		if(request.getParameter("newAddress").equals("") || request.getParameter("newAddress") == null) {
+			sale.setAddress(request.getParameter("oldAddress"));
+		} else {
+			sale.setAddress(request.getParameter("newAddress"));
+		}
+		List<ItemSet> itemList = cart.getItemList();
+		for(int i=0;i<itemList.size();i++) {
+			ItemSet itemSet =itemList.get(i);
+			int saleItemId = i+1;
+			SaleItem saleItem = new SaleItem(sale.getS_id(),saleItemId,itemSet,sale.getS_updateTime());
+			sale.getSaleItemList().add(saleItem);
+		}//db�� sale ���̺� �߰��ϱ�
+		saleDao.insert(sale);
+		List<SaleItem> saleItemList = sale.getSaleItemList();
+		for(SaleItem saleItem : saleItemList) {
+			saleItemDao.insert(saleItem); //�ֹ���ǰ ������ saleitem���̺� ����.
+		}
+		
+		return sale;
+	}
+	@Override
+	public void clearCart() {
+		itemDao.clearCart();
+	}
+	
 	
 }

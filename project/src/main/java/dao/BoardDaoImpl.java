@@ -78,16 +78,4 @@ public class BoardDaoImpl implements BoardDao{
 	public void refstepadd(Board board) {
 		sqlSession.getMapper(BoardMapper.class).refstepadd(board);
 	}
-
-	@Override
-	public void insert(Reply reply) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void refstepadd(Reply reply) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -50,7 +50,9 @@ public interface ShopService {
 	void Reply(Reply reply, HttpServletRequest request);
 
 	Reply getReply(Integer r_no, HttpServletRequest request);
-	
-	
+
+	Sale checkEnd(User loginUser, Cart cart, HttpServletRequest request);
+
+	void clearCart();	
 	
 }

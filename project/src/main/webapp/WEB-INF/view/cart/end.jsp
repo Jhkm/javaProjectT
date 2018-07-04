@@ -15,29 +15,31 @@
 </style>
 </head>
 <body>
-<h2>${loginUser.userName }님이 주문 하신 정보 입니다.</h2>
+<h2>${loginUser1.m_name }님이 주문 하신 정보 입니다.</h2>
 <h2>배송 받을 정보</h2>
 <table>
   <tr><td width="30%" class="title">구매자ID</td>
-  <td width="70%">${loginUser.userId }</td></tr>
+  <td width="70%">${loginUser1.m_id }</td></tr>
   <tr><td width="30%" class="title">이름</td>
-  <td width="70%">${loginUser.userName }</td></tr>
-  <tr><td width="30%" class="title">우편번호</td>
-  <td width="70%">${loginUser.postcode }</td></tr>
+  <td width="70%">${loginUser1.m_name }</td></tr>
   <tr><td width="30%" class="title">주소</td>
-  <td width="70%">${loginUser.address }</td></tr>
+  <td width="70%">${loginUser1.m_address }</td></tr>
   <tr><td width="30%" class="title">전화번호</td>
-  <td width="70%">${loginUser.phoneNo }</td></tr>
+  <td width="70%">${loginUser1.m_phone }</td></tr>
   <tr><td width="30%" class="title">이메일</td>
-  <td width="70%">${loginUser.email }</td></tr>
+  <td width="70%">${loginUser1.m_email }</td></tr>
+  <tr><td width="30%" class="title">마일리지</td>
+  <td width="70%">${loginUser1.m_mileage }</td></tr>
+  <tr><td width="30%" class="title">배송받을 주소지</td>
+  <td width="70%">${sale.address }</td></tr>
 </table><br><br>
 <h2>주문 완료 상품 목록</h2>
 <table>
   <tr><th>상품명</th><th>상품가격</th><th>수량</th><th>상품합계</th></tr>
   <c:forEach items="${sale.saleItemList }" var="saleItem">
-  <tr><td>${saleItem.item.name }</td><td>${saleItem.item.price } 원</td>
+  <tr><td>${saleItem.item.i_name }</td><td>${saleItem.item.i_price } 원</td>
       <td>${saleItem.quantity }개</td>
-      <td>${saleItem.quantity * saleItem.item.price }</td></tr>
+      <td>${saleItem.quantity * saleItem.item.i_price }</td></tr>
   </c:forEach>
   <tr><td colspan="4" style="text-align:right;">총금액 : 
     <fmt:formatNumber value="${totalAmount }" pattern="#,###"/>원</td></tr>

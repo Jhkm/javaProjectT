@@ -149,29 +149,27 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/r_reply", method=RequestMethod.POST)
-	public ModelAndView reply(@Valid Reply reply, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView reply(Reply reply, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		if (bindingResult.hasErrors()) {
-			mav.getModel().putAll(bindingResult.getModel());
-			reply = service.getReply(reply.getR_no(), request);
-			mav.addObject("reply", reply);
-			return mav;
-		}
+		String b_no = request.getParameter("b_no");
+		String pageNum = request.getParameter("pageNum");
 		try {
 			service.Reply(reply, request);
-			mav.setViewName("redirect:list.sdj");
+			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
 		} catch(Exception e) {
-			throw new BoardException("댓글 등록 실패", "reply.sdj");
+			throw new BoardException("댓글 등록 실패", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
-	}
+	} 
 	
 	@RequestMapping(value="board/*",method=RequestMethod.GET)
 	public ModelAndView detail(Integer b_no,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Board board = new Board();
+		
 		if(b_no != null) {
 			board = service.getBoard(b_no);
+			
 			String url = request.getServletPath();
 			if(url.contains("/board/detail.sdj")) {
 				service.updatereadcnt(b_no);

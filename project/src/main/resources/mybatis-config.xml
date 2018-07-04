@@ -8,12 +8,14 @@
     <typeAlias type="logic.Sale" alias="Sale"/>
     <typeAlias type="logic.SaleItem" alias="SaleItem"/>
     <typeAlias type="logic.Board" alias="Board"/>
+    <typeAlias type="logic.Reply" alias="Reply"/>
   </typeAliases>
   <mappers>
     <mapper resource="dao/mapper/Item.xml"/>
     <mapper resource="dao/mapper/User.xml"/>
-    <!-- <mapper resource="dao/mapper/Sale.xml"/> -->
-    <!-- <mapper resource="dao/mapper/SaleItem.xml"/> -->
     <mapper resource="dao/mapper/Board.xml"/>
+    <mapper resource="dao/mapper/Reply.xml"/>
+    <mapper resource="dao/mapper/Sale.xml"/>
+    <mapper resource="dao/mapper/SaleItem.xml"/>
   </mappers>
 </configuration>

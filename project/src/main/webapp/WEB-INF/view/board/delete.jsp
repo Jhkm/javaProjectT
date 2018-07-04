@@ -13,10 +13,6 @@
 		<input type="hidden" name="num" value="${param.num }"/>
 		<table border="1" cellpadding="0" cellspacing="0">
 			<tr>
-				<td>게시글 비밀번호</td>
-				<td><input type="password" name="pass"></td>
-			</tr>
-			<tr>
 				<td colspan="2" align="center">
 				<a href="javascript:document.f.submit()">[삭제]</a>
 				</td>

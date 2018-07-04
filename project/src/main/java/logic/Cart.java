@@ -6,6 +6,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import dao.ItemDao;
+
 public class Cart {
 	// itemList : 기존에 등록된 장바구니 상품
 	private List<ItemSet> itemList = new ArrayList<ItemSet>();
@@ -38,9 +42,5 @@ public class Cart {
 //			tot += is.getItem().getPrice()*is.getQuantity();
 //		}
 		return tot;
-	}
-	public void clearAll(HttpSession session) {
-		itemList = new ArrayList<ItemSet>();
-		session.setAttribute("CART", this);
 	}
 }
