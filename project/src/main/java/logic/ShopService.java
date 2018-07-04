@@ -1,6 +1,5 @@
 package logic;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +46,7 @@ public interface ShopService {
 
 	void cartUpdate(Integer no, Integer quantity, String loginId);
 
-	void Reply(Reply reply, HttpServletRequest request);
+	void Reply(Reply reply, Board board, HttpServletRequest request);
 
 	Reply getReply(Integer r_no, HttpServletRequest request);
 
@@ -64,5 +63,7 @@ public interface ShopService {
 	List<User> userList(String[] idchks);
 
 	int deleteItem(int i_no);
+	
+	List<logic.Reply> getBoardReply(Integer b_no);
 
 }

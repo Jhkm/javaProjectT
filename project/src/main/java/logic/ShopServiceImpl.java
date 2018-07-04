@@ -170,8 +170,9 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
-	public void Reply(Reply reply, HttpServletRequest request) {
+	public void Reply(Reply reply, Board board, HttpServletRequest request) {
 		int r_no = replyDao.maxNum();
+		board.setB_no(Integer.parseInt(request.getParameter("b_no")));
 		reply.setR_no(++r_no);
 		reply.setR_ref(r_no);
 		reply.setR_reflevel(0);
@@ -235,5 +236,9 @@ public class ShopServiceImpl implements ShopService{
 		return itemDao.delete(i_no);
 	}
 	
+	@Override
+	public List<logic.Reply> getBoardReply(Integer b_no) {
+		return replyDao.getBoardReply(b_no);
+	}
 	
 }

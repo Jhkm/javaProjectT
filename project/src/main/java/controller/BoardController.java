@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -149,12 +150,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/r_reply", method=RequestMethod.POST)
-	public ModelAndView reply(Reply reply, HttpServletRequest request) {
+	public ModelAndView reply(Reply reply, Board board, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
 		try {
-			service.Reply(reply, request);
+			service.Reply(reply, board, request);
 			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
 		} catch(Exception e) {
 			throw new BoardException("댓글 등록 실패", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
@@ -169,10 +170,12 @@ public class BoardController {
 		
 		if(b_no != null) {
 			board = service.getBoard(b_no);
-			
 			String url = request.getServletPath();
 			if(url.contains("/board/detail.sdj")) {
 				service.updatereadcnt(b_no);
+				List<Reply> replylist = new ArrayList<Reply>();
+				replylist = service.getBoardReply(b_no);
+				mav.addObject("replylist", replylist);
 			}
 		}
 		mav.addObject("board",board);

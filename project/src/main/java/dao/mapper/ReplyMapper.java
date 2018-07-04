@@ -1,5 +1,7 @@
 package dao.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -17,4 +19,7 @@ public interface ReplyMapper {
 
 	@Select("select ifnull(max(r_no),0) from reply")
 	int maxNum();
+
+	@Select("select * from reply where b_no=#{b_no}")
+	List<Reply> getBoardReply(Integer b_no);
 }
