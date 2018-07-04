@@ -61,7 +61,7 @@ public class ShopServiceImpl implements ShopService{
 		board.setB_reflevel(0);
 		board.setB_refstep(0);
 		board.setB_people(0);
-		board.setM_id((String)request.getSession().getAttribute("loginUser"));
+		board.setM_id((String)session.getAttribute("loginUser"));
 		board.setB_category(Integer.parseInt(request.getParameter("b_category")));
 		boardDao.insert(board);
 	}
@@ -183,7 +183,8 @@ public class ShopServiceImpl implements ShopService{
 		reply.setR_ref(r_no);
 		reply.setR_reflevel(0);
 		reply.setR_refstep(0);
-		board.setM_id((String)request.getSession().getAttribute("loginUser"));
+		reply.setM_id((String)session.getAttribute("loginUser"));
+		System.out.println(board.getM_id());
 		replyDao.insert(reply);
 	}
 
