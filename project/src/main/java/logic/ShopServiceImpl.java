@@ -130,6 +130,14 @@ public class ShopServiceImpl implements ShopService{
 	public void deleteUser(String id) {
 		userDao.delete(id);
 	}
+	@Override
+	public List<User> userList() {
+		return userDao.list();
+	}
+	@Override
+	public List<User> userList(String[] idchks) {
+		return userDao.list(idchks);
+	}
 	
 	
 }

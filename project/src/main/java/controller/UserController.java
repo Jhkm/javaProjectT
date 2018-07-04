@@ -153,7 +153,11 @@ public class UserController {
 		try {
 			// uesr : 화면에서 입력된 정보 저장하고 있는 객체
 			service.updateUser(user);
-			mav.setViewName("redirect:mypage.sdj?id=" + user.getM_id());
+			if (loginUser.getM_id().equals("admin")) {
+				mav.setViewName("redirect:../admin/admin.sdj");
+			}else {
+				mav.setViewName("redirect:mypage.sdj?id=" + user.getM_id());
+			}
 		} catch (DataIntegrityViolationException e) { // DataIntegrityViolationException : 기본키가 중복된 경우 발생되는 예외
 			bindingResult.reject("error.duplicate.user");
 		}

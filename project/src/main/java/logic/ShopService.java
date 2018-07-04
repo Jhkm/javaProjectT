@@ -37,6 +37,10 @@ public interface ShopService {
 	void updateUser(User user);
 
 	void deleteUser(String id);
+
+	List<User> userList();
+
+	List<User> userList(String[] idchks);
 	
 	
 	
