@@ -19,7 +19,7 @@
       </if>
       ${kind} like '%${find}%'
     </if>
-    order by i_no desc
+    order by ${sort}
   </select>
   <select id="cart" resultType="map" parameterType="map">
     select i_no, quantity from cart

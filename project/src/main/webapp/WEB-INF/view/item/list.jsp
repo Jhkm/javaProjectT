@@ -36,6 +36,19 @@
     </tr>
   </c:forEach>
 </table> --%>
+<form action="list.sdj" method="post">
+<div style="width:70%" align="left">
+	<select name="sort">
+		<option value="i_no desc">상품 등록 순</option>
+		<option value="i_amount desc">판매 인기 순</option>
+		<option value="like desc">추천 순</option>
+		<option value="i_price">낮은 가격 순</option>
+		<option value="i_price desc">높은 가격 순</option>
+		<option value="i_age">게임 연령 낮은순</option>
+		<option value="i_age desc">게임 연령 높은순</option>
+	</select>
+</div>
+
 <div style="width:70%">
   <ul>
     <c:forEach var="item" items="${itemList }" begin="${(pageNum-1)*25 }" end="${pageNum*25 - 1 }">
@@ -66,13 +79,12 @@
   </c:if>
   </c:forEach>
   <br>
-  <form action="list.sdj" method="post">
     <input type="hidden" name="gametype" value="${gametype }">
     <select name="kind">
       <option value="i_name">제목</option>
       <option value="i_explain">내용</option>
     </select>&nbsp;<input type="text" size="40" name="find">&nbsp;<input type="submit" value="검색">
-  </form>
 </div>
+</form>
 </body>
 </html>
