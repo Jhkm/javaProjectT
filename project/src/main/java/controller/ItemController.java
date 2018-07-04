@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.ShopException;
 import logic.Item;
 import logic.ShopService;
 
@@ -56,6 +57,7 @@ public class ItemController {
 		if(request.getParameter("pageNum") == null || request.getParameter("pageNum").equals("")) {
 			pageNum = 1;
 		} else {
+			System.out.println(request.getParameter("pageNum"));
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		}
 		int count = itemList.size();
@@ -99,6 +101,19 @@ public class ItemController {
 		}
 		service.update(item,request);
 		mav.setViewName("redirect:/item/list.sdj");
+		return mav;
+	}
+	@RequestMapping("item/delete")
+	public ModelAndView delete(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("item/list");
+		int i_no = Integer.parseInt(request.getParameter("no"));
+		if(service.deleteItem(i_no) > 0) {
+			mav.addObject("msg","상품 삭제를 성공 했습니다.");
+			mav.addObject("url","../item/list.sdj");
+			mav.setViewName("alert");
+		} else {
+			throw new ShopException("상품 삭제를 실패 했습니다.","../item/detail.sdj?no=" + i_no);
+		}
 		return mav;
 	}
 }

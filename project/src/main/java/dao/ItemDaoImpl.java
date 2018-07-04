@@ -41,6 +41,7 @@ public class ItemDaoImpl implements ItemDao{
 	@Override
 	public List<Item> list(HttpServletRequest request) {
 		Map map = new HashMap();
+		System.out.println(request.getParameter("sort") +"," + request.getParameter("find") + "," + request.getParameter("kind") + "," + request.getParameter("gametype"));
 		map.put("sort", request.getParameter("sort"));
 		map.put("find", request.getParameter("find"));
 		map.put("kind", request.getParameter("kind"));
@@ -98,5 +99,9 @@ public class ItemDaoImpl implements ItemDao{
 	@Override
 	public void clearCart() {
 		sqlSession.getMapper(ItemMapper.class).clearCart();
+	}
+	@Override
+	public int delete(int i_no) {
+		return sqlSession.getMapper(ItemMapper.class).delete(i_no);
 	}
 }

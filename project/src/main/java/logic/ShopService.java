@@ -63,6 +63,8 @@ public interface ShopService {
 
 	List<User> userList(String[] idchks);
 
+	int deleteItem(int i_no);
+	
 	List<logic.Reply> getBoardReply(Integer b_no);
 
 }

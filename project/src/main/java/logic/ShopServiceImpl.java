@@ -84,10 +84,7 @@ public class ShopServiceImpl implements ShopService{
 	public void boardReply(Board board) {
 		boardDao.refstepadd(board);
 		int b_no = boardDao.maxNum(); //
-		board.setB_no(++b_no); //
-//		board.getRef :
-//		board.setReflevel() : 
-//		board.setRefstep() : 
+		board.setB_no(++b_no);
 		board.setB_reflevel(board.getB_reflevel()+1);
 		board.setB_refstep(board.getB_refstep()+1);
 		boardDao.insert(board);
@@ -117,6 +114,7 @@ public class ShopServiceImpl implements ShopService{
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
 			uploadFileCreate(item.getI_Img_File(),request);
 			item.setI_img(item.getI_Img_File().getOriginalFilename()); 
+			item.setI_img(item.getI_Img_File().getOriginalFilename());
 		}
 		itemDao.create(item);
 	}
@@ -146,6 +144,7 @@ public class ShopServiceImpl implements ShopService{
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
 			uploadFileCreate(item.getI_Img_File(),request);
 			item.setI_img(item.getI_Img_File().getOriginalFilename()); 
+			item.setI_img(item.getI_Img_File().getOriginalFilename());
 		}
 		itemDao.update(item);
 	}	
@@ -197,6 +196,7 @@ public class ShopServiceImpl implements ShopService{
 		Sale sale = new Sale();
 		sale.setS_id(saleDao.getMaxSaleId());
 		sale.setUser(loginUser); 
+		sale.setUser(loginUser);
 		sale.setS_updateTime(new Date());
 		if(request.getParameter("newAddress").equals("") || request.getParameter("newAddress") == null) {
 			sale.setAddress(request.getParameter("oldAddress"));
@@ -214,6 +214,7 @@ public class ShopServiceImpl implements ShopService{
 		List<SaleItem> saleItemList = sale.getSaleItemList();
 		for(SaleItem saleItem : saleItemList) {
 			saleItemDao.insert(saleItem); 
+			saleItemDao.insert(saleItem);
 		}
 		
 		return sale;
@@ -240,9 +241,13 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
+	public int deleteItem(int i_no) {
+		return itemDao.delete(i_no);
+	}
+	
+	@Override
 	public List<logic.Reply> getBoardReply(Integer b_no) {
 		return replyDao.getBoardReply(b_no);
 	}
-	
 	
 }
