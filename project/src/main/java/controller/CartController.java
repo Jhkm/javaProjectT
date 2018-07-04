@@ -63,7 +63,7 @@ public class CartController {
 		Cart cart = service.selectCart(loginId);
 		ModelAndView mav = new ModelAndView("cart/cart");
 		if(cart == null || cart.isEmpty()) {
-			throw new CartEmptyException("카트에 상품이 없습니다. 상품 목록으로 갑니다.","../item/list.shop");
+			throw new CartEmptyException("카트에 상품이 없습니다. 상품 목록으로 갑니다.","../item/list.sdj");
 		}
 		mav.addObject("message","카트 상품 조회 입니다.");
 		mav.addObject("cart",cart);
@@ -104,7 +104,7 @@ public class CartController {
 		User loginUser = service.getUser(loginId);
 		
 		if(cart == null || cart.isEmpty()) {
-			throw new CartEmptyException("장바구니에 계산할 상품이 없습니다.","../item/list.shop");
+			throw new CartEmptyException("장바구니에 계산할 상품이 없습니다.","../item/list.sdj");
 		}
 		/*
 		 * 주문 정보 생성

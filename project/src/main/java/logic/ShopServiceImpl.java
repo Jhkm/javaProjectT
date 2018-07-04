@@ -51,8 +51,8 @@ public class ShopServiceImpl implements ShopService{
 		return itemDao.gameType();
 	}
 	@Override
-	public List<Item> getItemList() {
-		return itemDao.list();
+	public List<Item> getItemList(HttpServletRequest request) {
+		return itemDao.list(request);
 	}
 	@Override
 	public Item detail(Integer no) {

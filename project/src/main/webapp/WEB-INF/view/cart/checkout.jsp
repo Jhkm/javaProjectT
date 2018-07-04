@@ -70,7 +70,7 @@ function finalize() {
     <fmt:formatNumber value="${cart.totalAmount }" pattern="#,###"/>원</td></tr>
   <tr><td colspan="4">
     <a href="javascript:finalize()">확정</a>&nbsp;
-    <a href="../item/list.shop">상품목록</a></td></tr>
+    <a href="../item/list.sdj">상품목록</a></td></tr>
 </table>
 </body>
 </html>

@@ -16,9 +16,10 @@
 </style>
 </head>
 <body>
+<br><br><br>
 <a href="create.sdj">상품등록</a>
 <a href="../cart/cartView.sdj" style="float:right;">장바구니</a>
-<table border="1" cellspacing="0" cellpadding="0">
+<%-- <table border="1" cellspacing="0" cellpadding="0">
   <tr><th align="center" width="80">상품ID</th>
       <th align="center" width="320">상품명</th>
       <th align="center" width="100">가격</th>
@@ -34,19 +35,19 @@
         <td align="center"><a href="confirm.sdj?no=${item.i_no }">삭제</a></td>
     </tr>
   </c:forEach>
-</table>
-<div>
+</table> --%>
+<div style="width:70%">
   <ul>
-    <c:forEach var="item" items="${itemList }">
-      <li style="width:25%">
+    <c:forEach var="item" items="${itemList }" begin="${(pageNum-1)*25 }" end="${pageNum*25 - 1 }">
+      <li style="width:20%">
       <div style="width:182px;">
         <div>
-          <a href="detail.sdj?no=${item.i_no }">
+          <a href="detail.sdj?no=${item.i_no }&pageNum=${pageNum}">
             <img src="../picture/${item.i_img }" height="250" width="180">
           </a>
         </div>
         <div>
-          <a href="detail.sdj?no=${item.i_no }">${item.i_name }</a>
+          <a href="detail.sdj?no=${item.i_no }&pageNum=${pageNum}">${item.i_name }</a>
         </div>
         <br>
         <div>
@@ -56,6 +57,22 @@
       </li>
     </c:forEach>
   </ul>
+  <c:forEach var="a" begin="${startPage }" end="${endPage}">
+  <c:if test="${pageNum == a }">
+  <a>${a}</a>
+  </c:if>
+  <c:if test="${pageNum != a }">
+  <a href="list.sdj?pageNum=${a}">${a}</a>
+  </c:if>
+  </c:forEach>
+  <br>
+  <form action="list.sdj" method="post">
+    <input type="hidden" name="gametype" value="${gametype }">
+    <select name="kind">
+      <option value="i_name">제목</option>
+      <option value="i_explain">내용</option>
+    </select>&nbsp;<input type="text" size="40" name="find">&nbsp;<input type="submit" value="검색">
+  </form>
 </div>
 </body>
 </html>
