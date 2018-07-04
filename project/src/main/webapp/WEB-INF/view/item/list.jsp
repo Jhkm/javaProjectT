@@ -48,6 +48,7 @@
 		<option value="i_age desc">게임 연령 높은순</option>
 	</select>
 </div>
+
 <div style="width:70%">
   <ul>
     <c:forEach var="item" items="${itemList }" begin="${(pageNum-1)*25 }" end="${pageNum*25 - 1 }">
