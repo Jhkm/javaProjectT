@@ -72,11 +72,6 @@
             class="fa fa-search"></i></a>
       </div>
    </div>
-<<<<<<< HEAD
-</div>
-   
-=======
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 </div>
 <br><br><br>
 <div align="center" >
