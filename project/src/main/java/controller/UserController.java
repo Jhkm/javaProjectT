@@ -47,7 +47,6 @@ public class UserController {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
-		System.out.println("test1");
 		try {
 			// user : 화면에서 입력된 정보 저장하고 있는 객체 , userCreate 로 db에 전달
 			service.userCreate(user);
@@ -56,6 +55,8 @@ public class UserController {
 			// DataIntegrityViolationException : primary(기본키) 키가 중복된 경우 발생되는 예외
 		} catch (DataIntegrityViolationException e) {
 			bindingResult.reject("error.duplicate.user");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return mav;
 	}
@@ -135,10 +136,10 @@ public class UserController {
 	@RequestMapping(value = "user/update", method = RequestMethod.POST)
 	public ModelAndView update(@Valid User user, BindingResult bindingResult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		if (bindingResult.hasErrors()) {
+/*		if (bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
-		}
+		}*/
 		User loginUser = service.getUser((String) session.getAttribute("loginUser"));
 		User dbUser = service.getUser(user.getM_id());
 		if (loginUser.getM_id().equals("admin")) {
@@ -160,6 +161,8 @@ public class UserController {
 			}
 		} catch (DataIntegrityViolationException e) { // DataIntegrityViolationException : 기본키가 중복된 경우 발생되는 예외
 			bindingResult.reject("error.duplicate.user");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return mav;
 	}
@@ -175,6 +178,17 @@ public class UserController {
 				likegame += m.get("tp_name");
 			}
 		}
+		String[] fulladdress = user.getM_address().split(",");
+		String maddress = "";
+		for (int i =0; i<fulladdress.length-1; i++) {
+			maddress += fulladdress[i];
+			if (i<fulladdress.length-2) {
+				maddress +=",";
+			}
+		}
+		user.setM_address(maddress);
+		String address = fulladdress[fulladdress.length-1];
+		mav.addObject("address", address);
 		mav.addObject("likegame",likegame);
 		mav.addObject("gametype", maplist);
 		mav.addObject("user", user);
@@ -184,6 +198,7 @@ public class UserController {
 	
 	@RequestMapping(value="user/delete", method=RequestMethod.POST)
 	public String delete(@Valid User user, HttpSession session) {
+		
 		//세션으로부터 로그인유저 객체를 받아옴. 
 		User loginUser = service.getUser((String)session.getAttribute("loginUser"));
 		System.out.println(user);
@@ -201,6 +216,8 @@ public class UserController {
 			}
 		}
 		try {
+			System.out.println(session.getAttribute("check"));
+			
 			service.deleteUser(user.getM_id());
 			if(loginUser.getM_id().equals("admin")) { //관리자로그인.
 				return "redirect:../admin/admin.sdj";
