@@ -50,13 +50,6 @@ public class BoardController {
 		mav.addObject("boardcnt", boardcnt);
 		return mav;
 	}
-	/*
-	 * �Խñ� ����ϱ�
-	 * 1. ��ȿ�� �����ϱ�
-	 * 2. DB�� ����ϱ�
-	 * 3. ��� ���� : list.sdj
-	 * 	    ��� ���� : write.sdj ������ �̵�
-	 */
 	@RequestMapping(value="board/write", method=RequestMethod.POST)
 	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -70,7 +63,7 @@ public class BoardController {
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new BoardException("게시글 등록에 실패했습니다.", "write.sdj");
+			throw new BoardException(" ", "write.sdj");
 		}
 		return mav;
 	}
@@ -88,7 +81,7 @@ public class BoardController {
 			service.boardReply(board);
 			mav.setViewName("redirect:list.sdj");
 		} catch(Exception e) {
-			throw new BoardException("��Ͻ���", "reply.sdj");
+			throw new BoardException(" ", "reply.sdj");
 		}
 		return mav;
 	}
@@ -109,7 +102,7 @@ public class BoardController {
 			service.boardUpdate(board, request);
 			mav.setViewName("redirect:detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		} catch(Exception e) {
-			throw new BoardException("수정실패", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException(" ", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	}
@@ -119,14 +112,14 @@ public class BoardController {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		Board dbBoard = service.getBoard(b_no);
 //		if(!request.getParameter("pass").equals(dbBoard.getPass())) {
-//			throw new BoardException("��й�ȣ ����", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
+//			throw new BoardException(" ", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
 //		}
 		try {
 			service.boardDelete(b_no);
 			mav.setViewName("redirect:list.sdj?b_category=" + dbBoard.getB_category());
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new BoardException("���� ����", "delete.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException(" ", "delete.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	}
@@ -137,14 +130,14 @@ public class BoardController {
 		int b_no = Integer.parseInt(map.get("b_no"));
 		Board dbBoard = service.getBoard(b_no);
 //		if(!map.get("pass").equals(dbBoard.getPass())) {
-//			throw new BoardException("��й�ȣ ����", "delete.sdj?num="+num+"&pageNum="+map.get("pageNum"));
+//			throw new BoardException(" ", "delete.sdj?num="+num+"&pageNum="+map.get("pageNum"));
 //		}
 		try {
 			service.boardDelete(b_no);
 			mav.setViewName("redirect:list.sdj");
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new BoardException("삭제 실패", "delete.sdj?b_no="+b_no+"&pageNum="+map.get("pageNum"));
+			throw new BoardException(" ", "delete.sdj?b_no="+b_no+"&pageNum="+map.get("pageNum"));
 		}
 		return mav;
 	}
@@ -158,7 +151,7 @@ public class BoardController {
 			service.Reply(reply, board, request);
 			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
 		} catch(Exception e) {
-			throw new BoardException("댓글 등록 실패", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException(" ", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	} 
