@@ -83,7 +83,7 @@
   <table border="1" width="100%">
     <tr><td>아이디</td><td>${user.m_id }</td></tr>
     <tr><td>이름</td><td>${user.m_name }</td></tr>
-    <tr><td>주소</td><td>${user.m_address }</td></tr>
+    <tr><td>주소</td><td>(${user.m_postcode}) ${user.m_address }</td></tr>
     <tr><td>전화번호</td><td>${user.m_phone }</td></tr>
     <tr><td>이메일</td><td>${user.m_email }</td></tr>
     <tr><td>선호장르</td><td>${likegame }</td>
