@@ -221,4 +221,29 @@ public class UserController {
 		mav.addObject("user", user);
 		return mav;
 	}
+//	====================================================================================
+	@RequestMapping(value="user/shoping", method = RequestMethod.GET)
+	public ModelAndView shoping(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String loginId = request.getParameter("id");
+		System.out.println(loginId);
+		List<Sale> saleList = service.getSaleList(loginId);
+		System.out.println(saleList);
+		for(Sale s : saleList) {
+			List<SaleItem> saleItemList = service.getSaleItemList(s.getS_id());
+			int amount =0;
+			for(SaleItem sitem : saleItemList) {
+				Item item = service.detail(sitem.getI_no());
+				System.out.println(item);
+				sitem.setItem(item);
+				amount += sitem.getQuantity() * item.getI_price();
+				System.out.println(amount);
+			}
+			s.setSaleItemList(saleItemList);
+			s.setAmount(amount);
+			System.out.println(s);
+		}
+		mav.addObject("salelist",saleList);
+		return mav;
+	}
 }

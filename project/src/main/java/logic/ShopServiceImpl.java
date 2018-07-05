@@ -38,6 +38,8 @@ public class ShopServiceImpl implements ShopService{
 	BoardDao boardDao;
 	@Autowired
 	ReplyDao replyDao;
+	@Autowired
+	private SaleDao saleDao;
 	
 	@Override
 	public int boardcount(String searchType, String searchContent, String category) {
@@ -111,7 +113,6 @@ public class ShopServiceImpl implements ShopService{
 	}
 	
 	
-	private SaleDao saleDao;
 	@Autowired
 	private SaleItemDao saleItemDao;
 	@Override
@@ -241,7 +242,6 @@ public class ShopServiceImpl implements ShopService{
 		List<SaleItem> saleItemList = sale.getSaleItemList();
 		for(SaleItem saleItem : saleItemList) {
 			saleItemDao.insert(saleItem); 
-			saleItemDao.insert(saleItem);
 		}
 		
 		return sale;
@@ -275,6 +275,16 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public List<logic.Reply> getBoardReply(Integer b_no) {
 		return replyDao.getBoardReply(b_no);
+	}
+//==========================================================================
+	@Override
+	public List<Sale> getSaleList(String loginId) {
+		return saleDao.getSaleList(loginId);
+	}
+
+	@Override
+	public List<SaleItem> getSaleItemList(Integer s_id) {
+		return saleItemDao.getSaleItemList(s_id);
 	}
 	
 }

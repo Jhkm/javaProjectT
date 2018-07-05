@@ -67,4 +67,8 @@ public interface ShopService {
 	
 	List<logic.Reply> getBoardReply(Integer b_no);
 
+	List<Sale> getSaleList(String loginId);
+
+	List<SaleItem> getSaleItemList(Integer s_id);
+
 }
