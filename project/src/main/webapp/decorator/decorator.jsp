@@ -73,6 +73,10 @@
       </div>
    </div>
 </div>
+<<<<<<< HEAD
+=======
+   
+>>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 <br><br><br>
 <div align="center" >
 	<decorator:body/>

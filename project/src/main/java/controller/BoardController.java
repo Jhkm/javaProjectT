@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,15 +51,9 @@ public class BoardController {
 		mav.addObject("boardcnt", boardcnt);
 		return mav;
 	}
-	/*
-	 * ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
-	 * 1. ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
-	 * 2. DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
-	 * 3. ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : list.sdj
-	 * 	    ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : write.sdj ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
-	 */
+
 	@RequestMapping(value="board/write", method=RequestMethod.POST)
-	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
@@ -66,11 +61,11 @@ public class BoardController {
 //		}
 		try {
 			
-			service.insert(board, request);
+			service.insert(board, request, session);
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new BoardException("ê²Œì‹œê¸€ ë“±ë¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.", "write.sdj");
+			throw new BoardException("°Ô½Ã±Û µî·Ï ½ÇÆĞ", "write.sdj");
 		}
 		return mav;
 	}
@@ -88,7 +83,7 @@ public class BoardController {
 			service.boardReply(board);
 			mav.setViewName("redirect:list.sdj");
 		} catch(Exception e) {
-			throw new BoardException("ï¿½ï¿½Ï½ï¿½ï¿½ï¿½", "reply.sdj");
+			throw new BoardException("´ä±Û½ÇÆĞ", "reply.sdj");
 		}
 		return mav;
 	}
@@ -103,68 +98,68 @@ public class BoardController {
 			return mav;
 		}
 		if(board.getB_file() == null || board.getB_file().isEmpty()) {
-			board.setB_fileurl(request.getParameter("b_file"));//#
+			board.setB_fileurl(request.getParameter("b_file"));
 		}
 		try {
 			service.boardUpdate(board, request);
 			mav.setViewName("redirect:detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		} catch(Exception e) {
-			throw new BoardException("ìˆ˜ì •ì‹¤íŒ¨", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException("¼öÁ¤½ÇÆĞ", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	}
-//	@RequestMapping(value="board/delete", method=RequestMethod.POST)
+	@RequestMapping(value="board/delete", method=RequestMethod.POST)
 	public ModelAndView boardDelete(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		Board dbBoard = service.getBoard(b_no);
 //		if(!request.getParameter("pass").equals(dbBoard.getPass())) {
-//			throw new BoardException("ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
+//			throw new BoardException("ºñ¹Ğ¹øÈ£ ½ÇÆĞ", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
 //		}
 		try {
 			service.boardDelete(b_no);
 			mav.setViewName("redirect:list.sdj?b_category=" + dbBoard.getB_category());
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new BoardException("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½", "delete.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException("»èÁ¦½ÇÆĞ", "delete.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	}
 
-	@RequestMapping(value="board/delete", method=RequestMethod.POST)
-	public ModelAndView boardDelete2(@RequestParam HashMap<String, String> map) {
-		ModelAndView mav = new ModelAndView();
-		int b_no = Integer.parseInt(map.get("b_no"));
-		Board dbBoard = service.getBoard(b_no);
+//	@RequestMapping(value="board/delete", method=RequestMethod.POST)
+//	public ModelAndView boardDelete2(@RequestParam HashMap<String, String> map) {
+//		ModelAndView mav = new ModelAndView();
+//		int b_no = Integer.parseInt(map.get("b_no"));
+//		Board dbBoard = service.getBoard(b_no);
 //		if(!map.get("pass").equals(dbBoard.getPass())) {
-//			throw new BoardException("ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½", "delete.sdj?num="+num+"&pageNum="+map.get("pageNum"));
+//			throw new BoardException("ºñ¹Ğ¹øÈ£ ½ÇÆĞ", "delete.sdj?num="+num+"&pageNum="+map.get("pageNum"));
 //		}
-		try {
-			service.boardDelete(b_no);
-			mav.setViewName("redirect:list.sdj");
-		} catch(Exception e) {
-			e.printStackTrace();
-			throw new BoardException("ì‚­ì œ ì‹¤íŒ¨", "delete.sdj?b_no="+b_no+"&pageNum="+map.get("pageNum"));
-		}
-		return mav;
-	}
+//		try {
+//			service.boardDelete(b_no);
+//			mav.setViewName("redirect:list.sdj");
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			throw new BoardException("»èÁ¦½ÇÆĞ", "delete.sdj?b_no="+b_no+"&pageNum="+map.get("pageNum"));
+//		}
+//		return mav;
+//	}
 	
 	@RequestMapping(value="board/r_reply", method=RequestMethod.POST)
-	public ModelAndView reply(Reply reply, Board board, HttpServletRequest request) {
+	public ModelAndView reply(Reply reply, Board board, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
 		try {
-			service.Reply(reply, board, request);
+			service.Reply(reply, board, request, session);
 			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
 		} catch(Exception e) {
-			throw new BoardException("ëŒ“ê¸€ ë“±ë¡ ì‹¤íŒ¨", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException("´ñ±Û½ÇÆĞ", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	} 
 	
 	@RequestMapping(value="board/*",method=RequestMethod.GET)
-	public ModelAndView detail(Integer b_no,HttpServletRequest request) {
+	public ModelAndView detail(Integer b_no,HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Board board = new Board();
 		
