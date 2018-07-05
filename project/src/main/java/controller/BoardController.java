@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,9 @@ public class BoardController {
 		mav.addObject("boardcnt", boardcnt);
 		return mav;
 	}
+
 	@RequestMapping(value="board/write", method=RequestMethod.POST)
-	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
@@ -59,11 +61,12 @@ public class BoardController {
 //		}
 		try {
 			
-			service.insert(board, request);
+			service.insert(board, request, session);
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new BoardException(" ", "write.sdj");
+
+			throw new BoardException("게시글 등록 실패", "write.sdj");
 		}
 		return mav;
 	}
@@ -81,7 +84,7 @@ public class BoardController {
 			service.boardReply(board);
 			mav.setViewName("redirect:list.sdj");
 		} catch(Exception e) {
-			throw new BoardException(" ", "reply.sdj");
+			throw new BoardException("답글실패", "reply.sdj");
 		}
 		return mav;
 	}
@@ -96,68 +99,68 @@ public class BoardController {
 			return mav;
 		}
 		if(board.getB_file() == null || board.getB_file().isEmpty()) {
-			board.setB_fileurl(request.getParameter("b_file"));//#
+			board.setB_fileurl(request.getParameter("b_file"));
 		}
 		try {
 			service.boardUpdate(board, request);
 			mav.setViewName("redirect:detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		} catch(Exception e) {
-			throw new BoardException(" ", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException("수정실패", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	}
-//	@RequestMapping(value="board/delete", method=RequestMethod.POST)
+	@RequestMapping(value="board/delete", method=RequestMethod.POST)
 	public ModelAndView boardDelete(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		Board dbBoard = service.getBoard(b_no);
 //		if(!request.getParameter("pass").equals(dbBoard.getPass())) {
-//			throw new BoardException(" ", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
+//			throw new BoardException("비밀번호 실패", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
 //		}
 		try {
 			service.boardDelete(b_no);
 			mav.setViewName("redirect:list.sdj?b_category=" + dbBoard.getB_category());
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new BoardException(" ", "delete.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException("삭제실패", "delete.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	}
 
-	@RequestMapping(value="board/delete", method=RequestMethod.POST)
-	public ModelAndView boardDelete2(@RequestParam HashMap<String, String> map) {
-		ModelAndView mav = new ModelAndView();
-		int b_no = Integer.parseInt(map.get("b_no"));
-		Board dbBoard = service.getBoard(b_no);
+//	@RequestMapping(value="board/delete", method=RequestMethod.POST)
+//	public ModelAndView boardDelete2(@RequestParam HashMap<String, String> map) {
+//		ModelAndView mav = new ModelAndView();
+//		int b_no = Integer.parseInt(map.get("b_no"));
+//		Board dbBoard = service.getBoard(b_no);
 //		if(!map.get("pass").equals(dbBoard.getPass())) {
-//			throw new BoardException(" ", "delete.sdj?num="+num+"&pageNum="+map.get("pageNum"));
+//			throw new BoardException("비밀번호 실패", "delete.sdj?num="+num+"&pageNum="+map.get("pageNum"));
 //		}
-		try {
-			service.boardDelete(b_no);
-			mav.setViewName("redirect:list.sdj");
-		} catch(Exception e) {
-			e.printStackTrace();
-			throw new BoardException(" ", "delete.sdj?b_no="+b_no+"&pageNum="+map.get("pageNum"));
-		}
-		return mav;
-	}
+//		try {
+//			service.boardDelete(b_no);
+//			mav.setViewName("redirect:list.sdj");
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			throw new BoardException("삭제실패", "delete.sdj?b_no="+b_no+"&pageNum="+map.get("pageNum"));
+//		}
+//		return mav;
+//	}
 	
 	@RequestMapping(value="board/r_reply", method=RequestMethod.POST)
-	public ModelAndView reply(Reply reply, Board board, HttpServletRequest request) {
+	public ModelAndView reply(Reply reply, Board board, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
 		try {
-			service.Reply(reply, board, request);
+			service.Reply(reply, board, request, session);
 			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
 		} catch(Exception e) {
-			throw new BoardException(" ", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException("댓글실패", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	} 
 	
 	@RequestMapping(value="board/*",method=RequestMethod.GET)
-	public ModelAndView detail(Integer b_no,HttpServletRequest request) {
+	public ModelAndView detail(Integer b_no,HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Board board = new Board();
 		

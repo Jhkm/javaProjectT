@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td>글쓴이</td>
-			<td>${board.g_id}</td>
+			<td>${board.m_id}</td>
 		</tr>
 		<tr>
 			<td>제목</td>
