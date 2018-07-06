@@ -64,6 +64,7 @@ public class BoardController {
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
+
 			throw new BoardException("게시글 등록 실패", "write.sdj");
 		}
 		return mav; 

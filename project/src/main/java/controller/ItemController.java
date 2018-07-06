@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.ShopException;
 import logic.Item;
+import logic.ItemSet;
 import logic.ShopService;
 
 @Controller //@Component의 하위 객체. @Component + Controller 기능 부여
@@ -114,6 +116,16 @@ public class ItemController {
 		} else {
 			throw new ShopException("상품 삭제를 실패 했습니다.","../item/detail.sdj?no=" + i_no);
 		}
+		return mav;
+	}
+	@RequestMapping("item/buyout")
+	public ModelAndView buyout(HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String loginId = (String)session.getAttribute("loginUser");
+		mav.addObject("loginUser1", service.getUser(loginId));
+		Item item = service.detail(Integer.parseInt(request.getParameter("i_no")));
+		ItemSet is = new ItemSet(item,Integer.parseInt(request.getParameter("quantity")));
+		mav.addObject("itemSet", is);
 		return mav;
 	}
 }

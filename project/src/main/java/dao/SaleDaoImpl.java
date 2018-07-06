@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,5 +20,9 @@ public class SaleDaoImpl implements SaleDao{
 	@Override
 	public void insert(Sale sale) {
 		sqlSession.getMapper(SaleMapper.class).insert(sale);
+	}
+	@Override
+	public List<Sale> getSaleList(String loginId) {
+		return sqlSession.getMapper(SaleMapper.class).selectList(loginId);
 	}
 }

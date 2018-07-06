@@ -13,6 +13,7 @@ public class User implements Serializable {
 	@NotEmpty(message="사용자 이름은 필수 입니다.")
 	private String m_name;
 	private String m_phone;
+	private String m_postcode;
 	private String m_address;
 	private String m_email;
 	//좋아하는 보드게임 장르
@@ -43,6 +44,12 @@ public class User implements Serializable {
 	public void setM_phone(String m_phone) {
 		this.m_phone = m_phone;
 	}
+	public String getM_postcode() {
+		return m_postcode;
+	}
+	public void setM_postcode(String m_postcode) {
+		this.m_postcode = m_postcode;
+	}
 	public String getM_address() {
 		return m_address;
 	}
@@ -69,8 +76,9 @@ public class User implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "User [m_id=" + m_id + ", m_passwd=" + m_passwd + ", m_name=" + m_name
-				+ ", m_phone=" + m_phone + ", m_address=" + m_address + ", m_email=" + m_email + ", m_game=" + m_game
-				+ ", m_mileage=" + m_mileage + "]";
+		return "User [m_id=" + m_id + ", m_passwd=" + m_passwd + ", m_name=" + m_name + ", m_phone=" + m_phone
+				+ ", m_postcode=" + m_postcode + ", m_address=" + m_address + ", m_email=" + m_email + ", m_game="
+				+ m_game + ", m_mileage=" + m_mileage + "]";
 	}
+
 }
