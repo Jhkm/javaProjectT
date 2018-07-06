@@ -27,6 +27,7 @@ public class Board {
 //	@NotEmpty(message="참가 인원를 선택하세요")
 	private int b_people;
 	private String g_id;
+	private int i_no;
 	public int getB_no() {
 		return b_no;
 	}
@@ -36,8 +37,8 @@ public class Board {
 	public int getB_category() {
 		return b_category;
 	}
-	public void setB_category(int i) {
-		this.b_category = i;
+	public void setB_category(int b_category) {
+		this.b_category = b_category;
 	}
 	public String getB_subject() {
 		return b_subject;
@@ -123,6 +124,12 @@ public class Board {
 	public void setG_id(String g_id) {
 		this.g_id = g_id;
 	}
+	public int getI_no() {
+		return i_no;
+	}
+	public void setI_no(int i_no) {
+		this.i_no = i_no;
+	}
 	
 	@Override
 	public String toString() {
@@ -130,8 +137,8 @@ public class Board {
 				+ b_content + ", b_readcnt=" + b_readcnt + ", b_fileurl=" + b_fileurl + ", b_regtime=" + b_regtime
 				+ ", b_ref=" + b_ref + ", b_reflevel=" + b_reflevel + ", b_refstep=" + b_refstep + ", b_file=" + b_file
 				+ ", m_id=" + m_id + ", b_state=" + b_state + ", b_date=" + b_date + ", b_people=" + b_people
-				+ ", g_id=" + g_id + "]";
+				+ ", g_id=" + g_id + ", i_no=" + i_no + "]";
 	}
-	
+
 	
 }

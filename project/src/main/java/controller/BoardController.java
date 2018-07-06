@@ -58,31 +58,31 @@ public class BoardController {
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
 //			return mav;
-//		}
+//		} 
 		try {
-			
 			service.insert(board, request, session);
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new BoardException("게시글 등록 실패", "write.sdj");
 		}
-		return mav;
+		return mav; 
 	}
 	
 	@RequestMapping(value="board/reply", method=RequestMethod.POST)
-	public ModelAndView reply(@Valid Board board, BindingResult bindingResult) {
+	public ModelAndView reply(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		if (bindingResult.hasErrors()) {
-			mav.getModel().putAll(bindingResult.getModel());
-			board = service.getBoard(board.getB_no());
-			mav.addObject("board", board);
-			return mav;
-		}
+//		if (bindingResult.hasErrors()) {
+//			mav.getModel().putAll(bindingResult.getModel());
+//			board = service.getBoard(board.getB_no());
+//			mav.addObject("board", board);
+//			return mav;
+//		}
 		try {
-			service.boardReply(board);
-			mav.setViewName("redirect:list.sdj");
+			service.boardReply(board, request,session);
+			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
+			e.printStackTrace();
 			throw new BoardException("답글실패", "reply.sdj");
 		}
 		return mav;
@@ -113,10 +113,12 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		Board dbBoard = service.getBoard(b_no);
+		System.out.println(b_no);
 //		if(!request.getParameter("pass").equals(dbBoard.getPass())) {
 //			throw new BoardException("비밀번호 실패", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
 //		}
 		try {
+			System.out.println(b_no);
 			service.boardDelete(b_no);
 			mav.setViewName("redirect:list.sdj?b_category=" + dbBoard.getB_category());
 		} catch(Exception e) {

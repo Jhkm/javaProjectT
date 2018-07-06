@@ -10,11 +10,12 @@
 <body>
 	<form:form modelAttribute="board" name="f" method="post" action="delete.sdj">
 		<input type="hidden" name="pageNum" value="${param.pageNum }"/>
-		<input type="hidden" name="num" value="${param.num }"/>
+		<input type="hidden" name="b_no" value="${param.b_no }"/>
 		<table border="1" cellpadding="0" cellspacing="0">
+		<tr><td>삭제하시겠습니까?</td></tr>
 			<tr>
 				<td colspan="2" align="center">
-				<a href="javascript:document.f.submit()">[삭제]</a>
+				<a href="javascript:document.f.submit()">[삭제]</a><a href="javascript:history.go(-1)">[뒤로가기]</a>
 				</td>
 			</tr>
 		</table>

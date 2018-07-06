@@ -19,7 +19,7 @@ public interface ShopService {
 
 	void updatereadcnt(Integer num);
 
-	void boardReply(Board board);
+	void boardReply(Board board, HttpServletRequest request,  HttpSession session);
 
 	void boardUpdate(Board board, HttpServletRequest request);
 

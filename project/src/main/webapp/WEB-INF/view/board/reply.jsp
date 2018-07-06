@@ -16,9 +16,10 @@
 	<form:form action="reply.sdj" method="post" name="f" modelAttribute="board">
 		<input type="hidden" name="pageNum" value="${param.pageNum }">
 		<input type="hidden" name="b_no" value="${board.b_no }">
-		<input type="hidden" name="ref" value="${board.b_ref }">
-		<input type="hidden" name="reflevel" value="${board.b_reflevel }">
-		<input type="hidden" name="refstep" value="${board.b_refstep }">
+		<input type="hidden" name="b_category" value="${board.b_category }">
+		<input type="hidden" name="b_ref" value="${board.b_ref }">
+		<input type="hidden" name="b_reflevel" value="${board.b_reflevel }">
+		<input type="hidden" name="b_refstep" value="${board.b_refstep }">
 		<table border="1" cellpadding="0" cellspacing="0">
 		
 			<tr>
@@ -26,7 +27,7 @@
 			</tr>
 			<tr>
 				<td>Á¦¸ñ</td>
-				<td><input type="text" name="subject" value="Re:${board.b_subject }"/>
+				<td><input type="text" name="b_subject" value="Re:${board.b_subject }"/>
 					<font color="red"><form:errors path="b_subject"/></font></td>
 			</tr>
 			<tr>

@@ -63,6 +63,7 @@ public class ShopServiceImpl implements ShopService{
 		board.setB_people(0);
 		board.setM_id((String)session.getAttribute("loginUser"));
 		board.setB_category(Integer.parseInt(request.getParameter("b_category")));
+		board.setI_no(Integer.parseInt(request.getParameter("i_no")));
 		boardDao.insert(board);
 	}
 	private void uploadBoardFileCreate(MultipartFile file1, HttpServletRequest request) {
@@ -73,7 +74,7 @@ public class ShopServiceImpl implements ShopService{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	@Override
 	public void updatereadcnt(Integer b_no) {
@@ -81,12 +82,14 @@ public class ShopServiceImpl implements ShopService{
 	}
 	
 	@Override
-	public void boardReply(Board board) {
+	public void boardReply(Board board,HttpServletRequest request, HttpSession session) {
 		boardDao.refstepadd(board);
-		int b_no = boardDao.maxNum(); //
+		int b_no = boardDao.maxNum();
 		board.setB_no(++b_no);
 		board.setB_reflevel(board.getB_reflevel()+1);
 		board.setB_refstep(board.getB_refstep()+1);
+		board.setM_id((String)session.getAttribute("loginUser"));
+		board.setB_category(Integer.parseInt(request.getParameter("b_category")));
 		boardDao.insert(board);
 	}
 

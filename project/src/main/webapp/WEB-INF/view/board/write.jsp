@@ -13,7 +13,7 @@
 <body>
 	<form:form modelAttribute="board" action="write.sdj" method="post" enctype="multipart/form-data" name="f">
 		<table border="1" cellpadding="0" cellspacing="0">
-			<caption>SPRING 게시판</caption>
+			<caption>게시판</caption>
 	
 				<tr>
 					<td align="center">제목</td>
@@ -41,7 +41,13 @@
 				<tr>
 					<td><input type="hidden" name="b_people" value="0"></td>
 				</tr>
-				
+				<tr>
+				<c:if test="${param.i_no == null}">
+					<td><input type="hidden" name="i_no" value="0"></td>
+				</c:if>
+				<c:if test="${param.i_no != null}">
+					<td><input type="hidden" name="i_no" value="${param.i_no}"></td>
+				</c:if>
 				<tr>
 					<td align="center" colspan="2"><a href="javascript:document.f.submit()">[게시물등록]</a>
 					<a href="list.sdj">[게시물목록]</a></td>
