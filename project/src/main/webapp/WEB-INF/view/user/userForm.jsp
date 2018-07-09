@@ -79,7 +79,7 @@
 
 </head>
 <body class="w3-content" style="max-width: 300px">
-	<div class="w3-row" id="contact">
+	<div class="w3-row" id="contact" align="center" style="max-width: 80%;">
 		<div class="w3-padding-64 w3-padding-large">
 			<h1>雀盔啊涝</h1>
 			<form:form modelAttribute="user" class="w3-container w3-card w3-padding-32 w3-white"
@@ -116,7 +116,8 @@
 				</div>
 				<div class="w3-section">
 					<label>Address</label>
-					<form:input  class="w3-input" id="sample6_address" path="m_address" placeholder="林家"/><font color="red"><form:errors path="m_address"/></font> 
+					<form:input  class="w3-input" id="sample6_address" path="m_address" placeholder="林家" readonly="true"/>
+						<font color="red"><form:errors path="m_address"/></font> 
 					<input  class="w3-input" id="m_address" name="m_address" placeholder="惑技林家"/> 
 					<!-- <input class="w3-input" style="width: 100%;" type="text" required name="m_address" id="m_address"> -->
 					<div class=checkNick></div>

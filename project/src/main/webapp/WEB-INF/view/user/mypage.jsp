@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>마이페이지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
 	window.onload=function() {
 		document.getElementById("minfo").style.display="block";
@@ -31,34 +33,47 @@
 	
 	
 </script>
-<style type="text/css">
-	table {
-	width : 90%;
-	border-collapse: collapse;
-	}
-	th {
-	text-align: center;
-	}
-</style>
+
 </head>
-<body>
-<br>
-<br>
-<br>
-<table>
-	<tr><td><a href="javascript:disp_div('minfo')">회원정보보기</a></td>
-		<td><a href="shoping.sdj?id=${user.m_id }">주문정보보기</a></td>
-	</tr>
-</table>
-<div id="minfo" style="width:100%">
-  <table border="1" width="100%">
+<body class="w3-content" style="max-width: 400px">
+<h3>회원 정보보기</h3>
+<div class="w3- row" align="center" style="max-width:50%" id="minfo" style="width:100%">
+  <div class="w3- padding-large">
+  <form class="w3-container w3-card w3-padding-32 w3-white">
+  	<div class="w3-section">
+  		<label>ID</label>
+  		<input class="w3-input" style="width: 100%;text-align: center;" type="text" value="${user.m_id }"  readonly="true">
+  	</div>
+  	<div class="w3-section">
+  		<label>Name</label>
+  		<input class="w3-input" style="width: 100%;text-align: center;" type="text" value="${user.m_name }"  readonly="true">
+  	</div>
+  	<div class="w3-section">
+  		<label>Address</label>
+  		<input class="w3-input" style="width: 100%;text-align: center;" type="text" value="${user.m_address }"  readonly="true">
+  	</div>
+  	<div class="w3-section">
+  		<label>E-Mail</label>
+  		<input class="w3-input" style="width: 100%;text-align: center;" type="text" value="${user.m_email }"  readonly="true">
+  	</div>
+  	<div class="w3-section">
+  		<label>선호장르</label>
+  		<input class="w3-input" style="width: 100%;text-align: center;" type="text" value="${likegame}"  readonly="true">
+  	</div>
+
+    <!-- 가운데로 위치이동 -->
+   <%--  <c:if test="${user.m_id != 'admin' }">
+    <a href="javascript:graph_open('mygraph.shop?id=${user.m_id}')">[그래프]</a>&nbsp;
+    </c:if> --%>
+ </form> 
+ <%--  <table border="1" width="100%">
     <tr><td>아이디</td><td>${user.m_id }</td></tr>
     <tr><td>이름</td><td>${user.m_name }</td></tr>
     <tr><td>주소</td><td>(${user.m_postcode}) ${user.m_address }</td></tr>
     <tr><td>전화번호</td><td>${user.m_phone }</td></tr>
     <tr><td>이메일</td><td>${user.m_email }</td></tr>
     <tr><td>선호장르</td><td>${likegame }</td>
-    	<%-- <td>
+    	<td>
     		<select name="m_game">
 				<option value="${user.m_game }">${likegame }</option>
 				<c:forEach var="m" items="${gametype}">
@@ -67,21 +82,19 @@
 			 		</c:if>
 			 	</c:forEach>
 			</select>
-    	</td> --%>
+    	</td>
     </tr>
-  </table>
-</div>
-<br>
-	<a href="logout.sdj">[로그아웃]</a>&nbsp;
-	<a href="update.sdj?id=${user.m_id }">[회원정보수정]</a>&nbsp;
+  </table> --%>
+  </div>
+      <a class="w3-button w3-teal w3-center"  href="shoping.sdj?id=${user.m_id }">[주문정보보기]</a>&nbsp;
+	<a class="w3-button w3-teal w3-center"  href="update.sdj?id=${user.m_id }">[회원정보수정]</a>&nbsp;
     <c:if test="${loginUser != 'admin' }">
-    <a href="delete.sdj?id=${user.m_id }">[회원탈퇴]</a>&nbsp;
+    <a class="w3-button w3-teal w3-center"  href="delete.sdj?id=${user.m_id }">[회원탈퇴]</a>&nbsp;
     </c:if>
     <c:if test="${loginUser == 'admin' }">
-    <a href="../admin/admin.sdj">[회원목록보기]</a>&nbsp;
+    <a class="w3-button w3-teal w3-center"  href="../admin/admin.sdj">[회원목록보기]</a>&nbsp;
     </c:if>
-   <%--  <c:if test="${user.m_id != 'admin' }">
-    <a href="javascript:graph_open('mygraph.shop?id=${user.m_id}')">[그래프]</a>&nbsp;
-    </c:if> --%>
+</div>
+<br>
 </body>
 </html>

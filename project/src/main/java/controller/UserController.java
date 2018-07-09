@@ -85,7 +85,7 @@ public class UserController {
 		}
 		if (dbUser.getM_passwd().equals(user.getM_passwd())) {
 			mav.addObject("dbUser", dbUser);
-			mav.setViewName("user/loginSuccess");
+			mav.setViewName("decorator.jsp");
 			session.setAttribute("loginUser", dbUser.getM_id());
 		} else {
 			bindingResult.reject("error.login.m_passwd");
@@ -197,11 +197,10 @@ public class UserController {
 
 	
 	@RequestMapping(value="user/delete", method=RequestMethod.POST)
-	public String delete(@Valid User user, HttpSession session) {
+	public String delete(@Valid User user, HttpSession session, String x) {
 		
 		//세션으로부터 로그인유저 객체를 받아옴. 
 		User loginUser = service.getUser((String)session.getAttribute("loginUser"));
-		System.out.println(user);
 		//입력된 id의 db 회원정보를 저장하고 있는 user 객체
 		if(user == null) {
 			throw new ShopException("삭제 대상 사용자가 존재하지 않습니다.", "mypage.sdj?id="+user.getM_id());
@@ -216,7 +215,7 @@ public class UserController {
 			}
 		}
 		try {
-			System.out.println(session.getAttribute("check"));
+			System.out.println(x);
 			
 			service.deleteUser(user.getM_id());
 			if(loginUser.getM_id().equals("admin")) { //관리자로그인.
