@@ -11,11 +11,9 @@
 <script type="text/javascript">
 	window.onload=function() {
 		document.getElementById("minfo").style.display="block";
-		document.getElementById("oinfo").style.display="none";
 	}
 	function disp_div(id) {
 		document.getElementById("minfo").style.display="none";
-		document.getElementById("oinfo").style.display="none";
 		document.getElementById(id).style.display="block";
 	}
 	function list_disp(id) {
@@ -35,6 +33,13 @@
 </script>
 
 </head>
+<table>
+	<tr>
+	 <c:if test="${loginUser == 'admin'}">
+	    <td><a href="../admin/orderList.sdj">회원주문 목록보기</a></td>
+	 </c:if>
+	</tr>
+</table>
 <body class="w3-content" style="max-width: 400px">
 <h3>회원 정보보기</h3>
 <div class="w3- row" align="center" style="max-width:50%" id="minfo" style="width:100%">
@@ -67,6 +72,7 @@
     </c:if> --%>
  </form> 
  <%--  <table border="1" width="100%">
+>>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
     <tr><td>아이디</td><td>${user.m_id }</td></tr>
     <tr><td>이름</td><td>${user.m_name }</td></tr>
     <tr><td>주소</td><td>(${user.m_postcode}) ${user.m_address }</td></tr>

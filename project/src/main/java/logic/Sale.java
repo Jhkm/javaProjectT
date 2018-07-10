@@ -10,10 +10,18 @@ public class Sale implements Serializable{
 	private Date s_updateTime;
 	//진행상황
 	private Integer s_step;
+	private String m_id;
 	private String address;
 	private User user;
 	private Integer amount;
 	private List<SaleItem> saleItemList = new ArrayList<SaleItem>();
+	
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 	public String getAddress() {
 		return address;
 	}

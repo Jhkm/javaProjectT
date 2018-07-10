@@ -72,6 +72,8 @@ public class ItemController {
 		if(request.getParameter("gametype") != null && !request.getParameter("gametype").equals("")) {
 			mav.addObject("gametype", request.getParameter("gametype"));
 		}
+		String sort = request.getParameter("sort");
+		mav.addObject("sort", sort);
 		mav.addObject("startPage",startPage);
 		mav.addObject("endPage",endPage);
 		mav.addObject("pageNum",pageNum);

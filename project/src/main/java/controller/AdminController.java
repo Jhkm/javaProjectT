@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -21,6 +22,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import exception.ShopException;
+import logic.Item;
 import logic.Mail;
+import logic.Sale;
+import logic.SaleItem;
 import logic.ShopService;
 import logic.User;
 
@@ -160,4 +165,30 @@ public class AdminController {
 		mav.addObject("map",treemap);
 		return mav;
 	}*/
+	@RequestMapping("admin/orderList")
+	public ModelAndView orderList(HttpServletRequest request,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		List<Sale> saleList = service.getSaleList();
+		for(Sale sale : saleList) {
+			List<SaleItem> saleItemList = service.getSaleItemList(sale.getS_id());
+			int amount =0;
+			for(SaleItem saleItem : saleItemList) {
+				Item item = service.detail(saleItem.getI_no());
+				saleItem.setItem(item);
+				amount += saleItem.getQuantity() + item.getI_price();
+			}
+			sale.setSaleItemList(saleItemList);
+			sale.setAmount(amount);
+		}
+		mav.addObject("saleList", saleList);
+		return mav;
+	}
+	@RequestMapping("admin/stepChange")
+	public ModelAndView stepChange(HttpServletRequest request, HttpSession session) {
+		String s_id = request.getParameter("s_id");
+		String s_step = request.getParameter("s_step");
+		service.changeStep(s_id,s_step);
+		return new ModelAndView("redirect:../user/shoping.sdj?id="+session.getAttribute("loginUser"));
+	}
+	
 }

@@ -12,4 +12,8 @@ public interface SaleDao {
 
 	List<Sale> getSaleList(String loginId);
 
+	List<Sale> getSaleList();
+
+	void changeStep(String s_id, String s_step);
+
 }

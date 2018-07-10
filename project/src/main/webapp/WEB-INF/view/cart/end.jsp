@@ -44,7 +44,7 @@
   <tr><td colspan="4" style="text-align:right;">총금액 : 
     <fmt:formatNumber value="${totalAmount }" pattern="#,###"/>원</td></tr>
   <tr><td colspan="4">
-    <a href="../item/list.shop">상품목록</a></td></tr>
+    <a href="../item/list.sdj">상품목록</a></td></tr>
 </table>
 </body>
 </html>

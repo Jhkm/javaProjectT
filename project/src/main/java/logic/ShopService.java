@@ -71,4 +71,8 @@ public interface ShopService {
 
 	List<SaleItem> getSaleItemList(Integer s_id);
 
+	List<Sale> getSaleList();
+
+	void changeStep(String s_id, String s_step);
+
 }

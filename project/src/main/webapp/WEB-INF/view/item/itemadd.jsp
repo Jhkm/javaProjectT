@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>상품등록 화면</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
@@ -34,6 +35,14 @@
 		})
 	}
 </script>
+<style type="text/css">
+	#plus_button {
+		border-color:#ffffff;
+		background-color :#ffffff;
+		background-color : rgba( 255, 255, 255, 0.0 );
+		
+	}
+</style>
 </head>
 <body>
 <br><br><br>
@@ -78,10 +87,14 @@
 					<font color="red"><form:errors path="i_explain" /></font></td>
 				</tr>
 				<tr>
-					<td colspan="3"><input type="file" id="img_upload"
-						name="i_Img_File"></td>
+					<td colspan="3"><input type="file" id="img_upload" name="i_Img_File" ></td>
 				</tr>
+				<!-- 나중에 다시 수정 -->
+				<tr><td colspan="3" valign="middle">
+				<input multiple="multiple" type="file" id="img_upload1" name="i_Img_File1" >
+				<button id="plus_button" class="w3-button w3-circle w3-xlarge" onclick="">+</button></td></tr>
 				<tr>
+				<!-- 나중에 다시 수정 -->
 					<td colspan="3" align="center"><input type="submit" value="등록"></td>
 				</tr>
 			</table>
