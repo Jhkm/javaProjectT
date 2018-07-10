@@ -16,6 +16,17 @@ public class Cart {
 	public List<ItemSet> getItemList() {
 		return itemList;
 	}
+	public void create(List<Integer> nolist) {
+		List<ItemSet> ilist = new ArrayList<ItemSet>();
+		for(Integer no : nolist) {
+			for(ItemSet is : itemList) {
+				if(is.getItem().getI_no() == no) {
+					ilist.add(is);
+				}
+			}
+		}
+		itemList = ilist;
+	}
 	//itemSet : 추가될 상품
 	public void push(ItemSet itemSet) {
 		for(ItemSet is : itemList) {

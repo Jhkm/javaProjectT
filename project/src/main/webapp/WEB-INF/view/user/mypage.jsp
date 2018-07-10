@@ -9,39 +9,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
-	window.onload=function() {
-		document.getElementById("minfo").style.display="block";
-	}
-	function disp_div(id) {
-		document.getElementById("minfo").style.display="none";
-		document.getElementById(id).style.display="block";
-	}
-	function list_disp(id) {
-		var disp = document.getElementById(id);
-		if(disp.style.display == 'block') {
-			disp.style.display = 'none';
-		} else {
-			disp.style.display = 'block';
-		}
-	}
-	function graph_open(url){
-		var op = "width=700,height=500,scrollbars=yes,left=50,top=150";
-		window.open(url,"graph",op);
-	}
-	
-	
 </script>
 
 </head>
-<table>
-	<tr>
-	 <c:if test="${loginUser == 'admin'}">
-	    <td><a href="../admin/orderList.sdj">회원주문 목록보기</a></td>
-	 </c:if>
-	</tr>
-</table>
+
 <body class="w3-content" style="max-width: 400px">
+
 <h3>회원 정보보기</h3>
+<c:if test="${loginUser == 'admin'}">
+<a href="../admin/orderList.sdj">회원주문 목록보기</a>
+</c:if>
 <div class="w3- row" align="center" style="max-width:50%" id="minfo" style="width:100%">
   <div class="w3- padding-large">
   <form class="w3-container w3-card w3-padding-32 w3-white">

@@ -39,6 +39,7 @@ function finalize() {
 <body>
 <h2>배송지 정보</h2>
 <form action="end.sdj" method="post" name="f">
+<input type="hidden" name="nolist" value="${nolist }">
 <table>
   <tr><td width="30%" class="title">구매자ID</td>
   <td width="70%">${loginUser1.m_id }</td></tr>

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +32,7 @@ public class CartController {
 		Cart cart = service.selectCart(loginId);
 		ModelAndView mav = null;
 		if(checkAS) {
-			mav = new ModelAndView("cart/cart");
-			mav.addObject("message",service.detail(no).getI_name()+"을/를" + quantity + "개 카트에 추가");
+			mav = new ModelAndView("redirect:../cart/cartView.sdj");
 			mav.addObject("cart",cart);
 		} else {
 			mav = new ModelAndView("redirect:../item/list.sdj");
@@ -88,10 +88,21 @@ public class CartController {
 	//1. 로그인이 안된경우 : 로그인이 필요합니다. login.shop으로 /user/login.shop
 	//2. 카트가 비어 있는 경우 : 장바구니가 비었습니다. /item/list.shop
 	@RequestMapping("cart/checkout")
-	public ModelAndView checkout(HttpSession session) {
+	public ModelAndView checkout(HttpSession session,String itemcheck) {
+		String[] str = itemcheck.split(",");
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i =1;i<str.length;i+=2) {
+			list.add(Integer.parseInt(str[i]));
+		}
 		ModelAndView mav = new ModelAndView();
 		String loginId = (String)session.getAttribute("loginUser");
 		Cart cart = service.selectCart(loginId);
+		cart.create(list);
+		String inlist = "";
+		for(Integer i : list) {
+			inlist += i+",";
+		}
+		mav.addObject("nolist",inlist);
 		mav.addObject("cart",cart);
 		mav.addObject("loginUser1",(User)service.getUser(loginId));
 		return mav; // view 이름
@@ -102,7 +113,12 @@ public class CartController {
 		Cart cart = service.selectCart((String)session.getAttribute("loginUser"));
 		String loginId = (String)session.getAttribute("loginUser");
 		User loginUser = service.getUser(loginId);
-		
+		String nos = request.getParameter("nolist");
+		String noarr[] = nos.split(",");
+		List<Integer> nolist = new ArrayList<Integer>();
+		for(String s : noarr) {
+			nolist.add(Integer.parseInt(s));
+		}
 		if(cart == null || cart.isEmpty()) {
 			throw new CartEmptyException("장바구니에 계산할 상품이 없습니다.","../item/list.sdj");
 		}
@@ -111,6 +127,7 @@ public class CartController {
 		 *  sale 객체에 정보를 저장하여 리턴
 		 *  db에 주문정보와 주문 상품 정보 저장.
 		 */
+		cart.create(nolist);
 		Sale sale = service.checkEnd(loginUser,cart,request);
 		List<ItemSet> itemList = cart.getItemList();
 		int tot = cart.getTotalAmount(); //총 금액 산출
