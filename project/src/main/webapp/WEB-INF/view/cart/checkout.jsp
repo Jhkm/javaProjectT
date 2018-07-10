@@ -10,7 +10,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".newAddress").hide();
-	$("#addressUpdate").click(function () {
+	$("#addressUpdate").click(function() {
 		if($("#updateSet").css("display") == "none") {
 			$(".newAddress").show();
 		} else {

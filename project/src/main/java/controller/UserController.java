@@ -251,14 +251,11 @@ public class UserController {
 			int amount =0;
 			for(SaleItem sitem : saleItemList) {
 				Item item = service.detail(sitem.getI_no());
-				System.out.println(item);
 				sitem.setItem(item);
 				amount += sitem.getQuantity() * item.getI_price();
-				System.out.println(amount);
 			}
 			s.setSaleItemList(saleItemList);
 			s.setAmount(amount);
-			System.out.println(s);
 		}
 		mav.addObject("salelist",saleList);
 		return mav;

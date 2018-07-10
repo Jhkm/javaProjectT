@@ -9,11 +9,9 @@
 <script type="text/javascript">
 	window.onload=function() {
 		document.getElementById("minfo").style.display="block";
-		document.getElementById("oinfo").style.display="none";
 	}
 	function disp_div(id) {
 		document.getElementById("minfo").style.display="none";
-		document.getElementById("oinfo").style.display="none";
 		document.getElementById(id).style.display="block";
 	}
 	function list_disp(id) {
@@ -47,7 +45,12 @@
 <br>
 <table>
 	<tr><td><a href="javascript:disp_div('minfo')">회원정보보기</a></td>
-		<td><a href="shoping.sdj?id=${user.m_id }">주문정보보기</a></td>
+	 <c:if test="${loginUser == 'admin'}">
+	    <td><a href="../admin/orderList.sdj">회원주문 목록보기</a></td>
+	 </c:if>
+	 <c:if test="${loginUser != 'admin'}">
+	    <td><a href="shoping.sdj?id=${user.m_id }">주문정보보기</a></td>
+	 </c:if>
 	</tr>
 </table>
 <div id="minfo" style="width:100%">

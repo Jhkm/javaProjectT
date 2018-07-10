@@ -289,5 +289,15 @@ public class ShopServiceImpl implements ShopService{
 	public List<SaleItem> getSaleItemList(Integer s_id) {
 		return saleItemDao.getSaleItemList(s_id);
 	}
+
+	@Override
+	public List<Sale> getSaleList() {
+		return saleDao.getSaleList();
+	}
+
+	@Override
+	public void changeStep(String s_id, String s_step) {
+		saleDao.changeStep(s_id,s_step);
+	}
 	
 }

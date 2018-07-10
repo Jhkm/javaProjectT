@@ -1,9 +1,11 @@
 package dao.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import logic.Sale;
 
@@ -17,4 +19,7 @@ public interface SaleMapper {
 	
 	@Select("select * from sale where m_id = #{value}")
 	List<Sale> selectList(String loginId);
+
+	@Update("update sale set s_step = #{s_step} where s_id = #{s_id}")
+	void changeStep(Map map);
 }
