@@ -18,4 +18,6 @@ public interface UserDao {
 
 	List<User> list(String[] ids);
 
+	int checkId(String id);
+
 }

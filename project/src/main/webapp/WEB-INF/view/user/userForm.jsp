@@ -10,58 +10,34 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- <script type="text/javascript">
-	$(document).ready(function() {
-		$(".list").hide();
-		$("#player").keyup(function() {
-			var pname = $("#player").val(); // 입력된 아이디
-			var data = "pname=" + pname; // 파라미터 값 설정
-			$.ajax({
-				type : "POST",
-				url : "autocomplete.jsp",
-				data : data,
-				success : function(html) {
-					$(".list").show();
-					$(".list").html(html);
-					$("li").hover(function() { // li 태그의 마우스 over 이벤트 설정
-						$(this).addClass("hover");
-					}, function() {
-						$(this).removeClass("hover");
-					});
-					$("li").click(function() {
-						$("#player").val($(this).text());
-						$(".list").hide();
+<script type="text/javascript">
 
-					})
-				}
-			})
-		})
-		$("#id").keyup(function() {
-			var id = $("#id").val(); // 입력된 아이디
-			var data = "id=" + id; // 파라미터 값 설정
-			$.ajax({
-				type : "POST",
-				url : "checkId.jsp",
-				data : data,
-				success : function(html) {
-					$(".checkId").html(html);
-				}
-			})
-		})
-		$("#nick").keyup(function() {
-			var nick = $("#nick").val(); // 입력된 아이디
-			var data ="nick=" + nick; // 파라미터 값 설정
-			$.ajax({
-				type : "POST",
-				url : "checkNick.jsp",
-				data : data,
-				success : function(html) {
-					$(".checkNick").html(html);
-				}
-			})
-		})
+function idCheck() {
+	var id = $("#m_id").val(); // 입력된 아이디
+	var button_joinus = document.getElementById('button_joinus');
+	button_joinus.disabled = "disabled";
+	$.ajax({
+		url : 'checkId.sdj',
+		type : 'post',
+		data : {"m_id":id},
+		success : function(data) {
+			if (data == "true"){
+				$(".checkId").html("");
+				$(".checkId").html("사용가능한 아이디입니다.");
+				button_joinus.disabled = false;
+			} else {
+				$(".checkId").html("");
+				$(".checkId").html("사용 불가능한 아이디입니다.");
+			}
+		},
+		error:function(request,status,error) {
+			alert("code:"+request.status+"\n"+"error:" + error);
+		}
 	});
-</script> -->
+}
+</script>
+
+
 <style type="text/css">
 	.list {
 		background-color: black;
@@ -93,15 +69,20 @@
 				</spring:hasBindErrors>
 				<div class="w3-section">
 					<label>ID</label>
-					<form:input class="w3-input" path="m_id" placeholder="ID"/><font color="red"><form:errors path="m_id"/></font> 
+					<form:input class="w3-input" path="m_id" name="m_id" id="m_id" placeholder="ID"/><font color="red"><form:errors path="m_id" name="m_id" id="m_id"/></font>
+					<input type="button" value="중복확인" onclick="idCheck()" />
 					<!-- <input class="w3-input" style="width: 100%;" type="text" required name="m_id" id="m_id"> -->
 					<div class=checkId></div>
 				</div>
 				<div class="w3-section">
 					<label>Password</label> 
-					<form:password class="w3-input" path="m_passwd" placeholder="비밀번호"/><font color="red"><form:errors path="m_passwd"/></font> 
+					<form:password class="w3-input" path="m_passwd" name="m_passwd" placeholder="비밀번호"/><font color="red"><form:errors path="m_passwd"/></font> 
 					<!-- <input class="w3-input"	style="width: 100%;" type="m_passwd" required name="m_passwd"> -->
 				</div>
+				<!-- <div class="w3-section">
+					<label>Password 중복확인</label>
+					<input class="w3-input" type="password" name="passwordcheck" placeholder="비밀번호를 다시 입력하세요">
+				</div> -->
 				<div class="w3-section">
 					<label>Name</label> 
 					<form:input  class="w3-input" path="m_name" placeholder="이름"/><font color="red"><form:errors path="m_name"/></font> 
@@ -124,7 +105,7 @@
 				</div>
 				<div class="w3-section">
 					<label>Phone Number</label>
-					<form:input  class="w3-input"  path="m_phone" placeholder="전화번호"/><font color="red"><form:errors path="m_phone"/></font>  
+					<form:input  class="w3-input"  path="m_phone" name="m_phone" placeholder="전화번호는 -를 제외한 숫자만 입력해주세요"/><font color="red"><form:errors path="m_phone"/></font>  
 					<!-- <input class="w3-input"	style="width: 100%;" type="text" name="m_phone" id="m_phone"> -->
 					<div class="list"></div>
 				</div>
@@ -143,7 +124,7 @@
 					</select>
 				</div>
 				<input type="hidden" type="text" name="m_mileage" id="m_mileage" value="0">
-				<button type="submit" class="w3-button w3-teal w3-right">가입하기</button>
+				<button type="submit" id="button_joinus" class="w3-button w3-teal w3-right" disabled="disabled">가입하기</button>
 				<button type="reset" class="w3-button w3-teal w3-right">초기화</button>
 			</form:form>
 		</div>
