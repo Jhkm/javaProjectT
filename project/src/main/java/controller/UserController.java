@@ -85,7 +85,7 @@ public class UserController {
 		}
 		if (dbUser.getM_passwd().equals(user.getM_passwd())) {
 			mav.addObject("dbUser", dbUser);
-			mav.setViewName("decorator.jsp");
+			mav.setViewName("user/loginSuccess");
 			session.setAttribute("loginUser", dbUser.getM_id());
 		} else {
 			bindingResult.reject("error.login.m_passwd");
@@ -94,7 +94,6 @@ public class UserController {
 		}
 		return mav;
 	}
-	
 	@RequestMapping("user/logout")
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView mav = new ModelAndView("user/login");
