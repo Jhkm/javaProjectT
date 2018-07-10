@@ -10,15 +10,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
 </script>
-
 </head>
-
 <body class="w3-content" style="max-width: 400px">
 
 <h3>회원 정보보기</h3>
-<c:if test="${loginUser == 'admin'}">
-<a href="../admin/orderList.sdj">회원주문 목록보기</a>
-</c:if>
 <div class="w3- row" align="center" style="max-width:50%" id="minfo" style="width:100%">
   <div class="w3- padding-large">
   <form class="w3-container w3-card w3-padding-32 w3-white">
@@ -48,28 +43,14 @@
     <a href="javascript:graph_open('mygraph.shop?id=${user.m_id}')">[그래프]</a>&nbsp;
     </c:if> --%>
  </form> 
- <%--  <table border="1" width="100%">
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
-    <tr><td>아이디</td><td>${user.m_id }</td></tr>
-    <tr><td>이름</td><td>${user.m_name }</td></tr>
-    <tr><td>주소</td><td>(${user.m_postcode}) ${user.m_address }</td></tr>
-    <tr><td>전화번호</td><td>${user.m_phone }</td></tr>
-    <tr><td>이메일</td><td>${user.m_email }</td></tr>
-    <tr><td>선호장르</td><td>${likegame }</td>
-    	<td>
-    		<select name="m_game">
-				<option value="${user.m_game }">${likegame }</option>
-				<c:forEach var="m" items="${gametype}">
-					<c:if test="${m.get('tp_name') != likegame }">
-			 		<option value="${m.get('tp_no')}">${m.get('tp_name')}</option>
-			 		</c:if>
-			 	</c:forEach>
-			</select>
-    	</td>
-    </tr>
-  </table> --%>
+
   </div>
+	<c:if test="${loginUser == 'admin'}">
+		<a class="w3-button w3-teal w3-center" href="../admin/orderList.sdj">[회원주문 목록보기]</a>
+	</c:if>
+	<c:if test="${loginUser != 'admin' }">
       <a class="w3-button w3-teal w3-center"  href="shoping.sdj?id=${user.m_id }">[주문정보보기]</a>&nbsp;
+    </c:if>
 	<a class="w3-button w3-teal w3-center"  href="update.sdj?id=${user.m_id }">[회원정보수정]</a>&nbsp;
     <c:if test="${loginUser != 'admin' }">
     <a class="w3-button w3-teal w3-center"  href="delete.sdj?id=${user.m_id }">[회원탈퇴]</a>&nbsp;
