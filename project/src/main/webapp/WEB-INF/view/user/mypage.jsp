@@ -8,8 +8,11 @@
 <title>마이페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script type="text/javascript">
+</script>
 </head>
 <body class="w3-content" style="max-width: 400px">
+
 <h3>회원 정보보기</h3>
 <div class="w3- row" align="center" style="max-width:50%" id="minfo" style="width:100%">
   <div class="w3- padding-large">
