@@ -15,11 +15,34 @@
 	href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+function getCookie(cookie_name) {
+	  var x, y;
+	  var val = document.cookie.split(';');
+
+	  for (var i = 0; i < val.length; i++) {
+	    x = val[i].substr(0, val[i].indexOf('='));
+	    y = val[i].substr(val[i].indexOf('=') + 1);
+	    x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+	    if (x == cookie_name) {
+	      return unescape(y); // unescape로 디코딩 후 값 리턴
+	    }
+	  }
+	}
+$(document).ready(function() {
+	var cookie = getCookie(productItems);
+	console.log(cookie);
+	$('#cookie').text(cookie);
+	
+})
+//alert(${document.cookie.productItems});
+</script>
 <style>
 html, body, h1, h2, h3, h4 {
 	font-family: "Lato", sans-serif
 }
-
+body{background-color:#F7FFF5;}
 .mySlides {
 	display: none
 }
@@ -49,11 +72,20 @@ html, body, h1, h2, h3, h4 {
 */
 .bor {
 	margin: 0 0 50px;
-    padding: 40px 0 11px 4px;
-    border-bottom: 1px solid #dadada;
-    color: #000;
-    font-size: 22px;
-} 
+	padding: 40px 0 11px 4px;
+	border-bottom: 1px solid #dadada;
+	color: #000;
+	font-size: 22px;
+}
+.scroll-right
+{
+    height:35px;
+    font-size:12px;
+    position:fixed;
+    z-index:10000;
+    top:150px;
+    left:75%;
+}
 /* #bottom-down {
 	position : absolute;
 }
@@ -86,8 +118,7 @@ html, body, h1, h2, h3, h4 {
 	<div class="all_all">
 		<div id="top" class="w3-top w3-center">
 			<div class="w3-bar w3-white w3-card">
-				<a
-					class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+				<a	class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
 					href="javascript:void(0)" onclick="myFunction()"
 					title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> <a
 					href="/project/index.jsp"
@@ -138,7 +169,17 @@ html, body, h1, h2, h3, h4 {
 					class="fa fa-search"></i></a>
 			</div>
 		</div>
-		<div class="content  w3-container w3-content" style="margin-top:120px;">
+		<div class="scroll-right" style="fixed: right; margin-left:20px">
+					<div id="cookie">
+						
+						<!-- ${cookie} -->
+					</div>
+					<div class="up" style="width:10%; height:10%;">
+						<a href="#"><img src="/project/img/up.png"></a>
+					</div>
+				</div>
+		<div class="content  w3-container w3-content"
+			style="margin-top: 120px;">
 			<!-- style="max-width: 800px; margin-top: 100px; margin-left: 20%;"> -->
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				<div style="float: left;">
@@ -210,15 +251,13 @@ html, body, h1, h2, h3, h4 {
 						<div class="w3-container">
 							<img src="/w3images/jeans1.jpg" style="width: 100%">
 							<p>
-								Ripped Skinny Jeans<br>
-								<b>$0000</b>
+								Ripped Skinny Jeans<br> <b>$0000</b>
 							</p>
 						</div>
 						<div class="w3-container">
 							<img src="/w3images/jeans2.jpg" style="width: 100%">
 							<p>
-								Mega Ripped Jeans<br>
-								<b>$2222</b>
+								Mega Ripped Jeans<br> <b>$2222</b>
 							</p>
 						</div>
 					</div>
@@ -229,15 +268,13 @@ html, body, h1, h2, h3, h4 {
 								<img src="/w3images/jeans2.jpg" style="width: 100%">
 							</div>
 							<p>
-								Mega Ripped Jeans<br>
-								<b>$1111</b>
+								Mega Ripped Jeans<br> <b>$1111</b>
 							</p>
 						</div>
 						<div class="w3-container">
 							<img src="/w3images/jeans3.jpg" style="width: 100%">
 							<p>
-								Washed Skinny Jeans<br>
-								<b>$2222</b>
+								Washed Skinny Jeans<br> <b>$2222</b>
 							</p>
 						</div>
 					</div>
@@ -246,8 +283,7 @@ html, body, h1, h2, h3, h4 {
 						<div class="w3-container">
 							<img src="/w3images/jeans3.jpg" style="width: 100%">
 							<p>
-								Washed Skinny Jeans<br>
-								<b>$3333</b>
+								Washed Skinny Jeans<br> <b>$3333</b>
 							</p>
 						</div>
 						<div class="w3-container">
@@ -255,8 +291,7 @@ html, body, h1, h2, h3, h4 {
 								<img src="/w3images/jeans4.jpg" style="width: 100%">
 							</div>
 							<p>
-								Vintage Skinny Jeans<br>
-								<b class="w3-text-red">$4444</b>
+								Vintage Skinny Jeans<br> <b class="w3-text-red">$4444</b>
 							</p>
 						</div>
 					</div>
@@ -267,15 +302,13 @@ html, body, h1, h2, h3, h4 {
 						<div class="w3-container">
 							<img src="/w3images/jeans4.jpg" style="width: 100%">
 							<p>
-								Vintage Skinny Jeans<br>
-								<b>$5555</b>
+								Vintage Skinny Jeans<br> <b>$5555</b>
 							</p>
 						</div>
 						<div class="w3-container">
 							<img src="/w3images/jeans1.jpg" style="width: 100%">
 							<p>
-								Ripped Skinny Jeans<br>
-								<b>$6666</b>
+								Ripped Skinny Jeans<br> <b>$6666</b>
 							</p>
 						</div>
 					</div>
@@ -283,15 +316,13 @@ html, body, h1, h2, h3, h4 {
 						<div class="w3-container">
 							<img src="/w3images/jeans4.jpg" style="width: 100%">
 							<p>
-								Vintage Skinny Jeans<br>
-								<b>$4567</b>
+								Vintage Skinny Jeans<br> <b>$4567</b>
 							</p>
 						</div>
 						<div class="w3-container">
 							<img src="/w3images/jeans1.jpg" style="width: 100%">
 							<p>
-								Ripped Skinny Jeans<br>
-								<b>$3456</b>
+								Ripped Skinny Jeans<br> <b>$3456</b>
 							</p>
 						</div>
 					</div>
@@ -299,15 +330,13 @@ html, body, h1, h2, h3, h4 {
 						<div class="w3-container">
 							<img src="/w3images/jeans4.jpg" style="width: 100%">
 							<p>
-								Vintage Skinny Jeans<br>
-								<b>$2345</b>
+								Vintage Skinny Jeans<br> <b>$2345</b>
 							</p>
 						</div>
 						<div class="w3-container">
 							<img src="/w3images/jeans1.jpg" style="width: 100%">
 							<p>
-								Ripped Skinny Jeans<br>
-								<b>$1234</b>
+								Ripped Skinny Jeans<br> <b>$1234</b>
 							</p>
 						</div>
 					</div>
@@ -348,6 +377,7 @@ html, body, h1, h2, h3, h4 {
 			x[slideIndex - 1].style.display = "block";
 			dots[slideIndex - 1].className += " w3-white";
 		}
+
 	</script>
 </body>
 </html>

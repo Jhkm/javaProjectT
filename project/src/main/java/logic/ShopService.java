@@ -71,4 +71,24 @@ public interface ShopService {
 
 	List<SaleItem> getSaleItemList(Integer s_id);
 
+	void r_update(logic.Reply reply, Board board, HttpServletRequest request, HttpSession session);
+
+	List<logic.Reply> replylist(Integer b_no);
+
+/*	int replyMaxNum();
+
+	void replyCreate(logic.Reply reply);
+
+	logic.Reply setlectReply(Integer r_no);
+
+	void replyDelete(Integer r_no);
+
+	void insertReReply(logic.Reply reply);*/
+
+	void r_delte(logic.Reply reply, Board board, HttpServletRequest request, HttpSession session);
+
+	int replyMaxNum();
+
+	void replyRe(Board board, HttpServletRequest request, HttpSession session,Reply reply);
+
 }

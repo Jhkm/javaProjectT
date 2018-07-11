@@ -156,27 +156,65 @@ public class BoardController {
 			service.Reply(reply, board, request, session);
 			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
 		} catch(Exception e) {
+			e.printStackTrace();
 			throw new BoardException("´ñ±Û½ÇÆÐ", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
 		return mav;
 	} 
-	
-	@RequestMapping(value="board/*",method=RequestMethod.GET)
-	public ModelAndView detail(Integer b_no,HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value="board/r_update", method=RequestMethod.POST)
+	public ModelAndView r_update(Reply reply, Board board, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		Board board = new Board();
-		
-		if(b_no != null) {
-			board = service.getBoard(b_no);
-			String url = request.getServletPath();
-			if(url.contains("/board/detail.sdj")) {
-				service.updatereadcnt(b_no);
-				List<Reply> replylist = new ArrayList<Reply>();
-				replylist = service.getBoardReply(b_no);
-				mav.addObject("replylist", replylist);
-			}
+		String b_no = request.getParameter("b_no");
+		String pageNum = request.getParameter("pageNum");
+		try {
+			service.r_update(reply, board, request, session);
+			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
-		mav.addObject("board",board);
+		return mav;
+	}
+	@RequestMapping(value="board/replyRe", method=RequestMethod.POST)
+	public ModelAndView replyRe(@Valid Board board,BindingResult bindingResult,  Reply reply, HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String b_no = request.getParameter("b_no");
+		String pageNum = request.getParameter("pageNum");
+//		if (bindingResult.hasErrors()) {
+//			mav.getModel().putAll(bindingResult.getModel());
+//			board = service.getBoard(board.getB_no());
+//			mav.addObject("board", board);
+//			return mav;
+//		}
+		try {
+			service.replyRe(board, request,session,reply);
+			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	@RequestMapping(value="board/*", method=RequestMethod.GET)
+	public ModelAndView detail(Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+			try {
+				Board board = service.getBoard(b_no);
+				
+				System.out.println(board);
+				
+				mav.addObject("board",board);
+				
+				service.updatereadcnt(b_no);
+				
+				List<Reply> replylist =  service.getBoardReply(b_no);
+				
+				mav.addObject("replylist", replylist);
+				mav.addObject("reply", new Reply());
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		return mav;
 	}
 }
