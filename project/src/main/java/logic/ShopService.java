@@ -91,4 +91,10 @@ public interface ShopService {
 
 	void replyRe(Board board, HttpServletRequest request, HttpSession session,Reply reply);
 
+	List<Sale> getSaleList();
+
+	void changeStep(String s_id, String s_step);
+
+	boolean duplicateIdCheck(String id);
+
 }

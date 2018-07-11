@@ -6,6 +6,4 @@
      <pattern>*.sdj</pattern>
   </decorator>
   <!-- layout 설정을 제외 함. -->
-  <excludes>
-   </excludes>
 </decorators>

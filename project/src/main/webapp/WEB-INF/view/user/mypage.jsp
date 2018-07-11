@@ -9,33 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
-	window.onload=function() {
-		document.getElementById("minfo").style.display="block";
-		document.getElementById("oinfo").style.display="none";
-	}
-	function disp_div(id) {
-		document.getElementById("minfo").style.display="none";
-		document.getElementById("oinfo").style.display="none";
-		document.getElementById(id).style.display="block";
-	}
-	function list_disp(id) {
-		var disp = document.getElementById(id);
-		if(disp.style.display == 'block') {
-			disp.style.display = 'none';
-		} else {
-			disp.style.display = 'block';
-		}
-	}
-	function graph_open(url){
-		var op = "width=700,height=500,scrollbars=yes,left=50,top=150";
-		window.open(url,"graph",op);
-	}
-	
-	
 </script>
-
 </head>
 <body class="w3-content" style="max-width: 400px">
+
 <h3>회원 정보보기</h3>
 <div class="w3- row" align="center" style="max-width:50%" id="minfo" style="width:100%">
   <div class="w3- padding-large">
@@ -66,27 +43,14 @@
     <a href="javascript:graph_open('mygraph.shop?id=${user.m_id}')">[그래프]</a>&nbsp;
     </c:if> --%>
  </form> 
- <%--  <table border="1" width="100%">
-    <tr><td>아이디</td><td>${user.m_id }</td></tr>
-    <tr><td>이름</td><td>${user.m_name }</td></tr>
-    <tr><td>주소</td><td>(${user.m_postcode}) ${user.m_address }</td></tr>
-    <tr><td>전화번호</td><td>${user.m_phone }</td></tr>
-    <tr><td>이메일</td><td>${user.m_email }</td></tr>
-    <tr><td>선호장르</td><td>${likegame }</td>
-    	<td>
-    		<select name="m_game">
-				<option value="${user.m_game }">${likegame }</option>
-				<c:forEach var="m" items="${gametype}">
-					<c:if test="${m.get('tp_name') != likegame }">
-			 		<option value="${m.get('tp_no')}">${m.get('tp_name')}</option>
-			 		</c:if>
-			 	</c:forEach>
-			</select>
-    	</td>
-    </tr>
-  </table> --%>
+
   </div>
+	<c:if test="${loginUser == 'admin'}">
+		<a class="w3-button w3-teal w3-center" href="../admin/orderList.sdj">[회원주문 목록보기]</a>
+	</c:if>
+	<c:if test="${loginUser != 'admin' }">
       <a class="w3-button w3-teal w3-center"  href="shoping.sdj?id=${user.m_id }">[주문정보보기]</a>&nbsp;
+    </c:if>
 	<a class="w3-button w3-teal w3-center"  href="update.sdj?id=${user.m_id }">[회원정보수정]</a>&nbsp;
     <c:if test="${loginUser != 'admin' }">
     <a class="w3-button w3-teal w3-center"  href="delete.sdj?id=${user.m_id }">[회원탈퇴]</a>&nbsp;

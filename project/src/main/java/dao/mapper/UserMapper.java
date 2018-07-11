@@ -22,5 +22,8 @@ public interface UserMapper {
 
 	@Delete("delete from member where m_id=#{m_id}")
 	void delete(String id);
+
+	@Select("select count(*) from member where m_id =#{id}")
+	int checkId(String id);
 	
 }

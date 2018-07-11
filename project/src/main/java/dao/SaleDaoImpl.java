@@ -1,6 +1,8 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +26,16 @@ public class SaleDaoImpl implements SaleDao{
 	@Override
 	public List<Sale> getSaleList(String loginId) {
 		return sqlSession.getMapper(SaleMapper.class).selectList(loginId);
+	}
+	@Override
+	public List<Sale> getSaleList() {
+		return sqlSession.selectList(NS+"list");
+	}
+	@Override
+	public void changeStep(String s_id, String s_step) {
+		Map map = new HashMap();
+		map.put("s_id", s_id);
+		map.put("s_step", s_step);
+		sqlSession.getMapper(SaleMapper.class).changeStep(map);
 	}
 }

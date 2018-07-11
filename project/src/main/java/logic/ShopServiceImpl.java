@@ -296,6 +296,7 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
+
 	public List<logic.Reply> replylist(Integer b_no) {
 		 return replyDao.replyList(b_no);
 	}
@@ -305,6 +306,23 @@ public class ShopServiceImpl implements ShopService{
 		replyDao.r_delete(reply);
 	}
 
+	public List<Sale> getSaleList() {
+		return saleDao.getSaleList();
+	}
+
+	@Override
+	public void changeStep(String s_id, String s_step) {
+		saleDao.changeStep(s_id,s_step);
+	}
+	//==========================================================================
+	@Override
+	public boolean duplicateIdCheck(String id) {
+		boolean result = false;
+		if (userDao.checkId(id) < 1) {
+			result = true;
+		}
+		return result;
+	}
 	
 	@Override
 	public int replyMaxNum() {

@@ -57,6 +57,8 @@ public class ItemController {
 	@RequestMapping("item/list")
 	public ModelAndView list(HttpServletRequest request) {
 		List<Item> itemList = service.getItemList(request);
+		String kind = request.getParameter("kind");
+		String find = request.getParameter("find");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("itemList",itemList);
 		int pageNum = 1;
@@ -76,6 +78,10 @@ public class ItemController {
 		if(request.getParameter("gametype") != null && !request.getParameter("gametype").equals("")) {
 			mav.addObject("gametype", request.getParameter("gametype"));
 		}
+		String sort = request.getParameter("sort");
+		mav.addObject("kind",kind);
+		mav.addObject("find", find);
+		mav.addObject("sort", sort);
 		mav.addObject("startPage",startPage);
 		mav.addObject("endPage",endPage);
 		mav.addObject("pageNum",pageNum);

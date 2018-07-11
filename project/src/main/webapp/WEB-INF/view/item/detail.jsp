@@ -73,7 +73,7 @@ $(document).ready(function() {
 		}
 		count.value = x-1;
 		total.value = ${item.i_price} * parseInt(count.value);
-		event.preventDefault()
+		event.preventDefault();
 	})
 	$("#cartgo").click(function() {
 		var checkAnswer = confirm("장바구니에 담았습니다.\n장바구니 화면으로 이동 하시겠습니까?");
@@ -220,8 +220,10 @@ $(document).ready(function() {
     <div align="right">
         <input type="submit" value="구매하기"><input type="submit" value="장바구니 담기" id="cartgo">
     </div>
-    <input type="submit" value="정보수정" id="editgo">
-    <input type="button" value="삭제" onclick="javascript:checkConfirm();">
+    <c:if test="${sessionScope.loginUser == 'admin'}">
+    	<input type="submit" value="정보수정" id="editgo">
+    	<input type="button" value="삭제" onclick="javascript:checkConfirm();">
+    </c:if>
     </form>
   </span>
     <br>

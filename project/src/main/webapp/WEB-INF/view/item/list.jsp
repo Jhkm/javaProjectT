@@ -38,7 +38,8 @@
 </table> --%>
 <form action="list.sdj" method="post">
 <div style="width:70%" align="left">
-	<select name="sort">
+<!-- select 바뀔때 바로 정렬 바뀌도록 하기 -->
+	<select id="array" name="sort" onchange="this.form.submit()">
 		<option value="i_no desc">상품 등록 순</option>
 		<option value="i_amount desc">판매 인기 순</option>
 		<option value="like desc">추천 순</option>
@@ -47,6 +48,10 @@
 		<option value="i_age">게임 연령 낮은순</option>
 		<option value="i_age desc">게임 연령 높은순</option>
 	</select>
+	<script type="text/javascript">
+		array.value = '${sort}'
+		if(${sort == null}) {array.value = 'i_no desc'};
+	</script>
 </div>
 
 <div style="width:70%">
@@ -80,10 +85,16 @@
   </c:forEach>
   <br>
     <input type="hidden" name="gametype" value="${gametype}">
-    <select name="kind">
+    <select id="kind" name="kind">
       <option value="i_name">제목</option>
       <option value="i_explain">내용</option>
-    </select>&nbsp;<input type="text" size="40" name="find">&nbsp;<input type="submit" value="검색">
+    </select>&nbsp;<input type="text" size="40" name="find" value="${find }">&nbsp;<input type="submit" value="검색">
+    <script type="text/javascript">
+    kind.value = '${kind}'
+    if(${kind == null}) {
+    	kind.value = 'i_name'
+    }
+    </script>
 </div>
 </form>
 </body>

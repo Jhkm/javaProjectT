@@ -11,10 +11,13 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.LoginException;
@@ -85,7 +88,7 @@ public class UserController {
 		}
 		if (dbUser.getM_passwd().equals(user.getM_passwd())) {
 			mav.addObject("dbUser", dbUser);
-			mav.setViewName("decorator.jsp");
+			mav.setViewName("user/loginSuccess");
 			session.setAttribute("loginUser", dbUser.getM_id());
 		} else {
 			bindingResult.reject("error.login.m_passwd");
@@ -94,7 +97,6 @@ public class UserController {
 		}
 		return mav;
 	}
-	
 	@RequestMapping("user/logout")
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView mav = new ModelAndView("user/login");
@@ -250,16 +252,26 @@ public class UserController {
 			int amount =0;
 			for(SaleItem sitem : saleItemList) {
 				Item item = service.detail(sitem.getI_no());
-				System.out.println(item);
 				sitem.setItem(item);
 				amount += sitem.getQuantity() * item.getI_price();
-				System.out.println(amount);
 			}
 			s.setSaleItemList(saleItemList);
 			s.setAmount(amount);
-			System.out.println(s);
 		}
 		mav.addObject("salelist",saleList);
 		return mav;
+	}
+// --------------------------------------------------------------------------
+	@RequestMapping(value="user/checkId", method = RequestMethod.POST)
+	@ResponseBody
+	public String checkId(@RequestParam("m_id")String id, Model model) {
+		boolean result = service.duplicateIdCheck(id);
+		String responeText = "";
+		if (result) {
+			responeText += "true";
+		} else {
+			responeText += "false";
+		}
+		return responeText;
 	}
 }
