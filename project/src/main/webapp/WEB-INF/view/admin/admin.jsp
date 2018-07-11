@@ -29,7 +29,7 @@
 					<h2>회원 목록</h2>
 					<div class="w3-container w3-responsive" align="center">
 						<table class="w3-table">
-							<tr>
+							<tr class="w3-blue-gray">
 								<th>아이디</th>
 								<th>이름</th>
 								<th>주소</th>
@@ -46,7 +46,7 @@
 									<tr class="w3-indigo ">
 										<td>${user.m_id }</td>
 										<td>${user.m_name }</td>
-										<td>${user.m_address }</td>
+										<td>(${user.m_postcode})${user.m_address }</td>
 										<td>${user.m_phone }</td>
 										<td>${user.m_email }</td>
 										<td><c:forEach items="${gametype }" var="g">
@@ -55,18 +55,21 @@
 										</c:if>
 											</c:forEach></td>
 										<td>${user.m_mileage }</td>
-										<td><a href="../user/update.sdj?id=${user.m_id }">수정</a>
-											<a href="../user/delete.sdj?id=${user.m_id }">삭제</a> <a
-											href="../user/mypage.sdj?id=${user.m_id }">회원정보</a></td>
+										<td>
+											<a href="../user/update.sdj?id=${user.m_id }">수정</a>
+											<c:if test="${user.m_id != 'admin' }">
+											<a href="../user/delete.sdj?id=${user.m_id }">삭제</a>
+											</c:if> 
+											<a href="../user/mypage.sdj?id=${user.m_id }">회원정보</a></td>
 										<td><input type="checkbox" name="idchks"
 											value="${user.m_id }"></td>
 									</tr>
 								</c:if>
 								<c:if test="${s.index % 2 == 0 }">
-									<tr>
+									<tr class="w3-pale-green">
 										<td>${user.m_id }</td>
 										<td>${user.m_name }</td>
-										<td>${user.m_address }</td>
+										<td>(${user.m_postcode})${user.m_address }</td>
 										<td>${user.m_phone }</td>
 										<td>${user.m_email }</td>
 										<td><c:forEach items="${gametype }" var="g">
@@ -76,16 +79,19 @@
 											</c:forEach></td>
 										<td>${user.m_mileage }</td>
 										<td><a href="../user/update.sdj?id=${user.m_id }">수정</a>
-											<a href="../user/delete.sdj?id=${user.m_id }">삭제</a> <a
-											href="../user/mypage.sdj?id=${user.m_id }">회원정보</a></td>
+											<c:if test="${user.m_id != 'admin' }">
+											<a href="../user/delete.sdj?id=${user.m_id }">삭제</a>
+											</c:if>  
+											<a href="../user/mypage.sdj?id=${user.m_id }">회원정보</a></td>
 										<td><input type="checkbox" name="idchks"
 											value="${user.m_id }"></td>
 									</tr>
 								</c:if>
 							</c:forEach>
-							<tr >
-								<td colspan="9"><input type="submit"
-									value="메일보내기"></td>
+							<tr>
+								<td colspan="9" >
+									<input class="w3-button w3-teal w3-right" type="submit" value="메일보내기">
+								</td>
 							</tr>
 						</table>
 					</div>

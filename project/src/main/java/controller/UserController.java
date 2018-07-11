@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -88,7 +89,7 @@ public class UserController {
 		}
 		if (dbUser.getM_passwd().equals(user.getM_passwd())) {
 			mav.addObject("dbUser", dbUser);
-			mav.setViewName("user/loginSuccess");
+			mav.setViewName("redirect:../index.jsp");
 			session.setAttribute("loginUser", dbUser.getM_id());
 		} else {
 			bindingResult.reject("error.login.m_passwd");
