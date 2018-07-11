@@ -299,5 +299,14 @@ public class ShopServiceImpl implements ShopService{
 	public void changeStep(String s_id, String s_step) {
 		saleDao.changeStep(s_id,s_step);
 	}
+	//==========================================================================
+	@Override
+	public boolean duplicateIdCheck(String id) {
+		boolean result = false;
+		if (userDao.checkId(id) < 1) {
+			result = true;
+		}
+		return result;
+	}
 	
 }

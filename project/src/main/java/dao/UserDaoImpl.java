@@ -52,4 +52,9 @@ public class UserDaoImpl implements UserDao{
 		map.put("idlist", idlist);
 		return sqlSession.selectList(NS+"list",map);	
 	}
+
+	@Override
+	public int checkId(String id) {
+		return sqlSession.getMapper(UserMapper.class).checkId(id);
+	}
 }

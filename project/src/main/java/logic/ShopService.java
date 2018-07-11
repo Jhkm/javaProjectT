@@ -75,4 +75,6 @@ public interface ShopService {
 
 	void changeStep(String s_id, String s_step);
 
+	boolean duplicateIdCheck(String id);
+
 }

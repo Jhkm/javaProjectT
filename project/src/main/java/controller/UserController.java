@@ -11,10 +11,13 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.LoginException;
@@ -257,5 +260,18 @@ public class UserController {
 		}
 		mav.addObject("salelist",saleList);
 		return mav;
+	}
+// --------------------------------------------------------------------------
+	@RequestMapping(value="user/checkId", method = RequestMethod.POST)
+	@ResponseBody
+	public String checkId(@RequestParam("m_id")String id, Model model) {
+		boolean result = service.duplicateIdCheck(id);
+		String responeText = "";
+		if (result) {
+			responeText += "true";
+		} else {
+			responeText += "false";
+		}
+		return responeText;
 	}
 }
