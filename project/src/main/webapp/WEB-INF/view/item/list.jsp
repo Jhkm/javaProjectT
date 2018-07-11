@@ -85,10 +85,16 @@
   </c:forEach>
   <br>
     <input type="hidden" name="gametype" value="${gametype}">
-    <select name="kind">
+    <select id="kind" name="kind">
       <option value="i_name">제목</option>
       <option value="i_explain">내용</option>
-    </select>&nbsp;<input type="text" size="40" name="find">&nbsp;<input type="submit" value="검색">
+    </select>&nbsp;<input type="text" size="40" name="find" value="${find }">&nbsp;<input type="submit" value="검색">
+    <script type="text/javascript">
+    kind.value = '${kind}'
+    if(${kind == null}) {
+    	kind.value = 'i_name'
+    }
+    </script>
 </div>
 </form>
 </body>
