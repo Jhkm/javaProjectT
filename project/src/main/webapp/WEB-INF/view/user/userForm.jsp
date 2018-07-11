@@ -11,30 +11,40 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-function idCheck() {
-	var id = $("#m_id").val(); // 입력된 아이디
-	var button_joinus = document.getElementById('button_joinus');
-	button_joinus.disabled = "disabled";
-	$.ajax({
-		url : 'checkId.sdj',
-		type : 'post',
-		data : {"m_id":id},
-		success : function(data) {
-			if (data == "true"){
-				$(".checkId").html("");
-				$(".checkId").html("사용가능한 아이디입니다.");
-				button_joinus.disabled = false;
-			} else {
-				$(".checkId").html("");
-				$(".checkId").html("사용 불가능한 아이디입니다.");
+	function idCheck() {
+		var id = $("#m_id").val(); // 입력된 아이디
+		var button_joinus = document.getElementById('button_joinus');
+		button_joinus.disabled = "disabled";
+		$.ajax({
+			url : 'checkId.sdj',
+			type : 'post',
+			data : {
+				"m_id" : id
+			},
+			success : function(data) {
+				if (data == "true") {
+					$(".checkId").html("");
+					$(".checkId").html("사용가능한 아이디입니다.");
+					button_joinus.disabled = false;
+				} else {
+					$(".checkId").html("");
+					$(".checkId").html("사용 불가능한 아이디입니다.");
+				}
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "error:" + error);
 			}
-		},
-		error:function(request,status,error) {
-			alert("code:"+request.status+"\n"+"error:" + error);
+		});
+	}
+/* 	function buttonOn(f) {
+		var button_joinus = document.getElementById('button_joinus');
+		var cnt = Number(document.getElementById('checkAll').val());
+		var flag = Number(f);
+		cnt += flag;
+		if (cnt == 2) {
+			button_joinus.disabled = false;
 		}
-	});
-}
+	} */
 </script>
 
 
@@ -123,6 +133,11 @@ function idCheck() {
 					 	</c:forEach>
 					</select>
 				</div>
+				<!-- <div class="w3-section">
+					<label>이용약관</label>
+					<textarea rows="" cols=""></textarea>
+				</div>
+				<input type="hidden" type="text" name="checkAll" id="checkAll" value="0"> -->
 				<input type="hidden" type="text" name="m_mileage" id="m_mileage" value="0">
 				<button type="submit" id="button_joinus" class="w3-button w3-teal w3-right" disabled="disabled">가입하기</button>
 				<button type="reset" class="w3-button w3-teal w3-right">초기화</button>
