@@ -50,9 +50,8 @@ public class CartController {
 			delete = cart.getItemList().get(index);
 			service.cartSubtraction(delete.getItem().getI_no(),loginId);
 			cart.getItemList().remove(delete);
-			mav.addObject("message",delete.getItem().getI_name() + "을(를) 카트에서 제거 함");
 		} catch (Exception e) {
-			mav.addObject("message","상품을 카트에서 제거 실패함");
+			e.printStackTrace();
 		}
 		mav.addObject("cart",cart);
 		return mav;
