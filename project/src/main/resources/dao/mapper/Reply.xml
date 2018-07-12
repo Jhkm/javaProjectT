@@ -3,14 +3,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.ReplyMapper">
-   <select id="list" resultType="Reply" parameterType="map">
-   		select r_no, r_content, r_ref, r_refstep, r_reflevel, r_date b_no, m_id from reply where 1=1
+ <select id="replylist" resultType="Reply" parameterType="map">
+   		select r_no, r_content, r_ref, r_refstep, r_reflevel, r_date, b_no, m_id from reply where 1=1
 		<if test="r_no != null">
 		and r_no=#{r_no}
 		</if>
    		<!-- <if test="b_category != null">
    		and b_category = #{b_category}
    		</if> -->
-   		order by b_ref desc, b_refstep asc limit #{startrow}, #{limit}
+   		order by r_ref desc, r_refstep asc limit #{startrow}, #{limit}
    </select>
 </mapper>

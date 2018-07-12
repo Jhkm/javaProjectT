@@ -279,6 +279,11 @@ public class ShopServiceImpl implements ShopService{
 	public List<logic.Reply> getBoardReply(Integer b_no) {
 		return replyDao.getBoardReply(b_no);
 	}
+
+	@Override
+	public void r_update(logic.Reply reply, Board board, HttpServletRequest request, HttpSession session) {
+		replyDao.r_update(reply);
+	}
 //==========================================================================
 	@Override
 	public List<Sale> getSaleList(String loginId) {
@@ -291,6 +296,16 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
+
+	public List<logic.Reply> replylist(Integer b_no) {
+		 return replyDao.replyList(b_no);
+	}
+
+	@Override
+	public void r_delte(logic.Reply reply, Board board, HttpServletRequest request, HttpSession session) {
+		replyDao.r_delete(reply);
+	}
+
 	public List<Sale> getSaleList() {
 		return saleDao.getSaleList();
 	}
@@ -371,4 +386,51 @@ public class ShopServiceImpl implements ShopService{
 		userDao.subtractMileage(mileage,saleUserId);
 	}
 	
+	@Override
+	public int replyMaxNum() {
+		return replyDao.maxNum();
+
+	}
+	/*
+	@Override
+	public void replyCreate(logic.Reply reply) {
+		 replyDao.replyCreate(reply);
+
+		
+	}
+
+	@Override
+	public void insertReReply(logic.Reply reply) {
+		  replyDao.insertReReply(reply);
+
+		
+	}
+
+	@Override
+	public logic.Reply setlectReply(Integer r_no) {
+		   return replyDao.selectReply(r_no);
+	}
+
+	@Override
+	public void replyDelete(Integer r_no) {
+	    replyDao.replyDelete(r_no);
+	}*/
+
+	@Override
+	public void replyRe(Board board, HttpServletRequest request, HttpSession session,Reply reply) {
+		replyDao.replyrefstepadd(reply);
+		int b_no = replyDao.maxNum();
+		reply.setR_ref(reply.getR_no());
+		reply.setR_no(++b_no);
+		reply.setR_reflevel(reply.getR_reflevel()+1);
+		reply.setR_refstep(reply.getR_refstep()+1);
+		reply.setM_id((String)session.getAttribute("loginUser"));
+		replyDao.insert(reply);
+	}
+
+	@Override
+	public void replyDelete(Integer r_no) {
+		replyDao.replyDelete(r_no);
+		
+	}
 }

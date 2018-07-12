@@ -6,8 +6,4 @@
      <pattern>*.sdj</pattern>
   </decorator>
   <!-- layout 설정을 제외 함. -->
-  <excludes>
-    <pattern>/admin/graph*</pattern>
-    <pattern>/user/idCheckForm*</pattern>
-  </excludes>
 </decorators>

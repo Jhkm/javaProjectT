@@ -1,10 +1,13 @@
 package controller;
 
-import java.util.HashMap;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.ShopException;
@@ -87,6 +91,7 @@ public class ItemController {
 	@RequestMapping("item/detail")
 	public ModelAndView detail(Integer no,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		
 		Item item = service.detail(no);
 		String[] people = item.getI_people().split("~");
 		item.setI_people(people[0]);

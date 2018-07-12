@@ -4,11 +4,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.BoardMapper">
    <select id="count" resultType="Integer" parameterType="map">
-      select count(*) from board
+      select count(*) from board where 1=1
       <if test="searchType != null and searchContent != null">
-      	where ${searchType} like '%${searchContent}%'
+      	and ${searchType} like '%${searchContent}%'
       </if>
-      where b_category = #{b_category}
+      and b_category = #{b_category}
    </select>
    <select id="list" resultType="Board" parameterType="map">
    		select b_readcnt, b_no, b_category, b_subject, b_content, b_file b_fileurl, m_id, b_regtime, b_ref, b_reflevel, b_refstep, b_state, b_date, b_people, g_id, i_no from board where 1=1

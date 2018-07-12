@@ -12,7 +12,7 @@
 		if(searchType == null || searchType.length == 0) {
 			document.searchform.searchContent.value = "";
 			document.searchform.pageNum.value = "1";
-			location.href="list.sdj?pageNum=" + pageNum;
+			location.href="list.sdj?pageNum=" + pageNum&b_category=${board.b_category};
 		} else {
 			document.searchform.pageNum.value = pageNum;
 			document.searchform.submit();
@@ -30,9 +30,9 @@
 		<input type="hidden" name="b_category" value="${param.b_category }">
  		<select name="searchType" id="searchType">
 			<option value="">선택하세요</option>
-			<option value="subject">제목</option>
-			<option value="name">작성자</option>
-			<option value="content">내용</option>
+			<option value="b_subject">제목</option>
+			<option value="b_name">작성자</option>
+			<option value="b_content">내용</option>
 		</select>&nbsp;
 		<script type="text/javascript">
 			if('${param.searchType}' != '') {
