@@ -64,6 +64,11 @@ public class ReplyDaoImpl implements ReplyDao {
 		
 	}
 
+	@Override
+	public void replyDelete(Integer r_no) {
+		sqlSession.getMapper(ReplyMapper.class).replyDelete(r_no);		
+	}
+
 	
 	/*
 	@Override

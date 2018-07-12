@@ -97,4 +97,6 @@ public interface ShopService {
 
 	boolean duplicateIdCheck(String id);
 
+	void replyDelete(Integer r_no);
+
 }

@@ -95,6 +95,7 @@ public class BoardController {
 		if (bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			board = service.getBoard(board.getB_no());
+			board = service.getBoard(board.getB_category());
 			mav.addObject("board", board);
 			return mav;
 		}
@@ -103,7 +104,7 @@ public class BoardController {
 		}
 		try {
 			service.boardUpdate(board, request);
-			mav.setViewName("redirect:detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			mav.setViewName("redirect:detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum")+"&b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			throw new BoardException("수정실패", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
@@ -114,12 +115,10 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		Board dbBoard = service.getBoard(b_no);
-		System.out.println(b_no);
 //		if(!request.getParameter("pass").equals(dbBoard.getPass())) {
 //			throw new BoardException("비밀번호 실패", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
 //		}
 		try {
-			System.out.println(b_no);
 			service.boardDelete(b_no);
 			mav.setViewName("redirect:list.sdj?b_category=" + dbBoard.getB_category());
 		} catch(Exception e) {
@@ -168,7 +167,7 @@ public class BoardController {
 		String pageNum = request.getParameter("pageNum");
 		try {
 			service.r_update(reply, board, request, session);
-			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
+			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum+"&b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -193,6 +192,23 @@ public class BoardController {
 		}
 		return mav;
 	}
+	 @RequestMapping(value="board/replyDelete", method=RequestMethod.POST)
+	   public ModelAndView comreplyConreplyDelete(HttpSession session, String memberid, Integer b_category, Integer b_no, Integer pageNum, Integer r_no) {
+	      ModelAndView mav = new ModelAndView();
+	      try {
+	         service.replyDelete(r_no);
+	         //info
+	         List<Reply> replyList = service.replylist(b_no);
+	         mav.addObject("replyList", replyList);
+	      }catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      mav.addObject("reply", new Reply());
+	      mav.addObject("msg","댓글이 삭제 되었습니다.");
+	      mav.addObject("url","detail.sdj?b_no="+b_no+"&b_category="+b_category+"&pageNum="+pageNum);
+	      mav.setViewName("alert");
+	      return mav;
+	   }
 	@RequestMapping(value="board/*", method=RequestMethod.GET)
 	public ModelAndView detail(Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();

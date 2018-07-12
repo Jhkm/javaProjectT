@@ -357,11 +357,18 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void replyRe(Board board, HttpServletRequest request, HttpSession session,Reply reply) {
 		replyDao.replyrefstepadd(reply);
-		int b_no = boardDao.maxNum();
-		reply.setB_no(++b_no);
-		reply.setR_reflevel(board.getB_reflevel()+1);
-		reply.setR_refstep(board.getB_refstep()+1);
+		int b_no = replyDao.maxNum();
+		reply.setR_ref(reply.getR_no());
+		reply.setR_no(++b_no);
+		reply.setR_reflevel(reply.getR_reflevel()+1);
+		reply.setR_refstep(reply.getR_refstep()+1);
 		reply.setM_id((String)session.getAttribute("loginUser"));
 		replyDao.insert(reply);
+	}
+
+	@Override
+	public void replyDelete(Integer r_no) {
+		replyDao.replyDelete(r_no);
+		
 	}
 }

@@ -33,4 +33,6 @@ public interface ReplyDao {
 
 	void replyrefstepadd(Reply reply);
 
+	void replyDelete(Integer r_no);
+
 }
