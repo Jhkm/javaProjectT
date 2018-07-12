@@ -51,7 +51,12 @@ public class BoardController {
 		mav.addObject("boardcnt", boardcnt);
 		return mav;
 	}
-
+	@RequestMapping(value="board/write", method=RequestMethod.GET)
+	public ModelAndView write2(Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("board",new Board());
+		return mav;
+	}
 	@RequestMapping(value="board/write", method=RequestMethod.POST)
 	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
