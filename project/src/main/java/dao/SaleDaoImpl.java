@@ -38,4 +38,8 @@ public class SaleDaoImpl implements SaleDao{
 		map.put("s_step", s_step);
 		sqlSession.getMapper(SaleMapper.class).changeStep(map);
 	}
+	@Override
+	public String getUserId(String s_id) {
+		return sqlSession.getMapper(SaleMapper.class).getUserId(s_id);
+	}
 }

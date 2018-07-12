@@ -104,4 +104,32 @@ public class ItemDaoImpl implements ItemDao{
 	public int delete(int i_no) {
 		return sqlSession.getMapper(ItemMapper.class).delete(i_no);
 	}
+	@Override
+	public void updateAmount(Integer i_no) {
+		sqlSession.getMapper(ItemMapper.class).updateAmount(i_no);
+	}
+	@Override
+	public int checkFavorit(String i_no, String loginId, int i) {
+		Map map = new HashMap();
+		map.put("i_no", i_no);
+		map.put("m_id", loginId);
+		map.put("i", i);
+		return sqlSession.getMapper(ItemMapper.class).checkFavorit(map);
+	}
+	@Override
+	public void insertFavorit(String i_no, String loginId, int i) {
+		Map map = new HashMap();
+		map.put("i_no", i_no);
+		map.put("m_id", loginId);
+		map.put("i", i);
+		sqlSession.getMapper(ItemMapper.class).insertFavorit(map);
+	}
+	@Override
+	public void removeFavorit(String i_no, String loginId, int i) {
+		Map map = new HashMap();
+		map.put("i_no", i_no);
+		map.put("m_id", loginId);
+		map.put("i", i);
+		sqlSession.getMapper(ItemMapper.class).removeFavorit(map);
+	}
 }

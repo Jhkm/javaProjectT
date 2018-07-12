@@ -160,7 +160,18 @@ public class BoardController {
 		}
 		return mav;
 	} 
-	
+	@RequestMapping(value="board/purchaseComments",method=RequestMethod.GET)
+	public ModelAndView purchaseComment() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(new Board());
+		return mav;
+	}
+	@RequestMapping(value="board/purchaseComments",method=RequestMethod.POST)
+	public ModelAndView purchaseComments(Board board) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(new Board());
+		return mav;
+	}
 	@RequestMapping(value="board/*",method=RequestMethod.GET)
 	public ModelAndView detail(Integer b_no,HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();

@@ -77,4 +77,19 @@ public interface ShopService {
 
 	boolean duplicateIdCheck(String id);
 
+	void mileageSave(Integer mileage, String loginId);
+
+	void updateAmount(Integer i_no);
+
+	void buyOneItem(HttpServletRequest request,String loginId);
+
+	String favoritItem(String i_no, String loginId, int i);
+
+	int checkFavorit(Integer no, String attribute, int i);
+
+	String getSaleUserId(String s_id);
+
+	void mileageSubtract(Integer mileage, String saleUserId);
+
+
 }

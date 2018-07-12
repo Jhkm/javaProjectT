@@ -22,4 +22,7 @@ public interface SaleMapper {
 
 	@Update("update sale set s_step = #{s_step} where s_id = #{s_id}")
 	void changeStep(Map map);
+
+	@Select("select m_id from sale where s_id = #{value}")
+	String getUserId(String s_id);
 }
