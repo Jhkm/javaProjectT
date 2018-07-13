@@ -433,4 +433,9 @@ public class ShopServiceImpl implements ShopService{
 		replyDao.replyDelete(r_no);
 		
 	}
+
+	@Override
+	public List<Item> getBestItemList() {
+		return itemDao.bestItemList();
+		}
 }

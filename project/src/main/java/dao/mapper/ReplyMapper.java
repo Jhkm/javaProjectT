@@ -34,7 +34,7 @@ public interface ReplyMapper {
 	@Update("update reply set r_refstep = r_refstep + 1 where r_ref = #{r_ref} and r_refstep > #{r_refstep}")
 	void refstepadd(Reply reply);
 
-	@Delete("delete from board where r_no=#{r_no}")
+	@Delete("delete from reply where r_no=#{r_no}")
 	void replyDelete(Integer r_no);
 	
 /*	@Insert("insert into reply (r_no, m_id, r_content, r_date, r_ref, r_reflevel, r_refstep, b_no) values (#{r_no}, #{m_id}, #{r_content}, now(), #{r_ref}, #{r_reflevel}, #{r_refstep}, #{b_no})")

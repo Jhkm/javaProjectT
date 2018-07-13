@@ -99,7 +99,6 @@ $(document).ready(function() {
 	$(".question").click(function() {
 		location.href='#question';
 	})
-<<<<<<< HEAD
 	$("#fave").click(function(){
 		if($("#fave").hasClass('fave')) {
 			var no = ${item.i_no};
@@ -141,10 +140,6 @@ $(document).ready(function() {
 			
 		}
 	})
-=======
-	
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
-	
 })
 	function change() {
 		var z = parseInt(count.value)

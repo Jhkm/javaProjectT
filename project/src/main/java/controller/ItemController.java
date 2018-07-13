@@ -28,7 +28,7 @@ import logic.ShopService;
 public class ItemController {
 	@Autowired
 	private ShopService service;
-	
+
 	@RequestMapping("item/create")
 	public ModelAndView create() {
 		ModelAndView mav = new ModelAndView("item/itemadd");
@@ -157,5 +157,12 @@ public class ItemController {
 		String loginId = (String)session.getAttribute("loginUser");
 		result = service.favoritItem(i_no,loginId,1);
 		return result;
+	}
+	@RequestMapping("item/main")
+	public ModelAndView main() {
+		ModelAndView mav = new ModelAndView();
+		List<Item> itemList = service.getBestItemList();
+		mav.addObject("itemlist", itemList);
+		return mav;
 	}
 }

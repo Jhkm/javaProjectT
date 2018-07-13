@@ -113,4 +113,6 @@ public interface ShopService {
 
 	void replyDelete(Integer r_no);
 
+	List<Item> getBestItemList();
+
 }
