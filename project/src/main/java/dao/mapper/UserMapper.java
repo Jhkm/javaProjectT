@@ -1,5 +1,7 @@
 package dao.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -25,5 +27,11 @@ public interface UserMapper {
 
 	@Select("select count(*) from member where m_id =#{id}")
 	int checkId(String id);
+
+	@Update("update member set m_mileage = m_mileage + #{m_mileage} where m_id = #{m_id}")
+	void saveMileage(Map map);
+
+	@Update("update member set m_mileage = m_mileage - #{m_mileage} where m_id = #{m_id}")
+	void subtractMileage(Map map);
 	
 }

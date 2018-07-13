@@ -38,5 +38,17 @@ public interface ItemMapper {
 
 	@Delete("delete from item where i_no = #{value}")
 	int delete(int i_no);
+
+	@Update("update item set i_amount = i_amount + 1 where i_no = #{value}")
+	void updateAmount(Integer i_no);
+
+	@Select("select count(*) from likeitem where category=#{i} and i_no=#{i_no} and m_id=#{m_id}")
+	int checkFavorit(Map map);
+
+	@Insert("insert into likeitem (category,i_no,m_id) values (#{i},#{i_no},#{m_id})")
+	void insertFavorit(Map map);
+
+	@Delete("delete from likeitem where category=#{i} and i_no=#{i_no} and m_id=#{m_id}")
+	void removeFavorit(Map map);
 	
 }

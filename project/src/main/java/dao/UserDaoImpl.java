@@ -57,4 +57,20 @@ public class UserDaoImpl implements UserDao{
 	public int checkId(String id) {
 		return sqlSession.getMapper(UserMapper.class).checkId(id);
 	}
+
+	@Override
+	public void saveMileage(Integer mileage, String loginId) {
+		Map map = new HashMap();
+		map.put("m_mileage", mileage);
+		map.put("m_id", loginId);
+		sqlSession.getMapper(UserMapper.class).saveMileage(map);
+	}
+
+	@Override
+	public void subtractMileage(Integer mileage, String saleUserId) {
+		Map map = new HashMap();
+		map.put("m_mileage", mileage);
+		map.put("m_id", saleUserId);
+		sqlSession.getMapper(UserMapper.class).subtractMileage(map);
+	}
 }

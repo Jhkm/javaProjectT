@@ -79,7 +79,8 @@
 				</spring:hasBindErrors>
 				<div class="w3-section">
 					<label>ID</label>
-					<form:input class="w3-input" path="m_id" name="m_id" id="m_id" placeholder="ID"/><font color="red"><form:errors path="m_id" name="m_id" id="m_id"/></font>
+					<form:input class="w3-input" path="m_id" name="m_id" id="m_id" placeholder="ID"/>
+					<font color="red"><form:errors path="m_id" name="m_id" id="m_id"/></font>
 					<input type="button" value="중복확인" onclick="idCheck()" />
 					<!-- <input class="w3-input" style="width: 100%;" type="text" required name="m_id" id="m_id"> -->
 					<div class=checkId></div>

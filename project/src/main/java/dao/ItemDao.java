@@ -31,4 +31,12 @@ public interface ItemDao {
 	void clearCart();
 
 	int delete(int i_no);
+
+	void updateAmount(Integer i_no);
+
+	int checkFavorit(String i_no, String loginId, int i);
+
+	void insertFavorit(String i_no, String loginId, int i);
+
+	void removeFavorit(String i_no, String loginId, int i);
 }

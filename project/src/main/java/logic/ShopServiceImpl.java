@@ -323,6 +323,68 @@ public class ShopServiceImpl implements ShopService{
 		}
 		return result;
 	}
+
+	@Override
+	public void mileageSave(Integer mileage,String loginId) {
+		userDao.saveMileage(mileage,loginId);
+	}
+
+	@Override
+	public void updateAmount(Integer i_no) {
+		itemDao.updateAmount(i_no);
+	}
+
+	@Override
+	public void buyOneItem(HttpServletRequest request, String loginId) {
+		int s_num = saleDao.getMaxSaleId();
+		int i_num = Integer.parseInt(request.getParameter("i_no"));
+		Sale sale = new Sale();
+		if(request.getParameter("newAddress").equals("") || request.getParameter("newAddress") == null) {
+			sale.setAddress(request.getParameter("oldAddress"));
+		} else {
+			sale.setAddress(request.getParameter("newAddress"));
+		}
+		sale.setS_id(s_num);
+		sale.setS_updateTime(new Date());
+		sale.setUser(userDao.select(loginId));
+		saleDao.insert(sale);
+		SaleItem saleItem = new SaleItem(s_num, 1, new ItemSet(itemDao.detail(i_num),Integer.parseInt(request.getParameter("quantity"))), sale.getS_updateTime());
+		saleItemDao.insert(saleItem);
+	}
+
+	@Override
+	public String favoritItem(String i_no, String loginId, int i) {
+		String result = "";
+		try {
+			int checkRe = itemDao.checkFavorit(i_no,loginId,i);
+			if(checkRe == 0) {
+				itemDao.insertFavorit(i_no,loginId,i);
+				result = "success";
+			} else if(checkRe == 1) {
+				itemDao.removeFavorit(i_no,loginId,i);
+				result = "clear";
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+		return result;
+	}
+
+	@Override
+	public int checkFavorit(Integer no, String attribute, int i) {
+		return itemDao.checkFavorit(no+"",attribute,i);
+	}
+
+	@Override
+	public String getSaleUserId(String s_id) {
+		return saleDao.getUserId(s_id);
+	}
+
+	@Override
+	public void mileageSubtract(Integer mileage, String saleUserId) {
+		userDao.subtractMileage(mileage,saleUserId);
+	}
 	
 	@Override
 	public int replyMaxNum() {

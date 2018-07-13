@@ -16,7 +16,7 @@ $(document).ready(function() {
 			type:"POST",
 			url: "../cart/countUpdate.sdj",
 			data : {"itemNo":no,"quantity":quantity},
-			seccess : function(data) {
+			success : function(data) {
 				
 			}
 		})

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -99,7 +99,51 @@ $(document).ready(function() {
 	$(".question").click(function() {
 		location.href='#question';
 	})
+<<<<<<< HEAD
+	$("#fave").click(function(){
+		if($("#fave").hasClass('fave')) {
+			var no = ${item.i_no};
+			$.ajax({
+				type:"POST",
+				url:"favoritItem.sdj",
+				data:{"i_no":no},
+				success:function(result){
+					$("#fave").removeClass('fave')
+					$("#fave").addClass('fave_check')
+					if(result == 'success') {
+						alert('추천 하였습니다.')
+					}
+				},
+				error:function(result){
+					if(result == 'fail')
+					alert('추천 실패하였습니다.')
+				}
+			})
+			
+		} else {
+			var no = ${item.i_no};
+			$.ajax({
+				type:"POST",
+				url:"favoritItem.sdj",
+				data:{"i_no":no},
+				success:function(result){
+					$("#fave").addClass('fave')
+					$("#fave").removeClass('fave_check')
+					if(result == 'clear') {
+						alert('추천 해제 하였습니다.')
+					}
+				},
+				error:function(result){
+					if(result == 'fail')
+					alert('추천을 실패하였습니다.')
+				}
+			})
+			
+		}
+	})
+=======
 	
+>>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 	
 })
 	function change() {
@@ -115,6 +159,7 @@ $(document).ready(function() {
 		}
 		event.preventDefault();
 	}
+	
 </script>
 <style type="text/css">
   table {
@@ -183,6 +228,9 @@ $(document).ready(function() {
 	ul.kind_of_tab li.selected {
 		background-color:#e6eaf2;
 	}
+	.fave { width: 70px; height: 50px; background: url(../file/twitter_fave.png) no-repeat; background-position: 0 0; }
+	.fave:hover { background-position: -3519px 0; transition: background 1s steps(55); }
+	.fave_check {width: 70px; height: 50px; background: url(../file/twitter_fave.png) no-repeat; background-position: -3519px 0; transition: background 0s steps(55);}
 </style>
 
 
@@ -196,6 +244,13 @@ $(document).ready(function() {
   </span>
   <span style="height:450px; width:50%; float:left;">
   <form action="buyout.sdj" method="post">
+  	<section id="fave" class="fave" style="float:right;"></section>
+  	<script type="text/javascript">
+  	if(${checkResult == 1}) {
+  		$("#fave").removeClass('fave')
+		$("#fave").addClass('fave_check')
+	}
+  	</script>
     <h2>${item.i_name } (${item.i_age }세 이상, ${item.i_people }~${item.i_people2 }인용)</h2>
     <table height="100%" width="100%" cellpadding="15" cellspacing="2">
       <tr><td>장르</td><td align="right">${item.tp_name }</td></tr>

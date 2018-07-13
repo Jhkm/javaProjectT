@@ -22,6 +22,7 @@
 </script>
 </head>
 <body class="w3-container" style="max-width: 300px">
+<a href="orderList.sdj">회원 주문목록</a>
 	<div class="w3-row">
 		<div class="w3-container">
 			<form action="mailForm.shop" method="post">

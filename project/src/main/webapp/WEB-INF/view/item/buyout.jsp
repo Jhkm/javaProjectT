@@ -72,7 +72,10 @@ function finalize() {
   <td width="70%">${loginUser1.m_email }</td></tr>
   <tr><td width="30%" class="title">마일리지</td>
   <td width="70%">${loginUser1.m_mileage }</td></tr>
-</table></form><br><br>
+</table>
+<input type="hidden" name="quantity" value="${itemSet.quantity }">
+<input type="hidden" name="i_no" value="${itemSet.item.i_no }">
+</form><br><br>
 <h2>할인 및 적립</h2>
 <table>
 	<!-- 숫자만 쓸수 있게하기 -->

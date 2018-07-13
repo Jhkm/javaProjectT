@@ -16,4 +16,6 @@ public interface SaleDao {
 
 	void changeStep(String s_id, String s_step);
 
+	String getUserId(String s_id);
+
 }

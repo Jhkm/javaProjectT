@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -88,7 +89,7 @@ public class ItemController {
 		return mav;
 	}
 	@RequestMapping("item/detail")
-	public ModelAndView detail(Integer no) {
+	public ModelAndView detail(Integer no,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		Item item = service.detail(no);
@@ -96,13 +97,16 @@ public class ItemController {
 		item.setI_people(people[0]);
 		item.setI_people2(people[1]);
 		List<Map<Integer, String>> maplist = service.gameType();
+		
+		int checkResult = service.checkFavorit(no,(String)session.getAttribute("loginUser"),1);
+		mav.addObject("checkResult", checkResult);
 		mav.addObject("gametype", maplist);
 		mav.addObject("item",item);
 		return mav;
 	}
 	@RequestMapping("item/edit")
-	public ModelAndView edit(Integer no) {
-		return detail(no);
+	public ModelAndView edit(Integer no,HttpSession session) {
+		return detail(no,session);
 	}
 	@RequestMapping("item/update")
 	public ModelAndView update(Item item, BindingResult bindingResult, HttpServletRequest request) {
@@ -138,5 +142,20 @@ public class ItemController {
 		ItemSet is = new ItemSet(item,Integer.parseInt(request.getParameter("quantity")));
 		mav.addObject("itemSet", is);
 		return mav;
+	}
+	@RequestMapping("item/end")
+	public ModelAndView end(HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView("redirect:list.sdj");
+		String loginId = (String)session.getAttribute("loginUser");
+		service.buyOneItem(request,loginId);
+		return mav;
+	}
+	@RequestMapping("item/favoritItem")
+	@ResponseBody
+	public String favoritItem(String i_no,HttpSession session) {
+		String result = "";
+		String loginId = (String)session.getAttribute("loginUser");
+		result = service.favoritItem(i_no,loginId,1);
+		return result;
 	}
 }
