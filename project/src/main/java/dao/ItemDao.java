@@ -39,4 +39,6 @@ public interface ItemDao {
 	void insertFavorit(String i_no, String loginId, int i);
 
 	void removeFavorit(String i_no, String loginId, int i);
+
+	List<Item> bestItemList();
 }

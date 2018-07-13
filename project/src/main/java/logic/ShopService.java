@@ -117,5 +117,5 @@ public interface ShopService {
 
 	double avgGrade(Integer no, int i);
 	
-
+	List<Item> getBestItemList();
 }

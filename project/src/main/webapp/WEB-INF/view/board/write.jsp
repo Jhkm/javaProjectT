@@ -115,7 +115,7 @@
 			<label>제목</label>
 		</div>
 		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
-			<form:input class="w3-input" path="b_subject" />
+			<form:input class="w3-input w3-sand" path="b_subject" />
 			<font color="red"><form:errors path="b_subject"/></font>
 		</div>
 	</div>
@@ -126,8 +126,8 @@
 			<label>날짜</label>
 		</div>
 		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
-			<input type="text" id="datepicker1">
-			<input type="text" class='timepicker'>
+			<form:input type="text" id="datepicker1" path="b_date"/>
+			<input type="text" id="b_date" name="b_date" class='timepicker'>
 		</div>
 	</div>
 	<div class="w3-cell-row" >
@@ -135,7 +135,7 @@
 			<label>인원</label>
 		</div>
 		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
-			<form:input  path="b_people" />
+			<form:input path="b_people" />
 			<font color="red"><form:errors path="b_people"/></font>
 		</div>
 	</div>
@@ -148,6 +148,15 @@
 			<font color="red"><form:errors path="b_state"/></font>
 		</div>
 	</div>
+	<div class="w3-cell-row" style="display: none;">
+		<div class="w3-container w3-teal w3-cell" style="width: 20%;">
+			<label>123</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<div id="map" style="width:500px;height:400px;"></div>
+		</div>
+	</div>
+	<input type="hidden" name="g_id" value="${session.loginUser}">
 	</c:if>
 	<c:if test="${param.b_category != '5'}">
 		<input type="hidden" name="b_state" value="0">

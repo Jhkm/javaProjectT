@@ -132,4 +132,8 @@ public class ItemDaoImpl implements ItemDao{
 		map.put("i", i);
 		sqlSession.getMapper(ItemMapper.class).removeFavorit(map);
 	}
+	@Override
+	public List<Item> bestItemList() {
+		return sqlSession.selectList(NS+"bestitemlist");
+	}
 }

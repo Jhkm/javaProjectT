@@ -29,4 +29,8 @@
     </if>
     order by m_id
   </select>
+  <select id="bestitemlist" resultType="Item" parameterType="map">
+      select * from item
+         order by i_amount desc limit 0,8
+   </select>
 </mapper>

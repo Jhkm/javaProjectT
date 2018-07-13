@@ -52,7 +52,7 @@ public class BoardController {
 		mav.addObject("boardcnt", boardcnt);
 		return mav;
 	}
-		@RequestMapping(value="board/write", method=RequestMethod.GET)
+	@RequestMapping(value="board/write", method=RequestMethod.GET)
 	public ModelAndView write2(Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board",new Board());
@@ -70,8 +70,7 @@ public class BoardController {
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
-
-			throw new BoardException("게시글 등록 실패", "write.sdj");
+			throw new BoardException("게시글 등록 실패", "write.sdj?b_category="+request.getParameter("b_category"));
 		}
 		return mav; 
 	}
@@ -157,12 +156,13 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
+		String b_category = request.getParameter("b_category");
 		try {
 			service.Reply(reply, board, request, session);
 			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new BoardException("댓글실패", "detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException("댓글실패", "detail.sdj?b_no="+b_no+"&pageNum="+pageNum+"&b_category="+b_category);
 		}
 		return mav;
 	} 
@@ -171,9 +171,10 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
+		String b_category = request.getParameter("b_category");
 		try {
 			service.r_update(reply, board, request, session);
-			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum+"&b_category="+request.getParameter("b_category"));
+			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum+"&b_category="+b_category);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -184,6 +185,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
+		String b_category = request.getParameter("b_category");
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
 //			board = service.getBoard(board.getB_no());
@@ -192,17 +194,17 @@ public class BoardController {
 //		}
 		try {
 			service.replyRe(board, request,session,reply);
-			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
+			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum+"&b_category="+b_category);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
-	 @RequestMapping(value="board/replyDelete", method=RequestMethod.POST)
+	 @RequestMapping("board/replyDelete")
 	   public ModelAndView comreplyConreplyDelete(HttpSession session, String memberid, Integer b_category, Integer b_no, Integer pageNum, Integer r_no) {
 	      ModelAndView mav = new ModelAndView();
 	      try {
-	         service.replyDelete(r_no);
+	    	  service.replyDelete(r_no);
 	         //info
 	         List<Reply> replyList = service.replylist(b_no);
 	         mav.addObject("replyList", replyList);
@@ -236,9 +238,11 @@ public class BoardController {
 		
 			try {
 				Board board = service.getBoard(b_no);
-				
+				if (board.getG_id() != null) {
+					String[] idList = board.getG_id().split(",");
+					mav.addObject("idList", idList);
+				}
 				System.out.println(board);
-				
 				mav.addObject("board",board);
 				
 				service.updatereadcnt(b_no);

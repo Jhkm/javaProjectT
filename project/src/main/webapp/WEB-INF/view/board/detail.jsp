@@ -10,11 +10,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<% int cnt = 0; %>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
     function deleteReplyConfirm(pageNum, b_no, m_id, r_no, b_category) {
       if(confirm("댓글을 정말 삭제할까요?") == true){
-         location.href="replyDelete.sdj?pageNum="+pageNum+"&b_no="+b_no+"&m_id="+m_id+"&r_no="+r_no;
+    	  alert(pageNum+","+b_no+","+m_id+","+r_no+","+b_category);
+         location.href="replyDelete.sdj?pageNum="+pageNum+"&b_no="+b_no+"&m_id="+m_id+"&r_no="+r_no+"&b_category="+b_category;
       }else{
          return;
       }
@@ -48,6 +50,71 @@
 </style>
 </head>
 <body>
+<div style="max-width: 70%;">
+	<div class="w3-container" align="center">
+		<p>
+			<c:if test="${param.b_category == '1'}">플레이후기</c:if> 
+			<c:if test="${param.b_category == '2'}">팁 게시판</c:if> 
+			<c:if test="${param.b_category == '3'}">자유 게시판</c:if> 
+			<c:if test="${param.b_category == '4'}">요청 게시판</c:if> 
+			<c:if test="${param.b_category == '5'}">번개 게시판</c:if> 
+			<c:if test="${param.b_category == '6'}">게임플레이 동영상</c:if> 
+			<c:if test="${param.b_category == '7'}">후기 게시판</c:if>
+		</p>
+	</div>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>제목</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_subject}</label>
+		</div>
+	</div> 
+	<c:if test="${param.b_category == '5'}">
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>날짜</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_date}</label>
+		</div>
+	</div> 
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>장소</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_state}</label>
+		</div>
+	</div> 
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>참가인원</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_people}</label>
+		</div>
+	</div> 
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>참가중인 인원</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label><c:if test="${board.g_id != null}">${board.g_id }</c:if></label>
+		</div>
+		<c:forEach items="${idList}" var="id">
+			<c:if test="${id == loginUser }">
+				<% cnt = cnt+1; %>
+			</c:if>
+		</c:forEach>
+		<c:if test="<%= cnt == 0 %>">
+			<input type="button" value="참가하기">
+		</c:if>
+	</div> 
+	</c:if>
+</div>
+<!-- 썰!!!!@!!!@#!@#$ㄲ%ㅆㅉㅃ#ㅗ뉴 ㅊㅍㄸㅉ$후 ㅠ --> 
+ <!--  
  	<table align="center" border="1" cellpadding="0" cellspacing="0">
 	
 		<tr>
@@ -100,6 +167,8 @@
 			</td>
 		</tr>
 	</table>
+-->
+
 	
 <%-- 	<form:form modelAttribute="reply" action="r_reply.sdj" name="f">
 		<input type="hidden" name="b_no" value="${board.b_no}">
@@ -154,7 +223,7 @@
                <td width="300px" height="40px" style="text-align:center;">
                   <input type="button" id="ReplyRe_${status.index}" class="w3-button"  value="답변">
                   <input type="button" id="updateRe_${status.index}" class="w3-button" value="수정">
-                  <input type="button" class="w3-button" onclick="javascript:deleteReplyConfirm('${pageNum}','${re.b_no}','${re.m_id }','${re.r_no}','${b_category}')" value="삭 제">
+                  <input type="button" class="w3-button" onclick="javascript:deleteReplyConfirm('${param.pageNum}','${re.b_no}','${re.m_id }','${re.r_no}','${param.b_category}')" value="삭 제">
                </td>
             </tr>
             <tr id="upinput_${status.index}" class="upinput">
@@ -164,6 +233,7 @@
                      <input type="hidden" name="m_id" value="${re.m_id}">
                      <input type="hidden" value="${board.b_no}" name="b_no">
                      <input type="hidden" value="${param.pageNum}" name="pageNum">
+                     <input type="hidden" value="${param.b_category}" name="b_category">
                         <form:input path="r_content" size="170px"/>
                         <input type="submit" class="w3-button" value="수 정">
                         <font color="red"><form:errors path="r_content"/></font>
@@ -176,6 +246,7 @@
                      <input type="hidden" name="r_no" value="${re.r_no}">
                      <input type="hidden" value="${board.b_no}" name="b_no">
                      <input type="hidden" value="${param.pageNum}" name="pageNum">
+                     <input type="hidden" value="${param.b_category}" name="b_category">
                         <form:input path="r_content" size="170px"/>
                         <font color="red"><form:errors path="r_content"/></font>
                         <input type="submit" class="w3-button" value="등 록">

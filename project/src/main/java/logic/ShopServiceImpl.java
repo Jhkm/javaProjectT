@@ -72,6 +72,8 @@ public class ShopServiceImpl implements ShopService{
 		if(board.getB_category() == 0) {
 			board.setB_category(Integer.parseInt(request.getParameter("b_category")));
 		}
+		String[] date = board.getB_date().split(",");
+		board.setB_date(date[0]+" "+date[1]+":00");
 		if(board.getI_no() == 0) {
 			board.setI_no(Integer.parseInt(request.getParameter("i_no")));
 		}
@@ -447,4 +449,9 @@ public class ShopServiceImpl implements ShopService{
 	public double avgGrade(Integer no, int i) {
 		return boardDao.avgGrade(no,i);
 	}
+	
+	@Override
+	public List<Item> getBestItemList() {
+		return itemDao.bestItemList();
+		}
 }
