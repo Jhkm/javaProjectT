@@ -67,10 +67,12 @@ public class ShopServiceImpl implements ShopService{
 		board.setB_ref(b_no);
 		board.setB_reflevel(0);
 		board.setB_refstep(0);
-		board.setB_people(0);
 		board.setM_id((String)session.getAttribute("loginUser"));
 		board.setB_category(Integer.parseInt(request.getParameter("b_category")));
+		String[] date = board.getB_date().split(",");
+		board.setB_date(date[0]+" "+date[1]+":00");
 		board.setI_no(Integer.parseInt(request.getParameter("i_no")));
+		System.out.println(board);
 		boardDao.insert(board);
 	}
 	private void uploadBoardFileCreate(MultipartFile file1, HttpServletRequest request) {

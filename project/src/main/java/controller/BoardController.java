@@ -69,8 +69,7 @@ public class BoardController {
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
-
-			throw new BoardException("게시글 등록 실패", "write.sdj");
+			throw new BoardException("게시글 등록 실패", "write.sdj?b_category="+request.getParameter("b_category"));
 		}
 		return mav; 
 	}
@@ -220,9 +219,11 @@ public class BoardController {
 		
 			try {
 				Board board = service.getBoard(b_no);
-				
+				if (board.getG_id() != null) {
+					String[] idList = board.getG_id().split(",");
+					mav.addObject("idList", idList);
+				}
 				System.out.println(board);
-				
 				mav.addObject("board",board);
 				
 				service.updatereadcnt(b_no);

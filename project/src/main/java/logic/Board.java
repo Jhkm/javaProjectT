@@ -23,7 +23,7 @@ public class Board {
 //	@NotEmpty(message="날짜를 선택하세요")
 	private String b_state;
 //	@NotEmpty(message="장소를 선택하세요")
-	private Date b_date;
+	private String b_date;
 //	@NotEmpty(message="참가 인원를 선택하세요")
 	private int b_people;
 	private String g_id;
@@ -106,10 +106,10 @@ public class Board {
 	public void setB_state(String b_state) {
 		this.b_state = b_state;
 	}
-	public Date getB_date() {
+	public String getB_date() {
 		return b_date;
 	}
-	public void setB_date(Date b_date) {
+	public void setB_date(String b_date) {
 		this.b_date = b_date;
 	}
 	public int getB_people() {

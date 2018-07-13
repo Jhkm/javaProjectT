@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<% int cnt = 0; %>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
     function deleteReplyConfirm(pageNum, b_no, m_id, r_no, b_category) {
@@ -48,6 +49,71 @@
 </style>
 </head>
 <body>
+<div style="max-width: 70%;">
+	<div class="w3-container" align="center">
+		<p>
+			<c:if test="${param.b_category == '1'}">플레이후기</c:if> 
+			<c:if test="${param.b_category == '2'}">팁 게시판</c:if> 
+			<c:if test="${param.b_category == '3'}">자유 게시판</c:if> 
+			<c:if test="${param.b_category == '4'}">요청 게시판</c:if> 
+			<c:if test="${param.b_category == '5'}">번개 게시판</c:if> 
+			<c:if test="${param.b_category == '6'}">게임플레이 동영상</c:if> 
+			<c:if test="${param.b_category == '7'}">후기 게시판</c:if>
+		</p>
+	</div>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>제목</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_subject}</label>
+		</div>
+	</div> 
+	<c:if test="${param.b_category == '5'}">
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>날짜</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_date}</label>
+		</div>
+	</div> 
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>장소</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_state}</label>
+		</div>
+	</div> 
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>참가인원</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_people}</label>
+		</div>
+	</div> 
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>참가중인 인원</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label><c:if test="${board.g_id != null}">${board.g_id }</c:if></label>
+		</div>
+		<c:forEach items="${idList}" var="id">
+			<c:if test="${id == loginUser }">
+				<% cnt = cnt+1; %>
+			</c:if>
+		</c:forEach>
+		<c:if test="<%= cnt == 0 %>">
+			<input type="button" value="참가하기">
+		</c:if>
+	</div> 
+	</c:if>
+</div>
+<!-- 썰!!!!@!!!@#!@#$ㄲ%ㅆㅉㅃ#ㅗ뉴 ㅊㅍㄸㅉ$후 ㅠ --> 
+ <!--  
  	<table align="center" border="1" cellpadding="0" cellspacing="0">
 	
 		<tr>
@@ -100,6 +166,8 @@
 			</td>
 		</tr>
 	</table>
+-->
+
 	
 <%-- 	<form:form modelAttribute="reply" action="r_reply.sdj" name="f">
 		<input type="hidden" name="b_no" value="${board.b_no}">
