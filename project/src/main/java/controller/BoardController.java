@@ -216,7 +216,6 @@ public class BoardController {
 			try {
 				Board board = service.getBoard(b_no);
 				
-				System.out.println(board);
 				
 				mav.addObject("board",board);
 				
