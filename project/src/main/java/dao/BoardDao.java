@@ -25,4 +25,8 @@ public interface BoardDao {
 
 	void refstepadd(Board board);
 
+	List<Board> getItemCommentList(Integer no, int i);
+
+	double avgGrade(Integer no, int i);
+
 }

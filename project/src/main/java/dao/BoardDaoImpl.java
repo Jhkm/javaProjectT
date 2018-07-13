@@ -78,4 +78,20 @@ public class BoardDaoImpl implements BoardDao{
 	public void refstepadd(Board board) {
 		sqlSession.getMapper(BoardMapper.class).refstepadd(board);
 	}
+
+	@Override
+	public List<Board> getItemCommentList(Integer no, int i) {
+		Map map = new HashMap();
+		map.put("i_no",no);
+		map.put("b_category", i);
+		return sqlSession.getMapper(BoardMapper.class).itemCommentList(map);
+	}
+
+	@Override
+	public double avgGrade(Integer no, int i) {
+		Map map = new HashMap();
+		map.put("i_no",no);
+		map.put("b_category", i);
+		return sqlSession.getMapper(BoardMapper.class).avgGrade(map);
+	}
 }

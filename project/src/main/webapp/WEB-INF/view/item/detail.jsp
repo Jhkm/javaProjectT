@@ -99,7 +99,6 @@ $(document).ready(function() {
 	$(".question").click(function() {
 		location.href='#question';
 	})
-<<<<<<< HEAD
 	$("#fave").click(function(){
 		if($("#fave").hasClass('fave')) {
 			var no = ${item.i_no};
@@ -141,9 +140,6 @@ $(document).ready(function() {
 			
 		}
 	})
-=======
-	
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 	
 })
 	function change() {
@@ -258,6 +254,7 @@ $(document).ready(function() {
       <tr><td>구매혜택</td><td align="right">적립금 : <fmt:parseNumber integerOnly="true" value="${item.i_price*0.01 }"/>원</td></tr>
       <tr><td>게임인원</td><td align="right">${item.i_people } ~ ${item.i_people2 }명</td></tr>
       <tr><td>게임연령</td><td align="right">${item.i_age }세 이상</td></tr>
+      <tr><td>게임 선호도</td><td align="right">${avgGrade }</td></tr>
       <tr><td colspan="2">
       <div>
       <input type="hidden" name="i_no" value="${item.i_no }">
@@ -369,8 +366,13 @@ $(document).ready(function() {
     <li class="question" style="width:20%;"><a>상품 Q & A</a></li>
   </ul>
   <br><br>공란~~
+  <table>
+  	<c:forEach items="${commentsList }" var="comments">
+  		<tr><td>${comments.i_grade }</td><td>${comments.b_content }</td><td>${comments.m_id }</td><td><fmt:formatDate value="${comments.b_regtime }" pattern="YYYY.MM.dd"/></td></tr>
+  	</c:forEach>
+  </table>
   <br><br>공란~~
-  <br><br>공란~~
+  <br><br>공란~~11
   <br><br>공란~~
   <br><br>공란~~
   <br><br>공란~~

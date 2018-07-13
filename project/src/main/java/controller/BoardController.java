@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.BoardException;
@@ -215,15 +216,18 @@ public class BoardController {
 	      return mav;
 	   }
 	@RequestMapping(value="board/purchaseComments",method=RequestMethod.GET)
-	public ModelAndView purchaseComment() {
+	public ModelAndView purchaseComment(int i_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(new Board());
+		mav.addObject("item", service.detail(i_no));
 		return mav;
 	}
 	@RequestMapping(value="board/purchaseComments",method=RequestMethod.POST)
-	public ModelAndView purchaseComments(Board board) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject(new Board());
+	public ModelAndView purchaseComments(HttpServletRequest request, HttpSession session,Board board) {
+		ModelAndView mav = new ModelAndView("board/closeWindow");
+		service.insert(board, request, session);
+		System.out.println(board);
+		System.out.println(request.getParameter("grade"));
 		return mav;
 	}
 	@RequestMapping(value="board/*", method=RequestMethod.GET)

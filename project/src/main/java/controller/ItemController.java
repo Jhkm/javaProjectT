@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.ShopException;
+import logic.Board;
 import logic.Item;
 import logic.ItemSet;
 import logic.ShopService;
@@ -99,6 +100,12 @@ public class ItemController {
 		List<Map<Integer, String>> maplist = service.gameType();
 		
 		int checkResult = service.checkFavorit(no,(String)session.getAttribute("loginUser"),1);
+		
+		List<Board> commentList = service.getItemCommentList(no,10);
+		
+		double avgGrade = service.avgGrade(no,10);
+		mav.addObject("avgGrade", avgGrade);
+		mav.addObject("commentsList", commentList);
 		mav.addObject("checkResult", checkResult);
 		mav.addObject("gametype", maplist);
 		mav.addObject("item",item);

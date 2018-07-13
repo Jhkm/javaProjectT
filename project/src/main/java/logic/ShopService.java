@@ -113,4 +113,9 @@ public interface ShopService {
 
 	void replyDelete(Integer r_no);
 
+	List<Board> getItemCommentList(Integer no, int i);
+
+	double avgGrade(Integer no, int i);
+	
+
 }

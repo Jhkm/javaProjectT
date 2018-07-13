@@ -28,6 +28,13 @@ public class Board {
 	private int b_people;
 	private String g_id;
 	private int i_no;
+	private int i_grade;
+	public int getI_grade() {
+		return i_grade;
+	}
+	public void setI_grade(int i_grade) {
+		this.i_grade = i_grade;
+	}
 	public int getB_no() {
 		return b_no;
 	}

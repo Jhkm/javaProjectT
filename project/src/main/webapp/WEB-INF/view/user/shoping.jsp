@@ -8,11 +8,12 @@
 <title>회원 주문 목록</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
-
+function comments(index) {
+	window.open("../board/purchaseComments.sdj?i_no="+index,"구매후기","location=yes, menubar=no, titlebar=no, toolbar=no, width=500, height=700");
+}
 function decide(index) {
 	var result = confirm('구매를 확정 하시겠습니까?')
 	if(result) {
-		window.open("../board/purchaseComments.sdj","구매후기","location=yes, menubar=no, titlebar=no, toolbar=no, width=500, height=700");
 		location.href = '../admin/stepChange.sdj?s_id='+$('#sid'+index).val() + '&s_step=5&mileage='+$('#mileage'+index).val();
 	}
 }
@@ -56,7 +57,7 @@ function return1(index) {
 		<tr><td colspan="4">
 			<table width="100%">
 			<c:forEach items="${sale.saleItemList }" var="saleItem">
-				<tr><td rowspan="2"><img src="../picture/${saleItem.item.i_img }" width="100" height="100"></td><td colspan="2"><h4>${saleItem.item.i_name }</h4></td></tr>
+				<tr><td rowspan="2"><img src="../picture/${saleItem.item.i_img }" width="100" height="100"></td><td><h4>${saleItem.item.i_name }</h4></td><td align="right"><c:if test="${sale.s_step == 5 }"><button onclick="javascript:comments(${saleItem.item.i_no});">구매후기작성</button></c:if></td></tr>
 				<tr><td>${saleItem.item.i_price * saleItem.quantity } 원 | <fmt:formatDate value="${sale.s_updateTime}" pattern="YYYY.MM.dd"/></td><td style="text-align:right;">수량 : ${saleItem.quantity } | 단일 가격 : ${saleItem.item.i_price } 원</td></tr>
 				<c:set var="tot" value="${tot + (saleItem.item.i_price * saleItem.quantity - saleItem.item.i_price * saleItem.quantity%100)*0.01 }"/>
 				

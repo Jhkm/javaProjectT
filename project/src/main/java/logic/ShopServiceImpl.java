@@ -69,8 +69,12 @@ public class ShopServiceImpl implements ShopService{
 		board.setB_refstep(0);
 		board.setB_people(0);
 		board.setM_id((String)session.getAttribute("loginUser"));
-		board.setB_category(Integer.parseInt(request.getParameter("b_category")));
-		board.setI_no(Integer.parseInt(request.getParameter("i_no")));
+		if(board.getB_category() == 0) {
+			board.setB_category(Integer.parseInt(request.getParameter("b_category")));
+		}
+		if(board.getI_no() == 0) {
+			board.setI_no(Integer.parseInt(request.getParameter("i_no")));
+		}
 		boardDao.insert(board);
 	}
 	private void uploadBoardFileCreate(MultipartFile file1, HttpServletRequest request) {
@@ -432,5 +436,15 @@ public class ShopServiceImpl implements ShopService{
 	public void replyDelete(Integer r_no) {
 		replyDao.replyDelete(r_no);
 		
+	}
+
+	@Override
+	public List<Board> getItemCommentList(Integer no, int i) {
+		return boardDao.getItemCommentList(no,i);
+	}
+
+	@Override
+	public double avgGrade(Integer no, int i) {
+		return boardDao.avgGrade(no,i);
 	}
 }
