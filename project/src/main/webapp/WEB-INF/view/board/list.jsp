@@ -45,7 +45,15 @@
 	</td></tr>
 	<c:if test="${listcount > 0}">
 		<tr align="center" valign="middle">
-			<td colspan="4">Spring 게시판</td><td>글개수:${listcount }</td></tr>
+			<td colspan="4">
+ <c:if test="${param.b_category == '1'}">플레이후기</c:if> 
+  <c:if test="${param.b_category == '2'}">팁 게시판</c:if>
+  <c:if test="${param.b_category == '3'}">자유 게시판</c:if>
+  <c:if test="${param.b_category == '4'}">요청 게시판</c:if>
+  <c:if test="${param.b_category == '5'}">번개 게시판</c:if>
+  <c:if test="${param.b_category == '6'}">게임플레이 동영상</c:if>
+  <c:if test="${param.b_category == '7'}">후기 게시판</c:if>
+  </td><td>글개수:${listcount }</td></tr>
 			<tr align="center" valign="middle" bordercolor="#212121">
 				<th width="8%" height="26">번호</th>
 				<th width="50%" height="26">제목</th>
@@ -68,7 +76,7 @@
 					<c:if test="${board.b_reflevel > 0}">└</c:if>
 					<a href="detail.sdj?b_no=${board.b_no }&pageNum=${pageNum}&b_category=${board.b_category}">${board.b_subject }</a></td>
 					<td align="left">${board.m_id }</td>
-					<td align="center">${board.b_regtime }</td>
+					<td align="center"><fmt:formatDate value="${board.b_regtime}" pattern="yyyy-MM-dd HH:mm:ss" var="b_regtime" />${b_regtime}</td>
 					<td align="left">${board.b_readcnt }</td>
 				</tr>
 			</c:forEach>

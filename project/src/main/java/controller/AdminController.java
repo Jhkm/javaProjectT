@@ -187,7 +187,26 @@ public class AdminController {
 	public ModelAndView stepChange(HttpServletRequest request, HttpSession session) {
 		String s_id = request.getParameter("s_id");
 		String s_step = request.getParameter("s_step");
+		List<SaleItem> siList = service.getSaleItemList(Integer.parseInt(s_id));
+		
+		Integer mileage = 0;
+		try {
+			mileage = (int)Double.parseDouble(request.getParameter("mileage"));
+		} catch(Exception e) {
+			mileage = 0;
+		}
 		service.changeStep(s_id,s_step);
+		String loginId = (String)session.getAttribute("loginUser");
+		if(!loginId.equals("admin")) {
+			service.mileageSave(mileage,loginId);
+			for(SaleItem si : siList) {
+				service.updateAmount(si.getI_no());
+			}
+		}
+		String saleUserId = service.getSaleUserId(s_id);
+		if(s_step.equals("9") && loginId.equals("admin")) {
+			service.mileageSubtract(mileage,saleUserId);
+		}
 		return new ModelAndView("redirect:../user/shoping.sdj?id="+session.getAttribute("loginUser"));
 	}
 	

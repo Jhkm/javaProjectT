@@ -20,4 +20,8 @@ public interface UserDao {
 
 	int checkId(String id);
 
+	void saveMileage(Integer mileage, String loginId);
+
+	void subtractMileage(Integer mileage, String saleUserId);
+
 }

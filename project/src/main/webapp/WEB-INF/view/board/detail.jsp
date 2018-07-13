@@ -15,7 +15,8 @@
 <script type="text/javascript">
     function deleteReplyConfirm(pageNum, b_no, m_id, r_no, b_category) {
       if(confirm("댓글을 정말 삭제할까요?") == true){
-         location.href="replyDelete.sdj?pageNum="+pageNum+"&b_no="+b_no+"&m_id="+m_id+"&r_no="+r_no;
+    	  alert(pageNum+","+b_no+","+m_id+","+r_no+","+b_category);
+         location.href="replyDelete.sdj?pageNum="+pageNum+"&b_no="+b_no+"&m_id="+m_id+"&r_no="+r_no+"&b_category="+b_category;
       }else{
          return;
       }
@@ -222,7 +223,7 @@
                <td width="300px" height="40px" style="text-align:center;">
                   <input type="button" id="ReplyRe_${status.index}" class="w3-button"  value="답변">
                   <input type="button" id="updateRe_${status.index}" class="w3-button" value="수정">
-                  <input type="button" class="w3-button" onclick="javascript:deleteReplyConfirm('${pageNum}','${re.b_no}','${re.m_id }','${re.r_no}','${b_category}')" value="삭 제">
+                  <input type="button" class="w3-button" onclick="javascript:deleteReplyConfirm('${param.pageNum}','${re.b_no}','${re.m_id }','${re.r_no}','${param.b_category}')" value="삭 제">
                </td>
             </tr>
             <tr id="upinput_${status.index}" class="upinput">
@@ -232,6 +233,7 @@
                      <input type="hidden" name="m_id" value="${re.m_id}">
                      <input type="hidden" value="${board.b_no}" name="b_no">
                      <input type="hidden" value="${param.pageNum}" name="pageNum">
+                     <input type="hidden" value="${param.b_category}" name="b_category">
                         <form:input path="r_content" size="170px"/>
                         <input type="submit" class="w3-button" value="수 정">
                         <font color="red"><form:errors path="r_content"/></font>
@@ -244,6 +246,7 @@
                      <input type="hidden" name="r_no" value="${re.r_no}">
                      <input type="hidden" value="${board.b_no}" name="b_no">
                      <input type="hidden" value="${param.pageNum}" name="pageNum">
+                     <input type="hidden" value="${param.b_category}" name="b_category">
                         <form:input path="r_content" size="170px"/>
                         <font color="red"><form:errors path="r_content"/></font>
                         <input type="submit" class="w3-button" value="등 록">
