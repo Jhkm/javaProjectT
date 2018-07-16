@@ -135,7 +135,7 @@ body {
 					<button class="w3-padding-large w3-button" title="More">
 						커뮤니티 <i class="fa fa-caret-down"></i>
 					</button>
-					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+					<div class="w3-dropdown-content w3-bar-block w3-card-4"">
 						<a href="/project/board/list.sdj?b_category=1"
 							class="w3-bar-item w3-button">플레이후기</a> <a
 							href="/project/board/list.sdj?b_category=2"

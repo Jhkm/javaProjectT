@@ -18,7 +18,6 @@ import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sun.jimi.core.Jimi;
-import com.sun.jimi.core.JimiException;
 import com.sun.jimi.core.JimiUtils;
 
 import dao.BoardDao;

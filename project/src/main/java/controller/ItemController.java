@@ -31,7 +31,7 @@ public class ItemController {
 	private ShopService service;
 
 	@RequestMapping("item/create")
-	public ModelAndView create() {
+	public ModelAndView admcreate(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("item/itemadd");
 		List<Map<Integer, String>> maplist = service.gameType();
 		mav.addObject(new Item());
@@ -39,7 +39,7 @@ public class ItemController {
 		return mav;
 	}
 	@RequestMapping("item/register")
-	public ModelAndView register(@Valid Item item, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView admregister(HttpSession session,HttpServletRequest request,@Valid Item item, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView("item/itemadd");
 		item.setI_people(item.getI_people()+"~"+item.getI_people2());
 		if(bindingResult.hasErrors()) {
@@ -112,7 +112,7 @@ public class ItemController {
 		return mav;
 	}
 	@RequestMapping("item/edit")
-	public ModelAndView edit(Integer no,HttpSession session) {
+	public ModelAndView admedit(HttpSession session,HttpServletRequest request,Integer no) {
 		return detail(no,session);
 	}
 	@RequestMapping("item/update")
@@ -128,7 +128,7 @@ public class ItemController {
 		return mav;
 	}
 	@RequestMapping("item/delete")
-	public ModelAndView delete(HttpServletRequest request) {
+	public ModelAndView admdelete(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("item/list");
 		int i_no = Integer.parseInt(request.getParameter("no"));
 		if(service.deleteItem(i_no) > 0) {
@@ -141,7 +141,7 @@ public class ItemController {
 		return mav;
 	}
 	@RequestMapping("item/buyout")
-	public ModelAndView buyout(HttpServletRequest request, HttpSession session) {
+	public ModelAndView lcbuyout(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String loginId = (String)session.getAttribute("loginUser");
 		mav.addObject("loginUser1", service.getUser(loginId));
@@ -151,7 +151,7 @@ public class ItemController {
 		return mav;
 	}
 	@RequestMapping("item/end")
-	public ModelAndView end(HttpServletRequest request, HttpSession session) {
+	public ModelAndView lcend(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("redirect:list.sdj");
 		String loginId = (String)session.getAttribute("loginUser");
 		service.buyOneItem(request,loginId);
@@ -159,7 +159,7 @@ public class ItemController {
 	}
 	@RequestMapping("item/favoritItem")
 	@ResponseBody
-	public String favoritItem(String i_no,HttpSession session) {
+	public String lcfavoritItem(HttpSession session,String i_no) {
 		String result = "";
 		String loginId = (String)session.getAttribute("loginUser");
 		result = service.favoritItem(i_no,loginId,1);

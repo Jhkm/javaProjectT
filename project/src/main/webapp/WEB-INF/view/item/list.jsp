@@ -17,7 +17,7 @@
 </head>
 <body>
 <br><br><br>
-<a href="create.sdj">상품등록</a>
+<c:if test="${sessionScope.loginUser == 'admin' }"><a href="create.sdj">상품등록</a></c:if>
 <a href="../cart/cartView.sdj" style="float:right;">장바구니</a>
 <%-- <table border="1" cellspacing="0" cellpadding="0">
   <tr><th align="center" width="80">상품ID</th>

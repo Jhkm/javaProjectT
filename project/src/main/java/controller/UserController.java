@@ -106,7 +106,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("user/mypage")
-	public ModelAndView mypage(String id, HttpSession session) {
+	public ModelAndView lgmypage(HttpSession session,HttpServletRequest request,String id) {
 		ModelAndView mav = new ModelAndView();
 		String loginUserId = (String)session.getAttribute("loginUser");
 		User user = service.getUser(id);
@@ -137,7 +137,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "user/update", method = RequestMethod.POST)
-	public ModelAndView update(@Valid User user, BindingResult bindingResult, HttpSession session) {
+	public ModelAndView lgupdate(HttpSession session,@Valid User user, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 /*		if (bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
@@ -171,7 +171,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "user/update", method = RequestMethod.GET)
-	public ModelAndView myupdateForm(String id, HttpSession session) {
+	public ModelAndView lgmyupdateForm( HttpSession session,HttpServletRequest request,String id) {
 		ModelAndView mav = new ModelAndView();
 		User user = service.getUser(id);
 		List<Map<Integer, String>> maplist = service.gameType();
@@ -200,7 +200,7 @@ public class UserController {
 
 	
 	@RequestMapping(value="user/delete", method=RequestMethod.POST)
-	public String delete(@Valid User user, HttpSession session, String x) {
+	public String lgdelete(HttpSession session,HttpServletRequest request,@Valid User user) {
 		
 		//세션으로부터 로그인유저 객체를 받아옴. 
 		User loginUser = service.getUser((String)session.getAttribute("loginUser"));
@@ -218,8 +218,6 @@ public class UserController {
 			}
 		}
 		try {
-			System.out.println(x);
-			
 			service.deleteUser(user.getM_id());
 			if(loginUser.getM_id().equals("admin")) { //관리자로그인.
 				return "redirect:../admin/admin.sdj";
@@ -234,7 +232,7 @@ public class UserController {
 		
 	}
 	@RequestMapping(value = "user/delete", method = RequestMethod.GET)
-	public ModelAndView deleteForm(String id, HttpSession session) {
+	public ModelAndView lgdeleteForm(HttpSession session,HttpServletRequest request,String id) {
 		ModelAndView mav = new ModelAndView();
 		User user = service.getUser(id);
 		mav.addObject("user", user);
@@ -242,12 +240,10 @@ public class UserController {
 	}
 //	====================================================================================
 	@RequestMapping(value="user/shoping", method = RequestMethod.GET)
-	public ModelAndView shoping(HttpServletRequest request) {
+	public ModelAndView lgshoping(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String loginId = request.getParameter("id");
-		System.out.println(loginId);
 		List<Sale> saleList = service.getSaleList(loginId);
-		System.out.println(saleList);
 		for(Sale s : saleList) {
 			List<SaleItem> saleItemList = service.getSaleItemList(s.getS_id());
 			int amount =0;
