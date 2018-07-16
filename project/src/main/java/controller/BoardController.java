@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.BoardException;
 import logic.Board;
+import logic.Item;
 import logic.Reply;
 import logic.ShopService;
 
@@ -230,6 +231,13 @@ public class BoardController {
 		service.insert(board, request, session);
 		System.out.println(board);
 		System.out.println(request.getParameter("grade"));
+		return mav;
+	}
+	@RequestMapping("board/main")
+	public ModelAndView main(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		List<Board> review = service.getReview();
+		mav.addObject("review", review);
 		return mav;
 	}
 	@RequestMapping(value="board/*", method=RequestMethod.GET)

@@ -454,4 +454,9 @@ public class ShopServiceImpl implements ShopService{
 	public List<Item> getBestItemList() {
 		return itemDao.bestItemList();
 		}
+
+	@Override
+	public List<Board> getReview() {
+		return boardDao.review();
+	}
 }

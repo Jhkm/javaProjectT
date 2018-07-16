@@ -2,7 +2,7 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,7 +45,7 @@ html, body, h1, h2, h3, h4 {
 }
 
 body {
-	background-color: #F7FFF5;
+	 background-color: #F7FFF5;
 }
 
 .mySlides {
@@ -61,6 +61,17 @@ body {
 	width: 15px;
 	padding: 0;
 	margin-top: 6px
+}
+.b_bottom {
+	background-color : #f9f8f4;
+		padding: 35px 0 11px 4px;
+		border-bottom : 1px solid #dadada;
+}
+.fotter {
+	font-famlily : 'Nanum Gothic', sans-serif!important;
+	color: #717171;
+	font-size: 12px;
+	line-height:1.4;
 }
 </style>
 <style type="text/css">
@@ -82,7 +93,10 @@ body {
 	color: #000;
 	font-size: 22px;
 }
-
+#best {
+	border-bottom: 1px solid #dadada;
+	padding: 40px 0 11px 4px;
+}
 .scroll-right {
 	height: 35px;
 	font-size: 12px;
@@ -127,7 +141,7 @@ body {
 					class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
 					href="javascript:void(0)" onclick="myFunction()"
 					title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> <a
-					href="/project/index.jsp"
+					href="/project/item/main.sdj"
 					class="w3-bar-item w3-button w3-padding-large">HOME</a> <a
 					href="/project/item/list.sdj"
 					class="w3-bar-item w3-button w3-padding-large w3-hide-small">보드게임몰</a>
@@ -249,103 +263,86 @@ body {
 					</div>
 				</div>
 			</div>
-			<div class="bottom w3-container w3-content" style="float: bottom;">
+			<div class="bottom w3-container w3-content" style="float: bottom;" id="best">
 				<!-- 배스트상품 상품들 -->
-					<div class="w3-row w3-grayscale">
-						<h2 class="bor w3-center">베스트상품</h2>
-						<div class="w3-col l3 s6">
-							<div class="w3-container">
-								<img src="/w3images/jeans1.jpg" style="width: 100%">
-								<p>
-									Ripped Skinny Jeans<br> <b>$0000</b>
-								</p>
-							</div>
-							<div class="w3-container">
-								<img src="/w3images/jeans2.jpg" style="width: 100%">
-								<p>
-									Mega Ripped Jeans<br> <b>$2222</b>
-								</p>
-							</div>
-							<div class="w3-col l3 s6">
-								<div class="w3-container">
-									<div class="w3-display-container">
-										<img src="/w3images/jeans2.jpg" style="width: 100%">
+				<div class="w3-row w3-grayscale">
+					<h2 class="bor w3-center">베스트상품</h2>
+					<div class="w3-col l3 s6">
+						<c:forEach items="${itemlist}" var="item" varStatus="status">
+							<c:if test="${status.index % 4 == 0}">
+								<tr>
+							</c:if>
+							<td>
+								<div class="tb-center w3-btn w3-card">
+									<div class="box">
+										<div class="w3-container">
+											<a href="detail.sdj?no=${item.i_no}"><img src="/img/${item.i_no}/i1.jpg" style="width: 100%; padding: 30px 20px 11px 4px;"></a>
+										</div>
+										<ul class="info w3-middle"
+											style="list-style: none; padding-left: 0px;">
+											<li class="dsc">${item.i_name}</li>
+											<li><fmt:formatNumber value="${item.i_price }" pattern="#,###"></fmt:formatNumber>원</li>
+										</ul>
 									</div>
-									<p>
-										Mega Ripped Jeans<br> <b>$1111</b>
-									</p>
 								</div>
-								<div class="w3-container">
-									<img src="/w3images/jeans3.jpg" style="width: 100%">
-									<p>
-										Washed Skinny Jeans<br> <b>$2222</b>
-									</p>
-								</div>
-							</div>
+							</td>
+							<c:if test="${status.index % 4 == 3 or status.last}">
+								</tr>
+							</c:if>
+						</c:forEach>
 
-							<div class="w3-col l3 s6">
-								<div class="w3-container">
-									<img src="/w3images/jeans3.jpg" style="width: 100%">
-									<p>
-										Washed Skinny Jeans<br> <b>$3333</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<div class="w3-display-container">
-										<img src="/w3images/jeans4.jpg" style="width: 100%">
-									</div>
-									<p>
-										Vintage Skinny Jeans<br> <b class="w3-text-red">$4444</b>
-									</p>
-								</div>
-							</div>
-
-						</div>
-						<div id="bottom-down">
-							<div class="w3-col l3 s6">
-								<div class="w3-container">
-									<img src="/w3images/jeans4.jpg" style="width: 100%">
-									<p>
-										Vintage Skinny Jeans<br> <b>$5555</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<img src="/w3images/jeans1.jpg" style="width: 100%">
-									<p>
-										Ripped Skinny Jeans<br> <b>$6666</b>
-									</p>
-								</div>
-							</div>
-							<div class="w3-col l3 s6" id="bottom-down-right">
-								<div class="w3-container">
-									<img src="/w3images/jeans4.jpg" style="width: 100%">
-									<p>
-										Vintage Skinny Jeans<br> <b>$4567</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<img src="/w3images/jeans1.jpg" style="width: 100%">
-									<p>
-										Ripped Skinny Jeans<br> <b>$3456</b>
-									</p>
-								</div>
-							</div>
-							<div class="w3-col l3 s6" id="bottom-down-right-right">
-								<div class="w3-container">
-									<img src="/w3images/jeans4.jpg" style="width: 100%">
-									<p>
-										Vintage Skinny Jeans<br> <b>$2345</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<img src="/w3images/jeans1.jpg" style="width: 100%">
-									<p>
-										Ripped Skinny Jeans<br> <b>$1234</b>
-									</p>
-								</div>
-							</div>
-						</div>
 					</div>
+
+				</div>
+			</div>
+			<div class="b_bottom">
+				<div class="w3-container">
+					<div class="cscenter" style="float:left;width: 300px;">
+						<h3>CS Center</h3>
+						<strong>02-999-8888</strong>
+						<p>
+							"평일 09:00 ~ 18:00"<br>
+							"점심 12:00 ~ 13:00"<br>
+							"공휴일, 토요일, 주말 휴일"							
+						</p>
+					</div>
+					<div class="bank" style="float:left;width: 300px;">
+						<h3>BANK INFO</h3>
+						<strong>111-2222-33333333</strong>
+						<p>
+						예금주 : 보드행(주)
+						</p>
+					</div>
+					<div class="review" style="float:left;width: 300px;">
+						<h3>REVIEW</h3>
+						<c:forEach items="${review}" var="review" begin="0" end="5">
+							<li>
+								<a href="detail.sdj?b_no=${review.b_no}">
+								${review.b_subject }
+								</a>
+								
+							</li>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="w3-container">
+					<div class="logo" style="float:left;">
+						<img src="../img/boardhang.png" style="width:200px">
+					</div>
+				<div class="content" style="float:left; height:10px">
+				<address>
+					<strong>(주)보드행</strong>
+					"   서울특별시 금천구 가산동 238-33   "
+				</address>
+				<ul>
+				<li>제작자 : 김석원,김재한,설동희</li>
+				<li>사업자등록번호 : 111-22-333333</li>
+				<li>개인정보관리자 : 김재한</li>
+				</ul>
+				</div>
+				</div>
 			</div>
 		</div>
 	</div>

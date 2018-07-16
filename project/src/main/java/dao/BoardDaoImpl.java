@@ -94,4 +94,9 @@ public class BoardDaoImpl implements BoardDao{
 		map.put("b_category", i);
 		return sqlSession.getMapper(BoardMapper.class).avgGrade(map);
 	}
+
+	@Override
+	public List<Board> review() {
+		return sqlSession.selectList(NS+"review");
+	}
 }
