@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.BoardException;
 import logic.Board;
-import logic.Item;
 import logic.Reply;
 import logic.ShopService;
 
@@ -240,6 +239,61 @@ public class BoardController {
 		mav.addObject("review", review);
 		return mav;
 	}
+	
+	@RequestMapping("board/join")
+	@ResponseBody
+	public String join(@RequestParam(value="value")String value, @RequestParam(value="b_no")Integer b_no, HttpSession session, HttpServletRequest request) {
+		String result = "";
+		System.out.println("join test"+b_no+"::::"+value);
+		if (value.equals("1")) {
+			try{
+				System.out.println("!!!!");
+				String id = (String)session.getAttribute("loginUser");
+				Board board = service.getBoard(b_no);
+				board.setG_id(board.getG_id()+((board.getG_id().substring(board.getG_id().length()-1).equals(","))?" ":",")+id);
+				System.out.println(board);
+				service.boardUpdate(board, request);
+				board = service.getBoard(b_no);
+				String[] idList = board.getG_id().split(",");
+				String idList2 = "";
+				for (int i=0; i<idList.length; i++) {
+					idList[i] = idList[i].trim();
+					idList2 += idList[i] +((i!=idList.length-1)?",":"");
+				}
+				result = idList2;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try{
+				String id = (String)session.getAttribute("loginUser");
+				Board board = service.getBoard(b_no);
+				String[] idList = board.getG_id().split(",");
+				String idList2 = "";
+				for (int i=0; i<idList.length; i++) {
+					idList[i] = idList[i].trim();
+					if (!idList[i].equals(id)) {
+						idList2 += idList[i] +((i!=idList.length-1)? ",":"");
+					}
+				}
+				board.setG_id(idList2);
+				service.boardUpdate(board, request);
+
+				board = service.getBoard(b_no);
+				idList = board.getG_id().split(",");
+				idList2 = "";
+				for (int i=0; i<idList.length; i++) {
+					idList[i] = idList[i].trim();
+					idList2 += idList[i] +((i!=idList.length-1)? ",":"");
+				}
+				result = idList2;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	@RequestMapping(value="board/*", method=RequestMethod.GET)
 	public ModelAndView detail(Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -248,9 +302,14 @@ public class BoardController {
 				Board board = service.getBoard(b_no);
 				if (board.getG_id() != null) {
 					String[] idList = board.getG_id().split(",");
-					mav.addObject("idList", idList);
+					String[] idList2=new String[idList.length];
+					for (int i=0; i<idList.length; i++) {
+						idList2[i] = idList[i].trim();
+					}
+					mav.addObject("idList", idList2);
 				}
 				System.out.println(board);
+				board.setG_id(board.getG_id().trim());
 				mav.addObject("board",board);
 				
 				service.updatereadcnt(b_no);

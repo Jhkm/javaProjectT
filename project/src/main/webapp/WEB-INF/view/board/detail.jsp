@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<% int cnt = 0; %>
+<% 
+	int cnt = 0; 
+%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
     function deleteReplyConfirm(pageNum, b_no, m_id, r_no, b_category) {
@@ -20,27 +22,77 @@
       }else{
          return;
       }
-   }  
-	 $(document).ready(function() {
+   }
+	$(document).ready(function() {
 		console.log("!!!");
-         	$('.upinput').hide();
-         	$('.reinput').hide();
-          	<c:forEach items="${replylist}" varStatus="status">
-            $('#ReplyRe_${status.index}').click(function(){
-               rechange_${status.index}();
-            });
-            $('#updateRe_${status.index}').click(function(){
+        	$('.upinput').hide();
+        	$('.reinput').hide();
+        	<c:forEach items="${replylist}" varStatus="status">
+			$('#ReplyRe_${status.index}').click(function(){
+            	rechange_${status.index}();
+			});
+			$('#updateRe_${status.index}').click(function(){
                upchange_${status.index}();
             });
-     function rechange_${status.index}() {
-         $('#reinput_${status.index}').toggle();
-      }
-      function upchange_${status.index}() {
-         $('#upinput_${status.index}').toggle();
-      }
+		function rechange_${status.index}() {
+			$('#reinput_${status.index}').toggle();
+		}
+		function upchange_${status.index}() {
+			$('#upinput_${status.index}').toggle();
+		}
             </c:forEach>
-   });
+	});
 
+	$(document).ready(function() {
+		var value =  $('#join').val();
+		var data;
+		$("#join").on('click',function(){
+			if (value == '참가하기') {
+				data="1";
+				alert("참가하기");
+			} else {
+				data="2";
+				alert("취소하기");
+			}
+			var adata={"value":data, "b_no":${board.b_no}};
+			
+			$.ajax({
+				type:"POST",
+				url:"join.sdj",
+				data :adata,
+				success:function(result) {
+					console.log("result="+result);
+					$('input[id=ids]').attr('value',"");
+					$('input[id=ids]').attr('value',result);
+					if (data==1) {
+						$('button[id=join]').attr('value', '취소하기')
+						alert("참가완료");
+						location.reload();
+					} else {
+						$('button[id=join]').attr('value', '참가하기')
+						alert("취소완료");
+						location.reload();
+					}
+				}
+			})
+		})
+		$("#unjoin").on('click', function(){
+			alert("빠지기");
+			var adata={"value":"2", "b_no":${board.b_no}};
+			$.ajax({
+				type:"POST",
+				url:"join.sdj",
+				data :adata,
+				success:function(result) {
+					$('input[id=ids]').attr('value',"");
+					$('input[id=ids]').attr('value',result);
+					$('button[id=unjoin]').attr('value', '참가하기')
+					$('button[id=unjoin]').attr('id','join');
+					alert("빠지기완료");
+				}
+			})
+		})
+	})
 </script>
 <style>
 .date {
@@ -94,13 +146,13 @@
 		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
 			<label>${board.b_people}</label>
 		</div>
-	</div> 
+	</div>
 	<div class="w3-cell-row">
 		<div class="w3-container w3-cell" style="width: 20%;">
 			<label>참가중인 인원</label>
 		</div>
 		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
-			<label><c:if test="${board.g_id != null}">${board.g_id }</c:if></label>
+			<input type="text" value="${board.g_id }" id="ids">
 		</div>
 		<c:forEach items="${idList}" var="id">
 			<c:if test="${id == loginUser }">
@@ -108,10 +160,54 @@
 			</c:if>
 		</c:forEach>
 		<c:if test="<%= cnt == 0 %>">
-			<input type="button" value="참가하기">
+			<input id="join" type="button" value="참가하기">
 		</c:if>
-	</div> 
+		<c:if test="<%= cnt != 0 %>">
+			<input id="join" type="button" value="취소하기">
+		</c:if>
+	</div>
 	</c:if>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>내용</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<textarea rows="4" cols="80" name="r_content" style="color:black;">${board.b_content }</textarea>
+		</div>
+	</div>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label >첨부파일</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<c:if test="${!empty borad.b_filurl }">
+				<a href="../file/${board.b_fileurl }">${board.b_fileurl}</a>
+			</c:if>
+		</div>
+	</div>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell">
+			<a href="reply.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[답글]</a>
+			<a href="update.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[수정]</a>
+			<a href="delete.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[삭제]</a>
+			<a href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">[목록]</a>
+		</div>
+	</div>
+
+</div>
+<div>
+	<form:form modelAttribute="reply" action="r_reply.sdj" name="f">s
+		<input type="hidden" name="b_no" value="${board.b_no}">
+		<input type="hidden" name="pageNum" value="${param.pageNum}">
+		<div class="w3-cell-row">
+			<div class="w3-container w3-cell">
+				<a href="reply.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[답글]</a>
+				<a href="update.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[수정]</a>
+				<a href="delete.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[삭제]</a>
+				<a href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">[목록]</a>
+			</div>
+		</div>
+	</form:form>
 </div>
 <!-- 썰!!!!@!!!@#!@#$ㄲ%ㅆㅉㅃ#ㅗ뉴 ㅊㅍㄸㅉ$후 ㅠ --> 
  <!--  
