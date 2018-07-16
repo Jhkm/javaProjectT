@@ -1,66 +1,7 @@
-<%-- <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>게시판 글등록</title>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> -->
-</head>
-<body>
-	<form:form modelAttribute="board" action="write.sdj" method="post" enctype="multipart/form-data" name="f">
-		<table border="1" cellpadding="0" cellspacing="0">
-			<caption>게시판</caption>
-	
-				<tr>
-					<td align="center">제목</td>
-					<td><form:input path="b_subject"/>
-						<font color="red"><form:errors path="b_subject"/></font></td>
-				</tr>
-				<tr>
-					<td align="center">내용</td>
-					<td><form:textarea rows="15" cols="80" path="b_content"/>
-						<font color="red"><form:errors path="b_content"/></font></td>
-				</tr>
-				<tr>
-					<td align="center">첨부파일</td>
-					<td><input type="file" name="b_file" id="b_file" multiple></td>
-				</tr>
-				<tr>
-					<td><input type="hidden" name="b_category" value="${param.b_category }"></td>
-				</tr>
-				<tr>
-					<td><input type="hidden" name="b_state" value="0"></td>
-				</tr>
-				<tr>
-					<td><input type="hidden" name="b_date" value="0"></td>
-				</tr>
-				<tr>
-					<td><input type="hidden" name="b_people" value="0"></td>
-				</tr>
-				<tr>
-				<c:if test="${param.i_no == null}">
-					<td><input type="hidden" name="i_no" value="0"></td>
-				</c:if>
-				<c:if test="${param.i_no != null}">
-					<td><input type="hidden" name="i_no" value="${param.i_no}"></td>
-				</c:if>
-				<tr>
-					<td align="center" colspan="2"><a href="javascript:document.f.submit()">[게시물등록]</a>
-					<a href="list.sdj">[게시물목록]</a></td>
-				</tr>
-		</table>
-	<div id="preview">
-	</div>
-	</form:form>
-</body>
-</html> --%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -74,6 +15,9 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="//cdn.rawgit.com/fgelinas/timepicker/master/jquery.ui.timepicker.css">
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=IOAxpv0_yEzY_13m7xPn&submodules=geocoder"></script>
 <script src='//cdn.rawgit.com/fgelinas/timepicker/master/jquery.ui.timepicker.js'></script>
 <style>
 .ui-timepicker { font-size: 6px; width: 200px; }
@@ -110,8 +54,8 @@
 		<label>글작성하기</label>
 	</div>
 	<form:form modelAttribute="board" action="write.sdj" method="post" enctype="multipart/form-data" name="f" >
-	<div class="w3-cell-row" >
-		<div class="w3-container w3-teal w3-cell" style="width: 20%;">
+	<div class="w3-cell-row" style="border:1px solid;">
+		<div class="w3-container w3-teal w3-cell" style="width: 20%;vertical-align: middle;">
 			<label>제목</label>
 		</div>
 		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
@@ -143,17 +87,51 @@
 		<div class="w3-container w3-teal w3-cell" style="width: 20%;">
 			<label>장소</label>
 		</div>
-		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
-			<form:input  path="b_state" />
-			<font color="red"><form:errors path="b_state"/></font>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 60%;">
+			<form:input  path="b_state" id="asdf" name="sAddress" class="postcodify_address" value=""/>
+			<font color="red"><form:errors path="b_state"/></font><br>
+			<input type="text" name="b_state" id="b_state" class="postcodify_details" value="" onfocus="drawmap()"/>
+		</div>
+		<div class="w3-container w3-sand w3-cell" align="left" style="max-width: 20%;">
+			<input type="button" id="postcodify_search_button" class="w3-button w3-sand w3-right" value="주소찾기">
 		</div>
 	</div>
-	<div class="w3-cell-row" style="display: none;">
+	<div class="w3-cell-row">
 		<div class="w3-container w3-teal w3-cell" style="width: 20%;">
-			<label>123</label>
+			<label>지도</label>
 		</div>
 		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
-			<div id="map" style="width:500px;height:400px;"></div>
+			<div id="map" style="width:100%;height:400px;"></div>
+			<script>
+			var map = new naver.maps.Map('map');
+			var myaddress = "한강대로 405";// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+			console.log(myaddress);
+			naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+			    if (status !== naver.maps.Service.Status.OK) {
+			        return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+			    }
+			    var result = response.result;
+			    // 검색 결과 갯수: result.total
+			    // 첫번째 결과 결과 주소: result.items[0].address
+			    // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+			    var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+			    map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+			    // 마커 표시
+			    var marker = new naver.maps.Marker({
+			      position: myaddr,
+			      map: map
+			    });
+			    // 마커 클릭 이벤트 처리
+			    naver.maps.Event.addListener(marker, "click", function(e) {
+			      if (infowindow.getMap()) {
+			          infowindow.close();
+			      } else {
+			          infowindow.open(map, marker);
+			      }
+			    });
+			});
+
+      </script>
 		</div>
 	</div>
 	<input type="hidden" name="g_id" value="${session.loginUser}">
@@ -195,5 +173,40 @@
 	</div>
 	</form:form>
 </div>
+<!-- 지도관련 스크립트 -->
+  <script>
+function drawmap(){ 
+   var map = new naver.maps.Map('map');
+    var myaddress = $('#asdf').val();// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+    console.log(myaddress);
+    naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+           alert(myaddress + '의 지도검색 결과가 없거나 기타 네트워크 에러입니다. 우편번호를 다시 검색해주세요');
+           $("#zipcode").val(null);
+           $("#asdf").val(null);
+           $("#details").focus();
+        }
+        var result = response.result;
+        // 검색 결과 갯수: result.total
+        // 첫번째 결과 결과 주소: result.items[0].address
+        // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+        map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+        // 마커 표시
+        var marker = new naver.maps.Marker({
+          position: myaddr,
+          map: map
+        });
+        // 마커 클릭 이벤트 처리
+        naver.maps.Event.addListener(marker, "click", function(e) {
+          if (infowindow.getMap()) {
+              infowindow.close();
+          } else {
+              infowindow.open(map, marker);
+          }
+        });
+    });
+  }
+</script>
 </body>
 </html>
