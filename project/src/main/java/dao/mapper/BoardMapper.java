@@ -22,7 +22,7 @@ public interface BoardMapper {
 	@Update("update board set b_refstep = b_refstep + 1 where b_ref = #{b_ref} and b_refstep > #{b_refstep}")
 	void refstepadd(Board board);
 	
-	@Update("update board set b_subject=#{b_subject}, b_content=#{b_content}, b_file=#{b_fileurl}, b_regtime=now() where b_no=#{b_no}")
+	@Update("update board set b_subject=#{b_subject}, b_content=#{b_content}, b_file=#{b_fileurl}, b_regtime=now(),g_id=#{g_id} where b_no=#{b_no}")
 	void update(Board board);
 
 	@Delete("delete from board where b_no=#{b_no}")
