@@ -137,6 +137,7 @@
 	<input type="hidden" name="g_id" value="${session.loginUser}">
 	</c:if>
 	<c:if test="${param.b_category != '5'}">
+		<input type="hidden" name="g_id" value="0">
 		<input type="hidden" name="b_state" value="0">
 		<input type="hidden" name="b_date" value="0">
 		<input type="hidden" name="b_people" value="0">

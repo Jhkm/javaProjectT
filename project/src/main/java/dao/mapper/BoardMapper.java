@@ -15,7 +15,7 @@ public interface BoardMapper {
 	void b_readcnt(Integer num);
 
 
-	@Insert("insert into board (b_no, b_category, b_subject, b_content, b_file, b_readcnt, m_id, b_ref, b_reflevel, b_refstep, b_state, b_regtime, b_people, g_id, i_no,i_grade,b_date)"
+	@Insert("insert into board (b_no, b_category, b_subject, b_content, b_file, b_readcnt, m_id, b_ref, b_reflevel, b_refstep, b_state, b_regtime, b_people, g_id, i_no,i_grade,b_date) "
 			+ "values (#{b_no}, #{b_category}, #{b_subject}, #{b_content}, #{b_fileurl}, 0, #{m_id}, #{b_ref}, #{b_reflevel}, #{b_refstep}, #{b_state}, now(), #{b_people}, #{g_id}, #{i_no},#{i_grade}, #{b_date})")
 	void insert(Board board);
 
