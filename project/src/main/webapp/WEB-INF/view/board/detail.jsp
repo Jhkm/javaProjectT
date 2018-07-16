@@ -356,8 +356,8 @@
    <form:form modelAttribute="reply" action="r_reply.sdj" method="post">
       <input type="hidden" value="${board.b_no}" name="b_no">
       <input type="hidden" value="${param.pageNum}" name="pageNum">
-      <div style="width: 1500px;">
-         <form:input path="r_content" size="170px"/>
+      <div style="width: 1700px;">
+         <form:input path="r_content" size="1700px"/>
          <font color="red"><form:errors path="r_content"/></font>
       </div>
          <input type="submit" class="w3-button" value="µî ·Ï">

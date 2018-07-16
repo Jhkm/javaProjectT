@@ -32,10 +32,10 @@ public interface BoardMapper {
 	int maxNum();
 
 	@Select("select * from board where b_category = #{b_category} and i_no = #{i_no}")
-	List<Board> itemCommentList(Map map);
+	List<Board> itemCommentList(Map<Object, Object> map);
 
 	@Select("select ifnull(avg(i_grade),0) from board where b_category = #{b_category} and i_no = #{i_no}")
-	Double avgGrade(Map map);
+	Double avgGrade(Map<Object, Object> map);
 
 
 }
