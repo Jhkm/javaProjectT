@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +57,7 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/write", method=RequestMethod.POST)
-	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, HttpSession session) {
+	public ModelAndView write(Board board, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
@@ -79,7 +77,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/reply", method=RequestMethod.POST)
-	public ModelAndView reply(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, HttpSession session) {
+	public ModelAndView reply(Board board, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
@@ -97,16 +95,16 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/update", method=RequestMethod.POST)
-	public ModelAndView boardUpdate(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView boardUpdate(Board board, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Board dbBoard = service.getBoard(board.getB_no());
-		if (bindingResult.hasErrors()) {
+		/*if (bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			board = service.getBoard(board.getB_no());
 			board = service.getBoard(board.getB_category());
 			mav.addObject("board", board);
 			return mav;
-		}
+		}*/
 		if(board.getB_file() == null || board.getB_file().isEmpty()) {
 			board.setB_fileurl(request.getParameter("b_file"));
 		}
@@ -184,7 +182,7 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/replyRe", method=RequestMethod.POST)
-	public ModelAndView replyRe(@Valid Board board,BindingResult bindingResult,  Reply reply, HttpServletRequest request, HttpSession session) {
+	public ModelAndView replyRe(Board board, Reply reply, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");

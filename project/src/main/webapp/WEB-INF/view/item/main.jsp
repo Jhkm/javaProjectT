@@ -149,68 +149,6 @@ body {
 
 <body>
 	<div class="all_all">
-		<div id="top" class="w3-top w3-center">
-			<div class="w3-bar w3-white w3-card w3-center" style="width:51%; height:80px;">
-				<div style="vertical-align: middle">
-				<a href="/project/item/main.sdj" class="w3-bar-item w3-button w3-padding-large" style="height:80px;width: 148px; line-height: 371%;">
-				<img src="../img/mainlogo.png" style="width:100%"></a>
-				</div>
-         		<div class="w3-dropdown-hover w3-hide-small" >
-	           		 <button class="w3-padding-large w3-button" title="More"style="height:80px;" onclick="location.href='/project/item/list.sdj'">
-	             		보드게임몰<i class="fa fa-caret-down" ></i>
-	            	</button>
-            	<div class="w3-dropdown-content w3-bar-block w3-card-4">
-	               <a href="/project/item/list.sdj?gametype=7" class="w3-bar-item w3-button">액션</a>
-	               <a href="/project/item/list.sdj?gametype=1"   class="w3-bar-item w3-button">순발력</a>
-	               <a href="/project/item/list.sdj?gametype=4"   class="w3-bar-item w3-button">추리</a> 
-	               <a href="/project/item/list.sdj?gametype=2"   class="w3-bar-item w3-button">학습</a> 
-	               <a href="/project/item/list.sdj?gametype=6"   class="w3-bar-item w3-button">전략</a> 
-	               <a href="/project/item/list.sdj?gametype=10"   class="w3-bar-item w3-button">복불복</a>
-	               <a href="/project/item/list.sdj?gametype=8"   class="w3-bar-item w3-button">스포츠</a>
-           	 	</div>
-        	</div>
-         	<div class="w3-dropdown-hover w3-hide-small">
-          	  <button class="w3-padding-large w3-button" title="More" style="height:80px">
-           		    커뮤니티 <i class="fa fa-caret-down" ></i>
-              </button>
-            	<div class="w3-dropdown-content w3-bar-block w3-card-4">
-	               <a href="/project/board/list.sdj?b_category=1" class="w3-bar-item w3-button">플레이후기</a>
-	               <a href="/project/board/list.sdj?b_category=2"   class="w3-bar-item w3-button">팁 게시판</a>
-	               <a href="/project/board/list.sdj?b_category=3"   class="w3-bar-item w3-button">자유게시판</a> 
-	               <a href="/project/board/list.sdj?b_category=4"   class="w3-bar-item w3-button">요청게시판</a> 
-	               <a href="/project/board/list.sdj?b_category=5"   class="w3-bar-item w3-button">번개게시판</a> 
-	               <a href="/project/board/list.sdj?b_category=6"   class="w3-bar-item w3-button">게임플레이 동영상</a>
-	               <a href="/project/board/list.sdj?b_category=7"   class="w3-bar-item w3-button">후기게시판</a>
-	            </div>
-        	 </div>
-        	 <div>
-         <c:if test="${!empty sessionScope.loginUser}">
-               	<c:if test="${sessionScope.loginUser eq 'admin' }">
-               		<a href="/project/admin/admin.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small" >관리자페이지</a>
-              	</c:if>
-               	<c:if test="${sessionScope.loginUser ne 'admin' }">
-               		<a href="/project/user/mypage.sdj?id=${sessionScope.loginUser}" class="w3-bar-item w3-button w3-padding-large w3-hide-small" style="height:80px; line-height: 371%;">마이페이지</a>
-               	</c:if>
-               </c:if>
-          	</div>
-         <c:if test="${empty sessionScope.loginUser}">
-         <a href="/project/user/login.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right" style="height:80px; line-height: 248%;">로그인</a>
-         <a href="/project/user/userForm.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"style="height:80px; line-height: 248%;">회원가입</a>
-       	</c:if>
-       	<c:if test="${!empty sessionScope.loginUser}">
-         <a href="/project/user/logout.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small" style="height:80px; line-height: 248%;">로그아웃</a>
-       	</c:if>
-			</div>
-		</div>
-		<div class="scroll-right" style="fixed: right; margin-left: 20px">
-			<div id="cookie">
-
-				<!-- ${cookie} -->
-			</div>
-			<div class="up" style="width: 10%; height: 10%;">
-				<a href="#"><img src="/project/img/up.png"></a>
-			</div>
-		</div>
 		<div class="content  w3-container w3-content">
 			<!-- style="max-width: 800px; margin-top: 100px; margin-left: 20%;"> -->
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -335,24 +273,6 @@ body {
 							</li>
 						</c:forEach>
 					</div>
-				</div>
-			</div>
-			<div class="footer">
-				<div class="w3-container">
-					<div class="logo" style="float:left;">
-						<img src="../img/boardhang.png" style="width:200px">
-					</div>
-				<div class="content" style="float:left; height:10px;font-size:12px">
-				<address>
-					<strong>(주)보드행　　</strong>
-					   서울특별시 금천구 가산동 238-33<br>　　
-					  제작자 : 김석원, 김재한, 설동희　　/　　사업자등록번호 : 111-11-22222222<br>
-					대표번호 : 02-000-1111　　/　　팩스번호 : 02-111-2222　　/　　이메일 : boardhang@naver.com
-					<p style="padding: 5px 0 0;color: #bbb;font-size: 11px;">copyright(c)<strong>boardhang</strong> all rights reserved.</p>
-				</address>
-				<ul>
-				</ul>
-				</div>
 				</div>
 			</div>
 		</div>

@@ -81,7 +81,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public List<Board> getItemCommentList(Integer no, int i) {
-		Map map = new HashMap();
+		Map<Object, Object> map = new HashMap<Object,Object>();
 		map.put("i_no",no);
 		map.put("b_category", i);
 		return sqlSession.getMapper(BoardMapper.class).itemCommentList(map);
@@ -89,7 +89,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public double avgGrade(Integer no, int i) {
-		Map map = new HashMap();
+		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("i_no",no);
 		map.put("b_category", i);
 		return sqlSession.getMapper(BoardMapper.class).avgGrade(map);
