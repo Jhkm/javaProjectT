@@ -64,6 +64,10 @@ public class BoardController {
 //			return mav;
 //		} 
 		try {
+			if (request.getParameter("b_category").equals("5")) {
+				board.setG_id((String)session.getAttribute("loginUser"));
+			}
+			System.out.println(board);
 			service.insert(board, request, session);
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
@@ -248,7 +252,11 @@ public class BoardController {
 				System.out.println("!!!!");
 				String id = (String)session.getAttribute("loginUser");
 				Board board = service.getBoard(b_no);
-				board.setG_id(board.getG_id()+((board.getG_id().substring(board.getG_id().length()-1).equals(","))?" ":",")+id);
+				if (board.getG_id() == null) {
+					board.setG_id(board.getM_id());
+				} else {
+					board.setG_id(board.getG_id()+((board.getG_id().substring(board.getG_id().length()-1).equals(","))?" ":",")+id);
+				}
 				System.out.println(board);
 				service.boardUpdate(board, request);
 				board = service.getBoard(b_no);
@@ -305,9 +313,15 @@ public class BoardController {
 						idList2[i] = idList[i].trim();
 					}
 					mav.addObject("idList", idList2);
+				} else {
+					board.setG_id(board.getM_id());
+					mav.addObject("idList", board.getG_id());
 				}
 				System.out.println(board);
-				board.setG_id(board.getG_id().trim());
+				if(board.getG_id() != null) {
+					board.setG_id(board.getG_id().trim());
+				}
+				
 				mav.addObject("board",board);
 				
 				service.updatereadcnt(b_no);

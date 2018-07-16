@@ -28,11 +28,12 @@
 			<attribute name="owner.project.facets" value="#system#;jst.web"/>
 		</attributes>
 	</classpathentry>
+
+	<classpathentry kind="lib" path="C:/Users/user/git/javaProjectT/project/src/main/webapp/file/JimiProClasses.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/user/git/javaProjectT2/project/src/main/webapp/file/JimiProClasses.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
