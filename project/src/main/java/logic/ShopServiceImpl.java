@@ -81,7 +81,11 @@ public class ShopServiceImpl implements ShopService{
 		if(board.getI_no() == 0) {
 			board.setI_no(Integer.parseInt(request.getParameter("i_no")));
 		}
-		boardDao.insert(board);
+		if (request.getParameter("b_category").equals("5")) {
+			boardDao.insert(board);
+		} else {
+			boardDao.insert2(board);
+		}
 	}
 	private void uploadBoardFileCreate(MultipartFile file1, HttpServletRequest request) {
 		String uploadPath = request.getServletContext().getRealPath("/") + "/file/";

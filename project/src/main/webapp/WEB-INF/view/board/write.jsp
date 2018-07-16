@@ -54,6 +54,7 @@
 		<label>글작성하기</label>
 	</div>
 	<form:form modelAttribute="board" action="write.sdj" method="post" enctype="multipart/form-data" name="f" >
+	<form:hidden path="m_id" value="${loginUser }"/>
 	<div class="w3-cell-row" style="border:1px solid;">
 		<div class="w3-container w3-teal w3-cell" style="width: 20%;vertical-align: middle;">
 			<label>제목</label>

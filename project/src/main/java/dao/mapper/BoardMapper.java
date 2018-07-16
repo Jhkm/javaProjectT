@@ -37,5 +37,9 @@ public interface BoardMapper {
 	@Select("select ifnull(avg(i_grade),0) from board where b_category = #{b_category} and i_no = #{i_no}")
 	Double avgGrade(Map<Object, Object> map);
 
+	@Insert("insert into board (b_no, b_category, b_subject, b_content, b_file, b_readcnt, m_id, b_ref, b_reflevel, b_refstep, b_state, b_regtime, i_no,i_grade) "
+			+ "values (#{b_no}, #{b_category}, #{b_subject}, #{b_content}, #{b_fileurl}, 0, #{m_id}, #{b_ref}, #{b_reflevel}, #{b_refstep}, #{b_state}, now(), #{i_no},#{i_grade})")
+	void insert2(Board board);
+
 
 }
