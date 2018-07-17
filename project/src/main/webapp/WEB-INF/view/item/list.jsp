@@ -18,7 +18,6 @@
 <body>
 <br><br><br>
 <c:if test="${sessionScope.loginUser == 'admin' }"><a href="create.sdj">상품등록</a></c:if>
-<a href="../cart/cartView.sdj" style="float:right;">장바구니</a>
 <%-- <table border="1" cellspacing="0" cellpadding="0">
   <tr><th align="center" width="80">상품ID</th>
       <th align="center" width="320">상품명</th>
@@ -39,10 +38,11 @@
 <form action="list.sdj" method="post">
 <div style="width:70%" align="left">
 <!-- select 바뀔때 바로 정렬 바뀌도록 하기 -->
+정렬 >
 	<select id="array" name="sort" onchange="this.form.submit()">
 		<option value="i_no desc">상품 등록 순</option>
 		<option value="i_amount desc">판매 인기 순</option>
-		<option value="like desc">추천 순</option>
+		<option value="likecnt desc">추천 순</option>
 		<option value="i_price">낮은 가격 순</option>
 		<option value="i_price desc">높은 가격 순</option>
 		<option value="i_age">게임 연령 낮은순</option>
@@ -52,6 +52,7 @@
 		array.value = '${sort}'
 		if(${sort == null}) {array.value = 'i_no desc'};
 	</script>
+	<a href="../cart/cartView.sdj" style="float:right;"><img alt="장바구니" src="../file/3298599-buy-cart-trolley_106992.png" width="45px" height="45px"></a>
 </div>
 
 <div style="width:70%">

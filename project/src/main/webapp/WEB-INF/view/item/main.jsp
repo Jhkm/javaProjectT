@@ -215,16 +215,14 @@ body {
 				<!-- 배스트상품 상품들 -->
 				<div class="w3-row w3-grayscale">
 					<h2 class="bor w3-center">베스트상품</h2>
-					<div class="w3-col l3 s6">
+					<div class="w3-col l3 s6" style="width:100%;">
 						<c:forEach items="${itemlist}" var="item" varStatus="status">
 							<c:if test="${status.index % 4 == 0}">
-								<tr>
 							</c:if>
-							<td>
-								<div class="tb-center w3-btn w3-card">
-									<div class="box">
-										<div class="w3-container">
-											<a href="detail.sdj?no=${item.i_no}"><img src="/img/${item.i_no}/i1.jpg" style="width: 100%; padding: 30px 20px 11px 4px;"></a>
+								<div class="tb-center w3-btn w3-card" style="width:24.5%; height:230px;">
+									<div class="box" style="height:100%;">
+										<div class="w3-container" style="height:70%;">
+											<a href="detail.sdj?no=${item.i_no}"><img src="../picture/${item.i_img}" style="width: 100%; height:100%;"></a>
 										</div>
 										<ul class="info w3-middle"
 											style="list-style: none; padding-left: 0px;">
@@ -233,9 +231,7 @@ body {
 										</ul>
 									</div>
 								</div>
-							</td>
 							<c:if test="${status.index % 4 == 3 or status.last}">
-								</tr>
 							</c:if>
 						</c:forEach>
 
