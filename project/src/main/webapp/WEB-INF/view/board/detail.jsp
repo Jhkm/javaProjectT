@@ -10,7 +10,11 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<% int cnt = 0; %>
+
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=IOAxpv0_yEzY_13m7xPn&submodules=geocoder"></script>
+<% 
+	int cnt = 0; 
+%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
     function deleteReplyConfirm(pageNum, b_no, m_id, r_no, b_category) {
@@ -20,27 +24,77 @@
       }else{
          return;
       }
-   }  
-	 $(document).ready(function() {
+   }
+	$(document).ready(function() {
 		console.log("!!!");
-         	$('.upinput').hide();
-         	$('.reinput').hide();
-          	<c:forEach items="${replylist}" varStatus="status">
-            $('#ReplyRe_${status.index}').click(function(){
-               rechange_${status.index}();
-            });
-            $('#updateRe_${status.index}').click(function(){
+        	$('.upinput').hide();
+        	$('.reinput').hide();
+        	<c:forEach items="${replylist}" varStatus="status">
+			$('#ReplyRe_${status.index}').click(function(){
+            	rechange_${status.index}();
+			});
+			$('#updateRe_${status.index}').click(function(){
                upchange_${status.index}();
             });
-     function rechange_${status.index}() {
-         $('#reinput_${status.index}').toggle();
-      }
-      function upchange_${status.index}() {
-         $('#upinput_${status.index}').toggle();
-      }
+		function rechange_${status.index}() {
+			$('#reinput_${status.index}').toggle();
+		}
+		function upchange_${status.index}() {
+			$('#upinput_${status.index}').toggle();
+		}
             </c:forEach>
-   });
+	});
 
+	$(document).ready(function() {
+		var value =  $('#join').val();
+		var data;
+		$("#join").on('click',function(){
+			if (value == '참가하기') {
+				data="1";
+				alert("참가하기");
+			} else {
+				data="2";
+				alert("취소하기");
+			}
+			var adata={"value":data, "b_no":${board.b_no}};
+			
+			$.ajax({
+				type:"POST",
+				url:"join.sdj",
+				data :adata,
+				success:function(result) {
+					console.log("result="+result);
+					$('input[id=ids]').attr('value',"");
+					$('input[id=ids]').attr('value',result);
+					if (data==1) {
+						$('button[id=join]').attr('value', '취소하기')
+						alert("참가완료");
+						location.reload();
+					} else {
+						$('button[id=join]').attr('value', '참가하기')
+						alert("취소완료");
+						location.reload();
+					}
+				}
+			})
+		})
+		$("#unjoin").on('click', function(){
+			alert("빠지기");
+			var adata={"value":"2", "b_no":${board.b_no}};
+			$.ajax({
+				type:"POST",
+				url:"join.sdj",
+				data :adata,
+				success:function(result) {
+					$('input[id=ids]').attr('value',"");
+					$('input[id=ids]').attr('value',result);
+					$('button[id=unjoin]').attr('value', '참가하기')
+					$('button[id=unjoin]').attr('id','join');
+					alert("빠지기완료");
+				}
+			})
+		})
+	})
 </script>
 <style>
 .date {
@@ -79,6 +133,34 @@
 			<label>${board.b_date}</label>
 		</div>
 	</div> 
+	
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>참가인원</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<label>${board.b_people}</label>
+		</div>
+	</div>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>참가중인 인원</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<input type="text" value="${board.g_id }" id="ids">
+		</div>
+		<c:forEach items="${idList}" var="id">
+			<c:if test="${id == loginUser }">
+				<% cnt = cnt+1; %>
+			</c:if>
+		</c:forEach>
+		<c:if test="<%= cnt == 0 %>">
+			<input id="join" type="button" value="참가하기">
+		</c:if>
+		<c:if test="<%= cnt != 0 %>">
+			<input id="join" type="button" value="취소하기">
+		</c:if>
+	</div>
 	<div class="w3-cell-row">
 		<div class="w3-container w3-cell" style="width: 20%;">
 			<label>장소</label>
@@ -87,31 +169,86 @@
 			<label>${board.b_state}</label>
 		</div>
 	</div> 
-	<div class="w3-cell-row">
-		<div class="w3-container w3-cell" style="width: 20%;">
-			<label>참가인원</label>
+		<div class="w3-cell-row">
+		<div class="w3-container w3-teal w3-cell" style="width: 20%;">
+			<label>지도</label>
 		</div>
 		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
-			<label>${board.b_people}</label>
+			<div id="map" style="width:100%;height:400px;"></div>
+			<script>
+			var map = new naver.maps.Map('map');
+			var myaddress = "${board.b_state}";// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+			console.log(myaddress);
+			naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+			    if (status !== naver.maps.Service.Status.OK) {
+			        return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+			    }
+			    var result = response.result;
+			    // 검색 결과 갯수: result.total
+			    // 첫번째 결과 결과 주소: result.items[0].address
+			    // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+			    var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+			    map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+			    // 마커 표시
+			    var marker = new naver.maps.Marker({
+			      position: myaddr,
+			      map: map
+			    });
+			    // 마커 클릭 이벤트 처리
+			    naver.maps.Event.addListener(marker, "click", function(e) {
+			      if (infowindow.getMap()) {
+			          infowindow.close();
+			      } else {
+			          infowindow.open(map, marker);
+			      }
+			    });
+			});
+
+      </script>
 		</div>
-	</div> 
-	<div class="w3-cell-row">
-		<div class="w3-container w3-cell" style="width: 20%;">
-			<label>참가중인 인원</label>
-		</div>
-		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
-			<label><c:if test="${board.g_id != null}">${board.g_id }</c:if></label>
-		</div>
-		<c:forEach items="${idList}" var="id">
-			<c:if test="${id == loginUser }">
-				<% cnt = cnt+1; %>
-			</c:if>
-		</c:forEach>
-		<c:if test="<%= cnt == 0 %>">
-			<input type="button" value="참가하기">
-		</c:if>
-	</div> 
+	</div>
 	</c:if>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label>내용</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<textarea rows="4" cols="80" name="r_content" style="color:black;">${board.b_content }</textarea>
+		</div>
+	</div>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell" style="width: 20%;">
+			<label >첨부파일</label>
+		</div>
+		<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left" style="max-width: 80%;">
+			<c:if test="${!empty borad.b_filurl }">
+				<a href="../file/${board.b_fileurl }">${board.b_fileurl}</a>
+			</c:if>
+		</div>
+	</div>
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell">
+			<a href="reply.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[답글]</a>
+			<a href="update.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[수정]</a>
+			<a href="delete.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[삭제]</a>
+			<a href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">[목록]</a>
+		</div>
+	</div>
+
+</div>
+<div>
+	<form:form modelAttribute="reply" action="r_reply.sdj" name="f">s
+		<input type="hidden" name="b_no" value="${board.b_no}">
+		<input type="hidden" name="pageNum" value="${param.pageNum}">
+		<div class="w3-cell-row">
+			<div class="w3-container w3-cell">
+				<a href="reply.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[답글]</a>
+				<a href="update.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[수정]</a>
+				<a href="delete.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[삭제]</a>
+				<a href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">[목록]</a>
+			</div>
+		</div>
+	</form:form>
 </div>
 <!-- 썰!!!!@!!!@#!@#$ㄲ%ㅆㅉㅃ#ㅗ뉴 ㅊㅍㄸㅉ$후 ㅠ --> 
  <!--  
@@ -260,11 +397,13 @@
    <form:form modelAttribute="reply" action="r_reply.sdj" method="post">
       <input type="hidden" value="${board.b_no}" name="b_no">
       <input type="hidden" value="${param.pageNum}" name="pageNum">
-      <div style="width: 1500px;">
-         <form:input path="r_content" size="170px"/>
+      <div style="width: 1700px;">
+         <form:input path="r_content" size="1700px"/>
          <font color="red"><form:errors path="r_content"/></font>
       </div>
          <input type="submit" class="w3-button" value="등 록">
    </form:form>
+  
+   
 </body>
 </html>

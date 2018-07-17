@@ -26,4 +26,8 @@
    		</if>
    		order by b_ref desc, b_refstep asc limit #{startrow}, #{limit}
    </select>
+     <select id="review" resultType="Board" parameterType="map">
+      select * from board where b_category=7
+         order by b_regtime desc limit 0,5
+   </select>
 </mapper>

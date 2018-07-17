@@ -169,6 +169,8 @@ public class ItemController {
 	public ModelAndView main() {
 		ModelAndView mav = new ModelAndView();
 		List<Item> itemList = service.getBestItemList();
+		List<Board> review = service.getReview();
+		mav.addObject("review", review);
 		mav.addObject("itemlist", itemList);
 		return mav;
 	}

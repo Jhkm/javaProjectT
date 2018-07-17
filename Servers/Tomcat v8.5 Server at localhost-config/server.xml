@@ -111,9 +111,16 @@
 					directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log"
 					suffix=".txt" />
 
+<<<<<<< HEAD
 				<Context docBase="project" path="/project" reloadable="true"
 					source="org.eclipse.jst.j2ee.server:project" />
 			</Host>
 		</Engine>
 	</Service>
+=======
+      <Context docBase="project" path="/project" reloadable="true" source="org.eclipse.jst.j2ee.server:project"/>
+      </Host>
+    </Engine>
+  </Service>
+>>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 </Server>

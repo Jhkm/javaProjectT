@@ -29,4 +29,8 @@ public interface BoardDao {
 
 	double avgGrade(Integer no, int i);
 
+	List<Board> review();
+
+	void insert2(Board board);
+
 }

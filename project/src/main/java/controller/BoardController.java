@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,13 +57,16 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/write", method=RequestMethod.POST)
-	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, HttpSession session) {
+	public ModelAndView write(Board board, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
 //			return mav;
 //		} 
 		try {
+			if (request.getParameter("b_category").equals("5")) {
+				board.setG_id((String)session.getAttribute("loginUser"));
+			}
 			service.insert(board, request, session);
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
@@ -76,7 +77,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/reply", method=RequestMethod.POST)
-	public ModelAndView reply(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, HttpSession session) {
+	public ModelAndView reply(Board board, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
@@ -94,16 +95,16 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/update", method=RequestMethod.POST)
-	public ModelAndView boardUpdate(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView boardUpdate(Board board, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Board dbBoard = service.getBoard(board.getB_no());
-		if (bindingResult.hasErrors()) {
+		/*if (bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			board = service.getBoard(board.getB_no());
 			board = service.getBoard(board.getB_category());
 			mav.addObject("board", board);
 			return mav;
-		}
+		}*/
 		if(board.getB_file() == null || board.getB_file().isEmpty()) {
 			board.setB_fileurl(request.getParameter("b_file"));
 		}
@@ -181,7 +182,7 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/replyRe", method=RequestMethod.POST)
-	public ModelAndView replyRe(@Valid Board board,BindingResult bindingResult,  Reply reply, HttpServletRequest request, HttpSession session) {
+	public ModelAndView replyRe(Board board, Reply reply, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
@@ -232,6 +233,72 @@ public class BoardController {
 		System.out.println(request.getParameter("grade"));
 		return mav;
 	}
+	@RequestMapping("board/main")
+	public ModelAndView main(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		List<Board> review = service.getReview();
+		mav.addObject("review", review);
+		return mav;
+	}
+	
+	@RequestMapping("board/join")
+	@ResponseBody
+	public String join(@RequestParam(value="value")String value, @RequestParam(value="b_no")Integer b_no, HttpSession session, HttpServletRequest request) {
+		String result = "";
+		System.out.println("join test"+b_no+"::::"+value);
+		if (value.equals("1")) {
+			try{
+				System.out.println("!!!!");
+				String id = (String)session.getAttribute("loginUser");
+				Board board = service.getBoard(b_no);
+				if (board.getG_id() == null) {
+					board.setG_id(board.getM_id());
+				} else {
+					board.setG_id(board.getG_id()+((board.getG_id().substring(board.getG_id().length()-1).equals(","))?" ":",")+id);
+				}
+				System.out.println(board);
+				service.boardUpdate(board, request);
+				board = service.getBoard(b_no);
+				String[] idList = board.getG_id().split(",");
+				String idList2 = "";
+				for (int i=0; i<idList.length; i++) {
+					idList[i] = idList[i].trim();
+					idList2 += idList[i] +((i!=idList.length-1)?",":"");
+				}
+				result = idList2;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try{
+				String id = (String)session.getAttribute("loginUser");
+				Board board = service.getBoard(b_no);
+				String[] idList = board.getG_id().split(",");
+				String idList2 = "";
+				for (int i=0; i<idList.length; i++) {
+					idList[i] = idList[i].trim();
+					if (!idList[i].equals(id)) {
+						idList2 += idList[i] +((i!=idList.length-1)? ",":"");
+					}
+				}
+				board.setG_id(idList2);
+				service.boardUpdate(board, request);
+
+				board = service.getBoard(b_no);
+				idList = board.getG_id().split(",");
+				idList2 = "";
+				for (int i=0; i<idList.length; i++) {
+					idList[i] = idList[i].trim();
+					idList2 += idList[i] +((i!=idList.length-1)? ",":"");
+				}
+				result = idList2;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	@RequestMapping(value="board/*", method=RequestMethod.GET)
 	public ModelAndView detail(Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -240,9 +307,20 @@ public class BoardController {
 				Board board = service.getBoard(b_no);
 				if (board.getG_id() != null) {
 					String[] idList = board.getG_id().split(",");
-					mav.addObject("idList", idList);
+					String[] idList2=new String[idList.length];
+					for (int i=0; i<idList.length; i++) {
+						idList2[i] = idList[i].trim();
+					}
+					mav.addObject("idList", idList2);
+				} else {
+					board.setG_id(board.getM_id());
+					mav.addObject("idList", board.getG_id());
 				}
 				System.out.println(board);
+				if(board.getG_id() != null) {
+					board.setG_id(board.getG_id().trim());
+				}
+				
 				mav.addObject("board",board);
 				
 				service.updatereadcnt(b_no);

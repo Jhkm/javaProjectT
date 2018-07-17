@@ -66,17 +66,25 @@ public class ShopServiceImpl implements ShopService{
 		board.setB_ref(b_no);
 		board.setB_reflevel(0);
 		board.setB_refstep(0);
-		board.setB_people(0);
-		board.setM_id((String)session.getAttribute("loginUser"));
 		if(board.getB_category() == 0) {
 			board.setB_category(Integer.parseInt(request.getParameter("b_category")));
 		}
-		String[] date = board.getB_date().split(",");
-		board.setB_date(date[0]+" "+date[1]+":00");
+		if (!board.getB_date().equals("0")) {
+			String[] date = board.getB_date().split(",");
+			board.setB_date(date[0]+" "+date[1]+":00");
+		} else {
+			
+			board.setB_date("null");
+		}
+		System.out.println("service" + board);
 		if(board.getI_no() == 0) {
 			board.setI_no(Integer.parseInt(request.getParameter("i_no")));
 		}
-		boardDao.insert(board);
+		if (request.getParameter("b_category").equals("5")) {
+			boardDao.insert(board);
+		} else {
+			boardDao.insert2(board);
+		}
 	}
 	private void uploadBoardFileCreate(MultipartFile file1, HttpServletRequest request) {
 		String uploadPath = request.getServletContext().getRealPath("/") + "/file/";
@@ -449,4 +457,9 @@ public class ShopServiceImpl implements ShopService{
 	public List<Item> getBestItemList() {
 		return itemDao.bestItemList();
 		}
+
+	@Override
+	public List<Board> getReview() {
+		return boardDao.review();
+	}
 }
