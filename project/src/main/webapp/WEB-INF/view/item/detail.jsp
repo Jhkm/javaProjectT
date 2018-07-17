@@ -60,7 +60,11 @@ $(document).ready(function() {
 	    exdate.setDate(exdate.getDate() + exdays);
 	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
 	    document.cookie = cookieName + "=" + cookieValue;
+<<<<<<< HEAD
 	} */
+=======
+	}
+>>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 	$("#up_button").click(function(){
 		var y = parseInt(count.value)
 		count.value = y+1;;
@@ -117,8 +121,7 @@ $(document).ready(function() {
 					}
 				},
 				error:function(result){
-					if(result == 'fail')
-					alert('추천 실패하였습니다.')
+					alert('추천 실패하였습니다.\n로그인 하지 않으셨다면 로그인 후 이용 해주세요.')
 				}
 			})
 			
@@ -136,8 +139,7 @@ $(document).ready(function() {
 					}
 				},
 				error:function(result){
-					if(result == 'fail')
-					alert('추천을 실패하였습니다.')
+					alert('추천을 실패하였습니다.\n로그인 하지 않으셨다면 로그인 후 이용 해주세요.')
 				}
 			})
 			
@@ -145,7 +147,7 @@ $(document).ready(function() {
 	})
 	
 })
-	function change() {
+function change() {
 		var z = parseInt(count.value)
 		if(z < 0) {
 			count.value = 0;
@@ -289,247 +291,121 @@ ul.kind_of_tab li.selected {
 
 </head>
 <body>
-	<h2>상품 상세 보기</h2>
-	<div align="center" style="height: 600px; width: 60%">
-		<!-- <span style="hight:282px; width:302px; float:left;"> -->
-		<span style="width: 45%; float: left;"> <img height="100%"
-			width="100%" src="../picture/${item.i_img }">
-		</span> <span style="height: 450px; width: 50%; float: left;">
-			<form action="buyout.sdj" method="post">
-				<section id="fave" class="fave" style="float: right;"></section>
-				<script type="text/javascript">
+<<<<<<< HEAD
+<br><br>
+<h2>상품 상세 보기</h2>
+<div align="center" style="height:600px; width:60%">
+  <!-- <span style="hight:282px; width:302px; float:left;"> -->
+  <span style="width:45%; height:550px; float:left;">
+    <img height="100%" width="100%" src="../picture/${item.i_img }">
+  </span>
+  <span style="height:450px; width:50%; float:left;">
+  <form action="buyout.sdj" method="post">
+  	<section id="fave" class="fave" style="float:right;"></section>
+  	<script type="text/javascript">
   	if(${checkResult == 1}) {
   		$("#fave").removeClass('fave')
 		$("#fave").addClass('fave_check')
 	}
   	</script>
-				<h2>${item.i_name }(${item.i_age }세 이상, ${item.i_people }~${item.i_people2 }인용)</h2>
-				<table height="100%" width="100%" cellpadding="15" cellspacing="2">
-					<tr>
-						<td>장르</td>
-						<td align="right">${item.tp_name }</td>
-					</tr>
-					<tr>
-						<td>판매가</td>
-						<td align="right"><fmt:formatNumber type="currency"
-								value="${item.i_price }" pattern="0,000" var="i_price" />${i_price }원</td>
-					</tr>
-					<tr>
-						<td>구매혜택</td>
-						<td align="right">적립금 : <fmt:parseNumber integerOnly="true"
-								value="${item.i_price*0.01 }" />원
-						</td>
-					</tr>
-					<tr>
-						<td>게임인원</td>
-						<td align="right">${item.i_people }~ ${item.i_people2 }명</td>
-					</tr>
-					<tr>
-						<td>게임연령</td>
-						<td align="right">${item.i_age }세이상</td>
-					</tr>
-					<tr>
-						<td>게임 선호도</td>
-						<td align="right">${avgGrade }</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<div>
-								<input type="hidden" name="i_no" value="${item.i_no }">
-								<span><strong>수량:</strong></span> <span><input id="count"
-									type="text" align="middle" value="1" name="quantity"
-									onchange="javascript:change();"> <span>
-										<button id="up_button" class="up_button"></button>
-										<button id="down_button" class="down_button"></button>
-								</span> </span>&nbsp;&nbsp; <span class="total"><font
-									style="font-size: 20px;"><strong style="color: #ec187c;">
-											<input type="text" class="invisible" value="${item.i_price }"
-											id="total">
-									</strong></font>원</span>
-							</div>
-						</td>
-					</tr>
-				</table>
-				<div align="right">
-					<input type="submit" value="구매하기"><input type="submit"
-						value="장바구니 담기" id="cartgo">
-				</div>
-				<c:if test="${sessionScope.loginUser == 'admin'}">
-					<input type="submit" value="정보수정" id="editgo">
-					<input type="button" value="삭제"
-						onclick="javascript:checkConfirm();">
-				</c:if>
-			</form>
-		</span> <br>
-	</div>
-	<div id="detailInfo" style="width: 60%">
-		<br>
-		<br>
-		<br>
-		<br>
-		<ul class="kind_of_tab">
-			<li class="first_box selected detail" style="width: 20%;"><a>상품
-					상세정보</a></li>
-			<li class="delivery" style="width: 20%;"><a>배송정보</a></li>
-			<li class="exchange" style="width: 20%;"><a>교환 및 반품 정보</a></li>
-			<li class="review" style="width: 20%;"><a>상품 사용후기</a></li>
-			<li class="question" style="width: 20%;"><a>상품 Q & A</a></li>
-		</ul>
-		${item.i_explain } <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~<br>
-		<br>공란~~ <br>
-		<br>공란~~
-	</div>
-	<div id="delivery" style="width: 60%">
-		<br>
-		<br>
-		<br>
-		<br>
-		<ul class="kind_of_tab">
-			<li class="first_box detail" style="width: 20%;"><a>상품 상세정보</a></li>
-			<li class="selected delivery" style="width: 20%;"><a>배송정보</a></li>
-			<li class="exchange" style="width: 20%;"><a>교환 및 반품 정보</a></li>
-			<li class="review" style="width: 20%;"><a>상품 사용후기</a></li>
-			<li class="question" style="width: 20%;"><a>상품 Q & A</a></li>
-		</ul>
-		<br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~<br>
-		<br>공란~~ <br>
-		<br>공란~~
-	</div>
-	<div id="exchange" style="width: 60%">
-		<br>
-		<br>
-		<br>
-		<br>
-		<ul class="kind_of_tab">
-			<li class="first_box detail" style="width: 20%;"><a>상품 상세정보</a></li>
-			<li class="delivery" style="width: 20%;"><a>배송정보</a></li>
-			<li class="exchange selected" style="width: 20%;"><a>교환 및 반품
-					정보</a></li>
-			<li class="review" style="width: 20%;"><a>상품 사용후기</a></li>
-			<li class="question" style="width: 20%;"><a>상품 Q & A</a></li>
-		</ul>
-		<br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~<br>
-		<br>공란~~ <br>
-		<br>공란~~
-	</div>
-	<div id="review" style="width: 60%">
-		<br>
-		<br>
-		<br>
-		<br>
-		<ul class="kind_of_tab">
-			<li class="first_box detail" style="width: 20%;"><a>상품 상세정보</a></li>
-			<li class="delivery" style="width: 20%;"><a>배송정보</a></li>
-			<li class="exchange" style="width: 20%;"><a>교환 및 반품 정보</a></li>
-			<li class="review selected" style="width: 20%;"><a>상품 사용후기</a></li>
-			<li class="question" style="width: 20%;"><a>상품 Q & A</a></li>
-		</ul>
-		<br>
-		<br>공란~~
-		<table>
-			<c:forEach items="${commentsList }" var="comments">
-				<tr>
-					<td>${comments.i_grade }</td>
-					<td>${comments.b_content }</td>
-					<td>${comments.m_id }</td>
-					<td><fmt:formatDate value="${comments.b_regtime }"
-							pattern="YYYY.MM.dd" /></td>
-				</tr>
-			</c:forEach>
-		</table>
-		<br>
-		<br>공란~~ <br>
-		<br>공란~~11 <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~<br>
-		<br>공란~~ <br>
-		<br>공란~~
-	</div>
-	<div id="question" style="width: 60%">
-		<br>
-		<br>
-		<br>
-		<br>
-		<ul class="kind_of_tab">
-			<li class="first_box detail" style="width: 20%;"><a>상품 상세정보</a></li>
-			<li class="delivery" style="width: 20%;"><a>배송정보</a></li>
-			<li class="exchange" style="width: 20%;"><a>교환 및 반품 정보</a></li>
-			<li class="review" style="width: 20%;"><a>상품 사용후기</a></li>
-			<li class="question selected" style="width: 20%;"><a>상품 Q &
-					A</a></li>
-		</ul>
-		<br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~<br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~ <br>
-		<br>공란~~<br>
-		<br>공란~~ <br>
-		<br>공란~~
-	</div>
+    <h3>${item.i_name } (${item.i_age }세 이상, ${item.i_people }~${item.i_people2 }인용)</h3>
+    <table height="100%" width="100%" cellpadding="15" cellspacing="2">
+      <tr><td width="20%">장르</td><td align="left">${item.tp_name }</td></tr>
+      <tr><td>판매가</td><td align="left"><fmt:formatNumber type="currency" value="${item.i_price }" pattern="0,000" var="i_price" /><font style="font-weight:bold; font-size:20px; color:blue;">${i_price }</font>원</td></tr>
+      <tr><td>구매혜택</td><td align="left">적립금 : <fmt:parseNumber integerOnly="true" value="${item.i_price*0.01 }" var="effect"/><font style="font-weight:bold; font-size:20px; color:blue;">${effect}</font>원</td></tr>
+      <tr><td>게임인원</td><td align="left">${item.i_people } ~ ${item.i_people2 }명</td></tr>
+      <tr><td>게임연령</td><td align="left">${item.i_age }세 이상</td></tr>
+      <tr><td>게임 선호도</td><td align="left">
+      <fmt:parseNumber var="avg" value="${avgGrade }" integerOnly="true"/>
+      <c:forEach begin="1" end="${avg }"><font color="gold" style="font-size:20px;">★</font></c:forEach>
+      <c:forEach begin="${avg+1 }" end="5"><font color="gold" style="font-size:20px;">☆</font></c:forEach>
+      &nbsp;${avgGrade } 점
+      </td></tr>
+      <tr><td colspan="2">
+      <div>
+      <input type="hidden" name="i_no" value="${item.i_no }">
+      <span><strong>수량:</strong></span>
+      <span><input id="count" type="text" align="middle" value="1" name="quantity" onchange="javascript:change();">
+        <span>
+          <button id="up_button" class="up_button" ></button><button id="down_button" class="down_button"></button>
+        </span>
+      </span>&nbsp;&nbsp;
+      <span class="total"><font style="font-size:20px;"><strong style="color:#ec187c;">
+      <input type="text" class="invisible" value="${item.i_price }" id="total" readonly>
+      </strong></font>원</span>
+      </div></td></tr>
+    </table>
+    <br>
+    <div align="center">
+        <input type="submit" value="구매하기" class="w3-bar-item w3-button w3-pink" style="width:45%; height:60px; font-weight: bold ; font-family: 돋움; font-size: 24px;">&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="장바구니 담기" class="w3-button w3-white w3-border w3-border-pink w3-text-pink" id="cartgo" style="width:45%; height:60px; font-weight: bold ; font-family: 돋움; font-size: 24px;">
+    </div>
+    <c:if test="${sessionScope.loginUser == 'admin'}">
+    	<input type="submit" value="정보수정" id="editgo">
+    	<input type="button" value="삭제" onclick="javascript:checkConfirm();">
+    </c:if>
+    </form>
+  </span>
+    <br>
+</div>
+<div id="detailInfo" style="width:60%" >
+<br><br><br><br>
+  <ul class="kind_of_tab">
+    <li class="first_box selected detail" style="width:20%;"><a>상품 상세정보</a></li>
+    <li class="delivery" style="width:20%;"><a>배송정보</a></li>
+    <li class="exchange" style="width:20%;"><a>교환 및 반품 정보</a></li>
+    <li class="review" style="width:20%;"><a>상품 사용후기</a></li>
+    <li class="question" style="width:20%;"><a>상품 Q & A</a></li>
+  </ul>
+  ${item.i_explain }
+</div>
+<div id="delivery" style="width:60%">
+<br><br><br><br>
+  <ul class="kind_of_tab">
+    <li class="first_box detail" style="width:20%;"><a>상품 상세정보</a></li>
+    <li class="selected delivery" style="width:20%;"><a>배송정보</a></li>
+    <li class="exchange" style="width:20%;"><a>교환 및 반품 정보</a></li>
+    <li class="review" style="width:20%;"><a>상품 사용후기</a></li>
+    <li class="question" style="width:20%;"><a>상품 Q & A</a></li>
+  </ul>
+  <img alt="배송정보" src="../file/배송정보.jpg">
+</div>
+<div id="exchange" style="width:60%">
+<br><br><br><br>
+  <ul class="kind_of_tab">
+    <li class="first_box detail" style="width:20%;"><a>상품 상세정보</a></li>
+    <li class="delivery" style="width:20%;"><a>배송정보</a></li>
+    <li class="exchange selected" style="width:20%;"><a>교환 및 반품 정보</a></li>
+    <li class="review" style="width:20%;"><a>상품 사용후기</a></li>
+    <li class="question" style="width:20%;"><a>상품 Q & A</a></li>
+  </ul>
+  <img alt="배송정보" src="../file/교환정보.jpg">
+  <img alt="배송정보" src="../file/환불정보.jpg">
+</div>
+<div id="review" style="width:60%">
+<br><br><br><br>
+  <ul class="kind_of_tab">
+    <li class="first_box detail" style="width:20%;"><a>상품 상세정보</a></li>
+    <li class="delivery" style="width:20%;"><a>배송정보</a></li>
+    <li class="exchange" style="width:20%;"><a>교환 및 반품 정보</a></li>
+    <li class="review selected" style="width:20%;"><a>상품 사용후기</a></li>
+    <li class="question" style="width:20%;"><a>상품 Q & A</a></li>
+  </ul>
+  <table>
+  	<c:forEach items="${commentsList }" var="comments">
+  		<tr><td>${comments.i_grade }</td><td>${comments.b_content }</td><td>${comments.m_id }</td><td><fmt:formatDate value="${comments.b_regtime }" pattern="YYYY.MM.dd"/></td></tr>
+  	</c:forEach>
+  </table>
+</div>
+<div id="question" style="width:60%">
+<br><br><br><br>
+  <ul class="kind_of_tab">
+    <li class="first_box detail" style="width:20%;"><a>상품 상세정보</a></li>
+    <li class="delivery" style="width:20%;"><a>배송정보</a></li>
+    <li class="exchange" style="width:20%;"><a>교환 및 반품 정보</a></li>
+    <li class="review" style="width:20%;"><a>상품 사용후기</a></li>
+    <li class="question selected" style="width:20%;"><a>상품 Q & A</a></li>
+  </ul>
+</div>
 </body>
 </html>

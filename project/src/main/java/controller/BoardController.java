@@ -41,6 +41,7 @@ public class BoardController {
 		int endpage = startpage + 9;
 		if(endpage > maxpage) endpage = maxpage;
 		int boardcnt = listcount - (pageNum - 1) * limit;
+		mav.addObject("b_category",category);
 		mav.addObject("pageNum", pageNum);
 		mav.addObject("maxpage", maxpage);
 		mav.addObject("startpage", startpage);
