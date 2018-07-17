@@ -52,14 +52,14 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/write", method=RequestMethod.GET)
-	public ModelAndView write2(Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request, HttpSession session) {
+	public ModelAndView lcwrite2(HttpSession session, Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board",new Board());
 		
 		return mav;
 	}
 	@RequestMapping(value="board/write", method=RequestMethod.POST)
-	public ModelAndView write(Board board, HttpServletRequest request, HttpSession session) {
+	public ModelAndView lcwrite(HttpSession session, Board board, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());

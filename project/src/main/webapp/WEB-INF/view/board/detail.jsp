@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -132,7 +132,7 @@ font-family: "Nanum Pen Script", sans-serif;
 <div id="all">
 	<div class="w3-container" style="max-width: 100%; " align="center">
 		<div class="w3-container" align="center">
-			</h3><p><strong><h3>
+			<p><strong><h3>
 				<c:if test="${param.b_category == '1'}">플레이후기</c:if>
 				<c:if test="${param.b_category == '2'}">팁 게시판</c:if>
 				<c:if test="${param.b_category == '3'}">자유 게시판</c:if>
@@ -250,6 +250,21 @@ font-family: "Nanum Pen Script", sans-serif;
 				${board.b_content }
 			</div>
 		</div>
+		<c:if test="${param.b_category == '6' }">
+		<div class="w3-cell-row">
+			<div class="w3-container w3-cell" style="width: 20%;">
+				<label>동영상</label>
+			</div>
+			<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="center" style="max-width: 80%;">
+				<div align="center" style="width:90%;">
+				<video style="align-self: center;" width="100%" height="240" controls>
+				  <source src="../file/${board.b_fileurl }" type="video/mp4">
+				</video>
+		</div>
+			</div>
+		</div>
+		</c:if>
+		<c:if test="${param.b_category != '6' }">
 		<div class="w3-cell-row">
 			<div class="w3-container w3-cell" style="width: 20%;">
 				<label>첨부파일</label>
@@ -261,6 +276,7 @@ font-family: "Nanum Pen Script", sans-serif;
 				</c:if>
 			</div>
 		</div>
+		</c:if>
 		<div class="w3-cell-row">
 			<div class="w3-container w3-cell" style="padding-top:1%;">
 				<a
