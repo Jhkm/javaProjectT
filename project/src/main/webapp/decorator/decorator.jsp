@@ -250,25 +250,27 @@ body {
 				<a href="#"><img src="/project/img/up.png"></a>
 			</div>
 		</div>
-		<br> <br> <br>
-		<decorator:body />
-		<div class="footer w3-container">
-			<div class="w3-container w3-center" style="margin-left: 27%;">
-				<div class="logo" style="float: left;">
-					<img src="../img/boardhang.png" style="width: 200px">
-				</div>
-				<div class="content"
-					style="float: left; height: 10px; font-size: 12px">
-					<address>
-						<strong>(주)보드행 </strong> 서울특별시 금천구 가산동 238-33<br> 제작자 : 김석원,
-						김재한, 설동희 / 사업자등록번호 : 111-11-22222222<br> 대표번호 : 02-000-1111 /
-						팩스번호 : 02-111-2222 / 이메일 : boardhang@naver.com
-						<p style="padding: 5px 0 0; color: #bbb; font-size: 11px;">
-							copyright(c)<strong>boardhang</strong> all rights reserved.
-						</p>
-					</address>
-					<ul>
-					</ul>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+	<decorator:body/>
+	</div>
+	<div class="footer w3-container">
+				<div class="w3-container w3-center" style="margin-left: 27%;">
+					<div class="logo" style="float:left;">
+						<img src="../img/boardhang.png" style="width:200px">
+					</div>
+				<div class="content" style="float:left; height:10px;font-size:12px">
+				<address>
+					<strong>(주)보드행　　</strong>
+					   서울특별시 금천구 가산동 238-33<br>　　
+					  제작자 : 김석원, 김재한, 설동희　　/　　사업자등록번호 : 111-11-22222222<br>
+					대표번호 : 02-000-1111　　/　　팩스번호 : 02-111-2222　　/　　이메일 : boardhang@naver.com
+					<p style="padding: 5px 0 0;color: #bbb;font-size: 11px;">copyright(c)<strong>boardhang</strong> all rights reserved.</p>
+				</address>
+				<ul>
+				</ul>
 				</div>
 			</div>
 		</div>

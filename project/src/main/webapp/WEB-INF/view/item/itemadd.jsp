@@ -14,19 +14,37 @@
 	var sel_file;
 
 	$(document).ready(function() {
-		var fileTarget = $('.filebox .upload-hidden'); 
-		fileTarget.on('change', function(){ // 값이 변경되면 
+		$("#img_upload").on("change", handleImgsFilesSelect);
+		$(document).on("change",".upload-hidden",function(e){
 			if(window.FileReader){ // modern browser 
 				var filename = $(this)[0].files[0].name; 
 			} else { // old IE 
 				var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
 			} // 추출한 파일명 삽입
 			$(this).siblings('.upload-name').val(filename);
-			handleImgsFilesSelect()
-		});
-		$("#img_upload").on("change", handleImgsFilesSelect);
+			$(this).hide();
+			$(this).removeClass('upload-hidden')
+			
+			var files = e.target.files;
+			var filesArr = Array.prototype.slice.call(files);
+			filesArr.forEach(function(f) {
+				if (!f.type.match("image.*")) {
+					alert("확장자는 이미지 확장자만 가능 합니다.")
+					return;
+				}
+				sel_file = f;
+
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$("#content_img_div").append("<img width='80px' height='80px' src='" + e.target.result +"' id='" +img1 "'><a href=''>x</a>");
+					$(".filebox").append("<input type='file' name='' class='upload-hidden'>") 
+				}
+				reader.readAsDataURL(f);
+			})
+		})
 	});
 
+	
 	function handleImgsFilesSelect(e) {
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
@@ -47,52 +65,12 @@
 	}
 </script>
 <style type="text/css">
-#plus_button {
-	border-color: #ffffff;
-	background-color: #ffffff;
-	background-color: rgba(255, 255, 255, 0.0);
-}
-
-.filebox label {
-	display: inline-block;
-	padding: .5em .75em;
-	color: #999;
-	font-size: inherit;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #fdfdfd;
-	cursor: pointer;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
-	border-radius: .25em;
-}
-
-.filebox input[type="file"] {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
-}
-
-.filebox .upload-name {
-	display: inline-block;
-	padding: .5em .75em; /* label의 패딩값과 일치 */
-	font-size: inherit;
-	font-family: inherit;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #f5f5f5;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
-	border-radius: .25em;
-	-webkit-appearance: none; /* 네이티브 외형 감추기 */
-	-moz-appearance: none;
-	appearance: none;
-}
+	#plus_button {
+		border-color:#ffffff;
+		background-color :#ffffff;
+		background-color : rgba( 255, 255, 255, 0.0 );
+		
+	}
 </style>
 </head>
 <body>
@@ -100,15 +78,13 @@
 	<br>
 	<br>
 	<div align="center">
-		<form:form modelAttribute="item" action="register.sdj"
-			enctype="multipart/form-data">
+		<form:form modelAttribute="item" action="register.sdj" enctype="multipart/form-data">
 			<table border="1" cellpadding="0" cellspacing="0">
 				<tr>
 					<td rowspan="5"><div>
 							<img src="../file/test.jpg" id="img_ex" width="200" height="250">
 						</div></td>
 					<td>게임 장르:</td>
-					<!-- 추후에 장르 DB 조회하여 forEach문으로 다시 작성할 예정 -->
 					<td><select name="it_no">
 							<option>선택하세요</option>
 							<c:forEach var="m" items="${gametype }">
@@ -118,13 +94,11 @@
 				</tr>
 				<tr>
 					<td>상품명 :</td>
-					<td><form:input path="i_name" maxlength="20" size="35" /> <font
-						color="red"><form:errors path="i_name" /></font></td>
+					<td><form:input path="i_name" maxlength="20" size="35" /><font color="red"><form:errors path="i_name" /></font></td>
 				</tr>
 				<tr>
 					<td>상품가격 :</td>
-					<td><form:input path="i_price" maxlength="20" size="35" /> <font
-						color="red"><form:errors path="i_price" /></font></td>
+					<td><form:input path="i_price" maxlength="20" size="35" /><font color="red"><form:errors path="i_price" /></font></td>
 				</tr>
 				<tr>
 					<td>인원 :</td>
@@ -138,13 +112,14 @@
 				<tr>
 					<td colspan="3"><form:textarea path="i_explain"
 							id="smarteditor" rows="10" cols="100"
-							style="width:766px; height:412px;" /> <font color="red"><form:errors
-								path="i_explain" /></font></td>
+							style="width:766px; height:412px;" /> <font color="red"><form:errors path="i_explain" /></font></td>
 				</tr>
 				<tr>
-					<td colspan="3"><input type="file" id="img_upload"
-						name="i_Img_File" accept="image/*"></td>
+					<td colspan="3"><input type="file" id="img_upload" name="i_Img_File" accept="image/*"></td>
 				</tr>
+				<tr><td colspan="3"><div class="filebox">
+					<input type="file" class="upload-hidden" >
+				</div><div id="content_img_div"></div></td></tr>
 				<tr>
 					<td><div class="filebox">
 							<input class="upload-name" value="파일선택" disabled="disabled">
