@@ -5,4 +5,8 @@
 		<pattern>*.sdj</pattern>
 	</decorator>
 	<!-- layout 설정을 제외 함. -->
+	<excludes>
+    	<pattern>/board/purchase*</pattern>
+    	<pattern>/cart/countUp*</pattern>
+  	</excludes>
 </decorators>

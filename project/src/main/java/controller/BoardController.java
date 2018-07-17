@@ -227,7 +227,7 @@ public class BoardController {
 	      return mav;
 	   }
 	@RequestMapping(value="board/purchaseComments",method=RequestMethod.GET)
-	public ModelAndView lcpurchaseComment(int i_no) {
+	public ModelAndView lcpurchaseComment(HttpSession session,int i_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(new Board());
 		mav.addObject("item", service.detail(i_no));

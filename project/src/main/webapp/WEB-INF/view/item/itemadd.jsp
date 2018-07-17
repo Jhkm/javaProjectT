@@ -77,15 +77,13 @@
 	<br>
 	<br>
 	<br>
-	<div align="center">
+	<div align="center" style="width:50%;">
+		<img src="../file/195CEA254CE5F9721E.png" id="img_ex" width="80%" height="500">
 		<form:form modelAttribute="item" action="register.sdj" enctype="multipart/form-data">
 			<table border="1" cellpadding="0" cellspacing="0">
 				<tr>
-					<td rowspan="5"><div>
-							<img src="../file/test.jpg" id="img_ex" width="200" height="250">
-						</div></td>
-					<td>게임 장르:</td>
-					<td><select name="it_no">
+					<td colspan="2">게임 장르:</td>
+					<td colspan="2"><select name="it_no">
 							<option>선택하세요</option>
 							<c:forEach var="m" items="${gametype }">
 								<option value="${m.get('tp_no') }">${m.get('tp_name') }</option>
@@ -93,20 +91,20 @@
 					</select></td>
 				</tr>
 				<tr>
-					<td>상품명 :</td>
+					<td colspan="2">상품명 :</td>
 					<td><form:input path="i_name" maxlength="20" size="35" /><font color="red"><form:errors path="i_name" /></font></td>
 				</tr>
 				<tr>
-					<td>상품가격 :</td>
+					<td colspan="2">상품가격 :</td>
 					<td><form:input path="i_price" maxlength="20" size="35" /><font color="red"><form:errors path="i_price" /></font></td>
 				</tr>
 				<tr>
-					<td>인원 :</td>
+					<td colspan="2">인원 :</td>
 					<td><input type="text" size="5" name="i_people"> ~ <input
 						type="text" size="5" name="i_people2"></td>
 				</tr>
 				<tr>
-					<td>연령대 :</td>
+					<td colspan="2">연령대 :</td>
 					<td><input type="text" size="15" name="i_age">세 이상</td>
 				</tr>
 				<tr>

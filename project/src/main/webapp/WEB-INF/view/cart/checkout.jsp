@@ -59,6 +59,7 @@ td.title {
 </head>
 <body>
 	<h2>배송지 정보</h2>
+	<div style="width:70%">
 	<form action="end.sdj" method="post" name="f">
 		<input type="hidden" name="nolist" value="${nolist }">
 		<table>
@@ -124,5 +125,6 @@ td.title {
 				href="../item/list.sdj">상품목록</a></td>
 		</tr>
 	</table>
+	</div>
 </body>
 </html>
