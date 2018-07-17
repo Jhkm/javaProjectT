@@ -19,7 +19,6 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-
 	function getCookie(cookie_name) {
 		var x, y;
 		var val = document.cookie.split(';');
@@ -42,13 +41,12 @@
 	//alert(${document.cookie.productItems});
 </script>
 <style>
-@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 html, body, h1, h2, h3, h4 {
 	font-family: "Lato", sans-serif
 }
 
 body {
-	 background-color: #F7FFF5;
+	background-color: #F7FFF5;
 }
 
 .mySlides {
@@ -213,7 +211,7 @@ body {
 					</div>
 				</div>
 			</div>
-			<div class="bottom w3-container w3-content" style="float: bottom;" id="best">
+			<div class="bottom w3-container w3-content" style="float: bottom;">
 				<!-- 배스트상품 상품들 -->
 				<div class="w3-row w3-grayscale">
 					<h2 class="bor w3-center">베스트상품</h2>

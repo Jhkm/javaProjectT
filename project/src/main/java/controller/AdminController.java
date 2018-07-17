@@ -55,7 +55,7 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("admin/mailForm")
-	public ModelAndView mailForm(String[] idchks, HttpSession session) {
+	public ModelAndView admailForm(HttpSession session,String[] idchks) {
 		ModelAndView mav = new ModelAndView("admin/mail");
 		if(idchks == null || idchks.length == 0) {
 			throw new ShopException("메일을 보낼 대상자를 선택하세요", "admin.shop");
@@ -166,7 +166,7 @@ public class AdminController {
 		return mav;
 	}*/
 	@RequestMapping("admin/orderList")
-	public ModelAndView orderList(HttpServletRequest request,HttpSession session) {
+	public ModelAndView admorderList(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		List<Sale> saleList = service.getSaleList();
 		for(Sale sale : saleList) {
@@ -184,7 +184,7 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("admin/stepChange")
-	public ModelAndView stepChange(HttpServletRequest request, HttpSession session) {
+	public ModelAndView admstepChange(HttpSession session,HttpServletRequest request) {
 		String s_id = request.getParameter("s_id");
 		String s_step = request.getParameter("s_step");
 		List<SaleItem> siList = service.getSaleItemList(Integer.parseInt(s_id));

@@ -76,8 +76,10 @@ $(document).ready(function() {
 		event.preventDefault();
 	})
 	$("#cartgo").click(function() {
-		var checkAnswer = confirm("장바구니에 담았습니다.\n장바구니 화면으로 이동 하시겠습니까?");
-		location.href='../cart/cartAdd.sdj?no=${item.i_no}&quantity='+count.value+"&checkAS="+checkAnswer;
+		if(confirm("장바구니에 담으시겠습니까?")) {
+			var checkAnswer = confirm("장바구니 화면으로 이동 하시겠습니까?");
+			location.href='../cart/cartAdd.sdj?no=${item.i_no}&quantity='+count.value+"&checkAS="+checkAnswer;
+		}
 		event.preventDefault();
 	})
 	$("#editgo").click(function() {

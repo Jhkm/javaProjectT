@@ -25,7 +25,7 @@ public class CartController {
 	private ShopService service;
 	
 	@RequestMapping("cart/cartAdd")
-	public ModelAndView add(Integer no, Integer quantity,Boolean checkAS, HttpSession session) {
+	public ModelAndView lcadd(HttpSession session,Integer no, Integer quantity,Boolean checkAS) {
 		//selectedItem : id에 해당하는 상품정보를 db에서 읽어서 저장.
 		String loginId = (String)session.getAttribute("loginUser");
 		service.addItemToCart(no,quantity,loginId);
@@ -57,7 +57,7 @@ public class CartController {
 		return mav;
 	}
 	@RequestMapping("cart/cartView")
-	public ModelAndView view(HttpSession session) {
+	public ModelAndView lcview(HttpSession session) {
 		String loginId = (String)session.getAttribute("loginUser");
 		Cart cart = service.selectCart(loginId);
 		ModelAndView mav = new ModelAndView("cart/cart");

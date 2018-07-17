@@ -18,7 +18,6 @@ import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sun.jimi.core.Jimi;
-import com.sun.jimi.core.JimiException;
 import com.sun.jimi.core.JimiUtils;
 
 import dao.BoardDao;
@@ -137,28 +136,25 @@ public class ShopServiceImpl implements ShopService{
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
 			uploadFileCreate(item.getI_Img_File(),request);
 			item.setI_img(item.getI_Img_File().getOriginalFilename()); 
-			item.setI_img(item.getI_Img_File().getOriginalFilename());
 		}
-		createThumbnail(item.getI_img(),request);
-		item.setI_img("thumb_"+item.getI_img());
+//		createThumbnail(item.getI_img(),request);
 		itemDao.create(item);
 	}
 	// 썸네일 만들기
-	private void createThumbnail(String i_img,HttpServletRequest request) {
-		String path = request.getServletContext().getRealPath("/") +"/picture/";
-		System.out.println(path);
-		String orgFile = path + i_img;
-		String thumbFile = path+"thumb_" + i_img;
-		int thumbHeight = 400;
-		int thumbWidth = 400;
-		
-		try {
-			Image thumbnail = JimiUtils.getThumbnail(orgFile, thumbWidth, thumbHeight, Jimi.IN_MEMORY);
-			Jimi.putImage(thumbnail, thumbFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	private void createThumbnail(String i_img,HttpServletRequest request) {
+//		String path = request.getServletContext().getRealPath("/") +"/picture/";
+//		String orgFile = path + i_img;
+//		String thumbFile = path+"thumb_" + i_img;
+//		int thumbHeight = 400;
+//		int thumbWidth = 400;
+//		
+//		try {
+//			Image thumbnail = JimiUtils.getThumbnail(orgFile, thumbWidth, thumbHeight, Jimi.IN_MEMORY);
+//			Jimi.putImage(thumbnail, thumbFile);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private void uploadFileCreate(MultipartFile picture, HttpServletRequest request) {
 		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/";
@@ -186,9 +182,8 @@ public class ShopServiceImpl implements ShopService{
 		if(item.getI_Img_File() != null && !item.getI_Img_File().isEmpty()) {
 			uploadFileCreate(item.getI_Img_File(),request);
 			item.setI_img(item.getI_Img_File().getOriginalFilename()); 
-			item.setI_img(item.getI_Img_File().getOriginalFilename());
-			createThumbnail(item.getI_img(),request);
-			item.setI_img("thumb_"+item.getI_img());
+//			createThumbnail(item.getI_img(),request);
+//			item.setI_img("thumb_"+item.getI_img());
 		}
 		itemDao.update(item);
 	}	

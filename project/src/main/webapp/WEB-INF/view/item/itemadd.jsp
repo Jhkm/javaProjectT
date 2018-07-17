@@ -13,6 +13,16 @@
 	var sel_file;
 
 	$(document).ready(function() {
+		var fileTarget = $('.filebox .upload-hidden'); 
+		fileTarget.on('change', function(){ // 값이 변경되면 
+			if(window.FileReader){ // modern browser 
+				var filename = $(this)[0].files[0].name; 
+			} else { // old IE 
+				var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+			} // 추출한 파일명 삽입
+			$(this).siblings('.upload-name').val(filename);
+			handleImgsFilesSelect()
+		});
 		$("#img_upload").on("change", handleImgsFilesSelect);
 	});
 
@@ -42,6 +52,40 @@
 		background-color : rgba( 255, 255, 255, 0.0 );
 		
 	}
+	.filebox label { 
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999; font-size: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #fdfdfd; 
+	cursor: pointer; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; }
+	.filebox input[type="file"] { 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0; }
+	.filebox .upload-name { 
+	display: inline-block; 
+	padding: .5em .75em; /* label의 패딩값과 일치 */ 
+	font-size: inherit; 
+	font-family: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; 
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+	-moz-appearance: none; 
+	appearance: none; }
 </style>
 </head>
 <body>
@@ -87,15 +131,15 @@
 					<font color="red"><form:errors path="i_explain" /></font></td>
 				</tr>
 				<tr>
-					<td colspan="3"><input type="file" id="img_upload" name="i_Img_File" ></td>
+					<td colspan="3"><input type="file" id="img_upload" name="i_Img_File" accept="image/*"></td>
 				</tr>
-				<!-- 나중에 다시 수정 -->
-				<tr><td colspan="3" valign="middle">
-				<input multiple="multiple" type="file" id="img_upload1" name="i_Img_File1" >
-				<button id="plus_button" class="w3-button w3-circle w3-xlarge" onclick="">+</button></td></tr>
+				<tr><td><div class="filebox">
+					<input class="upload-name" value="파일선택" disabled="disabled">
+					<label for="ex_file">업로드</label>
+					<input type="file" id="ex_file" class="upload-hidden">
+				</div></td></tr>
 				<tr>
-				<!-- 나중에 다시 수정 -->
-					<td colspan="3" align="center"><input type="submit" value="등록"></td>
+					<td colspan="3" align="center"><input type="button" value="목록" onclick="location.href='list.sdj'"><input type="submit" value="등록"></td>
 				</tr>
 			</table>
 		</form:form>
