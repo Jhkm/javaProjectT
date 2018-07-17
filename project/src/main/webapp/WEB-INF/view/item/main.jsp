@@ -19,7 +19,7 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-	function getCookie(cookie_name) {
+/* 	function getCookie(cookie_name) {
 		var x, y;
 		var val = document.cookie.split(';');
 
@@ -31,13 +31,13 @@
 				return unescape(y); // unescape로 디코딩 후 값 리턴
 			}
 		}
-	}
+	} 
 	$(document).ready(function() {
 		var cookie = getCookie(productItems);
 		console.log(cookie);
 		$('#cookie').text(cookie);
 
-	})
+	})*/
 	//alert(${document.cookie.productItems});
 </script>
 <style>
@@ -231,6 +231,7 @@ body {
 									<div class="box" style="height:100%;">
 										<div class="w3-container" style="height:70%;">
 											<a href="detail.sdj?no=${item.i_no}"><img src="../picture/${item.i_img}" style="width: 100%; height:100%;"></a>
+
 										</div>
 										<ul class="info w3-middle"
 											style="list-style: none; padding-left: 0px;">

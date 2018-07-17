@@ -66,8 +66,8 @@
 </style>
 
 </head>
-<body class="w3-content" style="max-width: 300px">
-	<div class="w3-row" id="contact" align="center" style="max-width: 80%;">
+<body class="w3-content" style="max-width: 70%">
+	<div class="w3-row" id="contact" align="center" style="max-width: 50%;">
 		<div class="w3-padding-64 w3-padding-large">
 			<h1>회원가입</h1>
 			<form:form modelAttribute="user"
