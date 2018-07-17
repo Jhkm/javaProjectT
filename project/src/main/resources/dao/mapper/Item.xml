@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="dao.mapper.ItemMapper">
-  <select id="list" resultType="Item" parameterType="map">
-    select * from item join gametype on it_no = tp_no
-    <if test="no != null">
-       where i_no=#{no}
-    </if>
-    <if test="gametype != null and gametype != ''">
-       where it_no = #{gametype}
-    </if>
-    <if test="find != null and kind != null and find != ''">
-      <if test="no != null or (gametype != null and gametype != '')">
-        and 
-      </if>
-      <if test="no == null and (gametype == null or gametype == '')">
-        where 
-      </if>
-      ${kind} like '%${find}%'
-    </if>
-    <if test="sort == null">order by i_no desc</if>
-    <if test="sort != null">order by ${sort}</if>
-  </select>
-  <select id="cart" resultType="map" parameterType="map">
-    select i_no, quantity from cart
-    <if test="id != null">
-      where m_id = #{id}
-    </if>
-    order by m_id
-  </select>
-  <select id="bestitemlist" resultType="Item" parameterType="map">
-      select * from item
-         order by i_amount desc limit 0,8
-   </select>
+<mapper namespace="dao.mapper.ItemMapper">
+	<select id="list" resultType="Item" parameterType="map">
+		select * from item join gametype on it_no = tp_no
+		<if test="no != null">
+			where i_no=#{no}
+		</if>
+		<if test="gametype != null and gametype != ''">
+			where it_no = #{gametype}
+		</if>
+		<if test="find != null and kind != null and find != ''">
+			<if test="no != null or (gametype != null and gametype != '')">
+				and
+			</if>
+			<if test="no == null and (gametype == null or gametype == '')">
+				where
+			</if>
+			${kind} like '%${find}%'
+		</if>
+		<if test="sort == null">order by i_no desc</if>
+		<if test="sort != null">order by ${sort}</if>
+	</select>
+	<select id="cart" resultType="map" parameterType="map">
+		select i_no, quantity from cart
+		<if test="id != null">
+			where m_id = #{id}
+		</if>
+		order by m_id
+	</select>
+	<select id="bestitemlist" resultType="Item" parameterType="map">
+		select * from item
+		order by i_amount desc limit 0,8
+	</select>
 </mapper>

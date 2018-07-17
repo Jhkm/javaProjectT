@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+	pageEncoding="EUC-KR"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 function getCookie(cookie_name) {
 	  var x, y;
@@ -142,7 +143,7 @@ $(document).ready(function() {
 	})
 	
 })
-	function change() {
+function change() {
 		var z = parseInt(count.value)
 		if(z < 0) {
 			count.value = 0;
@@ -158,80 +159,135 @@ $(document).ready(function() {
 	
 </script>
 <style type="text/css">
-  table {
-    border-top:1px solid;
-    border-bottom:1px solid;
-  }
-  span {display:block}
-  table tr td div span input {float:left; height:34px; text-align:center;}
-  .up_button {background:url(../picture/up_button.jpg); display:block; height:17px; width:28px;}
-  .down_button {background:url(../picture/down_button.jpg); display:block; height:17px; width:28px;}
-  table tr td div {text-align:middle;}
-  table tr td div span {float:left; margin:0; padding:0;}
-  .total {float:right;}
-  .invisible {
-        clear: none;
-        border: 0px none;
-        float: none;
-        background-color: #ffffff;
-  }
-  ul.kind_of_tab {
-  	width: 100%;
-    margin: 0 auto;
-    border-bottom: #333 1px solid;
-    list-style: none;
-    padding: 0;
-    display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    /* -webkit-padding-start: 40px; */
-    font-family: Lato,'Nanum Gothic','Malgun Gothic';
-    font-size: 20px;
-    color: #333333;
-    white-space: normal;
-    line-height: normal;
-    font-weight: normal;
-    font-style: normal;
-    text-align: center;
-    font-variant: normal;
-    border-collapse: separate;
-    border-spacing: 2px;
-  }
-  ul.kind_of_tab:after {
-    content: "";
-    display: block;
-    clear: both;
-  }
-	ul.kind_of_tab li {
-    	float: left;
-    	margin-left: -1px;
-    	list-style: none;
-    	margin: 0;
-    	padding: 0;
-    	display: list-item;
-    	text-align: -webkit-match-parent;
-    	border-right: #c7cdd8 1px solid;
-    	border-top: #c7cdd8 1px solid;
-    	border-bottom:#c7cdd8 1px solid;
-	}
-	ul.kind_of_tab li.first_box {
-    	margin-left: 0;
-    	border: #333 1px solid;
-    	border-color:#c7cdd8;
-	}
-	ul.kind_of_tab li.selected {
-		background-color:#e6eaf2;
-	}
-	.fave { width: 70px; height: 50px; background: url(../file/twitter_fave.png) no-repeat; background-position: 0 0; }
-	.fave:hover { background-position: -3519px 0; transition: background 1s steps(55); }
-	.fave_check {width: 70px; height: 50px; background: url(../file/twitter_fave.png) no-repeat; background-position: -3519px 0; transition: background 0s steps(55);}
+table {
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+}
+
+span {
+	display: block
+}
+
+table tr td div span input {
+	float: left;
+	height: 34px;
+	text-align: center;
+}
+
+.up_button {
+	background: url(../picture/up_button.jpg);
+	display: block;
+	height: 17px;
+	width: 28px;
+}
+
+.down_button {
+	background: url(../picture/down_button.jpg);
+	display: block;
+	height: 17px;
+	width: 28px;
+}
+
+table tr td div {
+	text-align: middle;
+}
+
+table tr td div span {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.total {
+	float: right;
+}
+
+.invisible {
+	clear: none;
+	border: 0px none;
+	float: none;
+	background-color: #ffffff;
+}
+
+ul.kind_of_tab {
+	width: 100%;
+	margin: 0 auto;
+	border-bottom: #333 1px solid;
+	list-style: none;
+	padding: 0;
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	/* -webkit-padding-start: 40px; */
+	font-family: Lato, 'Nanum Gothic', 'Malgun Gothic';
+	font-size: 20px;
+	color: #333333;
+	white-space: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-style: normal;
+	text-align: center;
+	font-variant: normal;
+	border-collapse: separate;
+	border-spacing: 2px;
+}
+
+ul.kind_of_tab:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+ul.kind_of_tab li {
+	float: left;
+	margin-left: -1px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: list-item;
+	text-align: -webkit-match-parent;
+	border-right: #c7cdd8 1px solid;
+	border-top: #c7cdd8 1px solid;
+	border-bottom: #c7cdd8 1px solid;
+}
+
+ul.kind_of_tab li.first_box {
+	margin-left: 0;
+	border: #333 1px solid;
+	border-color: #c7cdd8;
+}
+
+ul.kind_of_tab li.selected {
+	background-color: #e6eaf2;
+}
+
+.fave {
+	width: 70px;
+	height: 50px;
+	background: url(../file/twitter_fave.png) no-repeat;
+	background-position: 0 0;
+}
+
+.fave:hover {
+	background-position: -3519px 0;
+	transition: background 1s steps(55);
+}
+
+.fave_check {
+	width: 70px;
+	height: 50px;
+	background: url(../file/twitter_fave.png) no-repeat;
+	background-position: -3519px 0;
+	transition: background 0s steps(55);
+}
 </style>
 
 
 </head>
 <body>
+<<<<<<< HEAD
 <br><br>
 <h2>상품 상세 보기</h2>
 <div align="center" style="height:600px; width:60%">

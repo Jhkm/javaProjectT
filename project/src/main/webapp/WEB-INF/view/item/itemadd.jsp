@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>상품등록 화면</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 	
 	var sel_file;
@@ -73,7 +74,9 @@
 </style>
 </head>
 <body>
-<br><br><br>
+	<br>
+	<br>
+	<br>
 	<div align="center">
 		<form:form modelAttribute="item" action="register.sdj" enctype="multipart/form-data">
 			<table border="1" cellpadding="0" cellspacing="0">
@@ -82,27 +85,25 @@
 							<img src="../file/test.jpg" id="img_ex" width="200" height="250">
 						</div></td>
 					<td>게임 장르:</td>
-					<!-- 추후에 장르 DB 조회하여 forEach문으로 다시 작성할 예정 -->
 					<td><select name="it_no">
-					 	<option>선택하세요</option>
-					 	<c:forEach var="m" items="${gametype }">
-					 	  <option value="${m.get('tp_no') }">${m.get('tp_name') }</option>
-					 	</c:forEach>
+							<option>선택하세요</option>
+							<c:forEach var="m" items="${gametype }">
+								<option value="${m.get('tp_no') }">${m.get('tp_name') }</option>
+							</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
 					<td>상품명 :</td>
-					<td><form:input path="i_name" maxlength="20" size="35" />
-					<font color="red"><form:errors path="i_name" /></font></td>
+					<td><form:input path="i_name" maxlength="20" size="35" /><font color="red"><form:errors path="i_name" /></font></td>
 				</tr>
 				<tr>
 					<td>상품가격 :</td>
-					<td><form:input path="i_price" maxlength="20" size="35" />
-					<font color="red"><form:errors path="i_price" /></font></td>
+					<td><form:input path="i_price" maxlength="20" size="35" /><font color="red"><form:errors path="i_price" /></font></td>
 				</tr>
 				<tr>
 					<td>인원 :</td>
-					<td><input type="text" size="5" name="i_people"> ~ <input type="text" size="5" name="i_people2"></td>
+					<td><input type="text" size="5" name="i_people"> ~ <input
+						type="text" size="5" name="i_people2"></td>
 				</tr>
 				<tr>
 					<td>연령대 :</td>
@@ -111,17 +112,25 @@
 				<tr>
 					<td colspan="3"><form:textarea path="i_explain"
 							id="smarteditor" rows="10" cols="100"
-							style="width:766px; height:412px;" />
-					<font color="red"><form:errors path="i_explain" /></font></td>
+							style="width:766px; height:412px;" /> <font color="red"><form:errors path="i_explain" /></font></td>
 				</tr>
 				<tr>
 					<td colspan="3"><input type="file" id="img_upload" name="i_Img_File" accept="image/*"></td>
 				</tr>
 				<tr><td colspan="3"><div class="filebox">
 					<input type="file" class="upload-hidden" >
-				</div><div id="content_img_div"><!-- <img id="content_img" src="" width="80px" height="80px"> --></div></td></tr>
+				</div><div id="content_img_div"></div></td></tr>
 				<tr>
-					<td colspan="3" align="center"><input type="button" value="목록" onclick="location.href='list.sdj'"><input type="submit" value="등록"></td>
+					<td><div class="filebox">
+							<input class="upload-name" value="파일선택" disabled="disabled">
+							<label for="ex_file">업로드</label> <input type="file" id="ex_file"
+								class="upload-hidden">
+						</div></td>
+				</tr>
+				<tr>
+					<td colspan="3" align="center"><input type="button" value="목록"
+						onclick="location.href='list.sdj'"><input type="submit"
+						value="등록"></td>
 				</tr>
 			</table>
 		</form:form>

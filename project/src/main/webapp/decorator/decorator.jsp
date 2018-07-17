@@ -2,7 +2,7 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+<%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -43,21 +43,24 @@
 </script>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
 html, body, h1, h2, h3, h4 {
 	font-family: "Lato", sans-serif
 }
 
 body {
-	 background-color: #F7FFF5;
+	background-color: #F7FFF5;
 }
 
 .mySlides {
 	display: none
 }
+
 #top {
 	font-family: 'Nanum Pen Script', cursive;
 	font-size: 25px;
 }
+
 .w3-tag, .fa {
 	cursor: pointer
 }
@@ -68,19 +71,22 @@ body {
 	padding: 0;
 	margin-top: 6px
 }
+
 .b_bottom {
-	background-color : #f9f8f4;
-		padding: 20px 0 11px 4px;
-		border-bottom : 1px solid #dadada;
+	background-color: #f9f8f4;
+	padding: 20px 0 11px 4px;
+	border-bottom: 1px solid #dadada;
 }
+
 .fotter {
 	padding: 35px 0 11px 4px;
 	color: #717171;
 	font-size: 12px;
-	line-height:20px;
+	line-height: 20px;
 }
+
 .content {
-	padding:50px 0 11px 4px;
+	padding: 50px 0 11px 4px;
 }
 </style>
 <style type="text/css">
@@ -102,10 +108,12 @@ body {
 	color: #000;
 	font-size: 22px;
 }
+
 #best {
 	border-bottom: 1px solid #dadada;
 	padding: 40px 0 11px 4px;
 }
+
 .scroll-right {
 	height: 35px;
 	font-size: 12px;
@@ -114,10 +122,11 @@ body {
 	top: 150px;
 	left: 75%;
 }
+
 .w3-center .w3-bar {
-    display: inline-block;
-    width: auto;
-    height: auto;
+	display: inline-block;
+	width: auto;
+	height: auto;
 }
 /* #bottom-down {
 	position : absolute;
@@ -145,61 +154,91 @@ body {
 	weight : 200px;
 }*/
 </style>
-<decorator:head/>
+<decorator:head />
 </head>
 <body>
 	<div class="all_all w3-container">
 		<div id="top" class="w3-top w3-center">
-			<div class="w3-bar w3-white w3-card w3-center" style="width:51%; height:80px;">
+			<div class="w3-bar w3-white w3-card w3-center"
+				style="width: 51%; height: 80px;">
 				<div style="vertical-align: middle">
-				<a href="/project/item/main.sdj" class="w3-bar-item w3-button w3-padding-large" style="height:80px;width: 148px; line-height: 371%;">
-				<img src="../img/mainlogo.png" style="width:100%"></a>
+					<a href="/project/item/main.sdj"
+						class="w3-bar-item w3-button w3-padding-large"
+						style="height: 80px; width: 148px; line-height: 371%;"> <img
+						src="../img/mainlogo.png" style="width: 100%"></a>
 				</div>
-         		<div class="w3-dropdown-hover w3-hide-small" >
-	           		 <button class="w3-padding-large w3-button" title="More"style="height:80px;" onclick="location.href='/project/item/list.sdj'">
-	             		보드게임몰 <i class="fa fa-caret-down" ></i>
-	            	</button>
-            	<div class="w3-dropdown-content w3-bar-block w3-card-4">
-	               <a href="/project/item/list.sdj?gametype=7" class="w3-bar-item w3-button">액션</a>
-	               <a href="/project/item/list.sdj?gametype=1"   class="w3-bar-item w3-button">순발력</a>
-	               <a href="/project/item/list.sdj?gametype=4"   class="w3-bar-item w3-button">추리</a> 
-	               <a href="/project/item/list.sdj?gametype=2"   class="w3-bar-item w3-button">학습</a> 
-	               <a href="/project/item/list.sdj?gametype=6"   class="w3-bar-item w3-button">전략</a> 
-	               <a href="/project/item/list.sdj?gametype=10"   class="w3-bar-item w3-button">복불복</a>
-	               <a href="/project/item/list.sdj?gametype=8"   class="w3-bar-item w3-button">스포츠</a>
-           	 	</div>
-        	</div>
-         	<div class="w3-dropdown-hover w3-hide-small">
-          	  <button class="w3-padding-large w3-button" title="More" style="height:80px">
-           		    커뮤니티 <i class="fa fa-caret-down" ></i>
-              </button>
-            	<div class="w3-dropdown-content w3-bar-block w3-card-4">
-	               <a href="/project/board/list.sdj?b_category=1" class="w3-bar-item w3-button">플레이후기</a>
-	               <a href="/project/board/list.sdj?b_category=2"   class="w3-bar-item w3-button">팁 게시판</a>
-	               <a href="/project/board/list.sdj?b_category=3"   class="w3-bar-item w3-button">자유게시판</a> 
-	               <a href="/project/board/list.sdj?b_category=4"   class="w3-bar-item w3-button">요청게시판</a> 
-	               <a href="/project/board/list.sdj?b_category=5"   class="w3-bar-item w3-button">번개게시판</a> 
-	               <a href="/project/board/list.sdj?b_category=6"   class="w3-bar-item w3-button">게임플레이 동영상</a>
-	               <a href="/project/board/list.sdj?b_category=7"   class="w3-bar-item w3-button">후기게시판</a>
-	            </div>
-        	 </div>
-        	 <div>
-         <c:if test="${!empty sessionScope.loginUser}">
-               	<c:if test="${sessionScope.loginUser eq 'admin' }">
-               		<a href="/project/admin/admin.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right" style="height:80px;line-height: 248%;">관리자페이지</a>
-              	</c:if>
-               	<c:if test="${sessionScope.loginUser ne 'admin' }">
-               		<a href="/project/user/mypage.sdj?id=${sessionScope.loginUser}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right" style="height:80px; line-height: 248%;">마이페이지</a>
-               	</c:if>
-               </c:if>
-          	</div>
-         <c:if test="${empty sessionScope.loginUser}">
-         <a href="/project/user/login.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right" style="height:80px; line-height: 248%;">로그인</a>
-         <a href="/project/user/userForm.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-small"style="height:80px; line-height: 248%;">회원가입</a>
-       	</c:if>
-       	<c:if test="${!empty sessionScope.loginUser}">
-         <a href="/project/user/logout.sdj" class="w3-bar-item w3-button w3-padding-large w3-hide-smal w3-right" style="height:80px; line-height: 248%;">로그아웃</a>
-       	</c:if>
+				<div class="w3-dropdown-hover w3-hide-small">
+					<button class="w3-padding-large w3-button" title="More"
+						style="height: 80px;"
+						onclick="location.href='/project/item/list.sdj'">
+						보드게임몰 <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<a href="/project/item/list.sdj?gametype=7"
+							class="w3-bar-item w3-button">액션</a> <a
+							href="/project/item/list.sdj?gametype=1"
+							class="w3-bar-item w3-button">순발력</a> <a
+							href="/project/item/list.sdj?gametype=4"
+							class="w3-bar-item w3-button">추리</a> <a
+							href="/project/item/list.sdj?gametype=2"
+							class="w3-bar-item w3-button">학습</a> <a
+							href="/project/item/list.sdj?gametype=6"
+							class="w3-bar-item w3-button">전략</a> <a
+							href="/project/item/list.sdj?gametype=10"
+							class="w3-bar-item w3-button">복불복</a> <a
+							href="/project/item/list.sdj?gametype=8"
+							class="w3-bar-item w3-button">스포츠</a>
+					</div>
+				</div>
+				<div class="w3-dropdown-hover w3-hide-small">
+					<button class="w3-padding-large w3-button" title="More"
+						style="height: 80px">
+						커뮤니티 <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						<a href="/project/board/list.sdj?b_category=1"
+							class="w3-bar-item w3-button">플레이후기</a> <a
+							href="/project/board/list.sdj?b_category=2"
+							class="w3-bar-item w3-button">팁 게시판</a> <a
+							href="/project/board/list.sdj?b_category=3"
+							class="w3-bar-item w3-button">자유게시판</a> <a
+							href="/project/board/list.sdj?b_category=4"
+							class="w3-bar-item w3-button">요청게시판</a> <a
+							href="/project/board/list.sdj?b_category=5"
+							class="w3-bar-item w3-button">번개게시판</a> <a
+							href="/project/board/list.sdj?b_category=6"
+							class="w3-bar-item w3-button">게임플레이 동영상</a> <a
+							href="/project/board/list.sdj?b_category=7"
+							class="w3-bar-item w3-button">후기게시판</a>
+					</div>
+				</div>
+				<div>
+					<c:if test="${!empty sessionScope.loginUser}">
+						<c:if test="${sessionScope.loginUser eq 'admin' }">
+							<a href="/project/admin/admin.sdj"
+								class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"
+								style="height: 80px; line-height: 248%;">관리자페이지</a>
+						</c:if>
+						<c:if test="${sessionScope.loginUser ne 'admin' }">
+							<a href="/project/user/mypage.sdj?id=${sessionScope.loginUser}"
+								class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"
+								style="height: 80px; line-height: 248%;">마이페이지</a>
+						</c:if>
+					</c:if>
+				</div>
+				<c:if test="${empty sessionScope.loginUser}">
+					<a href="/project/user/login.sdj"
+						class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right"
+						style="height: 80px; line-height: 248%;">로그인</a>
+					<a href="/project/user/userForm.sdj"
+						class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+						style="height: 80px; line-height: 248%;">회원가입</a>
+				</c:if>
+				<c:if test="${!empty sessionScope.loginUser}">
+					<a href="/project/user/logout.sdj"
+						class="w3-bar-item w3-button w3-padding-large w3-hide-smal w3-right"
+						style="height: 80px; line-height: 248%;">로그아웃</a>
+				</c:if>
 			</div>
 		</div>
 		<div class="scroll-right" style="fixed: right; margin-left: 20px">
@@ -233,8 +272,8 @@ body {
 				<ul>
 				</ul>
 				</div>
-				</div>
 			</div>
+		</div>
 	</div>
 </body>
 </html>
