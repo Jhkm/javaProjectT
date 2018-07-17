@@ -14,7 +14,8 @@
 <script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 <title>로그인</title>
 </head>
-<body class="w3-container">
+<body>
+	<div align="center" style="max-width:50%;">
 	<h2>로그인</h2>
 	<form:form modelAttribute="user" method="post" action="login.sdj">
 		<form:hidden path="m_name" value="의미없음" />
@@ -41,5 +42,6 @@
 				onclick="location.href='userForm.sdj'">
 		</div>
 	</form:form>
+	</div>
 </body>
 </html>

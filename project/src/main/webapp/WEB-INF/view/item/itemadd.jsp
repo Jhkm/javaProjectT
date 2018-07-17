@@ -36,7 +36,7 @@
 
 				var reader = new FileReader();
 				reader.onload = function(e) {
-					$("#content_img_div").append("<img width='80px' height='80px' src='" + e.target.result +"' id='" +img1 "'><a href=''>x</a>");
+					$("#content_img_div").append("<img width='80px' height='80px' src='" + e.target.result +"'><a href=''>x</a>");
 					$(".filebox").append("<input type='file' name='' class='upload-hidden'>") 
 				}
 				reader.readAsDataURL(f);
@@ -120,13 +120,6 @@
 				<tr><td colspan="3"><div class="filebox">
 					<input type="file" class="upload-hidden" >
 				</div><div id="content_img_div"></div></td></tr>
-				<tr>
-					<td><div class="filebox">
-							<input class="upload-name" value="파일선택" disabled="disabled">
-							<label for="ex_file">업로드</label> <input type="file" id="ex_file"
-								class="upload-hidden">
-						</div></td>
-				</tr>
 				<tr>
 					<td colspan="3" align="center"><input type="button" value="목록"
 						onclick="location.href='list.sdj'"><input type="submit"
