@@ -81,7 +81,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="board/reply", method=RequestMethod.POST)
-	public ModelAndView reply(Board board, HttpServletRequest request, HttpSession session) {
+	public ModelAndView lcreply(HttpSession session, Board board, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 //		if (bindingResult.hasErrors()) {
 //			mav.getModel().putAll(bindingResult.getModel());
@@ -99,7 +99,7 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/update", method=RequestMethod.POST)
-	public ModelAndView boardUpdate(Board board, HttpServletRequest request) {
+	public ModelAndView lcboardUpdate(HttpSession session, Board board, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Board dbBoard = service.getBoard(board.getB_no());
 		/*if (bindingResult.hasErrors()) {
@@ -121,7 +121,7 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping("board/delete")
-	public ModelAndView boardDelete(HttpServletRequest request, Integer b_category, Integer pageNum) {
+	public ModelAndView lcboardDelete(HttpSession session, HttpServletRequest request, Integer b_category, Integer pageNum) {
 		ModelAndView mav = new ModelAndView();
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		Board dbBoard = service.getBoard(b_no);
@@ -161,7 +161,7 @@ public class BoardController {
 //	}
 	
 	@RequestMapping(value="board/r_reply", method=RequestMethod.POST)
-	public ModelAndView reply(Reply reply, Board board, HttpServletRequest request, HttpSession session) {
+	public ModelAndView lcreply(HttpSession session, Reply reply, Board board, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
@@ -176,7 +176,7 @@ public class BoardController {
 		return mav;
 	} 
 	@RequestMapping(value="board/r_update", method=RequestMethod.POST)
-	public ModelAndView r_update(Reply reply, Board board, HttpServletRequest request, HttpSession session) {
+	public ModelAndView lcr_update(HttpSession session, Reply reply, Board board, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
@@ -190,7 +190,7 @@ public class BoardController {
 		return mav;
 	}
 	@RequestMapping(value="board/replyRe", method=RequestMethod.POST)
-	public ModelAndView replyRe(Board board, Reply reply, HttpServletRequest request, HttpSession session) {
+	public ModelAndView lcreplyRe(HttpSession session, Board board, Reply reply, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String b_no = request.getParameter("b_no");
 		String pageNum = request.getParameter("pageNum");
@@ -210,7 +210,7 @@ public class BoardController {
 		return mav;
 	}
 	 @RequestMapping("board/replyDelete")
-	   public ModelAndView comreplyConreplyDelete(HttpSession session, String memberid, Integer b_category, Integer b_no, Integer pageNum, Integer r_no) {
+	   public ModelAndView lccomreplyConreplyDelete(HttpSession session, String memberid, Integer b_category, Integer b_no, Integer pageNum, Integer r_no) {
 	      ModelAndView mav = new ModelAndView();
 	      try {
 	    	  service.replyDelete(r_no);
@@ -227,14 +227,14 @@ public class BoardController {
 	      return mav;
 	   }
 	@RequestMapping(value="board/purchaseComments",method=RequestMethod.GET)
-	public ModelAndView purchaseComment(int i_no) {
+	public ModelAndView lcpurchaseComment(int i_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(new Board());
 		mav.addObject("item", service.detail(i_no));
 		return mav;
 	}
 	@RequestMapping(value="board/purchaseComments",method=RequestMethod.POST)
-	public ModelAndView purchaseComments(HttpServletRequest request, HttpSession session,Board board) {
+	public ModelAndView lcpurchaseComments(HttpSession session, HttpServletRequest request, Board board) {
 		ModelAndView mav = new ModelAndView("board/closeWindow");
 		service.insert(board, request, session);
 		return mav;
@@ -249,7 +249,7 @@ public class BoardController {
 	
 	@RequestMapping("board/join")
 	@ResponseBody
-	public String join(@RequestParam(value="value")String value, @RequestParam(value="b_no")Integer b_no, HttpSession session, HttpServletRequest request) {
+	public String lcjoin(HttpSession session, @RequestParam(value="value")String value, @RequestParam(value="b_no")Integer b_no, HttpServletRequest request) {
 		String result = "";
 		if (value.equals("1")) {
 			try{

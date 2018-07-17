@@ -132,7 +132,7 @@ font-family: "Nanum Pen Script", sans-serif;
 <div id="all">
 	<div class="w3-container" style="max-width: 100%; " align="center">
 		<div class="w3-container" align="center">
-			<p><strong><h3>
+			<p><h3><strong>
 				<c:if test="${param.b_category == '1'}">플레이후기</c:if>
 				<c:if test="${param.b_category == '2'}">팁 게시판</c:if>
 				<c:if test="${param.b_category == '3'}">자유 게시판</c:if>
@@ -140,7 +140,7 @@ font-family: "Nanum Pen Script", sans-serif;
 				<c:if test="${param.b_category == '5'}">번개 게시판</c:if>
 				<c:if test="${param.b_category == '6'}">게임플레이 동영상</c:if>
 				<c:if test="${param.b_category == '7'}">후기 게시판</c:if>
-			</h3></strong></p>
+			</strong></p></h3>
 		</div>
 		<div class="w3-cell-row">
 			<div class="w3-container w3-cell"  style="width: 20%;">
@@ -250,21 +250,6 @@ font-family: "Nanum Pen Script", sans-serif;
 				${board.b_content }
 			</div>
 		</div>
-		<c:if test="${param.b_category == '6' }">
-		<div class="w3-cell-row">
-			<div class="w3-container w3-cell" style="width: 20%;">
-				<label>동영상</label>
-			</div>
-			<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="center" style="max-width: 80%;">
-				<div align="center" style="width:90%;">
-				<video style="align-self: center;" width="100%" height="240" controls>
-				  <source src="../file/${board.b_fileurl }" type="video/mp4">
-				</video>
-		</div>
-			</div>
-		</div>
-		</c:if>
-		<c:if test="${param.b_category != '6' }">
 		<div class="w3-cell-row">
 			<div class="w3-container w3-cell" style="width: 20%;">
 				<label>첨부파일</label>
@@ -276,7 +261,6 @@ font-family: "Nanum Pen Script", sans-serif;
 				</c:if>
 			</div>
 		</div>
-		</c:if>
 		<div class="w3-cell-row">
 			<div class="w3-container w3-cell" style="padding-top:1%;">
 				<a

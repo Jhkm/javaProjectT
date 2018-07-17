@@ -60,11 +60,7 @@ $(document).ready(function() {
 	    exdate.setDate(exdate.getDate() + exdays);
 	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
 	    document.cookie = cookieName + "=" + cookieValue;
-<<<<<<< HEAD
 	} */
-=======
-	}
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 	$("#up_button").click(function(){
 		var y = parseInt(count.value)
 		count.value = y+1;;
