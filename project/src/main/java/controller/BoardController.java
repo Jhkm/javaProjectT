@@ -67,7 +67,6 @@ public class BoardController {
 			if (request.getParameter("b_category").equals("5")) {
 				board.setG_id((String)session.getAttribute("loginUser"));
 			}
-			System.out.println(board);
 			service.insert(board, request, session);
 			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {

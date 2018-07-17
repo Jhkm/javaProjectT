@@ -54,6 +54,7 @@
 		<label>글작성하기</label>
 	</div>
 	<form:form modelAttribute="board" action="write.sdj" method="post" enctype="multipart/form-data" name="f" >
+	<form:hidden path="m_id" value="${loginUser }"/>
 	<div class="w3-cell-row" style="border:1px solid;">
 		<div class="w3-container w3-teal w3-cell" style="width: 20%;vertical-align: middle;">
 			<label>제목</label>
@@ -137,6 +138,7 @@
 	<input type="hidden" name="g_id" value="${session.loginUser}">
 	</c:if>
 	<c:if test="${param.b_category != '5'}">
+		<input type="hidden" name="g_id" value="0">
 		<input type="hidden" name="b_state" value="0">
 		<input type="hidden" name="b_date" value="0">
 		<input type="hidden" name="b_people" value="0">

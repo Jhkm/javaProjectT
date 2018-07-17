@@ -31,4 +31,6 @@ public interface BoardDao {
 
 	List<Board> review();
 
+	void insert2(Board board);
+
 }
