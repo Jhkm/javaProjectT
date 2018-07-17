@@ -2,7 +2,7 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+<%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -52,10 +52,12 @@ body {
 .mySlides {
 	display: none
 }
+
 #top {
 	font-family: 'Nanum Pen Script', cursive;
 	font-size: 25px;
 }
+
 .w3-tag, .fa {
 	cursor: pointer
 }
@@ -66,19 +68,22 @@ body {
 	padding: 0;
 	margin-top: 6px
 }
+
 .b_bottom {
-	background-color : #f9f8f4;
-		padding: 20px 0 11px 4px;
-		border-bottom : 1px solid #dadada;
+	background-color: #f9f8f4;
+	padding: 20px 0 11px 4px;
+	border-bottom: 1px solid #dadada;
 }
+
 .fotter {
 	padding: 35px 0 11px 4px;
 	color: #717171;
 	font-size: 12px;
-	line-height:20px;
+	line-height: 20px;
 }
+
 .content {
-	padding:50px 0 11px 4px;
+	padding: 50px 0 11px 4px;
 }
 </style>
 <style type="text/css">
@@ -100,10 +105,12 @@ body {
 	color: #000;
 	font-size: 22px;
 }
+
 #best {
 	border-bottom: 1px solid #dadada;
 	padding: 40px 0 11px 4px;
 }
+
 .scroll-right {
 	height: 35px;
 	font-size: 12px;
@@ -112,10 +119,11 @@ body {
 	top: 150px;
 	left: 75%;
 }
+
 .w3-center .w3-bar {
-    display: inline-block;
-    width: auto;
-    height: auto;
+	display: inline-block;
+	width: auto;
+	height: auto;
 }
 /* #bottom-down {
 	position : absolute;
@@ -224,12 +232,15 @@ body {
 								<div class="tb-center w3-btn w3-card">
 									<div class="box">
 										<div class="w3-container">
-											<a href="detail.sdj?no=${item.i_no}"><img src="/img/${item.i_no}/i1.jpg" style="width: 100%; padding: 30px 20px 11px 4px;"></a>
+											<a href="detail.sdj?no=${item.i_no}"><img
+												src="/img/${item.i_no}/i1.jpg"
+												style="width: 100%; padding: 30px 20px 11px 4px;"></a>
 										</div>
 										<ul class="info w3-middle"
 											style="list-style: none; padding-left: 0px;">
 											<li class="dsc">${item.i_name}</li>
-											<li><fmt:formatNumber value="${item.i_price }" pattern="#,###"></fmt:formatNumber>원</li>
+											<li><fmt:formatNumber value="${item.i_price }"
+													pattern="#,###"></fmt:formatNumber>원</li>
 										</ul>
 									</div>
 								</div>
@@ -245,30 +256,24 @@ body {
 			</div>
 			<div class="b_bottom">
 				<div class="w3-container">
-					<div class="cscenter" style="float:left;width: 300px;">
+					<div class="cscenter" style="float: left; width: 300px;">
 						<h3>CS Center</h3>
 						<strong>02-999-8888</strong>
 						<p>
-							"평일 09:00 ~ 18:00"<br>
-							"점심 12:00 ~ 13:00"<br>
-							"공휴일, 토요일, 주말 휴일"							
+							"평일 09:00 ~ 18:00"<br> "점심 12:00 ~ 13:00"<br> "공휴일,
+							토요일, 주말 휴일"
 						</p>
 					</div>
-					<div class="bank" style="float:left;width: 300px;">
+					<div class="bank" style="float: left; width: 300px;">
 						<h3>BANK INFO</h3>
 						<strong>111-2222-33333333</strong>
-						<p>
-						예금주 : 보드행(주)
-						</p>
+						<p>예금주 : 보드행(주)</p>
 					</div>
-					<div class="review" style="float:left;width: 300px; ">
+					<div class="review" style="float: left; width: 300px;">
 						<h3>REVIEW</h3>
 						<c:forEach items="${review}" var="review" begin="0" end="5">
-							<li>
-								<a href="detail.sdj?b_no=${review.b_no}">
-								${review.b_subject }
-								</a>
-							</li>
+							<li><a href="detail.sdj?b_no=${review.b_no}">
+									${review.b_subject } </a></li>
 						</c:forEach>
 					</div>
 				</div>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="dao.mapper.SaleMapper">
-   <select id="list" resultType="Sale" parameterType="map">
-     select * from sale
-     
-     order by s_updatetime desc
-     <if test="sort != null">
-       ,${sort}
-     </if>
-   </select>
-   
- </mapper>
+<mapper namespace="dao.mapper.SaleMapper">
+	<select id="list" resultType="Sale" parameterType="map">
+		select * from sale
+
+		order by s_updatetime desc
+		<if test="sort != null">
+			,${sort}
+		</if>
+	</select>
+
+</mapper>

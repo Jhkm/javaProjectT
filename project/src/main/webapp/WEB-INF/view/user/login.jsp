@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+	pageEncoding="EUC-KR"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,30 +15,31 @@
 <title>로그인</title>
 </head>
 <body class="w3-container">
-<h2>로그인</h2>
-<form:form modelAttribute="user" method="post" action="login.sdj">
-	<form:hidden path="m_name" value="의미없음" />
-	<spring:hasBindErrors name="user">
-		<font color="red">
-			<c:forEach items="${errors.globalErrors }" var="error">
-				<spring:message code="${error.code }" />
-			</c:forEach>
-		</font>
-	</spring:hasBindErrors>
-		<div class="w3-row-padding" style="margin:24 24px;">
+	<h2>로그인</h2>
+	<form:form modelAttribute="user" method="post" action="login.sdj">
+		<form:hidden path="m_name" value="의미없음" />
+		<spring:hasBindErrors name="user">
+			<font color="red"> <c:forEach items="${errors.globalErrors }"
+					var="error">
+					<spring:message code="${error.code }" />
+				</c:forEach>
+			</font>
+		</spring:hasBindErrors>
+		<div class="w3-row-padding" style="margin: 24 24px;">
 			<label>ID</label>
 			<form:input class="w3-input w3-border" path="m_id" />
-			<font color="red"><form:errors path="m_id"/></font>
+			<font color="red"><form:errors path="m_id" /></font>
 		</div>
-		<div class="w3-row-padding" style="margin:24 24px;">
+		<div class="w3-row-padding" style="margin: 24 24px;">
 			<label>Password</label>
 			<form:password class="w3-input w3-border" path="m_passwd" />
-			<font color="red"><form:errors path="m_passwd"/></font>
+			<font color="red"><form:errors path="m_passwd" /></font>
 		</div>
-		<div class="w3-row-padding" style="margin:24 24px;">
-			<input class="w3-button w3-teal w3-center"  type="submit" value="로그인">
-			<input class="w3-button w3-teal w3-center"  type="button" value="회원가입" onclick="location.href='userForm.sdj'">
+		<div class="w3-row-padding" style="margin: 24 24px;">
+			<input class="w3-button w3-teal w3-center" type="submit" value="로그인">
+			<input class="w3-button w3-teal w3-center" type="button" value="회원가입"
+				onclick="location.href='userForm.sdj'">
 		</div>
-</form:form>
+	</form:form>
 </body>
 </html>

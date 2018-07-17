@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+	pageEncoding="EUC-KR"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <%--
 	/WebContent/model1/board/updateForm.jsp
 	1. num 파라미터에 해당하는 게시물을 DB에서 조회하여 Board 객체 저장
@@ -20,7 +20,8 @@
 </head>
 
 <body>
-	<form:form modelAttribute="board" action="update.sdj" method="post" enctype="multipart/form-data" name="f">
+	<form:form modelAttribute="board" action="update.sdj" method="post"
+		enctype="multipart/form-data" name="f">
 		<%--
 			file2 : file의 정보를 저장하는 파라미터
 		--%>
@@ -29,30 +30,28 @@
 		<input type="hidden" name="pageNum" value="${param.pageNum }">
 		<table border="1" cellpadding="0" cellspacing="0">
 			<caption>SPRING 게시판</caption>
-				<tr>
-					<td align="center">제목</td>
-					<td><form:input path="b_subject"/>
-					<font color="red"><form:errors path="b_subject"/></font></td>
-				</tr>
-				<tr>
-					<td align="center">내용</td>
-					<td><textarea rows="15" cols="80" name="b_content">${board.b_content }</textarea></td>
-				</tr>
-				<tr>
-					<td align="center">첨부파일</td>
-					<td>
-					<c:if test="${!empty board.b_fileurl }">
+			<tr>
+				<td align="center">제목</td>
+				<td><form:input path="b_subject" /> <font color="red"><form:errors
+							path="b_subject" /></font></td>
+			</tr>
+			<tr>
+				<td align="center">내용</td>
+				<td><textarea rows="15" cols="80" name="b_content">${board.b_content }</textarea></td>
+			</tr>
+			<tr>
+				<td align="center">첨부파일</td>
+				<td><c:if test="${!empty board.b_fileurl }">
 						<div id="file_desc">
-							<a href="file/${board.b_fileurl }">${board.b_fileurl }</a>.
-							<a href="javascript:file_delete()">[첨부파일 삭제]</a>
+							<a href="file/${board.b_fileurl }">${board.b_fileurl }</a>. <a
+								href="javascript:file_delete()">[첨부파일 삭제]</a>
 						</div>
-					</c:if>
-					<input type="file" name="b_file">
-					</td>
-				</tr>
-				<tr>
-					<td align="center" colspan="2"> <a href="javascript:document.f.submit()">[게시판수정]</a> </td>
-				</tr>
+					</c:if> <input type="file" name="b_file"></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2"><a
+					href="javascript:document.f.submit()">[게시판수정]</a></td>
+			</tr>
 		</table>
 	</form:form>
 </body>

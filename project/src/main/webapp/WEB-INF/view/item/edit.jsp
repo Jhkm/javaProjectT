@@ -32,7 +32,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>상품수정 화면</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 	
 	var sel_file;
@@ -65,52 +66,57 @@
 </head>
 <body>
 	<div align="center">
-		<form:form modelAttribute="item" action="update.sdj" enctype="multipart/form-data">
-		    <form:hidden path="i_no"/>
-		    <form:hidden path="i_img"/>
+		<form:form modelAttribute="item" action="update.sdj"
+			enctype="multipart/form-data">
+			<form:hidden path="i_no" />
+			<form:hidden path="i_img" />
 			<table border="1" cellpadding="0" cellspacing="0">
 				<tr>
 					<td rowspan="5"><div>
-							<img src="../picture/${item.i_img }" id="img_ex" width="100%" height="100%">
+							<img src="../picture/${item.i_img }" id="img_ex" width="100%"
+								height="100%">
 						</div></td>
 					<td>게임 장르:</td>
 					<td><select name="it_no">
-					 	<option>선택하세요</option>
-					 	<c:forEach var="m" items="${gametype }">
-					 	  <option value="${m.get('tp_no') }">${m.get('tp_name') }</option>
-					 	</c:forEach>
+							<option>선택하세요</option>
+							<c:forEach var="m" items="${gametype }">
+								<option value="${m.get('tp_no') }">${m.get('tp_name') }</option>
+							</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
 					<td>상품명 :</td>
-					<td><form:input path="i_name" maxlength="20" size="35" />
-					<font color="red"><form:errors path="i_name" /></font></td>
+					<td><form:input path="i_name" maxlength="20" size="35" /> <font
+						color="red"><form:errors path="i_name" /></font></td>
 				</tr>
 				<tr>
 					<td>상품가격 :</td>
-					<td><form:input path="i_price" maxlength="20" size="35" />
-					<font color="red"><form:errors path="i_price" /></font></td>
+					<td><form:input path="i_price" maxlength="20" size="35" /> <font
+						color="red"><form:errors path="i_price" /></font></td>
 				</tr>
 				<tr>
 					<td>인원 :</td>
-					<td><form:input size="5" path="i_people"/> ~ <form:input size="5" path="i_people2"/></td>
+					<td><form:input size="5" path="i_people" /> ~ <form:input
+							size="5" path="i_people2" /></td>
 				</tr>
 				<tr>
 					<td>연령대 :</td>
-					<td><form:input size="15" path="i_age"/>세 이상</td>
+					<td><form:input size="15" path="i_age" />세 이상</td>
 				</tr>
 				<tr>
 					<td colspan="3"><form:textarea path="i_explain"
 							id="smarteditor" rows="10" cols="100"
-							style="width:766px; height:412px;" />
-					<font color="red"><form:errors path="i_explain" /></font></td>
+							style="width:766px; height:412px;" /> <font color="red"><form:errors
+								path="i_explain" /></font></td>
 				</tr>
 				<tr>
 					<td colspan="3"><input type="file" id="img_upload"
 						name="i_Img_File">${item.i_img }</td>
 				</tr>
 				<tr>
-					<td colspan="3" align="center"><input type="submit" value="수정"><input type="button" value="목록" onclick="location.href='../item/list.sdj'"></td>
+					<td colspan="3" align="center"><input type="submit" value="수정"><input
+						type="button" value="목록"
+						onclick="location.href='../item/list.sdj'"></td>
 				</tr>
 			</table>
 		</form:form>

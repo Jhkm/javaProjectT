@@ -251,101 +251,101 @@ body {
 			</div>
 			<div class="bottom w3-container w3-content" style="float: bottom;">
 				<!-- 배스트상품 상품들 -->
-					<div class="w3-row w3-grayscale">
-						<h2 class="bor w3-center">베스트상품</h2>
+				<div class="w3-row w3-grayscale">
+					<h2 class="bor w3-center">베스트상품</h2>
+					<div class="w3-col l3 s6">
+						<div class="w3-container">
+							<img src="/w3images/jeans1.jpg" style="width: 100%">
+							<p>
+								Ripped Skinny Jeans<br> <b>$0000</b>
+							</p>
+						</div>
+						<div class="w3-container">
+							<img src="/w3images/jeans2.jpg" style="width: 100%">
+							<p>
+								Mega Ripped Jeans<br> <b>$2222</b>
+							</p>
+						</div>
 						<div class="w3-col l3 s6">
+							<div class="w3-container">
+								<div class="w3-display-container">
+									<img src="/w3images/jeans2.jpg" style="width: 100%">
+								</div>
+								<p>
+									Mega Ripped Jeans<br> <b>$1111</b>
+								</p>
+							</div>
+							<div class="w3-container">
+								<img src="/w3images/jeans3.jpg" style="width: 100%">
+								<p>
+									Washed Skinny Jeans<br> <b>$2222</b>
+								</p>
+							</div>
+						</div>
+
+						<div class="w3-col l3 s6">
+							<div class="w3-container">
+								<img src="/w3images/jeans3.jpg" style="width: 100%">
+								<p>
+									Washed Skinny Jeans<br> <b>$3333</b>
+								</p>
+							</div>
+							<div class="w3-container">
+								<div class="w3-display-container">
+									<img src="/w3images/jeans4.jpg" style="width: 100%">
+								</div>
+								<p>
+									Vintage Skinny Jeans<br> <b class="w3-text-red">$4444</b>
+								</p>
+							</div>
+						</div>
+
+					</div>
+					<div id="bottom-down">
+						<div class="w3-col l3 s6">
+							<div class="w3-container">
+								<img src="/w3images/jeans4.jpg" style="width: 100%">
+								<p>
+									Vintage Skinny Jeans<br> <b>$5555</b>
+								</p>
+							</div>
 							<div class="w3-container">
 								<img src="/w3images/jeans1.jpg" style="width: 100%">
 								<p>
-									Ripped Skinny Jeans<br> <b>$0000</b>
+									Ripped Skinny Jeans<br> <b>$6666</b>
+								</p>
+							</div>
+						</div>
+						<div class="w3-col l3 s6" id="bottom-down-right">
+							<div class="w3-container">
+								<img src="/w3images/jeans4.jpg" style="width: 100%">
+								<p>
+									Vintage Skinny Jeans<br> <b>$4567</b>
 								</p>
 							</div>
 							<div class="w3-container">
-								<img src="/w3images/jeans2.jpg" style="width: 100%">
+								<img src="/w3images/jeans1.jpg" style="width: 100%">
 								<p>
-									Mega Ripped Jeans<br> <b>$2222</b>
+									Ripped Skinny Jeans<br> <b>$3456</b>
 								</p>
 							</div>
-							<div class="w3-col l3 s6">
-								<div class="w3-container">
-									<div class="w3-display-container">
-										<img src="/w3images/jeans2.jpg" style="width: 100%">
-									</div>
-									<p>
-										Mega Ripped Jeans<br> <b>$1111</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<img src="/w3images/jeans3.jpg" style="width: 100%">
-									<p>
-										Washed Skinny Jeans<br> <b>$2222</b>
-									</p>
-								</div>
-							</div>
-
-							<div class="w3-col l3 s6">
-								<div class="w3-container">
-									<img src="/w3images/jeans3.jpg" style="width: 100%">
-									<p>
-										Washed Skinny Jeans<br> <b>$3333</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<div class="w3-display-container">
-										<img src="/w3images/jeans4.jpg" style="width: 100%">
-									</div>
-									<p>
-										Vintage Skinny Jeans<br> <b class="w3-text-red">$4444</b>
-									</p>
-								</div>
-							</div>
-
 						</div>
-						<div id="bottom-down">
-							<div class="w3-col l3 s6">
-								<div class="w3-container">
-									<img src="/w3images/jeans4.jpg" style="width: 100%">
-									<p>
-										Vintage Skinny Jeans<br> <b>$5555</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<img src="/w3images/jeans1.jpg" style="width: 100%">
-									<p>
-										Ripped Skinny Jeans<br> <b>$6666</b>
-									</p>
-								</div>
+						<div class="w3-col l3 s6" id="bottom-down-right-right">
+							<div class="w3-container">
+								<img src="/w3images/jeans4.jpg" style="width: 100%">
+								<p>
+									Vintage Skinny Jeans<br> <b>$2345</b>
+								</p>
 							</div>
-							<div class="w3-col l3 s6" id="bottom-down-right">
-								<div class="w3-container">
-									<img src="/w3images/jeans4.jpg" style="width: 100%">
-									<p>
-										Vintage Skinny Jeans<br> <b>$4567</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<img src="/w3images/jeans1.jpg" style="width: 100%">
-									<p>
-										Ripped Skinny Jeans<br> <b>$3456</b>
-									</p>
-								</div>
-							</div>
-							<div class="w3-col l3 s6" id="bottom-down-right-right">
-								<div class="w3-container">
-									<img src="/w3images/jeans4.jpg" style="width: 100%">
-									<p>
-										Vintage Skinny Jeans<br> <b>$2345</b>
-									</p>
-								</div>
-								<div class="w3-container">
-									<img src="/w3images/jeans1.jpg" style="width: 100%">
-									<p>
-										Ripped Skinny Jeans<br> <b>$1234</b>
-									</p>
-								</div>
+							<div class="w3-container">
+								<img src="/w3images/jeans1.jpg" style="width: 100%">
+								<p>
+									Ripped Skinny Jeans<br> <b>$1234</b>
+								</p>
 							</div>
 						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>

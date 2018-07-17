@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@
 </script>
 </head>
 <body class="w3-container" style="max-width: 300px">
-<a href="orderList.sdj">회원 주문목록</a>
+	<a href="orderList.sdj">회원 주문목록</a>
 	<div class="w3-row">
 		<div class="w3-container">
 			<form action="mailForm.shop" method="post">
@@ -56,12 +56,10 @@
 										</c:if>
 											</c:forEach></td>
 										<td>${user.m_mileage }</td>
-										<td>
-											<a href="../user/update.sdj?id=${user.m_id }">수정</a>
+										<td><a href="../user/update.sdj?id=${user.m_id }">수정</a>
 											<c:if test="${user.m_id != 'admin' }">
-											<a href="../user/delete.sdj?id=${user.m_id }">삭제</a>
-											</c:if> 
-											<a href="../user/mypage.sdj?id=${user.m_id }">회원정보</a></td>
+												<a href="../user/delete.sdj?id=${user.m_id }">삭제</a>
+											</c:if> <a href="../user/mypage.sdj?id=${user.m_id }">회원정보</a></td>
 										<td><input type="checkbox" name="idchks"
 											value="${user.m_id }"></td>
 									</tr>
@@ -81,18 +79,16 @@
 										<td>${user.m_mileage }</td>
 										<td><a href="../user/update.sdj?id=${user.m_id }">수정</a>
 											<c:if test="${user.m_id != 'admin' }">
-											<a href="../user/delete.sdj?id=${user.m_id }">삭제</a>
-											</c:if>  
-											<a href="../user/mypage.sdj?id=${user.m_id }">회원정보</a></td>
+												<a href="../user/delete.sdj?id=${user.m_id }">삭제</a>
+											</c:if> <a href="../user/mypage.sdj?id=${user.m_id }">회원정보</a></td>
 										<td><input type="checkbox" name="idchks"
 											value="${user.m_id }"></td>
 									</tr>
 								</c:if>
 							</c:forEach>
 							<tr>
-								<td colspan="9" >
-									<input class="w3-button w3-teal w3-right" type="submit" value="메일보내기">
-								</td>
+								<td colspan="9"><input class="w3-button w3-teal w3-right"
+									type="submit" value="메일보내기"></td>
 							</tr>
 						</table>
 					</div>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="euc-kr" ?>
 
 <decorators defaultdir="/decorator">
-  <decorator name="main" 
-    page="decorator.jsp">
-     <pattern>*.sdj</pattern>
-  </decorator>
-  <!-- layout 설정을 제외 함. -->
+	<decorator name="main" page="decorator.jsp">
+		<pattern>*.sdj</pattern>
+	</decorator>
+	<!-- layout 설정을 제외 함. -->
 </decorators>

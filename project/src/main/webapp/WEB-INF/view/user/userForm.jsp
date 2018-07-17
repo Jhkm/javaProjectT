@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+<%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,18 +49,20 @@
 
 
 <style type="text/css">
-	.list {
-		background-color: black;
-		color: white;
-	}
-	.checkId {
-		background-color: black;
-		color: white;
-	}
-	.hover {
-		background-color: white;
-		color: black;
-	}
+.list {
+	background-color: black;
+	color: white;
+}
+
+.checkId {
+	background-color: black;
+	color: white;
+}
+
+.hover {
+	background-color: white;
+	color: black;
+}
 </style>
 
 </head>
@@ -68,26 +70,31 @@
 	<div class="w3-row" id="contact" align="center" style="max-width: 80%;">
 		<div class="w3-padding-64 w3-padding-large">
 			<h1>회원가입</h1>
-			<form:form modelAttribute="user" class="w3-container w3-card w3-padding-32 w3-white"
+			<form:form modelAttribute="user"
+				class="w3-container w3-card w3-padding-32 w3-white"
 				action="userEntry.sdj" method="post">
 				<spring:hasBindErrors name="user">
-					<font color="red"> 
-						<c:forEach items="${errors.globalErrors}" var="error">
+					<font color="red"> <c:forEach items="${errors.globalErrors}"
+							var="error">
 							<spring:message code="${error.code}" />
 						</c:forEach>
 					</font>
 				</spring:hasBindErrors>
 				<div class="w3-section">
 					<label>ID</label>
-					<form:input class="w3-input" path="m_id" name="m_id" id="m_id" placeholder="ID"/>
-					<font color="red"><form:errors path="m_id" name="m_id" id="m_id"/></font>
-					<input type="button" value="중복확인" onclick="idCheck()" />
+					<form:input class="w3-input" path="m_id" name="m_id" id="m_id"
+						placeholder="ID" />
+					<font color="red"><form:errors path="m_id" name="m_id"
+							id="m_id" /></font> <input type="button" value="중복확인"
+						onclick="idCheck()" />
 					<!-- <input class="w3-input" style="width: 100%;" type="text" required name="m_id" id="m_id"> -->
 					<div class=checkId></div>
 				</div>
 				<div class="w3-section">
-					<label>Password</label> 
-					<form:password class="w3-input" path="m_passwd" name="m_passwd" placeholder="비밀번호"/><font color="red"><form:errors path="m_passwd"/></font> 
+					<label>Password</label>
+					<form:password class="w3-input" path="m_passwd" name="m_passwd"
+						placeholder="비밀번호" />
+					<font color="red"><form:errors path="m_passwd" /></font>
 					<!-- <input class="w3-input"	style="width: 100%;" type="m_passwd" required name="m_passwd"> -->
 				</div>
 				<!-- <div class="w3-section">
@@ -95,43 +102,50 @@
 					<input class="w3-input" type="password" name="passwordcheck" placeholder="비밀번호를 다시 입력하세요">
 				</div> -->
 				<div class="w3-section">
-					<label>Name</label> 
-					<form:input  class="w3-input" path="m_name" placeholder="이름"/><font color="red"><form:errors path="m_name"/></font> 
+					<label>Name</label>
+					<form:input class="w3-input" path="m_name" placeholder="이름" />
+					<font color="red"><form:errors path="m_name" /></font>
 					<!-- <input class="w3-input"	style="width: 100%;" type="text" required name="m_name" id="m_name"> -->
 					<div class=checkNick></div>
 				</div>
 				<div class="w3-section">
-					<label>Post Code</label>
-					<br><input type="button" class="w3-button w3-teal w3-right" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input class="w3-input" style="width: 100%;" type="text" name="m_postcode" id="sample6_postcode" placeholder="우편번호">
-					
+					<label>Post Code</label> <br>
+					<input type="button" class="w3-button w3-teal w3-right"
+						onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+					<input class="w3-input" style="width: 100%;" type="text"
+						name="m_postcode" id="sample6_postcode" placeholder="우편번호">
+
 				</div>
 				<div class="w3-section">
 					<label>Address</label>
-					<form:input  class="w3-input" id="sample6_address" path="m_address" placeholder="주소" readonly="true"/>
-						<font color="red"><form:errors path="m_address"/></font> 
-					<input  class="w3-input" id="m_address" name="m_address" placeholder="상세주소"/> 
+					<form:input class="w3-input" id="sample6_address" path="m_address"
+						placeholder="주소" readonly="true" />
+					<font color="red"><form:errors path="m_address" /></font> <input
+						class="w3-input" id="m_address" name="m_address"
+						placeholder="상세주소" />
 					<!-- <input class="w3-input" style="width: 100%;" type="text" required name="m_address" id="m_address"> -->
 					<div class=checkNick></div>
 				</div>
 				<div class="w3-section">
 					<label>Phone Number</label>
-					<form:input  class="w3-input"  path="m_phone" name="m_phone" placeholder="전화번호는 -를 제외한 숫자만 입력해주세요"/><font color="red"><form:errors path="m_phone"/></font>  
+					<form:input class="w3-input" path="m_phone" name="m_phone"
+						placeholder="전화번호는 -를 제외한 숫자만 입력해주세요" />
+					<font color="red"><form:errors path="m_phone" /></font>
 					<!-- <input class="w3-input"	style="width: 100%;" type="text" name="m_phone" id="m_phone"> -->
 					<div class="list"></div>
 				</div>
 				<div class="w3-section">
 					<label>Email</label>
-					<form:input  class="w3-input"  path="m_email" placeholder="이메일"/><font color="red"><form:errors path="m_email"/></font>  
+					<form:input class="w3-input" path="m_email" placeholder="이메일" />
+					<font color="red"><form:errors path="m_email" /></font>
 					<!--  <input class="w3-input" style="width: 100%;" type="text" required name="m_email" id="m_email"> -->
 				</div>
 				<div class="w3-section">
-					<label>선호 장르</label>
-					<select name="m_game">
-					 	<option>선택하세요</option>
-					 	<c:forEach var="m" items="${gametype}">
-					 	  <option value="${m.get('tp_no')}">${m.get('tp_name')}</option>
-					 	</c:forEach>
+					<label>선호 장르</label> <select name="m_game">
+						<option>선택하세요</option>
+						<c:forEach var="m" items="${gametype}">
+							<option value="${m.get('tp_no')}">${m.get('tp_name')}</option>
+						</c:forEach>
 					</select>
 				</div>
 				<!-- <div class="w3-section">
@@ -139,15 +153,17 @@
 					<textarea rows="" cols=""></textarea>
 				</div>
 				<input type="hidden" type="text" name="checkAll" id="checkAll" value="0"> -->
-				<input type="hidden" type="text" name="m_mileage" id="m_mileage" value="0">
-				<button type="submit" id="button_joinus" class="w3-button w3-teal w3-right" disabled="disabled">가입하기</button>
+				<input type="hidden" type="text" name="m_mileage" id="m_mileage"
+					value="0">
+				<button type="submit" id="button_joinus"
+					class="w3-button w3-teal w3-right" disabled="disabled">가입하기</button>
 				<button type="reset" class="w3-button w3-teal w3-right">초기화</button>
 			</form:form>
 		</div>
 
 	</div>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
