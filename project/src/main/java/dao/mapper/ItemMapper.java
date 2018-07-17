@@ -31,7 +31,7 @@ public interface ItemMapper {
 	List<Map> selectCart(String loginId);
 
 	@Delete("delete from cart where m_id = #{id} and i_no = #{no}")
-	void cartSubT(Map<?, ?> map);
+	void cartSubT(Map map);
 
 	@Delete("delete from cart where 1 = 1")
 	void clearCart();
