@@ -107,7 +107,7 @@ public class ShopServiceImpl implements ShopService{
 		board.setB_refstep(board.getB_refstep()+1);
 		board.setM_id((String)session.getAttribute("loginUser"));
 		board.setB_category(Integer.parseInt(request.getParameter("b_category")));
-		boardDao.insert(board);
+		boardDao.insert2(board);
 	}
 
 	@Override

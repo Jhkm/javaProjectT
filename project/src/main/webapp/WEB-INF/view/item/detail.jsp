@@ -9,7 +9,7 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
-function getCookie(cookie_name) {
+/* function getCookie(cookie_name) {
 	  var x, y;
 	  var val = document.cookie.split(';');
 
@@ -53,14 +53,14 @@ function addCookie(id) {
 	    setCookie('productItems', id, expire);
 	  }
 	}
-addCookie("${item.i_no}");
+addCookie("${item.i_no}");*/
 $(document).ready(function() {
-	function setCookie(cookieName, value, exdays){
+	/*function setCookie(cookieName, value, exdays){
 	    var exdate = new Date();
 	    exdate.setDate(exdate.getDate() + exdays);
 	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
 	    document.cookie = cookieName + "=" + cookieValue;
-	} 
+	} */
 	$("#up_button").click(function(){
 		var y = parseInt(count.value)
 		count.value = y+1;;

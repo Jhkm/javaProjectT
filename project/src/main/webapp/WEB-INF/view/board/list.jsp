@@ -9,6 +9,8 @@
 <title>게시판 목록</title>
 <link rel="stylesheet" href="icono.min.css">
 <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript">
 	function list(pageNum) {
 		var searchType = document.searchform.searchType.value;
@@ -25,7 +27,7 @@
 	}
 </script>
 <style>
-
+.w3-btn {margin-bottom:10px;}
 	#boardlist {
     	margin-left: 21%;
     	margin-right: 21%;
@@ -51,9 +53,14 @@ table.type td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+.all{
+font-size : 20px;
+font-family: "Nanum Pen Script", sans-serif;
+}
 </style>
 </head>
 <body>
+<div class="all" >
 <div class="w3-container" id="boardlist">
 	<table class="type" width="100%" cellpadding="0" cellspacing="0">
 		<H3><strong><c:if test="${param.b_category == '1'}">플레이후기</c:if>
@@ -79,14 +86,14 @@ table.type td {
 				<tr align="center" valign="middle" bordercolor="#333333"
 					onmouseover="this.style.backgroundColor='#5CD1E5'"
 					onmouseout="this.style.backgroundColor=''">
-					<td height="23">${boardcnt }</td>
+					<td height="23"><a href="detail.sdj?b_no=${board.b_no }&pageNum=${pageNum}&b_category=${board.b_category}">${boardcnt }</a></td>
 					<c:set var="boardcnt" value="${boardcnt - 1 }" />
 					<td align="left"><c:if test="${not empty board.b_fileurl }">
 							<a href="../file/${board.b_fileurl }"><i class="icono-paperClip" style="width:3%; color: #0000cd;">  </i></a>
 						</c:if> <c:if test="${empty board.b_fileurl }">&nbsp;&nbsp;&nbsp;</c:if>
 						<c:forEach begin="1" end="${board.b_reflevel }">&nbsp;&nbsp;&nbsp;</c:forEach>
-						<c:if test="${board.b_reflevel > 0}">└</c:if> <a
-						href="detail.sdj?b_no=${board.b_no }&pageNum=${pageNum}&b_category=${board.b_category}">${board.b_subject }</a></td>
+						<c:if test="${board.b_reflevel > 0}">└</c:if>
+						 <a href="detail.sdj?b_no=${board.b_no }&pageNum=${pageNum}&b_category=${board.b_category}">${board.b_subject }</a></td>
 					<td align="center">${board.m_id }</td>
 					<td align="center"><fmt:formatDate value="${board.b_regtime}"
 							pattern="yyyy-MM-dd HH:mm:ss" var="b_regtime" />${b_regtime}</td>
@@ -133,9 +140,10 @@ table.type td {
 						value="${param.searchContent }"> <input type="submit"
 						value="검색">
 				</form></td>
-			<td align="right"><a href="write.sdj?b_category=${param.b_category }">[글쓰기]</a></td>
+			<td align="right"><a href="write.sdj?b_category=${param.b_category }"><button class="w3-btn w3-white w3-border w3-border-red w3-round-large">글쓰기</button></a></td>
 		</tr>
 	</table>
+</div>
 </div>
 </body>
 </html>

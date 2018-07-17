@@ -19,7 +19,7 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-	function getCookie(cookie_name) {
+/* 	function getCookie(cookie_name) {
 		var x, y;
 		var val = document.cookie.split(';');
 
@@ -31,13 +31,13 @@
 				return unescape(y); // unescape로 디코딩 후 값 리턴
 			}
 		}
-	}
+	} 
 	$(document).ready(function() {
 		var cookie = getCookie(productItems);
 		console.log(cookie);
 		$('#cookie').text(cookie);
 
-	})
+	})*/
 	//alert(${document.cookie.productItems});
 </script>
 <style>
