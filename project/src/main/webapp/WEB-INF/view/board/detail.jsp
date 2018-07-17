@@ -5,14 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>게시물 상세 보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=IOAxpv0_yEzY_13m7xPn&submodules=geocoder"></script>
 <% 
@@ -21,14 +20,21 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
-    function deleteReplyConfirm(pageNum, b_no, m_id, r_no, b_category) {
-      if(confirm("댓글을 정말 삭제할까요?") == true){
-    	  alert(pageNum+","+b_no+","+m_id+","+r_no+","+b_category);
-         location.href="replyDelete.sdj?pageNum="+pageNum+"&b_no="+b_no+"&m_id="+m_id+"&r_no="+r_no+"&b_category="+b_category;
-      }else{
-         return;
-      }
-   }
+function deleteReplyConfirm(pageNum, b_no, m_id, r_no, b_category) {
+    if(confirm("댓글을 정말 삭제할까요?") == true){
+       location.href="replyDelete.sdj?pageNum="+pageNum+"&b_no="+b_no+"&m_id="+m_id+"&r_no="+r_no+"&b_category="+b_category;
+    }else{
+       return;
+    }
+ }
+function deleteBoard(pageNum, b_no, b_category) {
+  if(confirm("게시글을 정말 삭제할까요?") == true){
+     location.href="delete.sdj?pageNum="+pageNum+"&b_no="+b_no+"&b_category="+b_category;
+  }else{
+     return;
+  }
+}
+    
 	$(document).ready(function() {
 		console.log("!!!");
         	$('.upinput').hide();
@@ -105,12 +111,28 @@
 	color: #D3D3D3;
 	font-size: 12px;
 }
+#all {
+	margin-left:22%;
+	margin-right:24%;
+	padding-top:5%;	
+	font-size : 20px;
+font-family: "Nanum Pen Script", sans-serif;
+}
+.w3-btn {margin-bottom:10px;}
+#b_subject {
+	border-bottom : 1px solid #dadada;
+
+}
+#b_content {
+	border-bottom : 1px solid #dadada;
+}
 </style>
 </head>
 <body>
-	<div style="max-width: 70%;">
+<div id="all">
+	<div class="w3-container" style="max-width: 100%; " align="center">
 		<div class="w3-container" align="center">
-			<p>
+			</h3><p><strong><h3>
 				<c:if test="${param.b_category == '1'}">플레이후기</c:if>
 				<c:if test="${param.b_category == '2'}">팁 게시판</c:if>
 				<c:if test="${param.b_category == '3'}">자유 게시판</c:if>
@@ -118,15 +140,16 @@
 				<c:if test="${param.b_category == '5'}">번개 게시판</c:if>
 				<c:if test="${param.b_category == '6'}">게임플레이 동영상</c:if>
 				<c:if test="${param.b_category == '7'}">후기 게시판</c:if>
-			</p>
+			</h3></strong></p>
 		</div>
 		<div class="w3-cell-row">
-			<div class="w3-container w3-cell" style="width: 20%;">
+			<div class="w3-container w3-cell"  style="width: 20%;">
 				<label>제목</label>
 			</div>
-			<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left"
+			<div class="w3-container w3-sand w3-cell w3-cell-bottom" id="b_subject" align="left"
 				style="max-width: 80%;">
 				<label>${board.b_subject}</label>
+				
 			</div>
 		</div>
 		<c:if test="${param.b_category == '5'}">
@@ -222,9 +245,9 @@
 			<div class="w3-container w3-cell" style="width: 20%;">
 				<label>내용</label>
 			</div>
-			<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left"
+			<div class="w3-container w3-sand w3-cell w3-cell-bottom" id="b_content"align="left"
 				style="max-width: 80%;">
-				<textarea rows="4" cols="80" name="r_content" style="color: black;">${board.b_content }</textarea>
+				${board.b_content }
 			</div>
 		</div>
 		<div class="w3-cell-row">
@@ -239,36 +262,20 @@
 			</div>
 		</div>
 		<div class="w3-cell-row">
-			<div class="w3-container w3-cell">
+			<div class="w3-container w3-cell" style="padding-top:1%;">
 				<a
-					href="reply.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[답글]</a>
+					href="reply.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">
+					<button class="w3-btn w3-white w3-border w3-border-red w3-round-large">답글</button></a>
 				<a
-					href="update.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[수정]</a>
+					href="update.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">
+					<button class="w3-btn w3-white w3-border w3-border-red w3-round-large">수정</button></a>
+				<a>	<button class="w3-btn w3-white w3-border w3-border-red w3-round-large" onclick="javascirpt:deleteBoard('${param.pageNum}', '${board.b_no }', '${board.b_category}')">삭제</button></a>
 				<a
-					href="delete.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[삭제]</a>
-				<a
-					href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">[목록]</a>
+					href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">
+					<button class="w3-btn w3-white w3-border w3-border-red w3-round-large">목록</button></a>
 			</div>
 		</div>
 
-	</div>
-	<div>
-		<form:form modelAttribute="reply" action="r_reply.sdj" name="f">s
-		<input type="hidden" name="b_no" value="${board.b_no}">
-			<input type="hidden" name="pageNum" value="${param.pageNum}">
-			<div class="w3-cell-row">
-				<div class="w3-container w3-cell">
-					<a
-						href="reply.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[답글]</a>
-					<a
-						href="update.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[수정]</a>
-					<a
-						href="delete.sdj?b_no=${board.b_no }&pageNum=${param.pageNum}&b_category=${param.b_category}">[삭제]</a>
-					<a
-						href="list.sdj?pageNum=${param.pageNum }&b_category=${param.b_category}">[목록]</a>
-				</div>
-			</div>
-		</form:form>
 	</div>
 	<!-- 썰!!!!@!!!@#!@#$ㄲ%ㅆㅉㅃ#ㅗ뉴 ㅊㅍㄸㅉ$후 ㅠ -->
 	<!--  
@@ -348,39 +355,40 @@
 	</table> 
 	</div>--%>
 
-	<table class="w3-table w3-bordered" style="width: 1500px;">
+	<table class="w3-table w3-bordered" style="width: 100%;">
 		<caption>댓글</caption>
 		<c:if test="${empty replylist}">
 			<tr>
-				<td>등록 된 댓글이 없습니다.</td>
+				<td align="center">등록 된 댓글이 없습니다.</td>
 			</tr>
 		</c:if>
 		<c:if test="${!empty replylist}">
 			<tr>
-				<th width="300px" height="20px" style="text-align: center;">작성자</th>
-				<th width="700px" height="20px" style="text-align: center;">내용</th>
-				<th width="200px" height="20px" style="text-align: center;">날짜</th>
-				<th width="300px" height="20px" style="text-align: center;">비고</th>
+				<th width="20%" height="5%" style="text-align: center;">작성자</th>
+				<th width="45%" height="5%" style="text-align: center;">내용</th>
+				<th width="15%" height="5%" style="text-align: center;">날짜</th>
+				<th width="30%" height="5%" style="text-align: center;">비고</th>
 			</tr>
 			<c:forEach var="re" items="${replylist}" varStatus="status">
 				<tr>
-					<td width="300px" height="40px" style="text-align: left;"><c:if
+					<td width="20%" height="5%" style="text-align: left;"><c:if
 							test="${re.r_reflevel > 0 }">
 							<c:forEach begin="1" end="${re.r_reflevel}">&nbsp;&nbsp;&nbsp;</c:forEach>
                      ┖
+                 
                   </c:if> &nbsp;[${re.m_id}]</td>
-					<td width="700px" height="40px" style="text-align: left;">${re.r_content}&nbsp;</td>
-					<td width="200px" height="40px" style="text-align: center;"><fmt:formatDate
+					<td width="45%" height="5%" style="text-align: left;">${re.r_content}&nbsp;</td>
+					<td width="15%" height="5%" style="text-align: center;"><fmt:formatDate
 							value="${re.r_date}" pattern="yyyy-MM-dd HH:mm:ss" var="regnow" />
 						${regnow}</td>
 					<!-- onclick="javascript:replyedisp('ReplyRe')"  onclick="javascript:replyedisp('updateRe')" -->
-					<td width="300px" height="40px" style="text-align: center;"><input
-						type="button" id="ReplyRe_${status.index}" class="w3-button"
-						value="답변"> <input type="button"
-						id="updateRe_${status.index}" class="w3-button" value="수정">
-						<input type="button" class="w3-button"
+					<td width="30%" height="5%" style="text-align: center;">
+					<input type="hidden" value="${board.b_category}">
+					<input type="button" id="ReplyRe_${status.index}" class="w3-button" value="[답변]">
+					<input type="button" id="updateRe_${status.index}" class="w3-button" value="[수정]">
+					<input type="button" class="w3-button"
 						onclick="javascript:deleteReplyConfirm('${param.pageNum}','${re.b_no}','${re.m_id }','${re.r_no}','${param.b_category}')"
-						value="삭 제"></td>
+						value="[삭 제]"></td>
 				</tr>
 				<tr id="upinput_${status.index}" class="upinput">
 					<td colspan="4"><form:form action="r_update.sdj"
@@ -389,11 +397,13 @@
 							<input type="hidden" name="m_id" value="${re.m_id}">
 							<input type="hidden" value="${board.b_no}" name="b_no">
 							<input type="hidden" value="${param.pageNum}" name="pageNum">
-							<input type="hidden" value="${param.b_category}"
+							<input type="hidden" value="${board.b_category}"
 								name="b_category">
-							<form:input path="r_content" size="170px" />
-							<input type="submit" class="w3-button" value="수 정">
+							<div style="width: 100%; float:left;">
+							<form:input path="r_content" size="100%" />
+							<input type="submit" class="w3-btn w3-white w3-border w3-border-red w3-round-large" value="수 정" style="margin-top:1%;">
 							<font color="red"><form:errors path="r_content" /></font>
+							</div>
 						</form:form></td>
 				</tr>
 				<tr id="reinput_${status.index}" class="reinput">
@@ -404,9 +414,11 @@
 							<input type="hidden" value="${param.pageNum}" name="pageNum">
 							<input type="hidden" value="${param.b_category}"
 								name="b_category">
-							<form:input path="r_content" size="170px" />
+						<div style="width: 100%; float:left;">
+							<form:input path="r_content" size="100%" />
 							<font color="red"><form:errors path="r_content" /></font>
-							<input type="submit" class="w3-button" value="등 록">
+							<input type="submit" class="w3-btn w3-white w3-border w3-border-red w3-round-large" value="등 록" style="margin-top:1%;">
+						</div>
 						</form:form></td>
 				</tr>
 			</c:forEach>
@@ -416,13 +428,14 @@
 	<form:form modelAttribute="reply" action="r_reply.sdj" method="post">
 		<input type="hidden" value="${board.b_no}" name="b_no">
 		<input type="hidden" value="${param.pageNum}" name="pageNum">
-		<div style="width: 1700px;">
-			<form:input path="r_content" size="1700px" />
+		<input type="hidden" value="${param.b_category}" name="b_category">
+		<div style="width: 100%; float:left;">
+			<form:input path="r_content" size="100%" />
 			<font color="red"><form:errors path="r_content" /></font>
+		<input type="submit" class="w3-btn w3-white w3-border w3-border-red w3-round-large" value="등 록" style="margin-top:1%;">
 		</div>
-		<input type="submit" class="w3-button" value="등 록">
 	</form:form>
 
-
+</div>
 </body>
 </html>

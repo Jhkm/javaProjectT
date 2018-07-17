@@ -55,6 +55,7 @@ public class BoardController {
 	public ModelAndView write2(Integer b_no, Integer pageNum, Integer b_category, HttpServletRequest request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board",new Board());
+		
 		return mav;
 	}
 	@RequestMapping(value="board/write", method=RequestMethod.POST)
@@ -74,6 +75,9 @@ public class BoardController {
 			e.printStackTrace();
 			throw new BoardException("게시글 등록 실패", "write.sdj?b_category="+request.getParameter("b_category"));
 		}
+		mav.addObject("msg","게시글 등록이 완료되었습니다.");
+		mav.addObject("url","list.sdj?b_category="+request.getParameter("b_category"));
+		mav.setViewName("alert");
 		return mav; 
 	}
 	
@@ -88,7 +92,7 @@ public class BoardController {
 //		}
 		try {
 			service.boardReply(board, request,session);
-			mav.setViewName("redirect:list.sdj?b_category="+request.getParameter("b_category"));
+			mav.setViewName("redirect:list.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum")+"&b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new BoardException("답글실패", "reply.sdj");
@@ -113,14 +117,15 @@ public class BoardController {
 			service.boardUpdate(board, request);
 			mav.setViewName("redirect:detail.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum")+"&b_category="+request.getParameter("b_category"));
 		} catch(Exception e) {
-			throw new BoardException("수정실패", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
+			throw new BoardException("수정실패", "update.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum")+"&b_category="+request.getParameter("b_category"));
 		}
 		return mav;
 	}
-	@RequestMapping(value="board/delete", method=RequestMethod.POST)
-	public ModelAndView boardDelete(HttpServletRequest request) {
+	@RequestMapping("board/delete")
+	public ModelAndView boardDelete(HttpServletRequest request, Integer b_category, Integer pageNum) {
 		ModelAndView mav = new ModelAndView();
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		
 		Board dbBoard = service.getBoard(b_no);
 //		if(!request.getParameter("pass").equals(dbBoard.getPass())) {
 //			throw new BoardException("비밀번호 실패", "delete.sdj?num="+request.getParameter("num")+"&pageNum="+request.getParameter("pageNum"));
@@ -132,6 +137,10 @@ public class BoardController {
 			e.printStackTrace();
 			throw new BoardException("삭제실패", "delete.sdj?b_no="+request.getParameter("b_no")+"&pageNum="+request.getParameter("pageNum"));
 		}
+		mav.addObject("board", new Board());
+		mav.addObject("msg","게시글이 삭제 되었습니다.");
+		mav.addObject("url","list.sdj?b_no="+b_no+"&b_category="+b_category+"&pageNum="+pageNum);
+		
 		return mav;
 	}
 
@@ -161,7 +170,7 @@ public class BoardController {
 		String b_category = request.getParameter("b_category");
 		try {
 			service.Reply(reply, board, request, session);
-			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum);
+			mav.setViewName("redirect:detail.sdj?b_no="+b_no+"&pageNum="+pageNum+"&b_category="+b_category);
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new BoardException("댓글실패", "detail.sdj?b_no="+b_no+"&pageNum="+pageNum+"&b_category="+b_category);
@@ -230,8 +239,6 @@ public class BoardController {
 	public ModelAndView purchaseComments(HttpServletRequest request, HttpSession session,Board board) {
 		ModelAndView mav = new ModelAndView("board/closeWindow");
 		service.insert(board, request, session);
-		System.out.println(board);
-		System.out.println(request.getParameter("grade"));
 		return mav;
 	}
 	@RequestMapping("board/main")
@@ -246,10 +253,8 @@ public class BoardController {
 	@ResponseBody
 	public String join(@RequestParam(value="value")String value, @RequestParam(value="b_no")Integer b_no, HttpSession session, HttpServletRequest request) {
 		String result = "";
-		System.out.println("join test"+b_no+"::::"+value);
 		if (value.equals("1")) {
 			try{
-				System.out.println("!!!!");
 				String id = (String)session.getAttribute("loginUser");
 				Board board = service.getBoard(b_no);
 				if (board.getG_id() == null) {
@@ -257,7 +262,6 @@ public class BoardController {
 				} else {
 					board.setG_id(board.getG_id()+((board.getG_id().substring(board.getG_id().length()-1).equals(","))?" ":",")+id);
 				}
-				System.out.println(board);
 				service.boardUpdate(board, request);
 				board = service.getBoard(b_no);
 				String[] idList = board.getG_id().split(",");
@@ -317,7 +321,6 @@ public class BoardController {
 					board.setG_id(board.getM_id());
 					mav.addObject("idList", board.getG_id());
 				}
-				System.out.println(board);
 				if(board.getG_id() != null) {
 					board.setG_id(board.getG_id().trim());
 				}
