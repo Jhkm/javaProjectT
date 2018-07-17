@@ -132,7 +132,7 @@ font-family: "Nanum Pen Script", sans-serif;
 <div id="all">
 	<div class="w3-container" style="max-width: 100%; " align="center">
 		<div class="w3-container" align="center">
-			</h3><p><strong><h3>
+			<p><h3><strong>
 				<c:if test="${param.b_category == '1'}">플레이후기</c:if>
 				<c:if test="${param.b_category == '2'}">팁 게시판</c:if>
 				<c:if test="${param.b_category == '3'}">자유 게시판</c:if>
@@ -140,7 +140,7 @@ font-family: "Nanum Pen Script", sans-serif;
 				<c:if test="${param.b_category == '5'}">번개 게시판</c:if>
 				<c:if test="${param.b_category == '6'}">게임플레이 동영상</c:if>
 				<c:if test="${param.b_category == '7'}">후기 게시판</c:if>
-			</h3></strong></p>
+			</strong></p></h3>
 		</div>
 		<div class="w3-cell-row">
 			<div class="w3-container w3-cell"  style="width: 20%;">

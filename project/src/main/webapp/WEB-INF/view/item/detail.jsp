@@ -62,9 +62,7 @@ $(document).ready(function() {
 	    document.cookie = cookieName + "=" + cookieValue;
 <<<<<<< HEAD
 	} */
-=======
 	}
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
 	$("#up_button").click(function(){
 		var y = parseInt(count.value)
 		count.value = y+1;;
@@ -291,7 +289,6 @@ ul.kind_of_tab li.selected {
 
 </head>
 <body>
-<<<<<<< HEAD
 <br><br>
 <h2>상품 상세 보기</h2>
 <div align="center" style="height:600px; width:60%">

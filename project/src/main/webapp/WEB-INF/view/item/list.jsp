@@ -21,7 +21,6 @@ div ul li {
 </style>
 </head>
 <body>
-<<<<<<< HEAD
 <br><br><br>
 <c:if test="${sessionScope.loginUser == 'admin' }"><a href="create.sdj">상품등록</a></c:if>
 <%-- <table border="1" cellspacing="0" cellpadding="0">
