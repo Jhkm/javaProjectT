@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.List;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -32,7 +34,14 @@ public class Item {
 	private MultipartFile i_Img_File;
 	private String tp_name;
 	private String i_people2;
+	private List<MultipartFile> contentImgFile;
 	
+	public List<MultipartFile> getContentImgFile() {
+		return contentImgFile;
+	}
+	public void setContentImgFile(List<MultipartFile> contentImgFile) {
+		this.contentImgFile = contentImgFile;
+	}
 	public String getI_people2() {
 		return i_people2;
 	}

@@ -254,7 +254,7 @@ body {
 	<br>
 	<br>
 	<div align="center">
-	<decorator:body/>
+		<decorator:body/>
 	</div>
 	<div class="footer w3-container">
 				<div class="w3-container w3-center" style="margin-left: 27%;">

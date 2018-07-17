@@ -134,6 +134,14 @@ public class ShopServiceImpl implements ShopService{
 			uploadFileCreate(item.getI_Img_File(),request);
 			item.setI_img(item.getI_Img_File().getOriginalFilename()); 
 		}
+		if(item.getContentImgFile() != null && !item.getContentImgFile().isEmpty()) {
+			String s = ",";
+			for(MultipartFile f : item.getContentImgFile()) {
+				uploadFileCreate(f,request);
+				s += f.getOriginalFilename() +",";
+			}
+			item.setI_explain(item.getI_explain()+s);
+		}
 //		createThumbnail(item.getI_img(),request);
 		itemDao.create(item);
 	}

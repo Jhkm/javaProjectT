@@ -287,7 +287,6 @@ ul.kind_of_tab li.selected {
 
 </head>
 <body>
-<<<<<<< HEAD
 <br><br>
 <h2>상품 상세 보기</h2>
 <div align="center" style="height:600px; width:60%">
@@ -354,6 +353,9 @@ ul.kind_of_tab li.selected {
     <li class="question" style="width:20%;"><a>상품 Q & A</a></li>
   </ul>
   ${item.i_explain }
+  <c:forEach items="${explainImg }" var="explainimg">
+  	<img src="../picture/${explainimg }" width="100%" height="1000px">
+  </c:forEach>
 </div>
 <div id="delivery" style="width:60%">
 <br><br><br><br>
@@ -387,9 +389,12 @@ ul.kind_of_tab li.selected {
     <li class="review selected" style="width:20%;"><a>상품 사용후기</a></li>
     <li class="question" style="width:20%;"><a>상품 Q & A</a></li>
   </ul>
-  <table>
+  <table style="width:100%">
   	<c:forEach items="${commentsList }" var="comments">
-  		<tr><td>${comments.i_grade }</td><td>${comments.b_content }</td><td>${comments.m_id }</td><td><fmt:formatDate value="${comments.b_regtime }" pattern="YYYY.MM.dd"/></td></tr>
+  		<tr><td>
+  		<c:forEach begin="1" end="${comments.i_grade }"><font color="gold" style="font-size:20px;">★</font></c:forEach>
+        <c:forEach begin="${comments.i_grade+1 }" end="5"><font color="gold" style="font-size:20px;">☆</font></c:forEach>
+  		</td><td>${comments.b_content }</td><td>${comments.m_id }</td><td align="right"><fmt:formatDate value="${comments.b_regtime }" pattern="YYYY.MM.dd"/></td></tr>
   	</c:forEach>
   </table>
 </div>

@@ -21,36 +21,8 @@ div ul li {
 </style>
 </head>
 <body>
-<<<<<<< HEAD
 <br><br><br>
 <c:if test="${sessionScope.loginUser == 'admin' }"><a href="create.sdj">상품등록</a></c:if>
-<%-- <table border="1" cellspacing="0" cellpadding="0">
-=======
-	<br>
-	<br>
-	<br>
-	<c:if test="${sessionScope.loginUser == 'admin' }">
-		<a href="create.sdj">상품등록</a>
-	</c:if>
-	<a href="../cart/cartView.sdj" style="float: right;">장바구니</a>
-	<%-- <table border="1" cellspacing="0" cellpadding="0">
->>>>>>> branch 'master' of https://github.com/Jhkm/javaProjectT.git
-  <tr><th align="center" width="80">상품ID</th>
-      <th align="center" width="320">상품명</th>
-      <th align="center" width="100">가격</th>
-      <th align="center" width="80">수정</th>
-      <th align="center" width="80">삭제</th>
-  </tr>
-  <c:forEach items="${itemList }" var="item">
-    <tr><td align="center">${item.i_no }</td>
-        <td align="left">
-        <a href="detail.sdj?no=${item.i_no }">${item.i_name }</a></td>
-        <td align="right"><fmt:formatNumber type="CURRENCY" currencySymbol="" value="${item.i_price }"/>원</td>
-        <td align="center"><a href="edit.sdj?no=${item.i_no }">수정</a></td>
-        <td align="center"><a href="confirm.sdj?no=${item.i_no }">삭제</a></td>
-    </tr>
-  </c:forEach>
-</table> --%>
 <form action="list.sdj" method="post">
 <div style="width:70%" align="left">
 <!-- select 바뀔때 바로 정렬 바뀌도록 하기 -->

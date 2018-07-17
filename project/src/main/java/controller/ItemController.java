@@ -2,6 +2,7 @@ package controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,6 +42,7 @@ public class ItemController {
 	}
 	@RequestMapping("item/register")
 	public ModelAndView admregister(HttpSession session,HttpServletRequest request,@Valid Item item, BindingResult bindingResult) {
+		System.out.println(item.getContentImgFile());
 		ModelAndView mav = new ModelAndView("item/itemadd");
 		item.setI_people(item.getI_people()+"~"+item.getI_people2());
 		if(bindingResult.hasErrors()) {
@@ -97,6 +100,15 @@ public class ItemController {
 		String[] people = item.getI_people().split("~");
 		item.setI_people(people[0]);
 		item.setI_people2(people[1]);
+		String explain[] = item.getI_explain().split(",");
+		List<String> explainImg = new ArrayList<String>();
+		for(int i = 0;i<explain.length;i++) {
+			if(i == 0) {
+				item.setI_explain(explain[i]);
+			} else {
+				explainImg.add(explain[i]);
+			}
+		}
 		List<Map<Integer, String>> maplist = service.gameType();
 		
 		int checkResult = service.checkFavorit(no,(String)session.getAttribute("loginUser"),1);
@@ -104,6 +116,7 @@ public class ItemController {
 		List<Board> commentList = service.getItemCommentList(no,10);
 		
 		double avgGrade = service.avgGrade(no,10);
+		mav.addObject("explainImg", explainImg);
 		mav.addObject("avgGrade", avgGrade);
 		mav.addObject("commentsList", commentList);
 		mav.addObject("checkResult", checkResult);
