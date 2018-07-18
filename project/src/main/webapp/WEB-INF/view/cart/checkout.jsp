@@ -25,6 +25,21 @@ $(document).ready(function(){
 		event.preventDefault();
 	})
 })
+function all_use() {
+	var m = ${loginUser1.m_mileage };
+	$("#use_mileage").val(m);
+	this.mileage();
+}
+function mileage() {
+	var m = $("#use_mileage").val();
+	if(m > ${loginUser1.m_mileage}) {
+		$("#use_mileage").val(${loginUser1.m_mileage});
+		$("#final_money").val(${itemSet.quantity * itemSet.item.i_price } - $("#use_mileage").val());
+		return;
+	}
+	var c = ${itemSet.quantity * itemSet.item.i_price } - $("#use_mileage").val();
+	$("#final_money").val(c);
+}
 function finalize() {
 	document.f.submit();
 }
@@ -99,6 +114,18 @@ td.title {
 	</form>
 	<br>
 	<br>
+	<h2>할인 및 적립</h2>
+	<table>
+		<!-- 숫자만 쓸수 있게하기 -->
+		<tr>
+			<th>사용할 마일리지 :</th>
+			<td style="text-align: right;"><input type="text"
+				id="use_mileage" style="text-align: right;" value="0"
+				onchange="mileage()"> 원</td>
+			<td><input type="button" value="전액사용" onclick="all_use()">(사용
+				가능한 마일리지:${loginUser1.m_mileage } 원)</td>
+		</tr>
+	</table>
 	<h2>장바구니 목록</h2>
 	<table>
 		<tr>

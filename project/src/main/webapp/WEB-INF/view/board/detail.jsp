@@ -277,7 +277,6 @@ font-family: "Nanum Pen Script", sans-serif;
 		</div>
 
 	</div>
-	<!-- 巡!!!!@!!!@#!@#$あ%ざすこ#で敢 ずそえす$板 ば -->
 	<!--  
  	<table align="center" border="1" cellpadding="0" cellspacing="0">
 	

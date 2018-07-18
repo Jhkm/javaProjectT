@@ -28,19 +28,21 @@
 	})
 </script>
 <style type="text/css">
+table.bigtable td {border-bottom:solid 1px;}
+table.bigtable table td{border:0px;}
 </style>
 </head>
 <body>
-	<table border="1" cellpadding="0" cellspacing="0" width="50%">
+	<table class="bigtable" border="0" cellpadding="0" cellspacing="0" width="50%">
 		<tr>
 			<td>구매한 날짜</td>
 			<td>구매자 ID</td>
 			<td>배송지 주소</td>
-			<td>진행상황</td>
+			<td align="center">진행상황</td>
 		</tr>
 		<c:forEach items="${saleList}" var="sale" varStatus="stat">
 			<input type="hidden" value="${sale.s_id }" id="sid${stat.index }">
-			<tr>
+			<tr style="background-color:pink;">
 				<td><fmt:formatDate value="${sale.s_updateTime}"
 						pattern="YYYY.MM.dd HH:mm:ss" /></td>
 				<td>${sale.m_id }</td>
@@ -64,9 +66,9 @@
 					<div style="display: inline;" id="disp${stat.index}"></div> <script
 						type="text/javascript">
 			if (${sale.s_step == 1}) {disp${stat.index}.innerHTML = '주문접수'}
-			if (${sale.s_step == 2}) {disp${stat.index}.innerHTML = '베송준비중'}
+			if (${sale.s_step == 2}) {disp${stat.index}.innerHTML = '배송준비중'}
 			if (${sale.s_step == 3}) {disp${stat.index}.innerHTML = '배송중'}
-			if (${sale.s_step == 4}) {disp${stat.index}.innerHTML = '베송완료'}
+			if (${sale.s_step == 4}) {disp${stat.index}.innerHTML = '배송완료'}
 			if (${sale.s_step == 5}) {disp${stat.index}.innerHTML = '구매확정'}
 			if (${sale.s_step == 6}) {disp${stat.index}.innerHTML = '주문취소신청'}
 			if (${sale.s_step == 7}) {disp${stat.index}.innerHTML = '주문취소'}
