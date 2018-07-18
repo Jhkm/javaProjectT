@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -43,10 +43,8 @@ table {
 </style>
 </head>
 <body>
-
-	<form>
 		<input type="hidden" name="itemNo" id="itemNo" value="${item.i_no }">
-		<table align="center" height="100%" width="100%">
+		<table align="center">
 			<tr>
 				<td><img alt="상품 이미지" src="../picture/${item.i_img }"
 					width="180" height="200"></td>
@@ -55,7 +53,7 @@ table {
 				<td>${item.i_name}</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="quantity" value="1" id="quantity"
+				<td>수량:<input type="text" name="quantity" value="1" id="quantity" size="5"
 					style="text-align: center;"></td>
 			</tr>
 			<tr>
@@ -63,6 +61,5 @@ table {
 					type="button" value="취소" onclick="self.close();"></td>
 			</tr>
 		</table>
-	</form>
 </body>
 </html>

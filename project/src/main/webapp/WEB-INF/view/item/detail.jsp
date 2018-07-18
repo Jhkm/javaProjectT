@@ -282,6 +282,8 @@ ul.kind_of_tab li.selected {
 	background-position: -3519px 0;
 	transition: background 0s steps(55);
 }
+ul.kind_of_tab li:hover { background-color:#eff1f4;
+}
 </style>
 
 

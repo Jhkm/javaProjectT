@@ -10,7 +10,7 @@
 	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
   function change(no) {
-	  window.open("../cart/countUpdate.sdj?no="+no,"수량 수정","location=yes, menubar=no, titlebar=no, toolbar=no, width=500, height=700");
+	  window.open("../cart/countUpdate.sdj?no="+no,"수량 수정","location=yes, menubar=no, titlebar=no, toolbar=no, width=500, height=380");
 	  location.href="rediract:cart.sdj"
   }
   $(document).ready(function(){

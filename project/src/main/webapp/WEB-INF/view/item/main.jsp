@@ -267,7 +267,7 @@ body {
 					<div class="review" style="float: left; width: 300px;">
 						<h3>REVIEW</h3>
 						<c:forEach items="${review}" var="review" begin="0" end="5">
-							<li><a href="detail.sdj?b_no=${review.b_no}">
+							<li><a href="../board/detail.sdj?b_no=${review.b_no}&b_category=${review.b_category}">
 									${review.b_subject } </a></li>
 						</c:forEach>
 					</div>

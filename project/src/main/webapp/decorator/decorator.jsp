@@ -255,6 +255,7 @@ body {
 	<br>
 	<div align="center">
 	<br><br>
+	<br><br><br><br>
 		<decorator:body/>
 	</div>
 	<div class="footer w3-container">

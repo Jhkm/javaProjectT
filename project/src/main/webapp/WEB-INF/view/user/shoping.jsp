@@ -10,7 +10,7 @@
 	src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 function comments(index) {
-	window.open("../board/purchaseComments.sdj?i_no="+index,"구매후기","location=yes, menubar=no, titlebar=no, toolbar=no, width=500, height=700");
+	window.open("../board/purchaseComments.sdj?i_no="+index,"구매후기","location=yes, menubar=no, titlebar=no, toolbar=no, width=500, height=400");
 }
 function decide(index) {
 	var result = confirm('구매를 확정 하시겠습니까?')
