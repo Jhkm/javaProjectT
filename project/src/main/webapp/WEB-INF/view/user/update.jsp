@@ -8,7 +8,7 @@
 <title>사용자 정보 수정</title>
 </head>
 <body class="w3-content" style="max-width: 300px">
-	<div class="w3-row" id="contact">
+	<div class="w3-row" id="contact" style="width:50%;">
 		<div class="w3-padding-64 w3-padding-large">
 			<h1>회원 정보 수정</h1>
 			<form:form modelAttribute="user"

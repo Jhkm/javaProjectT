@@ -178,7 +178,7 @@ body {
 							class="w3-bar-item w3-button">액션</a> <a
 							href="/project/item/list.sdj?gametype=1"
 							class="w3-bar-item w3-button">순발력</a> <a
-							href="/project/item/list.sdj?gametype=4"
+							href="/project/item/list.sdj?gametype=5"
 							class="w3-bar-item w3-button">추리</a> <a
 							href="/project/item/list.sdj?gametype=2"
 							class="w3-bar-item w3-button">학습</a> <a
@@ -254,6 +254,7 @@ body {
 	<br>
 	<br>
 	<div align="center">
+	<br><br>
 		<decorator:body/>
 	</div>
 	<div class="footer w3-container">

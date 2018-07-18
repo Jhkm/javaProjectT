@@ -85,10 +85,11 @@
 					<form:input class="w3-input" path="m_id" name="m_id" id="m_id"
 						placeholder="ID" />
 					<font color="red"><form:errors path="m_id" name="m_id"
-							id="m_id" /></font> <input type="button" value="중복확인"
-						onclick="idCheck()" />
+							id="m_id" /></font> 
+					<input class="w3-button w3-teal w3-right" type="button" value="중복확인" onclick="idCheck()" />
 					<!-- <input class="w3-input" style="width: 100%;" type="text" required name="m_id" id="m_id"> -->
 					<div class=checkId></div>
+					<br>
 				</div>
 				<div class="w3-section">
 					<label>Password</label>
