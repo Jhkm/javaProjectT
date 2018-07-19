@@ -51,4 +51,10 @@ public interface ItemMapper {
 	@Delete("delete from likeitem where category=#{i} and i_no=#{i_no} and m_id=#{m_id}")
 	void removeFavorit(Map map);
 	
+	@Update("update item set likecnt = likecnt+1 where i_no = #{value}")
+	void cntUpItem(String i_no);
+
+	@Update("update item set likecnt = likecnt-1 where i_no = #{value}")
+	void cntDownItem(String i_no);
+	
 }

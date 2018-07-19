@@ -12,7 +12,7 @@
 </script>
 </head>
 <body class="w3-content" style="max-width: 400px">
-
+	<br><br>
 	<h3>회원 정보보기</h3>
 	<div class="w3- row" align="center" style="max-width: 50%" id="minfo"
 		style="width:100%">

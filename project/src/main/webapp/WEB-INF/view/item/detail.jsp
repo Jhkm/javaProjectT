@@ -356,7 +356,7 @@ ul.kind_of_tab li:hover { background-color:#eff1f4;
   </ul>
   ${item.i_explain }
   <c:forEach items="${explainImg }" var="explainimg">
-  	<img src="../picture/${explainimg }" width="100%" height="1000px">
+  	<img src="../picture/${explainimg }" width="100%" height="100%">
   </c:forEach>
 </div>
 <div id="delivery" style="width:60%">

@@ -66,13 +66,15 @@ public class ShopServiceImpl implements ShopService{
 		if(board.getB_category() == 0) {
 			board.setB_category(Integer.parseInt(request.getParameter("b_category")));
 		}
-		if (!board.getB_date().equals("0")) {
-			String[] date = board.getB_date().split(",");
-			board.setB_date(date[0]+" "+date[1]+":00");
+		if(board.getB_date() != null) {
+			if (!board.getB_date().equals("0")) {
+				String[] date = board.getB_date().split(",");
+				board.setB_date(date[0]+" "+date[1]+":00");
+			}
 		} else {
-			
 			board.setB_date("null");
 		}
+		
 		System.out.println("service" + board);
 		if(board.getI_no() == 0) {
 			board.setI_no(Integer.parseInt(request.getParameter("i_no")));
@@ -373,9 +375,11 @@ public class ShopServiceImpl implements ShopService{
 			int checkRe = itemDao.checkFavorit(i_no,loginId,i);
 			if(checkRe == 0) {
 				itemDao.insertFavorit(i_no,loginId,i);
+				itemDao.cntUpItem(i_no);
 				result = "success";
 			} else if(checkRe == 1) {
 				itemDao.removeFavorit(i_no,loginId,i);
+				itemDao.cntDownItem(i_no);
 				result = "clear";
 			}
 		} catch(Exception e) {

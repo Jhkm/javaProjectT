@@ -45,7 +45,6 @@ font-family: "Nanum Pen Script", sans-serif;
 
 </style>
 <script>
-
 	$(function() {
 		$("#datepicker1").datepicker(
 				{
@@ -76,8 +75,7 @@ font-family: "Nanum Pen Script", sans-serif;
 		<div class="w3-container" align="center">
 			<label>글작성하기</label>
 		</div>
-		<form:form modelAttribute="board" action="write.sdj" method="post"
-			enctype="multipart/form-data" name="f">
+		<form:form modelAttribute="board" action="write.sdj" method="post" enctype="multipart/form-data" name="f">
 			<form:hidden path="m_id" value="${loginUser }" />
 			<div class="w3-cell-row">
 				<div class="w3-container w3-teal w3-cell"
@@ -204,9 +202,8 @@ font-family: "Nanum Pen Script", sans-serif;
 				<input type="hidden" name="i_no" value="${param.i_no}">
 			</c:if>
 			<div class="w3-cell-row w3-right" style="margin-top:1%;">
-					<a href="javascript:document.f.submit()"><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large">게시물 등록 </button></a>
-		
-				 <a	href="list.sdj"><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large">  게시물 목록</button></a>
+				<a href="javascript:document.f.submit()"><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large" id="write">게시물 등록 </button></a>
+				 <button onclick="list.sdj?b_category=${param.b_category}" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" id="Back"> 뒤로가기</button>
 			</div>
 			<div class="w3-cell-row" id="preview"></div>
 		</form:form>

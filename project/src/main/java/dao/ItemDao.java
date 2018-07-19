@@ -41,4 +41,8 @@ public interface ItemDao {
 	void removeFavorit(String i_no, String loginId, int i);
 
 	List<Item> bestItemList();
+	
+	public void cntUpItem(String i_no);
+	
+	public void cntDownItem(String i_no);
 }

@@ -33,6 +33,7 @@ table.bigtable table td{border:0px;}
 </style>
 </head>
 <body>
+	<br><br><br>
 	<table class="bigtable" border="0" cellpadding="0" cellspacing="0" width="50%">
 		<tr>
 			<td>구매한 날짜</td>
