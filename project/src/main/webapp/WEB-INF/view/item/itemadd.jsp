@@ -116,7 +116,7 @@
 					<td colspan="3"><input type="file" id="img_upload" name="i_Img_File" accept="image/*"></td>
 				</tr>
 				<tr><td colspan="3"><div class="filebox">
-					<input type="file" class="upload-hidden" >
+					<input type="file" name='contentImgFile' class="upload-hidden" >
 				</div><div id="content_img_div"></div></td></tr>
 				<tr>
 					<td colspan="3" align="center"><input type="button" value="¸ñ·Ï"

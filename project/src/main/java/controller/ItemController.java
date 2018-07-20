@@ -35,8 +35,8 @@ public class ItemController {
 	@RequestMapping("item/create")
 	public ModelAndView admcreate(HttpSession session,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("item/itemadd");
-		List<Map<Integer, String>> maplist = service.gameType();
 		mav.addObject(new Item());
+		List<Map<Integer, String>> maplist = service.gameType();
 		mav.addObject("gametype", maplist);
 		return mav;
 	}
@@ -46,7 +46,7 @@ public class ItemController {
 		ModelAndView mav = new ModelAndView("item/itemadd");
 		item.setI_people(item.getI_people()+"~"+item.getI_people2());
 		if(bindingResult.hasErrors()) {
-			mav.getModel().putAll(bindingResult.getModel());
+			mav.getModel().putAll(bindingResult.getModel());		
 			List<Map<Integer, String>> maplist = service.gameType();
 			mav.addObject("gametype", maplist);
 			return mav;

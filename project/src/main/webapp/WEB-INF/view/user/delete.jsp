@@ -25,6 +25,7 @@
 
 </head>
 <body class="w3-content" style="max-width: 300px">
+	<br><br>
 	<div class="w3- row" id="contact" align="center" style="max-width: 30%">
 		<div class="w3- padding-large">
 			<h2>È¸¿ø Å»Åð</h2>

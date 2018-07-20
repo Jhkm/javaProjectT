@@ -35,6 +35,7 @@ function return1(index) {
 </style>
 </head>
 <body>
+<br><br><br>
 	<table border="1" cellpadding="0" cellspacing="0" width="50%">
 		<tr>
 			<td>구매한 날짜</td>

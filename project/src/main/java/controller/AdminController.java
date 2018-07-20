@@ -184,7 +184,7 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("admin/stepChange")
-	public ModelAndView admstepChange(HttpSession session,HttpServletRequest request) {
+	public ModelAndView stepChange(HttpSession session,HttpServletRequest request) {
 		String s_id = request.getParameter("s_id");
 		String s_step = request.getParameter("s_step");
 		List<SaleItem> siList = service.getSaleItemList(Integer.parseInt(s_id));

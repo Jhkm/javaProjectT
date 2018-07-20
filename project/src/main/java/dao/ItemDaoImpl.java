@@ -136,4 +136,12 @@ public class ItemDaoImpl implements ItemDao{
 	public List<Item> bestItemList() {
 		return sqlSession.selectList(NS+"bestitemlist");
 	}
+	@Override
+	public void cntUpItem(String i_no) {
+	   sqlSession.getMapper(ItemMapper.class).cntUpItem(i_no);
+	}
+	@Override
+	public void cntDownItem(String i_no) {
+	   sqlSession.getMapper(ItemMapper.class).cntDownItem(i_no);
+	}
 }

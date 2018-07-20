@@ -90,9 +90,9 @@ font-family: "Nanum Pen Script", sans-serif;
 					onmouseout="this.style.backgroundColor=''">
 					<td height="23"><a href="detail.sdj?b_no=${board.b_no }&pageNum=${pageNum}&b_category=${board.b_category}">${boardcnt }</a></td>
 					<c:set var="boardcnt" value="${boardcnt - 1 }" />
-					<td align="left"><c:if test="${not empty board.b_fileurl }">
-							<a href="../file/${board.b_fileurl }"><i class="icono-paperClip" style="width:3%; color: #0000cd;">  </i></a>
-						</c:if> <c:if test="${empty board.b_fileurl }">&nbsp;&nbsp;&nbsp;</c:if>
+					<td align="left"><c:if test="${board.b_fileurl != 'null'}">
+							<a href="../file/${board.b_fileurl }" download><i class="icono-paperClip" style="width:3%; color: #0000cd;">  </i></a>
+						</c:if> <c:if test="${board.b_fileurl == 'null'}">&nbsp;&nbsp;&nbsp;</c:if>
 						<c:forEach begin="1" end="${board.b_reflevel }">&nbsp;&nbsp;&nbsp;</c:forEach>
 						<c:if test="${board.b_reflevel > 0}">¦¦</c:if>
 						 <a href="detail.sdj?b_no=${board.b_no }&pageNum=${pageNum}&b_category=${board.b_category}">${board.b_subject }</a></td>

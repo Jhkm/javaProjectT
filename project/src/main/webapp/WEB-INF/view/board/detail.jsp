@@ -165,7 +165,7 @@ font-family: "Nanum Pen Script", sans-serif;
 
 			<div class="w3-cell-row">
 				<div class="w3-container w3-cell" style="width: 20%;">
-					<label>참가인원</label>
+					<label>참가가능인원</label>
 				</div>
 				<div class="w3-container w3-sand w3-cell w3-cell-bottom"
 					align="left" style="max-width: 80%;">
@@ -178,8 +178,9 @@ font-family: "Nanum Pen Script", sans-serif;
 				</div>
 				<div class="w3-container w3-sand w3-cell w3-cell-bottom"
 					align="left" style="max-width: 80%;">
-					<input type="text" value="${board.g_id }" id="ids">
+					<input class="w3-sand" type="text" value="${board.g_id }" id="ids" readonly="readonly">
 				</div>
+				<c:if test="${loginUser != board.m_id }" >
 				<c:forEach items="${idList}" var="id">
 					<c:if test="${id == loginUser }">
 						<% cnt = cnt+1; %>
@@ -190,6 +191,7 @@ font-family: "Nanum Pen Script", sans-serif;
 				</c:if>
 				<c:if test="<%= cnt != 0 %>">
 					<input id="join" type="button" value="취소하기">
+				</c:if>
 				</c:if>
 			</div>
 			<div class="w3-cell-row">
@@ -250,17 +252,32 @@ font-family: "Nanum Pen Script", sans-serif;
 				${board.b_content }
 			</div>
 		</div>
+		<c:if test="${param.b_category == '6'}">
+		<div class="w3-cell-row" style="height: 500">
+			<div class="w3-container w3-cell" style="width: 20%;">
+				<label>동영상</label>
+			</div>
+			<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="center" style="max-width: 80%;">
+				<video style="align-self: center;" width="100%" height="100%" controls>
+				  <source src="../file/${board.b_fileurl }" type="video/mp4">
+				</video>
+			</div>
+		</div>
+		</c:if>
+		<c:if test="${param.b_category != '6'}">
 		<div class="w3-cell-row">
 			<div class="w3-container w3-cell" style="width: 20%;">
 				<label>첨부파일</label>
 			</div>
 			<div class="w3-container w3-sand w3-cell w3-cell-bottom" align="left"
 				style="max-width: 80%;">
-				<c:if test="${!empty borad.b_filurl }">
-					<a href="../file/${board.b_fileurl }">${board.b_fileurl}</a>
+				<c:if test="${borad.b_fileurl != 'null'}">
+					<a href="../file/${board.b_fileurl }" download>${board.b_fileurl}</a>
 				</c:if>
 			</div>
 		</div>
+		</c:if>
+		
 		<div class="w3-cell-row">
 			<div class="w3-container w3-cell" style="padding-top:1%;">
 				<a
@@ -390,8 +407,7 @@ font-family: "Nanum Pen Script", sans-serif;
 						value="[삭 제]"></td>
 				</tr>
 				<tr id="upinput_${status.index}" class="upinput">
-					<td colspan="4"><form:form action="r_update.sdj"
-							modelAttribute="reply" method="post">
+					<td colspan="4"><form:form action="r_update.sdj" modelAttribute="reply" method="post">
 							<input type="hidden" name="r_no" value="${re.r_no}">
 							<input type="hidden" name="m_id" value="${re.m_id}">
 							<input type="hidden" value="${board.b_no}" name="b_no">

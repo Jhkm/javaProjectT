@@ -223,7 +223,7 @@ body {
 				<!-- 배스트상품 상품들 -->
 				<div class="w3-row w3-grayscale">
 					<h2 class="bor w3-center">베스트상품</h2>
-					<div class="w3-col l3 s6" style="width:100%;">
+					<div class="w3-col l3 s6 " align="left" style="width:100%;">
 						<c:forEach items="${itemlist}" var="item" varStatus="status">
 							<c:if test="${status.index % 4 == 0}">
 							</c:if>

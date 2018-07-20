@@ -15,6 +15,7 @@
 <title>로그인</title>
 </head>
 <body>
+	<br><br>
 	<div align="center" style="max-width:50%;">
 	<h2>로그인</h2>
 	<form:form modelAttribute="user" method="post" action="login.sdj">
