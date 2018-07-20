@@ -47,6 +47,8 @@ public class ItemController {
 		item.setI_people(item.getI_people()+"~"+item.getI_people2());
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
+			List<Map<Integer, String>> maplist = service.gameType();
+			mav.addObject("gametype", maplist);
 			return mav;
 		}
 		int pageNum = 1;
